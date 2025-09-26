@@ -1,0 +1,39 @@
+#pragma once
+#include "Date.h"
+
+
+
+
+class Contract {
+private:
+    int contractID;
+    Date registrationDate;
+    int duration;
+    int studentID;
+    int roomID;
+
+public:
+    // Constructor, Copy constructor, Destructor
+    Contract(const int& = 0, const Date & = Date(), const int& = 0, const int& = 0, const int& = 0);
+    Contract(const Contract&);
+    ~Contract();
+
+    // Getter & Setter
+    int getContractID();
+    void setContractID(const int&);
+
+    Date getRegistrationDate();
+    void setRegistrationDate(const Date&);
+
+    int getDuration();
+    void setDuration(const int&);
+
+    int getStudentID();
+    void setStudentID(const int&);
+
+    int getRoomID();
+    void setRoomID(const int&);
+
+
+    void show();
+};

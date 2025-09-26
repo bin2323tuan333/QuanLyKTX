@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{67193f28-f62f-4b92-bb06-3a348e339ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{ec124831-a1ec-4a22-b8e4-4e8fef552e53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DataAccess">
+      <UniqueIdentifier>{c1c29190-9a6b-45b5-9a48-98175052fda1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DataAccess\Models">
+      <UniqueIdentifier>{6b4094f6-b30f-4ce7-b8a2-a4c8b4cbe527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DataAccess\Repositories">
+      <UniqueIdentifier>{555edeeb-d3ec-4704-aacc-8a346f6d3be1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BusinessLogic">
+      <UniqueIdentifier>{c15267af-ee61-497b-8d91-79b5c49386e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BusinessLogic">
+      <UniqueIdentifier>{1edd0c3b-e601-4821-ad56-59387bbabc3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Presentation">
+      <UniqueIdentifier>{30291c0b-8233-4ff7-87b5-840b78f587a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Presentation">
+      <UniqueIdentifier>{de2f7c67-dab6-4f30-93c2-031f1583a10d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Presentation\Views">
+      <UniqueIdentifier>{3f7d7959-e1c9-41bc-bc86-e08f8eaaa251}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BusinessLogic\Services">
+      <UniqueIdentifier>{f76be8e2-7c93-4fda-a591-8ea03a3370a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BusinessLogic\Services">
+      <UniqueIdentifier>{a9ce3d4c-6447-4e6f-8c33-f5143c812894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Presentation\Views">
+      <UniqueIdentifier>{b6be902c-651c-4473-a41d-f6318814c991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data Files">
+      <UniqueIdentifier>{bc9ba1a0-0240-4120-afdd-33ef3838290d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataAccess">
+      <UniqueIdentifier>{f6e40664-ba3f-4d6d-b4dc-0629e4ff59df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataAccess\Models">
+      <UniqueIdentifier>{65f161aa-f770-4a2c-ba12-4b6442dc08cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataAccess\Repositories">
+      <UniqueIdentifier>{a9a172ca-8ed9-42af-a454-dca8a0510462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Presentation\Controllers">
+      <UniqueIdentifier>{744d8b3a-fee7-43a2-a8c3-a6727b2a8584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Presentation\Controllers">
+      <UniqueIdentifier>{af562fd3-cbf3-44bf-a65e-6fcaf6cea591}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Date.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Account.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Feedback.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Contract.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Invoice.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Service.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceRegistration.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoiceDetail.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoiceDetailRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceRegistrationRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoiceRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="ContractRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeeRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="FeedbackRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="StudentRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="Student.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Employee.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files\DataAccess\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginService.cpp">
+      <Filter>Source Files\BusinessLogic\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsolaUI.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseScreen.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Position.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="HomePage.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="AboutUs.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceManager.cpp">
+      <Filter>Source Files\BusinessLogic\Services</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Account.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Date.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Feedback.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Invoice.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Contract.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Building.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="InvoiceDetail.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Service.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceRegistration.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="FeedbackRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="EmployeeRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="ContractRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="InvoiceRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceRegistrationRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="InvoiceDetailRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="Student.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Employee.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountRepository.h">
+      <Filter>Header Files\DataAccess\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Header Files\DataAccess\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginService.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsolaUI.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScreen.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="HomePage.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="AboutUs.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Login.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceManager.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Account.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="Student.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="Building.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="Contract.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

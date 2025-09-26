@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{a95d60bf-de5f-4a52-9130-73c3ea416e94}</ProjectGuid>
+    <RootNamespace>QuanLyKTX</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>STATIC_CONCPP;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\mysql-connector-c++-9.4.0-winx64\include\jdbc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\mysql-connector-c++-9.4.0-winx64\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="AboutUs.h" />
+    <ClInclude Include="LoginService.h" />
+    <ClCompile Include="AboutUs.cpp" />
+    <ClCompile Include="LoginService.cpp" />
+    <ClCompile Include="ConsolaUI.cpp" />
+    <ClCompile Include="BaseScreen.cpp" />
+    <ClCompile Include="HomePage.cpp" />
+    <ClCompile Include="InvoiceDetail.cpp" />
+    <ClInclude Include="Login.h" />
+    <ClCompile Include="Login.cpp" />
+    <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Position.cpp" />
+    <ClCompile Include="ServiceManager.cpp" />
+    <ClCompile Include="ServiceRegistration.cpp" />
+    <ClCompile Include="Date.cpp" />
+    <ClCompile Include="Service.cpp" />
+    <ClCompile Include="Invoice.cpp" />
+    <ClCompile Include="Contract.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Employee.cpp" />
+    <ClInclude Include="ConsolaUI.h" />
+    <ClInclude Include="BaseScreen.h" />
+    <ClInclude Include="HomePage.h" />
+    <ClInclude Include="Employee.h" />
+    <ClCompile Include="Feedback.cpp" />
+    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="InvoiceDetailRepository.cpp" />
+    <ClCompile Include="ServiceRegistrationRepository.cpp" />
+    <ClCompile Include="ServiceRepository.cpp" />
+    <ClCompile Include="InvoiceRepository.cpp" />
+    <ClCompile Include="ContractRepository.cpp" />
+    <ClCompile Include="EmployeeRepository.cpp" />
+    <ClCompile Include="FeedbackRepository.cpp" />
+    <ClCompile Include="RoomRepository.cpp" />
+    <ClCompile Include="StudentRepository.cpp" />
+    <ClCompile Include="AccountRepository.cpp" />
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="AccountRepository.h" />
+    <ClCompile Include="BuildingRepository.cpp" />
+    <ClCompile Include="Student.cpp" />
+    <ClInclude Include="Position.h" />
+    <ClInclude Include="ServiceManager.h" />
+    <ClInclude Include="Student.h" />
+    <ClCompile Include="Account.cpp" />
+    <ClCompile Include="Building.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InvoiceDetail.h" />
+    <ClInclude Include="ServiceRegistration.h" />
+    <ClInclude Include="Date.h" />
+    <ClInclude Include="Service.h" />
+    <ClInclude Include="Invoice.h" />
+    <ClInclude Include="Contract.h" />
+    <ClInclude Include="Feedback.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="InvoiceDetailRepository.h" />
+    <ClInclude Include="ServiceRegistrationRepository.h" />
+    <ClInclude Include="ServiceRepository.h" />
+    <ClInclude Include="InvoiceRepository.h" />
+    <ClInclude Include="ContractRepository.h" />
+    <ClInclude Include="EmployeeRepository.h" />
+    <ClInclude Include="FeedbackRepository.h" />
+    <ClInclude Include="RoomRepository.h" />
+    <ClInclude Include="StudentRepository.h" />
+    <ClInclude Include="BuildingRepository.h" />
+    <ClInclude Include="Account.h" />
+    <ClInclude Include="Building.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Account.txt" />
+    <Text Include="Building.txt" />
+    <Text Include="Contract.txt" />
+    <Text Include="Student.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
