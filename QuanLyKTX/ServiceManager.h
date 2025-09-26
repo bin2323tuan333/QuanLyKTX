@@ -1,8 +1,6 @@
 #pragma once
 #include "LoginService.h"
 #include "AccountRepository.h"
-#include <memory>
-#include <stdexcept>
 
 class ServiceManager {
 private:

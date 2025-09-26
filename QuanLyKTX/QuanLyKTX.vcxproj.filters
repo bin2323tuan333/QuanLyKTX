@@ -87,9 +87,6 @@
     <ClCompile Include="Room.cpp">
       <Filter>Source Files\DataAccess\Models</Filter>
     </ClCompile>
-    <ClCompile Include="Feedback.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
-    </ClCompile>
     <ClCompile Include="Contract.cpp">
       <Filter>Source Files\DataAccess\Models</Filter>
     </ClCompile>
@@ -121,9 +118,6 @@
       <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
     <ClCompile Include="EmployeeRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="FeedbackRepository.cpp">
       <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
     <ClCompile Include="RoomRepository.cpp">
@@ -179,9 +173,6 @@
     <ClInclude Include="Date.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Feedback.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
-    </ClInclude>
     <ClInclude Include="Invoice.h">
       <Filter>Header Files\DataAccess\Models</Filter>
     </ClInclude>
@@ -213,9 +204,6 @@
       <Filter>Header Files\DataAccess\Repositories</Filter>
     </ClInclude>
     <ClInclude Include="RoomRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
-    <ClInclude Include="FeedbackRepository.h">
       <Filter>Header Files\DataAccess\Repositories</Filter>
     </ClInclude>
     <ClInclude Include="EmployeeRepository.h">
