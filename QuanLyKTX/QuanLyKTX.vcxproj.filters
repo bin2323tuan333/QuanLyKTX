@@ -141,7 +141,7 @@
     <ClCompile Include="Person.cpp">
       <Filter>Source Files\DataAccess\Models</Filter>
     </ClCompile>
-    <ClCompile Include="LoginService.cpp">
+    <ClCompile Include="AccountService.cpp">
       <Filter>Source Files\BusinessLogic\Services</Filter>
     </ClCompile>
     <ClCompile Include="ConsolaUI.cpp">
@@ -233,9 +233,6 @@
     <ClInclude Include="Person.h">
       <Filter>Header Files\DataAccess\Models</Filter>
     </ClInclude>
-    <ClInclude Include="LoginService.h">
-      <Filter>Header Files\BusinessLogic\Services</Filter>
-    </ClInclude>
     <ClInclude Include="ConsolaUI.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
@@ -255,6 +252,30 @@
       <Filter>Header Files\Presentation\Views</Filter>
     </ClInclude>
     <ClInclude Include="ServiceManager.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountManagement.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingManagement.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ContractManagement.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="EmployeeManagement.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentManagement.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomManagement.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceManagement.h">
+      <Filter>Header Files\BusinessLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="BillingService.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
   </ItemGroup>

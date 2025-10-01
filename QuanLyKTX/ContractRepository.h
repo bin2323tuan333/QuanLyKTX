@@ -24,7 +24,7 @@ public:
     Contract Search(const int&);
 
     // Update
-    void Update(const int&);
+    void Update(Contract&);
 
     // Delete
     void Delete(const int&);

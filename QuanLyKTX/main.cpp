@@ -22,7 +22,6 @@ int main() {
     int currWidth, currHeight, befWidth = 0, befHeight = 0;
 
 
-
     while (current != nullptr) {
         pos.Update();
         bool d = false;

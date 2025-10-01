@@ -80,9 +80,16 @@ Service ServiceRepository::Search(const int& serviceID)
 }
 
 // Update
-void ServiceRepository::Update(const int&)
+void ServiceRepository::Update(Service& service)
 {
+    int index = IndexOf(service.getServiceID());
+    if (index == -1)
+        return;
 
+    (this->p + index)->setServiceID(service.getServiceID());
+    (this->p + index)->setServiceName(service.getServiceName());
+    (this->p + index)->setUnitPrice(service.getUnitPrice());
+    (this->p + index)->setDescription(service.getDescription());
 }
 
 // Delete

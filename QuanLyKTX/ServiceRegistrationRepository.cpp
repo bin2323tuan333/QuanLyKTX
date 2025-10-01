@@ -13,39 +13,96 @@ ServiceRegistrationRepository::~ServiceRegistrationRepository()
 }
 
 // Create
-void ServiceRegistrationRepository::Add(const ServiceRegistration& sr)
+void ServiceRegistrationRepository::Add(const ServiceRegistration& serviceRegistration)
 {
-
+	ServiceRegistration* temp = new ServiceRegistration[this->n + 1];
+	for (int i = 0; i < this->n; i++)
+	{
+		*(temp + i) = *(this->p + i);
+	}
+	*(temp + this->n) = serviceRegistration;
+	delete[] this->p;
+	this->p = temp;
+	(this->n)++;
 }
-void ServiceRegistrationRepository::Insert(const ServiceRegistration& sr, const int& index)
+void ServiceRegistrationRepository::Insert(const ServiceRegistration& serviceRegistration, const int& index)
 {
-
+	ServiceRegistration* temp = new ServiceRegistration[this->n + 1];
+	for (int i = 0; i < index; i++)
+	{
+		*(temp + i) = *(this->p + i);
+	}
+	*(temp + index) = serviceRegistration;
+	for (int i = index; i < this->n; i++)
+	{
+		*(temp + i + 1) = *(this->p + i);
+	}
+	delete[] this->p;
+	this->p = temp;
+	this->n++;
 }
 
 // Read
 void ServiceRegistrationRepository::Show()
 {
-
+	for (int i = 0; i < this->n; i++)
+	{
+		(this->p + i)->show();
+		cout << endl;
+	}
 }
-int ServiceRegistrationRepository::IndexOf(const int& id)
+int ServiceRegistrationRepository::IndexOf(const int& serviceID,const int& studentID)
 {
-
+	int index = -1;
+	for (int i = 0; i < this->n; i++)
+	{
+		if ((this->p + i)->getServiceID() == serviceID && (this->p + i)->getStudentID() == studentID)
+		{
+			index = i;
+			break;
+		}
+	}
+	return index;
 }
-ServiceRegistration ServiceRegistrationRepository::Search(const int& id)
+ServiceRegistration ServiceRegistrationRepository::Search(const int& serviceID,const int& studentID)
 {
-
+	int index = IndexOf(serviceID, studentID);
+	if (index != -1)
+	{
+		return *(this->p + index);
+	}
+	else return ServiceRegistration();
 }
 
 // Update
-void ServiceRegistrationRepository::Update(const int& id)
+void ServiceRegistrationRepository::Update(ServiceRegistration& serviceRegistration)
 {
-
+	int index = IndexOf(serviceRegistration.getServiceID(), serviceRegistration.getStudentID());
+	if (index == -1)
+		return;
+	(this->p + index)->setServiceID(serviceRegistration.getServiceID());
+	(this->p + index)->setStudentID(serviceRegistration.getStudentID());
+	(this->p + index)->setRegistrationDate(serviceRegistration.getRegistrationDate());
 }
 
 // Delete
-void ServiceRegistrationRepository::Delete(const int& id)
+void ServiceRegistrationRepository::Delete(const int& serviceID, const int& studentID)
 {
-
+	int index = IndexOf(serviceID, studentID);
+	if (index == -1)
+		return;
+	ServiceRegistration* temp = new ServiceRegistration[this->n - 1];
+	for (int i = 0; i < index; i++)
+	{
+		*(temp + i) = *(this->p + i);
+	}
+	for (int i = index; i < this->n - 1; i++)
+	{
+		*(temp + i) = *(this->p + i + 1);
+	}
+	delete[] this->p;
+	this->p = temp;
+	(this->n)--;
 }
 
 

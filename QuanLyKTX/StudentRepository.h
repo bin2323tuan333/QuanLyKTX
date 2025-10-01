@@ -24,7 +24,7 @@ public:
     Student Search(const int&);
 
     // Update
-    void Update(const int&);
+    void Update(Student&);
 
     // Delete
     void Delete(const int&);

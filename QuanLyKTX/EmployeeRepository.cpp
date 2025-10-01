@@ -77,9 +77,19 @@ Employee EmployeeRepository::Search(const int& employeeID)
     return Employee();
 }
 
-void EmployeeRepository::Update(const int& employeeID)
+void EmployeeRepository::Update(Employee& employee)
 {
+    int index = IndexOf(employee.getEmployeeID());
+    if (index == -1)
+        return;
 
+    (this->p + index)->setEmployeeID(employee.getEmployeeID());
+    (this->p + index)->setFullName(employee.getFullName());
+    (this->p + index)->setDateOfBirth(employee.getDateOfBirth());
+    (this->p + index)->setEmail(employee.getEmail());
+    (this->p + index)->setGender(employee.getGender());
+    (this->p + index)->setPhoneNumber(employee.getPhoneNumber());
+    (this->p + index)->setPosition(employee.getPosition());
 }
 
 void EmployeeRepository::Delete(const int& employeeID)

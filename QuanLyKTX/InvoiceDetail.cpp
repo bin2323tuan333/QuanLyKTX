@@ -4,11 +4,11 @@ using namespace std;
 
 // Constructor
 InvoiceDetail::InvoiceDetail(const int& invoiceDetailID, const int& quantity, const int& totalAmount, const int& serviceID)
-    : invoiceDetailID(invoiceDetailID), quantity(quantity), totalAmount(totalAmount), serviceID(serviceID)
+    : invoiceID(invoiceID), quantity(quantity), totalAmount(totalAmount), serviceID(serviceID)
 {
 }
 InvoiceDetail::InvoiceDetail(const InvoiceDetail& id)
-    : invoiceDetailID(id.invoiceDetailID), quantity(id.quantity), totalAmount(id.totalAmount), serviceID(id.serviceID) 
+    : invoiceID(id.invoiceID), quantity(id.quantity), totalAmount(id.totalAmount), serviceID(id.serviceID) 
 {
 }
 InvoiceDetail::~InvoiceDetail() 
@@ -16,13 +16,13 @@ InvoiceDetail::~InvoiceDetail()
 }
 
 // Getter & Setter
-int InvoiceDetail::getInvoiceDetailID() 
+int InvoiceDetail::getInvoiceID() 
 {
-    return this->invoiceDetailID;
+    return this->invoiceID;
 }
-void InvoiceDetail::setInvoiceDetailID(const int& invoiceDetailID) 
+void InvoiceDetail::setInvoiceID(const int& invoiceID) 
 {
-    this->invoiceDetailID = invoiceDetailID;
+    this->invoiceID = invoiceID;
 }
 int InvoiceDetail::getQuantity() 
 {

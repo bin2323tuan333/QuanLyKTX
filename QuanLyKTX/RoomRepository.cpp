@@ -80,10 +80,20 @@ Room RoomRepository::Search(const int& roomID)
 }
 
 // Update
-void RoomRepository::Update(const int& roomID)
+void RoomRepository::Update(Room& room)
 {
+    int index = IndexOf(room.getRoomID());
+    if (index == -1)
+        return;
 
+    (this->p + index)->setRoomID(room.getRoomID());
+    (this->p + index)->setRoomName(room.getRoomName());
+    (this->p + index)->setRoomType(room.getRoomType());
+    (this->p + index)->setCapacity(room.getCapacity());
+    (this->p + index)->setCurrentOccupancy(room.getCurrentOccupancy());
+    (this->p + index)->setBuildingID(room.getBuildingID());
 }
+
 
 // Delete
 void RoomRepository::Delete(const int& roomID)

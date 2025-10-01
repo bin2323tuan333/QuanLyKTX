@@ -77,9 +77,17 @@ Contract ContractRepository::Search(const int& contractID)
     return Contract();
 }
 
-void ContractRepository::Update(const int&)
+void ContractRepository::Update(Contract& contract)
 {
+    int index = IndexOf(contract.getContractID());
+    if (index == -1)
+        return;
 
+    (this->p + index)->setContractID(contract.getContractID());
+    (this->p + index)->setDuration(contract.getDuration());
+    (this->p + index)->setRegistrationDate(contract.getRegistrationDate());
+    (this->p + index)->setRoomID(contract.getRoomID());
+    (this->p + index)->setStudentID(contract.getStudentID());
 }
 
 void ContractRepository::Delete(const int& contractID)

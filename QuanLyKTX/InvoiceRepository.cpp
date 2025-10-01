@@ -78,9 +78,16 @@ Invoice InvoiceRepository::Search(const int& invoiceID)
 }
 
 // Update
-void InvoiceRepository::Update(const int& invoiceID)
+void InvoiceRepository::Update(Invoice& invoice)
 {
+    int index = IndexOf(invoice.getInvoiceID());
+    if (index == -1)
+        return;
 
+    (this->p + index)->setTotalAmount(invoice.getTotalAmount());
+    (this->p + index)->setCreatedDate(invoice.getCreatedDate());
+    (this->p + index)->setPaymentPeriod(invoice.getPaymentPeriod());
+    (this->p + index)->setEmployeeID(invoice.getEmployeeID());
 }
 
 // Delete

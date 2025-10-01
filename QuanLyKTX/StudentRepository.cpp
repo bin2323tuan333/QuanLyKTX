@@ -78,9 +78,20 @@ Student StudentRepository::Search(const int& studentID)
 }
 
 // Update
-void StudentRepository::Update(const int&)
+void StudentRepository::Update(Student& student)
 {
-	 
+	int index = IndexOf(student.getStudentID());
+	if (index == -1)
+		return;
+
+	(this->p + index)->setStudentID(student.getStudentID());
+	(this->p + index)->setFullName(student.getFullName());
+	(this->p + index)->setDateOfBirth(student.getDateOfBirth());
+	(this->p + index)->setGender(student.getGender());
+	(this->p + index)->setClassName(student.getClassName());
+	(this->p + index)->setFaculty(student.getFaculty());
+	(this->p + index)->setPhoneNumber(student.getPhoneNumber());
+	(this->p + index)->setEmail(student.getEmail());
 }
 
 // Delete

@@ -24,7 +24,7 @@ public:
     Employee Search(const int&);
 
     // Update
-    void Update(const int&);
+    void Update(Employee&);
 
     // Delete
     void Delete(const int&);

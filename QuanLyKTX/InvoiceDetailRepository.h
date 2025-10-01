@@ -20,14 +20,14 @@ public:
 
     // Read
     void Show();
-    int IndexOf(const int&);
-    InvoiceDetail Search(const int&);
+    int IndexOf(const int&, const int&);
+    InvoiceDetail Search(const int&, const int&);
 
     // Update
-    void Update(const int&);
+    void Update(InvoiceDetail&);
 
     // Delete
-    void Delete(const int&);
+    void Delete(const int&, const int&);
 
 
     void LoadDataFromFile();

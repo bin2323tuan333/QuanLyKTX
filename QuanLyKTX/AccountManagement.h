@@ -2,14 +2,14 @@
 #include "AccountRepository.h"
 
 
-class LoginService
+class AccountService
 {
 private:
     AccountRepository& accountRepo;
 
 public:
-    LoginService(AccountRepository&);
-    ~LoginService();
+    AccountService(AccountRepository&);
+    ~AccountService();
 
 
     // SignIn
@@ -23,7 +23,7 @@ public:
 
     // UpdateAccount
     bool UpdateAccount(const Account&);
-   
+
 
     // DeleteAccount
     bool DeleteAccount(const int&);

@@ -20,14 +20,14 @@ public:
 
     // Read
     void Show();
-    int IndexOf(const int&);
-    ServiceRegistration Search(const int&);
+    int IndexOf(const int&, const int&);
+    ServiceRegistration Search(const int&, const int&);
 
     // Update
-    void Update(const int&);
+    void Update(ServiceRegistration&);
 
     // Delete
-    void Delete(const int&);
+    void Delete(const int&, const int&);
 
 
     void LoadDataFromFile();

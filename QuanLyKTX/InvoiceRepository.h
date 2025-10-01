@@ -24,7 +24,7 @@ public:
     Invoice Search(const int&);
 
     // Update
-    void Update(const int&);
+    void Update(Invoice&);
 
     // Delete
     void Delete(const int&);

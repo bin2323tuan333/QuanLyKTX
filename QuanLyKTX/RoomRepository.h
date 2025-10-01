@@ -24,7 +24,7 @@ public:
     Room Search(const int&);
 
     // Update
-    void Update(const int&);
+    void Update(Room&);
 
     // Delete
     void Delete(const int&);

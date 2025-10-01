@@ -77,9 +77,14 @@ Building BuildingRepository::Search(const int& buildingID)
     return Building();
 }
 
-void BuildingRepository::Update(const int&)
+void BuildingRepository::Update(Building& building)
 {
+    int index = IndexOf(building.getBuildingID());
+    if (index == -1)
+        return;
 
+    (this->p + index)->setBuildingName(building.getBuildingName());
+    (this->p + index)->setNumberOfRooms(building.getNumberOfRooms());
 }
 
 void BuildingRepository::Delete(const int& buildingID)

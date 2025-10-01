@@ -5,7 +5,7 @@
 
 class InvoiceDetail {
 private:
-    int invoiceDetailID;
+    int invoiceID;
     int quantity;
     int totalAmount;
     int serviceID;
@@ -17,8 +17,8 @@ public:
     ~InvoiceDetail();
 
     // Getter & Setter
-    int getInvoiceDetailID();
-    void setInvoiceDetailID(const int&);
+    int getInvoiceID();
+    void setInvoiceID(const int&);
 
     int getQuantity();
     void setQuantity(const int&);

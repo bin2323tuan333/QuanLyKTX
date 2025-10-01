@@ -105,16 +105,20 @@ Account AccountRepository::SearchByUsername(const string& username)
 
 
 // Update
-void AccountRepository::Update(const int& accountID)
+void AccountRepository::Update(Account& account)
 {
-	int index = IndexOf(accountID);
-	if (index != 1)
+	int index = IndexOf(account.getAccountID());
+	if (index == -1)
 	{
-		string matKhau;
-		cout << "Nhap matKhau moi: ";
-		cin >> matKhau;
-		(this->p + index)->setPassword(matKhau);
+		return;
 	}
+	
+	(this->p + index)->setAccountID(account.getAccountID());
+	(this->p + index)->setUsername(account.getUsername());
+	(this->p + index)->setPassword(account.getPassword());
+	(this->p + index)->setEmployeeID(account.getEmployeeID());
+	(this->p + index)->setStudentID(account.getStudentID());
+	(this->p + index)->setRole(account.getRole());
 }
 
 //Delete
