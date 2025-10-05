@@ -1,0 +1,15 @@
+#pragma once
+#include "StudentRepository.h"
+
+
+class StudentService
+{
+private:
+	StudentRepository& studentRepo;
+
+public:
+	StudentService(StudentRepository&);
+	~StudentService();
+};
+
+

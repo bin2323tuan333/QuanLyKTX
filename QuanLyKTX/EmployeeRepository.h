@@ -19,7 +19,6 @@ public:
     void Insert(const Employee&, const int&);
 
     // Read
-    void Show();
     int IndexOf(const int&);
     Employee Search(const int&);
 

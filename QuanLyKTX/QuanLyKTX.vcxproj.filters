@@ -64,12 +64,6 @@
     <Filter Include="Source Files\DataAccess\Repositories">
       <UniqueIdentifier>{a9a172ca-8ed9-42af-a454-dca8a0510462}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Presentation\Controllers">
-      <UniqueIdentifier>{744d8b3a-fee7-43a2-a8c3-a6727b2a8584}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Presentation\Controllers">
-      <UniqueIdentifier>{af562fd3-cbf3-44bf-a65e-6fcaf6cea591}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,9 +75,6 @@
     <ClCompile Include="Account.cpp">
       <Filter>Source Files\DataAccess\Models</Filter>
     </ClCompile>
-    <ClCompile Include="Building.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
-    </ClCompile>
     <ClCompile Include="Room.cpp">
       <Filter>Source Files\DataAccess\Models</Filter>
     </ClCompile>
@@ -92,24 +83,6 @@
     </ClCompile>
     <ClCompile Include="Invoice.cpp">
       <Filter>Source Files\DataAccess\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="Service.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="ServiceRegistration.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="InvoiceDetail.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="InvoiceDetailRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="ServiceRegistrationRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="ServiceRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
     <ClCompile Include="InvoiceRepository.cpp">
       <Filter>Source Files\DataAccess\Repositories</Filter>
@@ -126,9 +99,6 @@
     <ClCompile Include="StudentRepository.cpp">
       <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
     <ClCompile Include="Student.cpp">
       <Filter>Source Files\DataAccess\Models</Filter>
     </ClCompile>
@@ -138,32 +108,41 @@
     <ClCompile Include="AccountRepository.cpp">
       <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
-    <ClCompile Include="Person.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
-    </ClCompile>
     <ClCompile Include="AccountService.cpp">
       <Filter>Source Files\BusinessLogic\Services</Filter>
     </ClCompile>
     <ClCompile Include="ConsolaUI.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="BaseScreen.cpp">
-      <Filter>Source Files\Presentation\Views</Filter>
-    </ClCompile>
     <ClCompile Include="Position.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceManager.cpp">
+      <Filter>Source Files\BusinessLogic\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ContractService.cpp">
+      <Filter>Source Files\BusinessLogic\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeeService.cpp">
+      <Filter>Source Files\BusinessLogic\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="PaymentService.cpp">
+      <Filter>Source Files\BusinessLogic\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomService.cpp">
+      <Filter>Source Files\BusinessLogic\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="StudentService.cpp">
+      <Filter>Source Files\BusinessLogic\Services</Filter>
     </ClCompile>
     <ClCompile Include="HomePage.cpp">
       <Filter>Source Files\Presentation\Views</Filter>
     </ClCompile>
-    <ClCompile Include="AboutUs.cpp">
-      <Filter>Source Files\Presentation\Views</Filter>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files\Presentation</Filter>
     </ClCompile>
-    <ClCompile Include="Login.cpp">
+    <ClCompile Include="PageManager.cpp">
       <Filter>Source Files\Presentation\Views</Filter>
-    </ClCompile>
-    <ClCompile Include="ServiceManager.cpp">
-      <Filter>Source Files\BusinessLogic\Services</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,24 +161,6 @@
     <ClInclude Include="Room.h">
       <Filter>Header Files\DataAccess\Models</Filter>
     </ClInclude>
-    <ClInclude Include="Building.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="InvoiceDetail.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Service.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="ServiceRegistration.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="ServiceRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
-    <ClInclude Include="BuildingRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
     <ClInclude Include="StudentRepository.h">
       <Filter>Header Files\DataAccess\Repositories</Filter>
     </ClInclude>
@@ -215,12 +176,6 @@
     <ClInclude Include="InvoiceRepository.h">
       <Filter>Header Files\DataAccess\Repositories</Filter>
     </ClInclude>
-    <ClInclude Include="ServiceRegistrationRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
-    <ClInclude Include="InvoiceDetailRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
     <ClInclude Include="Student.h">
       <Filter>Header Files\DataAccess\Models</Filter>
     </ClInclude>
@@ -230,53 +185,47 @@
     <ClInclude Include="AccountRepository.h">
       <Filter>Header Files\DataAccess\Repositories</Filter>
     </ClInclude>
-    <ClInclude Include="Person.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
-    </ClInclude>
     <ClInclude Include="ConsolaUI.h">
       <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseScreen.h">
-      <Filter>Header Files\Presentation\Views</Filter>
     </ClInclude>
     <ClInclude Include="Position.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="HomePage.h">
-      <Filter>Header Files\Presentation\Views</Filter>
-    </ClInclude>
-    <ClInclude Include="AboutUs.h">
-      <Filter>Header Files\Presentation\Views</Filter>
-    </ClInclude>
-    <ClInclude Include="Login.h">
-      <Filter>Header Files\Presentation\Views</Filter>
-    </ClInclude>
     <ClInclude Include="ServiceManager.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
-    <ClInclude Include="AccountManagement.h">
+    <ClInclude Include="AccountService.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingManagement.h">
+    <ClInclude Include="ContractService.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
-    <ClInclude Include="ContractManagement.h">
+    <ClInclude Include="EmployeeService.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
-    <ClInclude Include="EmployeeManagement.h">
+    <ClInclude Include="RoomService.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
-    <ClInclude Include="StudentManagement.h">
+    <ClInclude Include="PaymentService.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
-    <ClInclude Include="RoomManagement.h">
+    <ClInclude Include="StudentService.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
-    <ClInclude Include="ServiceManagement.h">
-      <Filter>Header Files\BusinessLogic\Services</Filter>
+    <ClInclude Include="HomePage.h">
+      <Filter>Header Files\Presentation\Views</Filter>
     </ClInclude>
-    <ClInclude Include="BillingService.h">
-      <Filter>Header Files\BusinessLogic\Services</Filter>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files\Presentation</Filter>
+    </ClInclude>
+    <ClInclude Include="EmployeePage.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentPage.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="PageManager.h">
+      <Filter>Header Files\Presentation\Views</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

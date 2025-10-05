@@ -6,8 +6,6 @@
 
 using namespace std;
 
-
-
 class ConsolaUI {
 public:
     static int getConsoleWidth();
@@ -16,8 +14,7 @@ public:
     static void ShowCursor(bool);
     static void setTextColor(int);
     static void drawBox(int, int, int, int, int);
-    static void text(int, int, const string&);
+    static void text(int, int, const string&, const int&);
     static string getInput(int, int, int, int, int, int);
-    static void drawButton(int, int, int, int, const string&, int, int);
     static void clearScreen();
 };

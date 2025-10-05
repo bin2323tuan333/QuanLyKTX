@@ -1,6 +1,6 @@
 #include <iomanip>
 #include "Date.h"
-
+#include <ctime>
 
 
 Date::Date(const int& d, const int& m, const int& y)
@@ -11,9 +11,17 @@ Date::Date(const Date& D)
 	: day(D.day), month(D.month), year(D.year)
 {
 }
-
 Date::~Date()
 {
+}
+
+Date Date::getCurrentDay()
+{
+	time_t now = time(0);
+	tm localTime;
+	localtime_s(&localTime, &now);
+
+	return Date(localTime.tm_mday, localTime.tm_mon + 1, localTime.tm_year + 1900);
 }
 
 bool Date::laNamNhuan()

@@ -1,16 +1,31 @@
 #pragma once
-#include "BaseScreen.h"
-#include "LoginService.h"
+#include <iostream>
+using namespace std;
 
-
-class HomePage : public BaseScreen
+class HomePage
 {
 private:
-	LoginService& loginService;
-public:
-	HomePage(LoginService&);
-	~HomePage();  
+	int menuSize;
+	string* menuList;
+	int menuSelected;
 
-	void draw() override;
-	void handleClick(int x, int y, BaseScreen*& current) override;
+public:
+	HomePage();
+	~HomePage();
+	int show();
+	void drawHomePage();
+	void drawLoginPage();
+	void drawAboutUsPage();
+
+private:
+	void drawHeader(const int&, const int&);
+	void drawMenuItems(const int&, const int&);
+	void drawFooter(const int&, const int&);
+	void drawHomeContent(const int&, const int&);
+	void drawLoginContent(const int&, const int&);
+	void drawAboutUsContent(const int&, const int&);
+	
+	void drawSelectedItem(int, bool);
+	void handleArrowKeys(int, int&, const int&);
+	bool handleNormalKeys(int, int&, const int&);
 };

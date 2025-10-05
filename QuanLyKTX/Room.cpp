@@ -3,14 +3,14 @@
 
 // Constructor
 Room::Room(const int& roomID, const string& roomName, const string& roomType,
-    const int& capacity, const int& currentOccupancy, const int& buildingID)
+    const int& capacity, const int& currentOccupancy, const int& floor, const string& building)
     : roomID(roomID), roomName(roomName), roomType(roomType),
-    capacity(capacity), currentOccupancy(currentOccupancy), buildingID(buildingID) 
+    capacity(capacity), currentOccupancy(currentOccupancy), floor(floor), building(building) 
 {
 }
 Room::Room(const Room& r)
     : roomID(r.roomID), roomName(r.roomName), roomType(r.roomType),
-    capacity(r.capacity), currentOccupancy(r.currentOccupancy), buildingID(r.buildingID) 
+    capacity(r.capacity), currentOccupancy(r.currentOccupancy), floor(r.floor), building(r.building)
 {
 }
 Room::~Room() 
@@ -61,22 +61,19 @@ void Room::setCurrentOccupancy(const int& currentOccupancy)
 {
     this->currentOccupancy = currentOccupancy;
 }
-int Room::getBuildingID() 
+int Room::getFloor()
 {
-    return this->buildingID;
+    return this->floor;
 }
-void Room::setBuildingID(const int& buildingID) 
+void Room::setFloor(const int& floor)
 {
-    this->buildingID = buildingID;
+    this->floor = floor;
 }
-
-
-
-
-
-void Room::show() {
-    cout << this->roomID << " "
-        << this->roomName << " "
-        << this->roomType << " "
-        << this->buildingID;
+string Room::getBuilding() 
+{
+    return this->building;
+}
+void Room::setBuilding(const string& building)
+{
+    this->building = building;
 }

@@ -46,14 +46,7 @@ void ContractRepository::Insert(const Contract& contract, const int& index)
     (this->n)++;
 }
 
-void ContractRepository::Show()
-{
-    for (int i = 0; i < this->n; i++)
-    {
-        (this->p + i)->show();
-        cout << endl;
-    }
-}
+
 int ContractRepository::IndexOf(const int& contractID)
 {
     int index = -1;
@@ -84,10 +77,11 @@ void ContractRepository::Update(Contract& contract)
         return;
 
     (this->p + index)->setContractID(contract.getContractID());
-    (this->p + index)->setDuration(contract.getDuration());
-    (this->p + index)->setRegistrationDate(contract.getRegistrationDate());
     (this->p + index)->setRoomID(contract.getRoomID());
     (this->p + index)->setStudentID(contract.getStudentID());
+    (this->p + index)->setDuration(contract.getDuration());
+    (this->p + index)->setRegistrationDate(contract.getRegistrationDate());
+    
 }
 
 void ContractRepository::Delete(const int& contractID)
@@ -123,7 +117,6 @@ void ContractRepository::LoadDataFromFile()
 
         stringstream ss(line);
         string token;
-        char gap;
 
         Contract temp;
 

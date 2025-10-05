@@ -1,17 +1,36 @@
 #pragma once
-#include "LoginService.h"
-#include "AccountRepository.h"
+#include "AccountService.h"
+#include "ContractService.h"
+#include "EmployeeService.h"
+#include "PaymentService.h"
+#include "RoomService.h"
+#include "StudentService.h"
+
 
 class ServiceManager {
 private:
-    static LoginService* loginService;
-    static AccountRepository* accountRepo;
-    static bool initialized;
+	AccountRepository* accountRepo;
+	ContractRepository* contractRepo;
+	EmployeeRepository* employeeRepo;
+	InvoiceRepository* invoiceRepo;
+	RoomRepository* roomRepo;
+	StudentRepository* studentRepo;
+
+	AccountService* accountService;
+	ContractService* contractService;
+	EmployeeService* employeeService;
+	PaymentService* paymentService;
+	RoomService* roomService;
+	StudentService* studentService;
 
 public:
-    static void initialize();
-    static LoginService& getLoginService();
-    static AccountRepository& getAccountRepository();
-    static bool isInitialized();
-    static void shutdown();
+	void initialize();
+	void shutdown();
+
+	AccountService* getAccountService();
+	ContractService* getContractService();
+	EmployeeService* getEmployeeService();
+	PaymentService* getPaymentService();
+	RoomService* getRoomService();
+	StudentService* getStudentService();
 };

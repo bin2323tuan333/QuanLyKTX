@@ -19,9 +19,10 @@ public:
     void Insert(const Invoice&, const int&);
 
     // Read
-    void Show();
     int IndexOf(const int&);
     Invoice Search(const int&);
+    Invoice SearchByStudentID(const int&);
+    
 
     // Update
     void Update(Invoice&);

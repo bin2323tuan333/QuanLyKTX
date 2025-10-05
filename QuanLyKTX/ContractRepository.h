@@ -19,7 +19,6 @@ public:
     void Insert(const Contract&, const int&);
 
     // Read
-    void Show();
     int IndexOf(const int&);
     Contract Search(const int&);
 

@@ -8,15 +8,15 @@ using namespace std;
 class Room {
 private:
     int roomID;
-    string roomName;
-    string roomType;
+    string roomName, roomType;
     int capacity;
     int currentOccupancy;
-    int buildingID;
-
+    int floor;
+    string building;
+    
 public:
     // Constructor, Copy constructor, Destructor
-    Room(const int& = 0, const string & = "", const string & = "", const int& = 0, const int& = 0, const int& = 0);
+    Room(const int& = 0, const string & = "", const string & = "", const int& = 0, const int& = 0, const int& = 0, const string& = "");
     Room(const Room&);
     ~Room();
 
@@ -36,10 +36,9 @@ public:
     int getCurrentOccupancy();
     void setCurrentOccupancy(const int&);
 
-    int getBuildingID();
-    void setBuildingID(const int&);
+    int getFloor();
+    void setFloor(const int&);
 
-
-
-    void show();
+    string getBuilding();
+    void setBuilding(const string&);
 };

@@ -9,11 +9,9 @@ class Account
 {
 private:
     int accountID;
-    string username;
-    string password;
+    string username, password;
     string role;
-    int studentID;
-    int employeeID;
+    int studentID, employeeID;
 
 public:
     Account(const int& = 0, const string & = "", const string & = "", const string & = "", const int& = 0, const int& = 0);
@@ -39,6 +37,4 @@ public:
     int getEmployeeID();
     void setEmployeeID(const int&);
 
-
-    void show();
 };

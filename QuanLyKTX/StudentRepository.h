@@ -19,7 +19,6 @@ public:
     void Insert(const Student&, const int&);
 
     // Read
-    void Show();
     int IndexOf(const int&);
     Student Search(const int&);
 

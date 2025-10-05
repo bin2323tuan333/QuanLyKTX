@@ -85,19 +85,3 @@ void Student::setEmail(const string& email)
 {
     this->email = email;
 }
-
-
-
-
-
-
-void Student::show() {
-    cout << this->studentID << " "
-        << this->fullName << " "
-        << this->gender << " "
-        << this->dateOfBirth << " "
-        << this->className << " "
-        << this->faculty << " "
-        << this->phoneNumber << " "
-        << this->email;
-}

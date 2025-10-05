@@ -19,7 +19,6 @@ public:
     void Insert(const Room&, const int&);
 
     // Read
-    void Show();
     int IndexOf(const int&);
     Room Search(const int&);
 

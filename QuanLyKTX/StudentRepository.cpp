@@ -46,14 +46,6 @@ void StudentRepository::Insert(const Student& student, const int& index)
 }
 
 // Read
-void StudentRepository::Show()
-{
-	for (int i = 0; i < this->n; i++)
-	{
-		(this->p + i)->show();
-		cout << endl;
-	}
-}
 int StudentRepository::IndexOf(const int& studentID)
 {
 	int index = -1;

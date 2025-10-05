@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 using namespace std;
 
@@ -12,6 +11,7 @@ public:
 	Date(const Date&);
 	~Date();
 
+	static Date getCurrentDay();
 	bool laNamNhuan();
 	bool laTonTai();
 

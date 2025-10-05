@@ -6,15 +6,13 @@
 
 class Contract {
 private:
-    int contractID;
+    int contractID, studentID, roomID;
     Date registrationDate;
     int duration;
-    int studentID;
-    int roomID;
 
 public:
     // Constructor, Copy constructor, Destructor
-    Contract(const int& = 0, const Date & = Date(), const int& = 0, const int& = 0, const int& = 0);
+    Contract(const int& = 0, const int& = 0, const int& = 0, const Date & = Date(), const int& = 0);
     Contract(const Contract&);
     ~Contract();
 
@@ -33,7 +31,4 @@ public:
 
     int getRoomID();
     void setRoomID(const int&);
-
-
-    void show();
 };

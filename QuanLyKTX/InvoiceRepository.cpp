@@ -46,14 +46,6 @@ void InvoiceRepository::Insert(const Invoice& invoice, const int& index)
 }
 
 // Read
-void InvoiceRepository::Show()
-{
-    for (int i = 0; i < this->n; i++)
-    {
-        (this->p + i)->show();
-        cout << endl;
-    }
-}
 int InvoiceRepository::IndexOf(const int& invoiceID)
 {
     int index = -1;
@@ -76,6 +68,21 @@ Invoice InvoiceRepository::Search(const int& invoiceID)
     }
     return Invoice();
 }
+Invoice InvoiceRepository::SearchByStudentID(const int& studentID)
+{
+    int index = -1;
+    for (int i = 0; i < this->n; i++)
+    {
+        if (studentID == (this->p + i)->getStudentID())
+        {
+            index = i;
+            break;
+        }
+    }
+    if (index == -1)
+        return Invoice();
+    return *(this->p + index);
+}
 
 // Update
 void InvoiceRepository::Update(Invoice& invoice)
@@ -84,10 +91,16 @@ void InvoiceRepository::Update(Invoice& invoice)
     if (index == -1)
         return;
 
+    (this->p + index)->setStudentID(invoice.getStudentID());
+    (this->p + index)->setEmployeeID(invoice.getEmployeeID());
+    (this->p + index)->setMonth(invoice.getMonth());
+    (this->p + index)->setYear(invoice.getYear());
+    (this->p + index)->setRoomFee(invoice.getRoomFee());
+    (this->p + index)->setInternetFee(invoice.getInternetFee());
+    (this->p + index)->setElectricFee(invoice.getElectricFee());
+    (this->p + index)->setWaterFee(invoice.getWaterFee());
     (this->p + index)->setTotalAmount(invoice.getTotalAmount());
     (this->p + index)->setCreatedDate(invoice.getCreatedDate());
-    (this->p + index)->setPaymentPeriod(invoice.getPaymentPeriod());
-    (this->p + index)->setEmployeeID(invoice.getEmployeeID());
 }
 
 // Delete
@@ -130,6 +143,14 @@ void InvoiceRepository::LoadDataFromFile()
         Invoice temp;
 
         getline(ss, token, ';'); temp.setInvoiceID(stoi(token));
+        getline(ss, token, ';'); temp.setStudentID(stoi(token));
+        getline(ss, token, ';'); temp.setEmployeeID(stoi(token));
+        getline(ss, token, ';'); temp.setMonth(stoi(token));
+        getline(ss, token, ';'); temp.setYear(stoi(token));
+        getline(ss, token, ';'); temp.setRoomFee(stoi(token));
+        getline(ss, token, ';'); temp.setInternetFee(stoi(token));
+        getline(ss, token, ';'); temp.setElectricFee(stoi(token));
+        getline(ss, token, ';'); temp.setWaterFee(stoi(token));
         getline(ss, token, ';'); temp.setTotalAmount(stoi(token));
         getline(ss, token, ';'); 
         int d, m, y;
@@ -137,8 +158,6 @@ void InvoiceRepository::LoadDataFromFile()
         stringstream dateStream(token);
         dateStream >> d >> sep1 >> m >> sep2 >> y;
         temp.setCreatedDate(Date(d, m, y));
-        getline(ss, token, ';'); temp.setPaymentPeriod(token);
-        getline(ss, token, ';'); temp.setEmployeeID(stoi(token));
 
         this->Add(temp);
     }
@@ -157,10 +176,16 @@ void InvoiceRepository::SaveDateToFile()
     for (int i = 0; i < this->n; i++)
     {
         file << (this->p + i)->getInvoiceID() << ";";
+        file << (this->p + i)->getStudentID() << ";";
+        file << (this->p + i)->getEmployeeID() << ";";
+        file << (this->p + i)->getMonth() << ";";
+        file << (this->p + i)->getYear() << ";";
+        file << (this->p + i)->getRoomFee() << ";";
+        file << (this->p + i)->getInternetFee() << ";";
+        file << (this->p + i)->getElectricFee() << ";";
+        file << (this->p + i)->getWaterFee() << ";";
         file << (this->p + i)->getTotalAmount() << ";";
-        file << (this->p + i)->getCreatedDate() << ";";
-        file << (this->p + i)->getPaymentPeriod() << ";";
-        file << (this->p + i)->getEmployeeID() << "\n";
+        file << (this->p + i)->getCreatedDate() << "\n";
     }
     file.close();
 }

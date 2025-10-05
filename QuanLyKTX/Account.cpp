@@ -70,16 +70,3 @@ void Account::setEmployeeID(const int& employeeID)
     this->employeeID = employeeID;
 }
 
-
-
-
-void Account::show() 
-{
-    cout << setw(5) << right << this->accountID << setw(20) << right << this->username << setw(15) << right << this->role;
-    if (role == "student") {
-        cout << setw(10) << right << this->studentID;
-    }
-    else {
-        cout << setw(10) << right << this->employeeID;
-    }
-}

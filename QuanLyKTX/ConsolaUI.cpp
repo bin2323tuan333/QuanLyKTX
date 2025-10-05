@@ -37,6 +37,7 @@ void ConsolaUI::setTextColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
+
 // Hinh Chu Nhat
 void ConsolaUI::drawBox(int x, int y, int w, int h, int borderColor) {
     // Mau Sac
@@ -57,8 +58,9 @@ void ConsolaUI::drawBox(int x, int y, int w, int h, int borderColor) {
     }
 }
 
-void ConsolaUI::text(int x, int y, const string& content)
+void ConsolaUI::text(int x, int y, const string& content, const int& color)
 {
+    setTextColor(color);
     gotoXY(x, y);
     cout << content;
 }
@@ -96,28 +98,9 @@ string ConsolaUI::getInput(int x, int y, int w, int h, int textColor, int border
     return input;
 }
 
-// New: Function to draw a button
-void ConsolaUI::drawButton(int x, int y, int w, int h, const string& content, int textColor, int buttonColor) {
-    drawBox(x, y, w, h, buttonColor);
-    setTextColor(textColor);
-    text(x + 1, (y + h) / 2, content);
-}
 
 
 void ConsolaUI::clearScreen() 
 {
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    DWORD count;
-    DWORD cellCount;
-    COORD homeCoords = { 0, 0 };
-
-    if (hOut == INVALID_HANDLE_VALUE) return;
-    if (!GetConsoleScreenBufferInfo(hOut, &csbi)) return;
-
-    cellCount = csbi.dwSize.X * csbi.dwSize.Y;
-
-    FillConsoleOutputCharacter(hOut, ' ', cellCount, homeCoords, &count);
-    FillConsoleOutputAttribute(hOut, csbi.wAttributes, cellCount, homeCoords, &count);
-    SetConsoleCursorPosition(hOut, homeCoords);
+    system("cls");
 }

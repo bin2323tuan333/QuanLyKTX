@@ -44,7 +44,4 @@ public:
 
     string getEmail();
     void setEmail(const string&);
-
-    
-    void show();
 };

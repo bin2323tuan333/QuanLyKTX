@@ -11,7 +11,6 @@ private:
 	int n;
 
 public:
-	//ko co TaiKhoan
 	AccountRepository();
 	~AccountRepository();
 
@@ -20,13 +19,12 @@ public:
 	void Insert(const Account&, const int&);
 
 	// Read
-	void Show();
 	int IndexOf(const int&);
 	Account SearchByID(const int&);
 	Account SearchByUsername(const string&);
 
 	// Update
-	void Update(const int&);
+	void Update(Account&);
 
 	// Delete
 	void Delete(const int&); 

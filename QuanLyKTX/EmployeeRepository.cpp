@@ -46,14 +46,7 @@ void EmployeeRepository::Insert(const Employee& employee, const int& index)
     (this->n)++;
 }
 
-void EmployeeRepository::Show()
-{
-    for (int i = 0; i < this->n; i++)
-    {
-        (this->p + i)->show();
-        cout << endl;
-    }
-}
+
 int EmployeeRepository::IndexOf(const int& employeeID)
 {
     int index = -1;

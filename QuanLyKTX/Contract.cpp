@@ -2,8 +2,8 @@
 #include "Contract.h"
 
 // Constructor
-Contract::Contract(const int& contractID, const Date& registrationDate, const int& duration, const int& studentID, const int& roomID)
-    : contractID(contractID), registrationDate(registrationDate), duration(duration), studentID(studentID), roomID(roomID) 
+Contract::Contract(const int& contractID, const int& studentID, const int& roomID, const Date& registrationDate, const int& duration)
+    : contractID(contractID), studentID(studentID), roomID(roomID), registrationDate(registrationDate), duration(duration)
 {
 }
 Contract::Contract(const Contract& c)
@@ -56,16 +56,4 @@ int Contract::getRoomID()
 void Contract::setRoomID(const int& roomID) 
 {
     this->roomID = roomID;
-}
-
-
-
-
-void Contract::show() 
-{
-    std::cout << this->contractID << " "
-        << this->registrationDate << " "
-        << this->duration << " "
-        << this->studentID << " "
-        << this->roomID;
 }

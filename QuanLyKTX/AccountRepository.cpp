@@ -8,6 +8,7 @@ AccountRepository::AccountRepository()
 {
 	this->p = nullptr;
 	this->n = 0;
+	LoadDataFromFile();
 }
 AccountRepository::~AccountRepository()
 {
@@ -60,15 +61,6 @@ void AccountRepository::Insert(const Account& account, const int& index)
 }
 
 // Read
-void AccountRepository::Show()
-{
-	for (int i = 0; i < this->n; i++)
-	{
-		(this->p + i)->show();
-		cout << endl;
-	}
-
-}
 int AccountRepository::IndexOf(const int& accountID)
 {
 	int index = -1;

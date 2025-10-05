@@ -48,14 +48,6 @@ void RoomRepository::Insert(const Room& room, const int& index)
 }
 
 // Read
-void RoomRepository::Show()
-{
-	for (int i = 0; i < this->n; i++)
-	{
-		(this->p + i)->show();
-		cout << endl;
-	}
-}
 int RoomRepository::IndexOf(const int& roomID)
 {
 	int index = -1;
@@ -91,7 +83,8 @@ void RoomRepository::Update(Room& room)
     (this->p + index)->setRoomType(room.getRoomType());
     (this->p + index)->setCapacity(room.getCapacity());
     (this->p + index)->setCurrentOccupancy(room.getCurrentOccupancy());
-    (this->p + index)->setBuildingID(room.getBuildingID());
+    (this->p + index)->setFloor(room.getFloor());
+    (this->p + index)->setBuilding(room.getBuilding());
 }
 
 
@@ -137,7 +130,8 @@ void RoomRepository::LoadDataFromFile()
 		getline(ss, token, ';'); temp.setRoomType(token);
 		getline(ss, token, ';'); temp.setCapacity(stoi(token));
 		getline(ss, token, ';'); temp.setCurrentOccupancy(stoi(token));
-		getline(ss, token, ';'); temp.setBuildingID(stoi(token));
+		getline(ss, token, ';'); temp.setFloor(stoi(token));
+		getline(ss, token, ';'); temp.setBuilding(token);
 
 		this->Add(temp);
 	}
@@ -160,7 +154,8 @@ void RoomRepository::SaveDateToFile()
 		file << (this->p + i)->getRoomType() << ";";
 		file << (this->p + i)->getCapacity() << ";";
 		file << (this->p + i)->getCurrentOccupancy() << ";";
-		file << (this->p + i)->getBuildingID() << "\n";
+		file << (this->p + i)->getFloor() << ";";
+		file << (this->p + i)->getBuilding() << "\n";
 	}
 	file.close();
 }

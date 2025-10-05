@@ -4,7 +4,7 @@
 
 
 AccountService::AccountService(AccountRepository& repo)
-    : accountRepo(repo) 
+    : accountRepo(repo), isLogin(false)
 {
 }
 AccountService::~AccountService()
@@ -12,41 +12,46 @@ AccountService::~AccountService()
 }
 
 
-bool AccountService::SignIn(const string& username, const string& password)
+bool AccountService::signIn(const string& username, const string& password)
 {
     Account temp = (this->accountRepo.SearchByUsername(username));
     if (username == temp.getUsername() && password == temp.getPassword())
-        return true;
-    return false;
-}
-
-bool AccountService::ChangePassword(const string& username, const string& oldPassword, const string& newPassword)
-{
-    Account temp = (this->accountRepo.SearchByUsername(username));
-    if (oldPassword == temp.getPassword())
     {
-        temp.setPassword(newPassword);
+        this->isLogin = true;
         return true;
     }
     return false;
 }
-
-Account* AccountService::GetAllAccount()
+bool AccountService::changePassword(const string& username, const string& oldPassword, const string& newPassword)
 {
-
+    return false;
+}
+bool AccountService::isSignIn()
+{
+    return this->isLogin;
 }
 
-bool AccountService::UpdateAccount(const Account& account)
-{
 
+bool AccountService::createAccount(const Account& account)
+{
+    return false;
+}
+bool AccountService::updateAccount(const Account& account)
+{
+    return false;
+}
+bool AccountService::deleteAccount(const int& accountID)
+{
+    return false;
 }
 
-bool AccountService::DeleteAccount(const int& accountID)
+
+Account AccountService::findAccountByUsername(const string& username)
 {
 
+    return Account();
 }
-
-Account AccountService::FindAccountByUsername(const string& username)
+Account AccountService::findAccountById(const int&)
 {
-
+    return Account();
 }

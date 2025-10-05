@@ -1,45 +1,66 @@
 #include "ServiceManager.h"
 
 
-LoginService* ServiceManager::loginService = nullptr;
-AccountRepository* ServiceManager::accountRepo = nullptr;
-bool ServiceManager::initialized = false;
-
-
-void ServiceManager::initialize() 
+void ServiceManager::initialize()
 {
-    if (initialized) return;
-    accountRepo = new AccountRepository();
-    accountRepo->LoadDataFromFile();
-    loginService = new LoginService(*accountRepo);
-    initialized = true;
+	this->accountRepo = new AccountRepository();
+	this->contractRepo = new ContractRepository();
+	this->employeeRepo = new EmployeeRepository();
+	this->invoiceRepo = new InvoiceRepository();
+	this->roomRepo = new RoomRepository();
+	this->studentRepo = new StudentRepository();
+
+	this->accountService = new AccountService(*accountRepo);
+	this->contractService = new ContractService(*contractRepo, *studentRepo);
+	this->employeeService = new EmployeeService(*employeeRepo);
+	this->paymentService = new PaymentService(*invoiceRepo);
+	this->roomService = new RoomService(*roomRepo, *studentRepo);
+	this->studentService = new StudentService(*studentRepo);
 }
 
-LoginService& ServiceManager::getLoginService() 
+void ServiceManager::shutdown()
 {
-    return *loginService;
+	delete accountService; accountService = nullptr;
+	delete contractService; contractService = nullptr;
+	delete employeeService; employeeService = nullptr;
+	delete paymentService; paymentService = nullptr;
+	delete roomService; roomService = nullptr;
+	delete studentService; studentService = nullptr;
+
+	delete accountRepo; accountRepo = nullptr;
+	delete contractRepo; contractRepo = nullptr;
+	delete employeeRepo; employeeRepo = nullptr;
+	delete invoiceRepo; invoiceRepo = nullptr;
+	delete roomRepo; roomRepo = nullptr;
+	delete studentRepo; studentRepo = nullptr;
 }
 
-AccountRepository& ServiceManager::getAccountRepository() 
+AccountService* ServiceManager::getAccountService()
 {
-    return *accountRepo;
+	return accountService;
 }
 
-bool ServiceManager::isInitialized() 
+ContractService* ServiceManager::getContractService()
 {
-    return initialized;
+	return contractService;
 }
 
-void ServiceManager::shutdown() 
+PaymentService* ServiceManager::getPaymentService()
 {
-    if (loginService) 
-    {
-        delete loginService;
-        loginService = nullptr;
-    }
-    if (accountRepo) {
-        delete accountRepo;
-        accountRepo = nullptr;
-    }
-    initialized = false;
+	return paymentService;
+}
+
+EmployeeService* ServiceManager::getEmployeeService()
+{
+	return employeeService;
+}
+
+RoomService* ServiceManager::getRoomService()
+{
+	return roomService;
+}
+
+StudentService* ServiceManager::getStudentService()
+{
+	return studentService;
 }

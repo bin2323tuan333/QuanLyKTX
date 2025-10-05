@@ -76,18 +76,3 @@ void Employee::setEmail(const string& email)
 {
     this->email = email;
 }
-
-
-
-
-
-void Employee::show() 
-{
-    std::cout << this->employeeID << " "
-        << this->fullName << " "
-        << this->dateOfBirth << " "
-        << this->gender << " "
-        << this->position << " "
-        << this->phoneNumber << " "
-        << this->email;
-}
