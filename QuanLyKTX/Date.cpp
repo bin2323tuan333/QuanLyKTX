@@ -13,7 +13,7 @@ Date::Date(const Date& D)
 }
 Date::~Date()
 {
-}
+ }
 
 Date Date::getCurrentDay()
 {

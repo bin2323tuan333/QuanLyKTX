@@ -1,21 +1,30 @@
 #pragma once
 #include <iostream>
+#include "AccountService.h"
 using namespace std;
 
 class HomePage
 {
 private:
+	AccountService* accountService;
+
 	int menuSize;
 	string* menuList;
 	int menuSelected;
+	int loginFormSize;
+	string* loginFormList;
+	int loginFormSelected;
+
+	string username;
+	string password;
+	bool isRunning;
+	bool isError;
 
 public:
-	HomePage();
+	HomePage(AccountService*);
 	~HomePage();
-	int show();
+	void show();
 	void drawHomePage();
-	void drawLoginPage();
-	void drawAboutUsPage();
 
 private:
 	void drawHeader(const int&, const int&);
@@ -25,7 +34,7 @@ private:
 	void drawLoginContent(const int&, const int&);
 	void drawAboutUsContent(const int&, const int&);
 	
-	void drawSelectedItem(int, bool);
+
 	void handleArrowKeys(int, int&, const int&);
 	bool handleNormalKeys(int, int&, const int&);
 };

@@ -65,38 +65,6 @@ void ConsolaUI::text(int x, int y, const string& content, const int& color)
     cout << content;
 }
 
-// New: Function to draw an input box and get user input
-string ConsolaUI::getInput(int x, int y, int w, int h, int textColor, int borderColor) {
-    string input;
-    setTextColor(borderColor);
-    drawBox(x, y, w, h, borderColor);
-    gotoXY(x + 1, y + h / 2);
-    setTextColor(textColor);
-    ShowCursor(true);
-
-    char c;
-    int curX = x + 1;
-    while (true) {
-        c = _getch();
-        if (c == 13) break; 
-        else if (c == 8) {  
-            if (!input.empty()) {
-                input.pop_back();
-                curX--;
-                gotoXY(curX, y + h / 2);
-                cout << " ";
-                gotoXY(curX, y + h / 2);
-            }
-        }
-        else if (isprint(c) && curX < x + w - 1) { 
-            input += c;
-            cout << c;
-            curX++;
-        }
-    }
-    ShowCursor(false);
-    return input;
-}
 
 
 

@@ -15,6 +15,5 @@ public:
     static void setTextColor(int);
     static void drawBox(int, int, int, int, int);
     static void text(int, int, const string&, const int&);
-    static string getInput(int, int, int, int, int, int);
     static void clearScreen();
 };

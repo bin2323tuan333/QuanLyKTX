@@ -8,3 +8,9 @@ EmployeeService::EmployeeService(EmployeeRepository& employeeRepo)
 EmployeeService::~EmployeeService()
 {
 }
+
+
+Employee& EmployeeService::getEmployeeById(const int& employeeID)
+{
+	return this->employeeRepo.Search(employeeID);
+}

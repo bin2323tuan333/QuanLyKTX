@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="EmployeePage.cpp" />
     <ClCompile Include="HomePage.cpp" />
     <ClInclude Include="PageManager.h" />
     <ClInclude Include="StudentPage.h" />
@@ -186,6 +187,7 @@
     <Text Include="Account.txt" />
     <Text Include="Building.txt" />
     <Text Include="Contract.txt" />
+    <Text Include="Employee.txt" />
     <Text Include="Student.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

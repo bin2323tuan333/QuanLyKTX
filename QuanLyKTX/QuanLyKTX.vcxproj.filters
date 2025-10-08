@@ -105,9 +105,6 @@
     <ClCompile Include="Employee.cpp">
       <Filter>Source Files\DataAccess\Models</Filter>
     </ClCompile>
-    <ClCompile Include="AccountRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
     <ClCompile Include="AccountService.cpp">
       <Filter>Source Files\BusinessLogic\Services</Filter>
     </ClCompile>
@@ -143,6 +140,12 @@
     </ClCompile>
     <ClCompile Include="PageManager.cpp">
       <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeePage.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountRepository.cpp">
+      <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +242,9 @@
       <Filter>Data Files</Filter>
     </Text>
     <Text Include="Contract.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="Employee.txt">
       <Filter>Data Files</Filter>
     </Text>
   </ItemGroup>

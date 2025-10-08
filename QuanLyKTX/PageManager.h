@@ -9,10 +9,15 @@ class PageManager
 public:
 	ServiceManager* service;
 
+	HomePage* homePage;
+	EmployeePage* employeePage;
+
+
+public:
 	PageManager(ServiceManager*);
 	~PageManager();
 
-	HomePage getHomePage();
+	HomePage& getHomePage();
 	StudentPage getStudentPage();
-	EmployeePage getEmployeePage();
+	EmployeePage& getEmployeePage();
 };

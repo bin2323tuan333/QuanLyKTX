@@ -8,6 +8,7 @@ EmployeeRepository::EmployeeRepository()
 {
     this->p = nullptr;
     this->n = 0;
+    LoadDataFromFile();
 }
 EmployeeRepository::~EmployeeRepository()
 {
@@ -60,14 +61,14 @@ int EmployeeRepository::IndexOf(const int& employeeID)
     }
     return index;
 }
-Employee EmployeeRepository::Search(const int& employeeID)
+Employee& EmployeeRepository::Search(const int& employeeID)
 {
     int index = IndexOf(employeeID);
     if (index != -1)
     {
         return *(this->p + index);
     }
-    return Employee();
+    
 }
 
 void EmployeeRepository::Update(Employee& employee)
@@ -107,7 +108,7 @@ void EmployeeRepository::Delete(const int& employeeID)
 
 void EmployeeRepository::LoadDataFromFile()
 {
-    string filename = "Account.txt";
+    string filename = "Employee.txt";
     ifstream file(filename);
     if (!file.is_open()) {
         cout << "Khong the mo file " << filename << "!";

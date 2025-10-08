@@ -12,7 +12,7 @@ Application::~Application()
 
 void Application::run()
 {
-	this->isRunning = true;
+	/*this->isRunning = true;
 	while (isRunning)
 	{
 		this->isSignIn = this->page->service->getAccountService()->isSignIn();
@@ -22,10 +22,15 @@ void Application::run()
 		}
 		else
 		{
+			if ((this->page->service->getAccountService())->getRole() == "staff")
+			{
 
-			cout << "Tuan Dep Trai";
+			}
+			else if ((this->page->service->getAccountService())->getRole() == "student")
+			{
+
+			}
 		}
-		_getch();
-	}
-
+	}*/
+	(this->page->getEmployeePage()).show();
 }
