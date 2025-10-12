@@ -107,7 +107,7 @@ void StudentRepository::Delete(const int& studentID)
 
 void StudentRepository::LoadDataFromFile()
 {
-	string filename = "Account.txt";
+	string filename = "Student.txt";
 	ifstream file(filename);
 	if (!file.is_open()) {
 		cout << "Khong the mo file " << filename << "!";
@@ -142,7 +142,7 @@ void StudentRepository::LoadDataFromFile()
 }
 void StudentRepository::SaveDateToFile()
 {
-	string filename = "Account.txt";
+	string filename = "Student.txt";
 	ofstream file(filename);
 
 	if (!file.is_open()) {

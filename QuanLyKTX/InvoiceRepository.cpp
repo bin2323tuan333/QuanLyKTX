@@ -127,7 +127,7 @@ void InvoiceRepository::Delete(const int& invoiceID)
 
 void InvoiceRepository::LoadDataFromFile()
 {
-    string filename = "Account.txt";
+    string filename = "Invoice.txt";
     ifstream file(filename);
     if (!file.is_open()) {
         cout << "Khong the mo file " << filename << "!";
@@ -165,7 +165,7 @@ void InvoiceRepository::LoadDataFromFile()
 }
 void InvoiceRepository::SaveDateToFile()
 {
-    string filename = "Account.txt";
+    string filename = "Invoice.txt";
     ofstream file(filename);
 
     if (!file.is_open()) {

@@ -142,7 +142,7 @@ void EmployeeRepository::LoadDataFromFile()
 }
 void EmployeeRepository::SaveDateToFile()
 {
-    string filename = "Account.txt";
+    string filename = "Employee.txt";
     ofstream file(filename);
 
     if (!file.is_open()) {

@@ -110,7 +110,7 @@ void RoomRepository::Delete(const int& roomID)
 
 void RoomRepository::LoadDataFromFile()
 {
-	string filename = "Account.txt";
+	string filename = "Room.txt";
 	ifstream file(filename);
 	if (!file.is_open()) {
 		cout << "Khong the mo file " << filename << "!";
@@ -139,7 +139,7 @@ void RoomRepository::LoadDataFromFile()
 }
 void RoomRepository::SaveDateToFile()
 {
-	string filename = "Account.txt";
+	string filename = "Room.txt";
 	ofstream file(filename);
 
 	if (!file.is_open()) {

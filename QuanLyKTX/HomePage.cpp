@@ -33,6 +33,9 @@ HomePage::~HomePage()
 
 void HomePage::show()
 {
+	this->username = "";
+	this->password = "";
+	this->menuSelected = 0;
 	this->isRunning = true;
 	while (true)
 	{

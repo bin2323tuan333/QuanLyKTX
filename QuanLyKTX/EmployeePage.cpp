@@ -22,7 +22,6 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 		"Thong Tin Ca Nhan",
 		"Doi Mat Khau",
 		"Dang Xuat"
-
 	};
 	this->changePasswordSelected = 0;
 	this->oldPass = "";
@@ -187,7 +186,7 @@ void EmployeePage::drawFooter(const int& width, const int& height)
 }
 void EmployeePage::drawInfomationContent(const int& width, const int& height)
 {
-	Employee& temp = this->employeeService->getEmployeeById(this->accountService->getEmployeeID());
+	Employee& temp = this->employeeService->getEmployeeById(/*this->accountService->getEmployeeID()*/1001);
 	switch (this->sidebarInfoSelected)
 	{
 	case 0:
@@ -208,6 +207,7 @@ void EmployeePage::drawInfomationContent(const int& width, const int& height)
 		ConsolaUI::text(63, 20, temp.getPhoneNumber(), 15);
 		break;
 	case 1:
+		ConsolaUI::text(30, 7, "DOI MAT KHAU:", 14);
 		ConsolaUI::text(width / 2 - 20, height / 2 - 2, "1. Nhap Mat Khau Cu", (1 == this->changePasswordSelected) ? 11 : 8);
 		ConsolaUI::text(width / 2 - 20, height / 2 + 1, "2. Nhap Mat Khau Moi", (2 == this->changePasswordSelected) ? 11 : 8);
 		ConsolaUI::text(width / 2 - 20, height / 2 + 4, "3. Nhap Lai Mat Khau Moi", (3 == this->changePasswordSelected) ? 11 : 8);
@@ -245,6 +245,7 @@ void EmployeePage::drawInfomationContent(const int& width, const int& height)
 
 		break;
 	case 2:
+		ConsolaUI::text(30, 7, "DANG XUAT TAI KHOAN:", 14);
 		ConsolaUI::text(53, 15, "Nhan ESC De Dang Xuat", 15);
 		break;
 	}
@@ -260,7 +261,31 @@ void EmployeePage::drawSidebarInfomation(const int& width, const int& height)
 
 void EmployeePage::drawStudentServiceContent(const int& width, const int& height)
 {
-
+	switch (this->sidebarStudentSelected)
+	{
+	case 0:
+		ConsolaUI::text(30, 7, "THEM SINH VIEN MOI:", 14);
+		ConsolaUI::text(35, 8, "1. Ten Sinh Vien: ", 8);
+		ConsolaUI::text(35, 10, "2. Ngay Sinh: ", 8);
+		ConsolaUI::text(35, 12, "3. Gioi Tinh: ", 8);
+		ConsolaUI::text(35, 14, "4. Ma So Sinh Vien: ", 8);
+		ConsolaUI::text(35, 16, "5. Lop: ", 8);
+		ConsolaUI::text(35, 18, "6. Khoa: ", 8);
+		ConsolaUI::text(35, 20, "7. So Dien Thoai: ", 8);
+		ConsolaUI::text(35, 22, "8. Email: ", 8);
+		ConsolaUI::text(80, 25, "Nhan ENTER De Them Sinh Vien", 15);
+		ConsolaUI::text(85, 25, "ENTER", 2);
+		break;
+	case 1:
+		ConsolaUI::text(30, 7, "XOA SINH VIEN:", 14);
+		break;
+	case 2:
+		ConsolaUI::text(30, 7, "CAP NHAT THONG TIN SINH VIEN:", 14);
+		break;
+	case 3:
+		ConsolaUI::text(30, 7, "TIM KIEN THEO MA SINH VIEN:", 14);
+		break;
+	}
 }
 void EmployeePage::drawSidebarStudent(const int& width, const int& height)
 {
@@ -274,7 +299,15 @@ void EmployeePage::drawSidebarStudent(const int& width, const int& height)
 
 void EmployeePage::drawRoomServiceContent(const int& width, const int& height)
 {
-
+	switch (this->sidebarRoomSelected)
+	{
+	case 0:
+		ConsolaUI::text(30, 7, "XEM DANH SACH PHONG:", 14);
+		break;
+	case 1:
+		ConsolaUI::text(30, 7, "LOC THEO TRANG THAI:", 14);
+		break;
+	}
 }
 void EmployeePage::drawSidebarRoom(const int& width, const int& height)
 {
@@ -285,7 +318,15 @@ void EmployeePage::drawSidebarRoom(const int& width, const int& height)
 
 void EmployeePage::drawContractServiceContent(const int& width, const int& height)
 {
-
+	switch (this->sidebarContractSelected)
+	{
+	case 0:
+		ConsolaUI::text(30, 7, "TAO HOP DONG MOI:", 14);
+		break;
+	case 1:
+		ConsolaUI::text(30, 7, "KET THUC HOP DONG:", 14);
+		break;
+	}
 }
 void EmployeePage::drawSidebarContract(const int& width, const int& height)
 {
@@ -297,7 +338,15 @@ void EmployeePage::drawSidebarContract(const int& width, const int& height)
 
 void EmployeePage::drawInvoiceServiceContent(const int& width, const int& height)
 {
-
+	switch (this->sidebarInvoiceSelected)
+	{
+	case 0:
+		ConsolaUI::text(30, 7, "TAO HOA DON:", 14);
+		break;
+	case 1:
+		ConsolaUI::text(30, 7, "CAP NHAT TRANG THAI:", 14);
+		break;
+	}
 }
 void EmployeePage::drawSidebarInvoice(const int& width, const int& height)
 {

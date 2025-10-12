@@ -1,4 +1,4 @@
-1001;manager01;pass123;Manager;0;1001
+1001;manager01;123123;Manager;0;1001
 1002;manager02;pass456;Manager;0;1002
 1003;manager03;pass789;Manager;0;1003
 1004;manager04;passabc;Manager;0;1004

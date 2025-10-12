@@ -28,13 +28,15 @@ bool AccountService::signIn(const string& username, const string& password)
 }
 bool AccountService::changePassword(const int& accountID, const string& oldPass, const string& newPass, const string& reEnterNewPass)
 {
-	if (newPass != reEnterNewPass)
+	if (newPass != reEnterNewPass || newPass == "")
 		return false;
-	if (oldPass != this->accountRepo.SearchByID(accountID).getPassword())
+	Account tempAccount = this->accountRepo.SearchByID(accountID);
+	if (tempAccount.getPassword() != oldPass)
 		return false;
-	if (newPass == "")
-		return false;
-	this->accountRepo.SearchByID(accountID).setPassword(newPass);
+	tempAccount.setPassword(newPass);
+	this->accountRepo.Update(tempAccount);
+
+	this->accountRepo.SaveDateToFile();
 	return true;
 }
 bool AccountService::isSignIn()
