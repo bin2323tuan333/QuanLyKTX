@@ -1,7 +1,4 @@
-﻿#include <iostream>
-#include <conio.h>
-#include "Application.h"
-using namespace std;
+﻿#include "Application.h"
 
 
 

@@ -111,9 +111,6 @@
     <ClCompile Include="ConsolaUI.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Position.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="ServiceManager.cpp">
       <Filter>Source Files\BusinessLogic\Services</Filter>
     </ClCompile>
@@ -189,9 +186,6 @@
       <Filter>Header Files\DataAccess\Repositories</Filter>
     </ClInclude>
     <ClInclude Include="ConsolaUI.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Position.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="ServiceManager.h">

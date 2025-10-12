@@ -12,7 +12,7 @@ Application::~Application()
 
 void Application::run()
 {
-	/*this->isRunning = true;
+	this->isRunning = true;
 	while (isRunning)
 	{
 		this->isSignIn = this->page->service->getAccountService()->isSignIn();
@@ -22,15 +22,14 @@ void Application::run()
 		}
 		else
 		{
-			if ((this->page->service->getAccountService())->getRole() == "staff")
+			if ((this->page->service->getAccountService())->getRole() == "Manager")
 			{
-
+				(this->page->getEmployeePage()).show();
 			}
-			else if ((this->page->service->getAccountService())->getRole() == "student")
+			else if ((this->page->service->getAccountService())->getRole() == "Student")
 			{
 
 			}
 		}
-	}*/
-	(this->page->getEmployeePage()).show();
+	}
 }

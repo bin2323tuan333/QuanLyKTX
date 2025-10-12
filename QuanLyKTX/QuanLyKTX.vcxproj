@@ -145,7 +145,6 @@
     <ClInclude Include="ContractService.h" />
     <ClInclude Include="EmployeeService.h" />
     <ClCompile Include="PaymentService.cpp" />
-    <ClCompile Include="Position.cpp" />
     <ClInclude Include="RoomService.h" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Invoice.cpp" />
@@ -165,7 +164,6 @@
     <ClCompile Include="AccountRepository.cpp" />
     <ClInclude Include="AccountRepository.h" />
     <ClCompile Include="Student.cpp" />
-    <ClInclude Include="Position.h" />
     <ClInclude Include="ServiceManager.h" />
     <ClInclude Include="Student.h" />
     <ClCompile Include="Account.cpp" />

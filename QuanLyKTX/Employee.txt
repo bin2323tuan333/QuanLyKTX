@@ -1,6 +1,5 @@
-1;Nguyen Van Hung;15/08/1980;Male;Quan Ly Khu A;0912345678;hungnv@ktx.edu.vn
-2;Tran Thi Lan;23/03/1985;Female;Quan Ly Khu B;0987654321;lantt@ktx.edu.vn
-3;Le Minh Tuan;10/12/1988;Male;Quan Ly Khu C;0978123456;tuanlm@ktx.edu.vn
-4;Pham Thu Ha;05/06/1990;Female;Quan Ly Khu D;0966789012;hapt@ktx.edu.vn
-5;Vo Thanh Son;30/11/1987;Male;Quan Ly Khu E;0933456789;sonvt@ktx.edu.vn
-6;Hoang Thi Mai;14/02/1991;Female;Quan Ly Khu F;0944567890;maibt@ktx.edu.vn
+1001;Le Van Thanh;01/05/1990;Male;Manager;0987123456;leva@school.edu.vn
+1002;Tran Van Nam;15/11/1988;Female;Manager;0978234567;trantb@school.edu.vn
+1003;Nguyen Thi Sau;20/07/1995;Male;Manager;0912345678;nguvanc@school.edu.vn
+1004;Vo Van Chau;05/03/1992;Female;Manager;0909456789;phamtd@school.edu.vn
+1005;Phan Nhat Minh;10/09/1985;Male;Manager;0968567890;hme@school.edu.vn

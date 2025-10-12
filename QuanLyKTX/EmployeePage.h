@@ -16,6 +16,27 @@ private:
 	string* sidebarInfoList;
 	int sidebarInfoSize;
 	int sidebarInfoSelected;
+	
+
+	string* sidebarStudentList;
+	int sidebarStudentSize;
+	int sidebarStudentSelected;
+
+	string* sidebarRoomList;
+	int sidebarRoomSize;
+	int sidebarRoomSelected;
+
+	string* sidebarContractList;
+	int sidebarContractSize;
+	int sidebarContractSelected;
+
+	string* sidebarInvoiceList;
+	int sidebarInvoiceSize;
+	int sidebarInvoiceSelected;
+
+	int changePasswordSelected;
+	string oldPass, newPass, reEnterNewPass;
+	bool isChangePass;
 
 public:
 	EmployeePage(AccountService* ,EmployeeService*);
@@ -39,13 +60,16 @@ private:
 	void drawRoomServiceContent(const int&, const int&);
 	void drawSidebarRoom(const int&, const int&);
 
+	void drawContractServiceContent(const int&, const int&);
+	void drawSidebarContract(const int&, const int&);
+
 	void drawInvoiceServiceContent(const int&, const int&);
 	void drawSidebarInvoice(const int&, const int&);
 
-	void drawRegisterServiceContent(const int&, const int&);
-	void drawSidebarRegister(const int&, const int&);
+	
 
 	void handleArrowLR(int, int&, const int&);
 	void handleArrowUD(int, int&, const int&);
-	void handleNormalKeys(int, int&, const int&);
+	void handleNormalKeys(int, int&);
+	string GetLine();
 };

@@ -53,7 +53,11 @@ void HomePage::show()
 			handleNormalKeys(key, this->loginFormSelected, this->loginFormSize);
 		}
 		if (this->accountService->isSignIn())
+		{
+			this->username = "";
+			this->password = "";
 			break;
+		}
 	}
 }
 void HomePage::drawHomePage()

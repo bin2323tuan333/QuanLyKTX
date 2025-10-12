@@ -1,4 +1,4 @@
-#include "EmployeePage.h"
+﻿#include "EmployeePage.h"
 #include "ConsolaUI.h"
 
 EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* employeeService)
@@ -11,17 +11,64 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 		"Trang Ca Nhan",
 		"Quan Ly Sinh Vien",
 		"Quan Ly Phong",
-		"Quan Ly Hoa Don",
-		"Dang Ky Va Lam Thu Tuc"
+		"Quan Ly Hop Dong",
+		"Quan Ly Hoa Don"
 	};
 
 	this->sidebarInfoSelected = 0;
 	this->sidebarInfoSize = 3;
 	this->sidebarInfoList = new string[this->sidebarInfoSize]
 	{
-		"Thong tin ca nhan",
-		"Chinh sua thong tin",
-		"Dang xuat"
+		"Thong Tin Ca Nhan",
+		"Doi Mat Khau",
+		"Dang Xuat"
+
+	};
+	this->changePasswordSelected = 0;
+	this->oldPass = "";
+	this->newPass = "";
+	this->reEnterNewPass = "";
+	this->isChangePass = false;
+
+	this->sidebarStudentSelected = 0;
+	this->sidebarStudentSize = 4;
+	this->sidebarStudentList = new string[this->sidebarStudentSize]
+	{
+		"Them Moi Sinh Vien",
+		"Xoa Sinh Vien",
+		"Cap Nhat Thong Tin",
+		"Tim Kiem Theo Ma SV"
+		//Tim Theo Ten
+		//Loc Theo Lop, Khoa, Toa, Phong.
+	};
+
+	this->sidebarRoomSelected = 0;
+	this->sidebarRoomSize = 2;
+	this->sidebarRoomList = new string[this->sidebarRoomSize]
+	{
+		"Xem Danh Sach Phong",
+		"Loc Theo Trang Thai"
+		//Xem Chi Tiet Phong
+	};
+
+	this->sidebarContractSelected = 0;
+	this->sidebarContractSize = 2;
+	this->sidebarContractList = new string[this->sidebarContractSize]
+	{
+		"Tao Hop Dong Moi",
+		"Ket Thuc Hop Dong"
+		//Chuyen Phong
+		//Gia Han Hop Dong
+
+	};
+
+	this->sidebarInvoiceSelected = 0;
+	this->sidebarInvoiceSize = 2;
+	this->sidebarInvoiceList = new string[this->sidebarInvoiceSize]
+	{
+		"Tao Hoa Don",
+		"Cap Nhat Trang Thai"
+		//Tu Dong Tao Hoa Don
 	};
 
 }
@@ -29,6 +76,11 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 EmployeePage::~EmployeePage()
 {
 	delete[] this->menuList;
+	delete[] this->sidebarInfoList;
+	delete[] this->sidebarStudentList;
+	delete[] this->sidebarRoomList;
+	delete[] this->sidebarContractList;
+	delete[] this->sidebarInvoiceList;
 }
 
 
@@ -50,16 +102,32 @@ void EmployeePage::show()
 				handleArrowUD(key, this->sidebarInfoSelected, this->sidebarInfoSize);
 				break;
 			case 1:
+				handleArrowUD(key, this->sidebarStudentSelected, this->sidebarStudentSize);
 				break;
 			case 2:
+				handleArrowUD(key, this->sidebarRoomSelected, this->sidebarRoomSize);
 				break;
 			case 3:
+				handleArrowUD(key, this->sidebarContractSelected, this->sidebarContractSize);
 				break;
 			case 4:
+				handleArrowUD(key, this->sidebarInvoiceSelected, this->sidebarInvoiceSize);
 				break;
 			}
 		}
-
+		if (this->menuSelected == 0 && this->sidebarInfoSelected == 2 && key == 27)
+		{
+			this->accountService->setSignIn(false);
+			this->isRunning = false;
+		}
+		if (this->menuSelected == 0 && this->sidebarInfoSelected == 1)
+		{
+			handleNormalKeys(key, this->changePasswordSelected);
+			if (key == 13)
+			{
+				this->isChangePass = this->accountService->changePassword(this->accountService->getEmployeeID(), this->oldPass, this->newPass, this->reEnterNewPass);
+			}
+		}
 	}
 }
 void EmployeePage::drawEmployeePage()
@@ -88,12 +156,12 @@ void EmployeePage::drawEmployeePage()
 		drawRoomServiceContent(width, height);
 		break;
 	case 3:
-		drawSidebarInvoice(width, height);
-		drawInvoiceServiceContent(width, height);
+		drawSidebarContract(width, height);
+		drawContractServiceContent(width, height);
 		break;
 	case 4:
-		drawSidebarRegister(width, height);
-		drawRegisterServiceContent(width, height);
+		drawSidebarInvoice(width, height);
+		drawInvoiceServiceContent(width, height);
 		break;
 	};
 }
@@ -119,44 +187,65 @@ void EmployeePage::drawFooter(const int& width, const int& height)
 }
 void EmployeePage::drawInfomationContent(const int& width, const int& height)
 {
-	Employee& temp = this->employeeService->getEmployeeById(/*this->accountService->getEmployeeID()*/1);
+	Employee& temp = this->employeeService->getEmployeeById(this->accountService->getEmployeeID());
 	switch (this->sidebarInfoSelected)
 	{
 	case 0:
 		ConsolaUI::text(30, 7, "THONG TIN NHAN VIEN:", 14);
 		ConsolaUI::text(33, 8, "Ho Va Ten: ", 15);
-		ConsolaUI::text(53, 8, temp.getFullName(), 15);
+		ConsolaUI::text(63, 8, temp.getFullName(), 15);
 		ConsolaUI::text(33, 10, "Ma Nhan Vien:", 15);
-		ConsolaUI::text(53, 10, to_string(temp.getEmployeeID()), 15);
+		ConsolaUI::text(63, 10, to_string(temp.getEmployeeID()), 15);
 		ConsolaUI::text(33, 12, "Ngay Sinh:", 15);
-		ConsolaUI::gotoXY(53, 12); ConsolaUI::setTextColor(15); cout << temp.getDateOfBirth();
+		ConsolaUI::gotoXY(63, 12); ConsolaUI::setTextColor(15); cout << temp.getDateOfBirth();
 		ConsolaUI::text(33, 14, "Gioi Tinh:", 15);
-		ConsolaUI::text(53, 14, temp.getGender(), 15);
+		ConsolaUI::text(63, 14, temp.getGender(), 15);
 		ConsolaUI::text(33, 16, "Chuc Vu:", 15);
-		ConsolaUI::text(53, 16, temp.getPosition(), 15);
+		ConsolaUI::text(63, 16, temp.getPosition(), 15);
 		ConsolaUI::text(33, 18, "Email:", 15);
-		ConsolaUI::text(53, 18, temp.getEmail(), 15);
+		ConsolaUI::text(63, 18, temp.getEmail(), 15);
 		ConsolaUI::text(33, 20, "So Dien Thoai:", 15);
-		ConsolaUI::text(53, 20, temp.getPhoneNumber(), 15);
+		ConsolaUI::text(63, 20, temp.getPhoneNumber(), 15);
 		break;
 	case 1:
-		ConsolaUI::text(30, 7, "CHINH SUA THONG TIN NHAN VIEN:", 14);
-		ConsolaUI::text(33, 8, "Ho Va Ten: ", 15);
-		ConsolaUI::text(53, 8, temp.getFullName(), 15);
-		ConsolaUI::text(33, 10, "Ma Nhan Vien:", 15);
-		ConsolaUI::text(53, 10, to_string(temp.getEmployeeID()), 15);
-		ConsolaUI::text(33, 12, "Ngay Sinh:", 15);
-		ConsolaUI::gotoXY(53, 12); ConsolaUI::setTextColor(15); cout << temp.getDateOfBirth();
-		ConsolaUI::text(33, 14, "Gioi Tinh:", 15);
-		ConsolaUI::text(53, 14, temp.getGender(), 15);
-		ConsolaUI::text(33, 16, "Chuc Vu:", 15);
-		ConsolaUI::text(53, 16, temp.getPosition(), 15);
-		ConsolaUI::text(33, 18, "Email:", 15);
-		ConsolaUI::text(53, 18, temp.getEmail(), 15);
-		ConsolaUI::text(33, 20, "So Dien Thoai:", 15);
-		ConsolaUI::text(53, 20, temp.getPhoneNumber(), 15);
+		ConsolaUI::text(width / 2 - 20, height / 2 - 2, "1. Nhap Mat Khau Cu", (1 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::text(width / 2 - 20, height / 2 + 1, "2. Nhap Mat Khau Moi", (2 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::text(width / 2 - 20, height / 2 + 4, "3. Nhap Lai Mat Khau Moi", (3 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::text(width / 2 + 12, height / 2 - 2, ((this->oldPass == "") ? "" : this->oldPass), (1 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::text(width / 2 + 12, height / 2 + 1, ((this->newPass == "") ? "" : this->newPass), (2 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::text(width / 2 + 12, height / 2 + 4, ((this->reEnterNewPass == "") ? "" : this->reEnterNewPass), (3 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::text(width / 2, height / 2 + 7, "Nhan           De Thay Doi Mat Khau", 15);
+		ConsolaUI::text(width / 2 + 5, height / 2 + 7, "[ Enter ]", 2);
+
+		if (this->isChangePass)
+		{
+			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Doi Mat Khau Thanh Cong", 2);
+		}
+
+		ConsolaUI::drawBox(width / 2 + 10, height / 2 - 3, 30, 2, (1 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::drawBox(width / 2 + 10, height / 2, 30, 2, (2 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::drawBox(width / 2 + 10, height / 2 + 3, 30, 2, (3 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::setTextColor(15);
+		switch (this->changePasswordSelected)
+		{
+		case 1:
+			ConsolaUI::gotoXY(width / 2 + 12, height / 2 - 2);
+			this->oldPass = GetLine();
+			break;
+		case 2:
+			ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 1);
+			this->newPass = GetLine();
+			break;
+		case 3:
+			ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 4);
+			this->reEnterNewPass = GetLine();
+			break;
+		}
+		this->changePasswordSelected = 0;
+
 		break;
 	case 2:
+		ConsolaUI::text(53, 15, "Nhan ESC De Dang Xuat", 15);
 		break;
 	}
 }
@@ -176,6 +265,10 @@ void EmployeePage::drawStudentServiceContent(const int& width, const int& height
 void EmployeePage::drawSidebarStudent(const int& width, const int& height)
 {
 	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
+	ConsolaUI::text(5, 8, *(this->sidebarStudentList), (0 == this->sidebarStudentSelected) ? 11 : 8);
+	ConsolaUI::text(5, 12, *(this->sidebarStudentList + 1), (1 == this->sidebarStudentSelected) ? 11 : 8);
+	ConsolaUI::text(5, 16, *(this->sidebarStudentList + 2), (2 == this->sidebarStudentSelected) ? 11 : 8);
+	ConsolaUI::text(5, 20, *(this->sidebarStudentList + 3), (3 == this->sidebarStudentSelected) ? 11 : 8);
 }
 
 
@@ -186,6 +279,19 @@ void EmployeePage::drawRoomServiceContent(const int& width, const int& height)
 void EmployeePage::drawSidebarRoom(const int& width, const int& height)
 {
 	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
+	ConsolaUI::text(5, 8, *(this->sidebarRoomList), (0 == this->sidebarRoomSelected) ? 11 : 8);
+	ConsolaUI::text(5, 12, *(this->sidebarRoomList + 1), (1 == this->sidebarRoomSelected) ? 11 : 8);
+}
+
+void EmployeePage::drawContractServiceContent(const int& width, const int& height)
+{
+
+}
+void EmployeePage::drawSidebarContract(const int& width, const int& height)
+{
+	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
+	ConsolaUI::text(5, 8, *(this->sidebarContractList), (0 == this->sidebarContractSelected) ? 11 : 8);
+	ConsolaUI::text(5, 12, *(this->sidebarContractList + 1), (1 == this->sidebarContractSelected) ? 11 : 8);
 }
 
 
@@ -196,16 +302,8 @@ void EmployeePage::drawInvoiceServiceContent(const int& width, const int& height
 void EmployeePage::drawSidebarInvoice(const int& width, const int& height)
 {
 	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
-}
-
-
-void EmployeePage::drawRegisterServiceContent(const int& width, const int& height)
-{
-
-}
-void EmployeePage::drawSidebarRegister(const int& width, const int& height)
-{
-	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
+	ConsolaUI::text(5, 8, *(this->sidebarInvoiceList), (0 == this->sidebarInvoiceSelected) ? 11 : 8);
+	ConsolaUI::text(5, 12, *(this->sidebarInvoiceList + 1), (1 == this->sidebarInvoiceSelected) ? 11 : 8);
 }
 
 
@@ -234,20 +332,38 @@ void EmployeePage::handleArrowUD(int key, int& index, const int& size)
 	}
 }
 
-void EmployeePage::handleNormalKeys(int key, int& index, const int& size)
+void EmployeePage::handleNormalKeys(int key, int& index)
 {
-	switch (key)
+	if (key >= '1' && key <= '9')
 	{
-	case 27:
-		index = -1;
-	default:
-		if (key >= '1' && key <= '9')
+		index = key - '0';
+	}
+}
+
+string EmployeePage::GetLine()
+{
+	string ss;
+	while (true)
+	{
+		int key = _getch();
+		if (key == '\r' || key == '\n')
 		{
-			int num = key - '1';
-			if (num < size)
+			break;
+		}
+
+		if (key == '\b')
+		{
+			if (ss.length() > 0)
 			{
-				index = num;
+				ss.resize(ss.length() - 1);
+				cout << "\b \b";
 			}
 		}
+		else
+		{
+			ss += char(key);
+			cout << char(key);
+		}
 	}
+	return ss;
 }
