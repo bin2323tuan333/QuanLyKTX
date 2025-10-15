@@ -39,7 +39,9 @@ private:
 	int changePasswordSelected;
 	string oldPass, newPass, reEnterNewPass;
 	bool isChangePass;
+
 	int studentIDToSearch;
+	int keyToSearchStudent;
 
 public:
 	EmployeePage(AccountService* ,EmployeeService*, StudentService*);
@@ -75,4 +77,5 @@ private:
 	void handleArrowUD(int, int&, const int&);
 	void handleNormalKeys(int, int&);
 	string GetLine();
+	int GetInt();
 };

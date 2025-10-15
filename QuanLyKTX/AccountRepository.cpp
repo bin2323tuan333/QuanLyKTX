@@ -123,8 +123,8 @@ void AccountRepository::Delete(const int& accountID)
 	int j = 0;
 	for (int i = 0; i < this->n; i++)
 	{
-		{
 		if (i != index)
+		{
 			*(temp + j) = *(this->p + i);
 			j++;
 		}

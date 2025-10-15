@@ -1,5 +1,6 @@
 ﻿#include "EmployeePage.h"
 #include "ConsolaUI.h"
+#include <sstream>
 
 EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* employeeService, StudentService* studentService)
 	:accountService(accountService), employeeService(employeeService), isRunning(true)
@@ -39,6 +40,7 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 		//Loc Theo Lop, Khoa, Toa, Phong.
 	};
 	this->studentIDToSearch = 0;
+	this->keyToSearchStudent = 0;
 
 	this->sidebarRoomSelected = 0;
 	this->sidebarRoomSize = 2;
@@ -128,11 +130,10 @@ void EmployeePage::show()
 		}
 		if (this->menuSelected == 1 && this->sidebarStudentSelected == 1)
 		{
-			if (key == '1')
+			handleNormalKeys(key, this->keyToSearchStudent);
+			if (key == 13)
 			{
-				ConsolaUI::ShowCursor(true);
-				ConsolaUI::gotoXY(67, 9);
-				this->studentIDToSearch = stoi(GetLine());
+
 			}
 		}
 	}
@@ -285,21 +286,49 @@ void EmployeePage::drawStudentServiceContent(const int& width, const int& height
 		ConsolaUI::text(85, 25, "ENTER", 2);
 		break;
 	case 1:
-		Student* temp = this->studentService->SearchByID(this->studentIDToSearch);
+		ConsolaUI::text(30, 7, "TIM KIEM THEO MA SINH VIEN:", 14);
+		ConsolaUI::text(35, 9, "1. Nhap Ma Sinh Vien: ", 8);
+		ConsolaUI::drawBox(65, 8, 25, 2, 8);
+		if (this->keyToSearchStudent == 1)
+		{
+			ConsolaUI::ShowCursor(true);
+			ConsolaUI::gotoXY(66, 9);
+			this->studentIDToSearch = GetInt();
+			ConsolaUI::ShowCursor(false);
+		}
 
+		Student* temp = this->studentService->SearchByID(this->studentIDToSearch);
 		if (temp != nullptr)
 		{
+			ConsolaUI::text(35, 11, ">> SINH VIEN DA DUOC TIM THAY! <<", 10);
 
+			ConsolaUI::text(35, 13, "Ho Va Ten:", 15);
+			ConsolaUI::text(65, 13, temp->getFullName(), 15);
+
+			ConsolaUI::text(35, 15, "Ma Sinh Vien:", 15);
+			ConsolaUI::text(65, 15, to_string(temp->getStudentID()), 15);
+
+			ConsolaUI::text(35, 17, "Ngay Sinh:", 15);
+			ConsolaUI::gotoXY(65, 17);
+			ConsolaUI::setTextColor(15);
+			cout << temp->getDateOfBirth();
+
+			ConsolaUI::text(35, 19, "Gioi Tinh:", 15);
+			ConsolaUI::text(65, 19, temp->getGender(), 15);
+
+			ConsolaUI::text(35, 21, "Lop/Khoa:", 15);
+			ConsolaUI::text(65, 21, temp->getClassName() + " - " + temp->getFaculty(), 15);
 		}
 		else
 		{
-			ConsolaUI::text(30, 7, "TIM KIEN THEO MA SINH VIEN:", 14);
-			ConsolaUI::text(35, 9, "1. Nhap Ma Sinh Vien: ", 8);
-			ConsolaUI::drawBox(65, 8, 25, 2, 8);
+			ConsolaUI::text(35, 11, ">> KHONG TIM THAY MA SINH VIEN: " + to_string(this->studentIDToSearch) + " <<", 12);
 		}
 		break;
 	}
+
+
 }
+
 void EmployeePage::drawSidebarStudent(const int& width, const int& height)
 {
 	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
@@ -425,4 +454,13 @@ string EmployeePage::GetLine()
 		}
 	}
 	return ss;
+}
+
+int EmployeePage::GetInt()
+{
+	string inputString = GetLine();
+	stringstream ss(inputString);
+	int result = 0;
+	ss >> result;
+	return result;
 }
