@@ -1,11 +1,13 @@
 #pragma once
 #include "EmployeeService.h"
 #include "AccountService.h"
+#include "StudentService.h"
 
 class EmployeePage {
 private:
 	AccountService* accountService;
 	EmployeeService* employeeService;
+	StudentService* studentService;
 
 	bool isRunning;
 
@@ -37,9 +39,10 @@ private:
 	int changePasswordSelected;
 	string oldPass, newPass, reEnterNewPass;
 	bool isChangePass;
+	int studentIDToSearch;
 
 public:
-	EmployeePage(AccountService* ,EmployeeService*);
+	EmployeePage(AccountService* ,EmployeeService*, StudentService*);
 	~EmployeePage();
 
 	void show();

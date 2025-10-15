@@ -14,5 +14,5 @@ public:
     bool deleteEmployee(int);
     bool deactivateEmployee(int);
 
-    Employee& getEmployeeById(const int&);
+    Employee* getEmployeeById(const int&);
 };

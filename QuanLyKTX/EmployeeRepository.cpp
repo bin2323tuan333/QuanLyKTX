@@ -61,14 +61,14 @@ int EmployeeRepository::IndexOf(const int& employeeID)
     }
     return index;
 }
-Employee& EmployeeRepository::Search(const int& employeeID)
+Employee* EmployeeRepository::Search(const int& employeeID)
 {
     int index = IndexOf(employeeID);
     if (index != -1)
     {
-        return *(this->p + index);
+        return (this->p + index);
     }
-    
+    return nullptr;
 }
 
 void EmployeeRepository::Update(Employee& employee)

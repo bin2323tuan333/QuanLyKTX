@@ -9,7 +9,8 @@ PageManager::PageManager(ServiceManager* service)
 	);
 	this->employeePage = new EmployeePage(
 		service->getAccountService(),
-		service->getEmployeeService()
+		service->getEmployeeService(),
+		service->getStudentService()
 	);
 }
 PageManager::~PageManager()

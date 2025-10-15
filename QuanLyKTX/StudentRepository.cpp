@@ -59,14 +59,14 @@ int StudentRepository::IndexOf(const int& studentID)
 	}
 	return index;
 }
-Student StudentRepository::Search(const int& studentID)
+Student* StudentRepository::Search(const int& studentID)
 {
 	int index = IndexOf(studentID);
 	if (index != -1)
 	{
-		return *(this->p + index);
+		return (this->p + index);
 	}
-	return Student();
+	return nullptr;
 }
 
 // Update

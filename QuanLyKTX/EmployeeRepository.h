@@ -20,7 +20,7 @@ public:
 
     // Read
     int IndexOf(const int&);
-    Employee& Search(const int&);
+    Employee* Search(const int&);
 
     // Update
     void Update(Employee&);

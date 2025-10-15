@@ -1,7 +1,7 @@
 ﻿#include "EmployeePage.h"
 #include "ConsolaUI.h"
 
-EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* employeeService)
+EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* employeeService, StudentService* studentService)
 	:accountService(accountService), employeeService(employeeService), isRunning(true)
 {
 	this->menuSelected = 0;
@@ -30,16 +30,15 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 	this->isChangePass = false;
 
 	this->sidebarStudentSelected = 0;
-	this->sidebarStudentSize = 4;
+	this->sidebarStudentSize = 2;
 	this->sidebarStudentList = new string[this->sidebarStudentSize]
 	{
 		"Them Moi Sinh Vien",
-		"Xoa Sinh Vien",
-		"Cap Nhat Thong Tin",
 		"Tim Kiem Theo Ma SV"
 		//Tim Theo Ten
 		//Loc Theo Lop, Khoa, Toa, Phong.
 	};
+	this->studentIDToSearch = 0;
 
 	this->sidebarRoomSelected = 0;
 	this->sidebarRoomSize = 2;
@@ -127,6 +126,15 @@ void EmployeePage::show()
 				this->isChangePass = this->accountService->changePassword(this->accountService->getEmployeeID(), this->oldPass, this->newPass, this->reEnterNewPass);
 			}
 		}
+		if (this->menuSelected == 1 && this->sidebarStudentSelected == 1)
+		{
+			if (key == '1')
+			{
+				ConsolaUI::ShowCursor(true);
+				ConsolaUI::gotoXY(67, 9);
+				this->studentIDToSearch = stoi(GetLine());
+			}
+		}
 	}
 }
 void EmployeePage::drawEmployeePage()
@@ -186,25 +194,25 @@ void EmployeePage::drawFooter(const int& width, const int& height)
 }
 void EmployeePage::drawInfomationContent(const int& width, const int& height)
 {
-	Employee& temp = this->employeeService->getEmployeeById(/*this->accountService->getEmployeeID()*/1001);
+	Employee* temp = this->employeeService->getEmployeeById(/*this->accountService->getEmployeeID()*/1001);
 	switch (this->sidebarInfoSelected)
 	{
 	case 0:
 		ConsolaUI::text(30, 7, "THONG TIN NHAN VIEN:", 14);
 		ConsolaUI::text(33, 8, "Ho Va Ten: ", 15);
-		ConsolaUI::text(63, 8, temp.getFullName(), 15);
+		ConsolaUI::text(63, 8, temp->getFullName(), 15);
 		ConsolaUI::text(33, 10, "Ma Nhan Vien:", 15);
-		ConsolaUI::text(63, 10, to_string(temp.getEmployeeID()), 15);
+		ConsolaUI::text(63, 10, to_string(temp->getEmployeeID()), 15);
 		ConsolaUI::text(33, 12, "Ngay Sinh:", 15);
-		ConsolaUI::gotoXY(63, 12); ConsolaUI::setTextColor(15); cout << temp.getDateOfBirth();
+		ConsolaUI::gotoXY(63, 12); ConsolaUI::setTextColor(15); cout << temp->getDateOfBirth();
 		ConsolaUI::text(33, 14, "Gioi Tinh:", 15);
-		ConsolaUI::text(63, 14, temp.getGender(), 15);
+		ConsolaUI::text(63, 14, temp->getGender(), 15);
 		ConsolaUI::text(33, 16, "Chuc Vu:", 15);
-		ConsolaUI::text(63, 16, temp.getPosition(), 15);
+		ConsolaUI::text(63, 16, temp->getPosition(), 15);
 		ConsolaUI::text(33, 18, "Email:", 15);
-		ConsolaUI::text(63, 18, temp.getEmail(), 15);
+		ConsolaUI::text(63, 18, temp->getEmail(), 15);
 		ConsolaUI::text(33, 20, "So Dien Thoai:", 15);
-		ConsolaUI::text(63, 20, temp.getPhoneNumber(), 15);
+		ConsolaUI::text(63, 20, temp->getPhoneNumber(), 15);
 		break;
 	case 1:
 		ConsolaUI::text(30, 7, "DOI MAT KHAU:", 14);
@@ -277,13 +285,18 @@ void EmployeePage::drawStudentServiceContent(const int& width, const int& height
 		ConsolaUI::text(85, 25, "ENTER", 2);
 		break;
 	case 1:
-		ConsolaUI::text(30, 7, "XOA SINH VIEN:", 14);
-		break;
-	case 2:
-		ConsolaUI::text(30, 7, "CAP NHAT THONG TIN SINH VIEN:", 14);
-		break;
-	case 3:
-		ConsolaUI::text(30, 7, "TIM KIEN THEO MA SINH VIEN:", 14);
+		Student* temp = this->studentService->SearchByID(this->studentIDToSearch);
+
+		if (temp != nullptr)
+		{
+
+		}
+		else
+		{
+			ConsolaUI::text(30, 7, "TIM KIEN THEO MA SINH VIEN:", 14);
+			ConsolaUI::text(35, 9, "1. Nhap Ma Sinh Vien: ", 8);
+			ConsolaUI::drawBox(65, 8, 25, 2, 8);
+		}
 		break;
 	}
 }
@@ -292,8 +305,6 @@ void EmployeePage::drawSidebarStudent(const int& width, const int& height)
 	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
 	ConsolaUI::text(5, 8, *(this->sidebarStudentList), (0 == this->sidebarStudentSelected) ? 11 : 8);
 	ConsolaUI::text(5, 12, *(this->sidebarStudentList + 1), (1 == this->sidebarStudentSelected) ? 11 : 8);
-	ConsolaUI::text(5, 16, *(this->sidebarStudentList + 2), (2 == this->sidebarStudentSelected) ? 11 : 8);
-	ConsolaUI::text(5, 20, *(this->sidebarStudentList + 3), (3 == this->sidebarStudentSelected) ? 11 : 8);
 }
 
 
@@ -399,7 +410,6 @@ string EmployeePage::GetLine()
 		{
 			break;
 		}
-
 		if (key == '\b')
 		{
 			if (ss.length() > 0)

@@ -9,3 +9,10 @@ StudentService::~StudentService()
 {
 }
 
+
+Student* StudentService::SearchByID(const int& studentID)
+{
+	Student* student = this->studentRepo.Search(studentID);
+	return student;
+}
+

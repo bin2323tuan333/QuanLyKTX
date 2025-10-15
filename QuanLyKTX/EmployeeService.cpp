@@ -10,7 +10,7 @@ EmployeeService::~EmployeeService()
 }
 
 
-Employee& EmployeeService::getEmployeeById(const int& employeeID)
+Employee* EmployeeService::getEmployeeById(const int& employeeID)
 {
 	return this->employeeRepo.Search(employeeID);
 }

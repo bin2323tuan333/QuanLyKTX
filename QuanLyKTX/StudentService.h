@@ -10,6 +10,9 @@ private:
 public:
 	StudentService(StudentRepository&);
 	~StudentService();
+
+
+	Student* SearchByID(const int&);
 };
 
 
