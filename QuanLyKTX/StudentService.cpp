@@ -16,3 +16,11 @@ Student* StudentService::SearchByID(const int& studentID)
 	return student;
 }
 
+
+bool StudentService::Add(Student& student)
+{
+	if (!(student.getDateOfBirth()).isValid())
+		return false;
+    
+    return true;
+}

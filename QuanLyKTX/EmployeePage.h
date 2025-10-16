@@ -40,8 +40,13 @@ private:
 	string oldPass, newPass, reEnterNewPass;
 	bool isChangePass;
 
+	Student* studentToAct;
 	int studentIDToSearch;
 	int keyToSearchStudent;
+
+	Student* studentToAdd;
+	int tempDay, tempMonth, tempYear;
+	bool isAddStudentSucessfull;
 
 public:
 	EmployeePage(AccountService* ,EmployeeService*, StudentService*);

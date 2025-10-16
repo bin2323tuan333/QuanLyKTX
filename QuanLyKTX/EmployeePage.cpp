@@ -3,7 +3,7 @@
 #include <sstream>
 
 EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* employeeService, StudentService* studentService)
-	:accountService(accountService), employeeService(employeeService), isRunning(true)
+	:accountService(accountService), employeeService(employeeService), studentService(studentService), isRunning(true)
 {
 	this->menuSelected = 0;
 	this->menuSize = 5;
@@ -41,6 +41,9 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 	};
 	this->studentIDToSearch = 0;
 	this->keyToSearchStudent = 0;
+	this->studentToAct = nullptr;
+	this->studentToAdd = new Student();
+	this->isAddStudentSucessfull = false;
 
 	this->sidebarRoomSelected = 0;
 	this->sidebarRoomSize = 2;
@@ -81,6 +84,8 @@ EmployeePage::~EmployeePage()
 	delete[] this->sidebarRoomList;
 	delete[] this->sidebarContractList;
 	delete[] this->sidebarInvoiceList;
+
+	delete this->studentToAdd;
 }
 
 
@@ -131,13 +136,88 @@ void EmployeePage::show()
 		if (this->menuSelected == 1 && this->sidebarStudentSelected == 1)
 		{
 			handleNormalKeys(key, this->keyToSearchStudent);
-			if (key == 13)
+			if (key == '1')
 			{
+				ConsolaUI::text(66, 9, "                       ", 7);
+				ConsolaUI::gotoXY(66, 9);
 
+				this->studentIDToSearch = GetInt();
+				this->keyToSearchStudent = 0;
+			}
+		}
+		if (this->menuSelected == 1 && this->sidebarStudentSelected == 0)
+		{
+			if (key == '1')
+			{
+				ConsolaUI::text(58, 8, "                         ", 7);
+				ConsolaUI::gotoXY(58, 8);
+				this->studentToAdd->setFullName(GetLine());
+			}
+			else if (key == '2')
+			{
+				ConsolaUI::text(58, 9, "      ", 7);
+				ConsolaUI::gotoXY(58, 9);
+				this->tempDay = GetInt();
+			}
+			else if (key == '3')
+			{
+				ConsolaUI::text(58, 10, "      ", 7);
+				ConsolaUI::gotoXY(58, 10);
+				this->tempMonth = GetInt();
+			}
+			else if (key == '4')
+			{
+				ConsolaUI::text(58, 11, "      ", 7);
+				ConsolaUI::gotoXY(58, 11);
+				this->tempYear = GetInt();
+			}
+			else if (key == '5')
+			{
+				ConsolaUI::text(58, 12, "                         ", 7);
+				ConsolaUI::gotoXY(58, 12);
+				this->studentToAdd->setGender(GetLine());
+			}
+			else if (key == '6')
+			{
+				ConsolaUI::text(58, 13, "                         ", 7);
+				ConsolaUI::gotoXY(58, 13);
+				string inputID = GetLine();
+				this->studentToAdd->setStudentID(stoi(inputID));
+			}
+			else if (key == '7')
+			{
+				ConsolaUI::text(58, 14, "                         ", 7);
+				ConsolaUI::gotoXY(58, 14);
+				this->studentToAdd->setClassName(GetLine());
+			}
+			else if (key == '8')
+			{
+				ConsolaUI::text(58, 15, "                         ", 7);
+				ConsolaUI::gotoXY(58, 15);
+				this->studentToAdd->setFaculty(GetLine());
+			}
+			else if (key == '9')
+			{
+				ConsolaUI::text(58, 16, "                         ", 7);
+				ConsolaUI::gotoXY(58, 16);
+				this->studentToAdd->setPhoneNumber(GetLine());
+			}
+			else if (key == '0')
+			{
+				ConsolaUI::text(58, 17, "                         ", 7);
+				ConsolaUI::gotoXY(58, 17);
+				this->studentToAdd->setEmail(GetLine());
+			}
+			else if (key == 13)
+			{
+				this->isAddStudentSucessfull = this->studentService->Add(*this->studentToAct);
 			}
 		}
 	}
 }
+
+
+
 void EmployeePage::drawEmployeePage()
 {
 	int width = ConsolaUI::getConsoleWidth();
@@ -275,58 +355,63 @@ void EmployeePage::drawStudentServiceContent(const int& width, const int& height
 	case 0:
 		ConsolaUI::text(30, 7, "THEM SINH VIEN MOI:", 14);
 		ConsolaUI::text(35, 8, "1. Ten Sinh Vien: ", 8);
-		ConsolaUI::text(35, 10, "2. Ngay Sinh: ", 8);
-		ConsolaUI::text(35, 12, "3. Gioi Tinh: ", 8);
-		ConsolaUI::text(35, 14, "4. Ma So Sinh Vien: ", 8);
-		ConsolaUI::text(35, 16, "5. Lop: ", 8);
-		ConsolaUI::text(35, 18, "6. Khoa: ", 8);
-		ConsolaUI::text(35, 20, "7. So Dien Thoai: ", 8);
-		ConsolaUI::text(35, 22, "8. Email: ", 8);
-		ConsolaUI::text(80, 25, "Nhan ENTER De Them Sinh Vien", 15);
-		ConsolaUI::text(85, 25, "ENTER", 2);
+
+		//Tách Ngay Sinh thành 3 trường
+		ConsolaUI::text(35, 9, "2. Ngay Sinh (ngay): ", 8);
+		ConsolaUI::text(35, 10, "3. Ngay Sinh (thang):", 8);
+		ConsolaUI::text(35, 11, "4. Ngay Sinh (nam):  ", 8);
+
+		ConsolaUI::text(35, 12, "5. Gioi Tinh: ", 8);
+		ConsolaUI::text(35, 13, "6. Ma So Sinh Vien: ", 8);
+		ConsolaUI::text(35, 14, "7. Lop: ", 8);
+		ConsolaUI::text(35, 15, "8. Khoa: ", 8);
+		ConsolaUI::text(35, 16, "9. So Dien Thoai: ", 8);
+		ConsolaUI::text(35, 17, "0. Email: ", 8);
+
+		ConsolaUI::text(80, 28, "Nhan ENTER De Them Sinh Vien", 15);
+		ConsolaUI::text(85, 28, "ENTER", 2);
 		break;
 	case 1:
 		ConsolaUI::text(30, 7, "TIM KIEM THEO MA SINH VIEN:", 14);
-		ConsolaUI::text(35, 9, "1. Nhap Ma Sinh Vien: ", 8);
-		ConsolaUI::drawBox(65, 8, 25, 2, 8);
-		if (this->keyToSearchStudent == 1)
+		ConsolaUI::text(35, 9, "1. Nhap Ma Sinh Vien: ", 15);
+		ConsolaUI::drawBox(65, 8, 25, 2, 15);
+
+		for (int i = 13; i <= 20; i++)
 		{
-			ConsolaUI::ShowCursor(true);
-			ConsolaUI::gotoXY(66, 9);
-			this->studentIDToSearch = GetInt();
-			ConsolaUI::ShowCursor(false);
+			ConsolaUI::text(35, i, "                                                                  ", 15);
 		}
 
-		Student* temp = this->studentService->SearchByID(this->studentIDToSearch);
-		if (temp != nullptr)
+		if (this->studentIDToSearch != 0)
 		{
-			ConsolaUI::text(35, 11, ">> SINH VIEN DA DUOC TIM THAY! <<", 10);
+			this->studentToAct = this->studentService->SearchByID(this->studentIDToSearch);
 
-			ConsolaUI::text(35, 13, "Ho Va Ten:", 15);
-			ConsolaUI::text(65, 13, temp->getFullName(), 15);
+			if (this->studentToAct != nullptr)
+			{
+				ConsolaUI::text(35, 11, ">> SINH VIEN DA DUOC TIM THAY! (ID: " + to_string(this->studentIDToSearch) + ") <<", 10);
+				ConsolaUI::text(35, 13, "Ten:                  " + this->studentToAct->getFullName(), 15);
+				ConsolaUI::text(35, 14, "Ma So Sinh Vien:      " + to_string(this->studentToAct->getStudentID()), 15);
+				ConsolaUI::text(35, 15, "Ngay Sinh:            ", 15);
+				ConsolaUI::gotoXY(57, 15); cout << this->studentToAct->getDateOfBirth();
+				ConsolaUI::text(35, 16, "Gioi Tinh:            " + this->studentToAct->getGender(), 15);
+				ConsolaUI::text(35, 17, "Lop:                  " + this->studentToAct->getClassName(), 15);
+				ConsolaUI::text(35, 18, "Khoa:                 " + this->studentToAct->getFaculty(), 15);
+				ConsolaUI::text(35, 19, "SDT:                  " + this->studentToAct->getPhoneNumber(), 15);
+				ConsolaUI::text(35, 20, "Email:                " + this->studentToAct->getEmail(), 15);
 
-			ConsolaUI::text(35, 15, "Ma Sinh Vien:", 15);
-			ConsolaUI::text(65, 15, to_string(temp->getStudentID()), 15);
-
-			ConsolaUI::text(35, 17, "Ngay Sinh:", 15);
-			ConsolaUI::gotoXY(65, 17);
-			ConsolaUI::setTextColor(15);
-			cout << temp->getDateOfBirth();
-
-			ConsolaUI::text(35, 19, "Gioi Tinh:", 15);
-			ConsolaUI::text(65, 19, temp->getGender(), 15);
-
-			ConsolaUI::text(35, 21, "Lop/Khoa:", 15);
-			ConsolaUI::text(65, 21, temp->getClassName() + " - " + temp->getFaculty(), 15);
+				ConsolaUI::text(35, 25, "[ X ] Xoa", 2);
+				ConsolaUI::text(65, 25, "[ U ] Cap Nhat", 2);
+			}
+			else
+			{
+				ConsolaUI::text(35, 11, ">> KHONG TIM THAY MA SINH VIEN: " + to_string(this->studentIDToSearch) + " <<", 12);
+			}
 		}
 		else
 		{
-			ConsolaUI::text(35, 11, ">> KHONG TIM THAY MA SINH VIEN: " + to_string(this->studentIDToSearch) + " <<", 12);
+			ConsolaUI::text(35, 11, ">> NHAN PHIM '1' DE NHAP MA SINH VIEN <<", 15);
 		}
 		break;
 	}
-
-
 }
 
 void EmployeePage::drawSidebarStudent(const int& width, const int& height)
@@ -432,6 +517,7 @@ void EmployeePage::handleNormalKeys(int key, int& index)
 string EmployeePage::GetLine()
 {
 	string ss;
+	ConsolaUI::ShowCursor(true);
 	while (true)
 	{
 		int key = _getch();
@@ -453,6 +539,7 @@ string EmployeePage::GetLine()
 			cout << char(key);
 		}
 	}
+	ConsolaUI::ShowCursor(false);
 	return ss;
 }
 

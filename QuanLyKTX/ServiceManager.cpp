@@ -20,19 +20,19 @@ void ServiceManager::initialize()
 
 void ServiceManager::shutdown()
 {
-	delete accountService; accountService = nullptr;
-	delete contractService; contractService = nullptr;
-	delete employeeService; employeeService = nullptr;
-	delete paymentService; paymentService = nullptr;
-	delete roomService; roomService = nullptr;
-	delete studentService; studentService = nullptr;
+	delete accountService; 
+	delete contractService; 
+	delete employeeService; 
+	delete paymentService; 
+	delete roomService;
+	delete studentService;
 
-	delete accountRepo; accountRepo = nullptr;
-	delete contractRepo; contractRepo = nullptr;
-	delete employeeRepo; employeeRepo = nullptr;
-	delete invoiceRepo; invoiceRepo = nullptr;
-	delete roomRepo; roomRepo = nullptr;
-	delete studentRepo; studentRepo = nullptr;
+	delete accountRepo; 
+	delete contractRepo; 
+	delete employeeRepo; 
+	delete invoiceRepo; 
+	delete roomRepo; 
+	delete studentRepo; 
 }
 
 AccountService* ServiceManager::getAccountService()

@@ -13,7 +13,7 @@ public:
 
 	static Date getCurrentDay();
 	bool laNamNhuan();
-	bool laTonTai();
+	bool isValid();
 
 	friend ostream& operator << (ostream&, const Date&);
 	friend istream& operator >> (istream&, Date&);

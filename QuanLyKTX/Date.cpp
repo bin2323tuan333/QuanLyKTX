@@ -31,7 +31,7 @@ bool Date::laNamNhuan()
 	return (this->year % 4 == 0);
 }
 
-bool Date::laTonTai()
+bool Date::isValid()
 {
 	if (this->year < 999) return false;
 	if (this->month > 12 || this->month < 1) return false;

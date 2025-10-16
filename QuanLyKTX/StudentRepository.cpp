@@ -6,10 +6,12 @@ StudentRepository::StudentRepository()
 {
 	this->p = nullptr;
 	this->n = 0;
+	LoadDataFromFile();
 }
 StudentRepository::~StudentRepository()
 {
 	delete[] this->p;
+	SaveDateToFile();
 }
 
 // Create
