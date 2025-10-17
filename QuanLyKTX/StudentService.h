@@ -16,6 +16,7 @@ public:
 
 	bool Add(Student&);
 	bool Delete(Student&);
+	bool Update(Student&);
 };
 
 

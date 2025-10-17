@@ -129,11 +129,16 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="EmployeePage.cpp" />
     <ClCompile Include="HomePage.cpp" />
+    <ClInclude Include="ContractManageView.h" />
+    <ClInclude Include="InvoiceManageView.h" />
     <ClInclude Include="PageManager.h" />
     <ClInclude Include="StringUtil.h" />
     <ClInclude Include="StudentPage.h" />
+    <ClInclude Include="InfoManageView.h" />
     <ClCompile Include="PageManager.cpp" />
+    <ClInclude Include="RoomManageView.h" />
     <ClCompile Include="StringUtil.cpp" />
+    <ClInclude Include="StudentManageView.h" />
     <ClCompile Include="StudentService.cpp" />
     <ClCompile Include="AccountService.cpp" />
     <ClCompile Include="ConsolaUI.cpp" />

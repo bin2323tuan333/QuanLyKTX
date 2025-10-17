@@ -230,6 +230,21 @@
     <ClInclude Include="StringUtil.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="InfoManageView.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomManageView.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentManageView.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="InvoiceManageView.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="ContractManageView.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Account.txt">

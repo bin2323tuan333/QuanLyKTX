@@ -39,3 +39,10 @@ bool StudentService::Delete(Student& student)
 	else
 		return false;
 }
+
+bool StudentService::Update(Student& student)
+{
+	this->studentRepo.Update(student);
+	this->studentRepo.SaveDateToFile();
+	return true;
+}

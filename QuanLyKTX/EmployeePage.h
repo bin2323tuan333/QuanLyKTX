@@ -46,6 +46,8 @@ private:
 	int keyToActStudent;
 	bool isShowBoxDeleteStudent;
 	bool isShowBoxUpdateStudent;
+	bool isDeleteComplete;
+	bool isUpdateComplete;
 
 	Student* studentToAdd;
 	int tempDay, tempMonth, tempYear;

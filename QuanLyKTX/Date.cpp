@@ -1,5 +1,6 @@
 #include <iomanip>
 #include "Date.h"
+#include <string>
 #include <ctime>
 
 
@@ -45,6 +46,24 @@ bool Date::isValid()
 	if (this->day < 1 || this->day > dayOfMonth[this->month]) return false;
 
 	return true;
+}
+
+int Date::getDay()
+{
+	return this->day;
+}
+int Date::getMonth()
+{
+	return this->month;
+}
+int Date::getYear()
+{
+	return this->year;
+}
+
+string Date::getDate()
+{
+	return to_string(this->day) + "/" + to_string(this->month) + "/" + to_string(this->year);
 }
 
 ostream& operator << (ostream& out, const Date& D)

@@ -15,6 +15,13 @@ public:
 	bool laNamNhuan();
 	bool isValid();
 
+	int getDay();
+	int getMonth();
+	int getYear();
+
+	string getDate();
+
+
 	friend ostream& operator << (ostream&, const Date&);
 	friend istream& operator >> (istream&, Date&);
 };

@@ -48,3 +48,4 @@
 2048;Bui Thi Phuong;06/04/2003;Nu;MMT_C;CNTT;0901234548;student48@uni.edu
 2049;Ho Quang Vinh;14/01/2002;Nam;HTTT_C;CNTT;0901234549;student49@uni.edu
 2050;Duong Thi Ngoc;19/08/2003;Nu;HTTT_C;CNTT;0901234550;student50@uni.edu
+102240229;Pham Quoc Tuan;08/07/2006;Nam;24T_DT4;Cong Nghe Thong Tin;0187876421;102240229@sv1.dut.udn.vn
