@@ -35,13 +35,9 @@ StudentManageView::~StudentManageView()
 
 void StudentManageView::handleInput(int key)
 {
-    if (key == 0 || key == 224)
+    if (key == 72 || key == 80)
     {
-        key = _getch();
-        if (key == 72 || key == 80)
-        {
-            sidebarStudentSelected = (sidebarStudentSelected + (key == 72 ? -1 : 1) + sidebarStudentSize) % sidebarStudentSize;
-        }
+        sidebarStudentSelected = (sidebarStudentSelected + (key == 72 ? -1 : 1) + sidebarStudentSize) % sidebarStudentSize;
     }
 
     if (sidebarStudentSelected == 1) {
@@ -153,12 +149,13 @@ void StudentManageView::drawStudentServiceContent(const int& width, const int& h
         ConsolaUI::text(35, 16, "9. So Dien Thoai: ", 15);
         ConsolaUI::text(35, 17, "0. Email: ", 15);
 
-        ConsolaUI::text(80, 28, "Nhan [ENTER] De Them Sinh Vien", 15);
+        ConsolaUI::text(80, 25, "Nhan [ ENTER ] De Them Sinh Vien", 15);
+        ConsolaUI::text(87, 25, "ENTER", 2);
         if (this->isAddStudentSucessfull) {
             ConsolaUI::text(45, 20, "THEM SINH VIEN THANH CONG!", 2);
         }
         else {
-            ConsolaUI::text(45, 20, "                                 ", 15);
+            ConsolaUI::text(45, 20, "HAY NHAP DUNG THONG TIN SINH VIEN", 15);
         }
         break;
 
