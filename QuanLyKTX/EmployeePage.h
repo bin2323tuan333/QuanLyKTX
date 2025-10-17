@@ -2,6 +2,8 @@
 #include "EmployeeService.h"
 #include "AccountService.h"
 #include "StudentService.h"
+#include "InfoManageView.h"
+#include "StudentManageView.h"
 
 class EmployeePage {
 private:
@@ -14,10 +16,6 @@ private:
 	string* menuList;
 	int menuSize;
 	int menuSelected;
-
-	string* sidebarInfoList;
-	int sidebarInfoSize;
-	int sidebarInfoSelected;
 	
 
 	string* sidebarStudentList;
@@ -36,10 +34,6 @@ private:
 	int sidebarInvoiceSize;
 	int sidebarInvoiceSelected;
 
-	int changePasswordSelected;
-	string oldPass, newPass, reEnterNewPass;
-	bool isChangePass;
-
 	Student* studentToAct;
 	int studentIDToSearch;
 	int keyToSearchStudent;
@@ -52,6 +46,9 @@ private:
 	Student* studentToAdd;
 	int tempDay, tempMonth, tempYear;
 	bool isAddStudentSucessfull;
+
+	InfoManageView* infoManageView;
+	StudentManageView* studentManageView;
 
 public:
 	EmployeePage(AccountService* ,EmployeeService*, StudentService*);

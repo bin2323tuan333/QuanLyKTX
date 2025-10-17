@@ -16,20 +16,6 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 		"Quan Ly Hoa Don"
 	};
 
-	this->sidebarInfoSelected = 0;
-	this->sidebarInfoSize = 3;
-	this->sidebarInfoList = new string[this->sidebarInfoSize]
-	{
-		"Thong Tin Ca Nhan",
-		"Doi Mat Khau",
-		"Dang Xuat"
-	};
-	this->changePasswordSelected = 0;
-	this->oldPass = "";
-	this->newPass = "";
-	this->reEnterNewPass = "";
-	this->isChangePass = false;
-
 	this->sidebarStudentSelected = 0;
 	this->sidebarStudentSize = 2;
 	this->sidebarStudentList = new string[this->sidebarStudentSize]
@@ -78,18 +64,22 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 		//Tu Dong Tao Hoa Don
 	};
 
+
+	this->infoManageView = new InfoManageView(this->accountService, this->employeeService);
+	
 }
 
 EmployeePage::~EmployeePage()
 {
 	delete[] this->menuList;
-	delete[] this->sidebarInfoList;
 	delete[] this->sidebarStudentList;
 	delete[] this->sidebarRoomList;
 	delete[] this->sidebarContractList;
 	delete[] this->sidebarInvoiceList;
 
 	delete this->studentToAdd;
+
+	delete this->infoManageView;
 }
 
 
@@ -108,156 +98,20 @@ void EmployeePage::show()
 			switch (this->menuSelected)
 			{
 			case 0:
-				handleArrowUD(key, this->sidebarInfoSelected, this->sidebarInfoSize);
+				this->infoManageView->handleInput(key);
 				break;
 			case 1:
-				handleArrowUD(key, this->sidebarStudentSelected, this->sidebarStudentSize);
+				this->studentManageView->handleInput(key);
 				break;
 			case 2:
-				handleArrowUD(key, this->sidebarRoomSelected, this->sidebarRoomSize);
+				//handleArrowUD(key, this->sidebarRoomSelected, this->sidebarRoomSize);
 				break;
 			case 3:
-				handleArrowUD(key, this->sidebarContractSelected, this->sidebarContractSize);
+				//handleArrowUD(key, this->sidebarContractSelected, this->sidebarContractSize);
 				break;
 			case 4:
-				handleArrowUD(key, this->sidebarInvoiceSelected, this->sidebarInvoiceSize);
+				//handleArrowUD(key, this->sidebarInvoiceSelected, this->sidebarInvoiceSize);
 				break;
-			}
-		}
-		if (this->menuSelected == 0 && this->sidebarInfoSelected == 2 && key == 27)
-		{
-			this->accountService->setSignIn(false);
-			this->isRunning = false;
-		}
-		if (this->menuSelected == 0 && this->sidebarInfoSelected == 1)
-		{
-			handleNormalKeys(key, this->changePasswordSelected);
-			if (key == 13)
-			{
-				this->isChangePass = this->accountService->changePassword(this->accountService->getEmployeeID(), this->oldPass, this->newPass, this->reEnterNewPass);
-			}
-		}
-		if (this->menuSelected == 1 && this->sidebarStudentSelected == 1)
-		{
-			handleNormalKeys(key, this->keyToSearchStudent);
-			if (key == 'F' || key == 'f')
-			{
-				ConsolaUI::text(66, 9, "                       ", 7);
-				ConsolaUI::gotoXY(66, 9);
-
-				this->studentIDToSearch = GetInt();
-				this->keyToSearchStudent = 0;
-				this->isShowBoxDeleteStudent = false;
-				this->isShowBoxUpdateStudent = false;
-			}
-			if (this->studentToAct != nullptr)
-			{
-				if (key == 'X' || key == 'x')
-				{
-					this->isShowBoxDeleteStudent = true;
-					this->isShowBoxUpdateStudent = false;
-				}
-				else if (key == 'U' || key == 'u')
-				{
-					this->isShowBoxUpdateStudent = true;
-					this->isShowBoxDeleteStudent = false;
-				}
-				if (this->isShowBoxDeleteStudent)
-				{
-					if (key == 'Y' || key == 'y')
-					{
-						this->isDeleteComplete = this->studentService->Delete(*this->studentToAct);
-					}
-					else if (key == 'N' || key == 'n' || key == 27)
-					{
-						this->isShowBoxDeleteStudent = false;
-					}
-				}
-				if (this->isShowBoxUpdateStudent)
-				{
-					if (key == 'Y' || key == 'y')
-					{
-						this->isUpdateComplete = this->studentService->Update(*this->studentToAct);
-					}
-					else if (key == 27)
-					{
-						this->isShowBoxUpdateStudent = false;
-					}
-				}
-			}
-		}
-		if (this->menuSelected == 1 && this->sidebarStudentSelected == 0)
-		{
-			if (key == '1')
-			{
-				ConsolaUI::text(58, 8, "                         ", 7);
-				ConsolaUI::gotoXY(58, 8);
-				this->studentToAdd->setFullName(GetLine());
-			}
-			else if (key == '2')
-			{
-				ConsolaUI::text(58, 9, "      ", 7);
-				ConsolaUI::gotoXY(58, 9);
-				this->tempDay = GetInt();
-			}
-			else if (key == '3')
-			{
-				ConsolaUI::text(58, 10, "      ", 7);
-				ConsolaUI::gotoXY(58, 10);
-				this->tempMonth = GetInt();
-			}
-			else if (key == '4')
-			{
-				ConsolaUI::text(58, 11, "      ", 7);
-				ConsolaUI::gotoXY(58, 11);
-				this->tempYear = GetInt();
-			}
-			else if (key == '5')
-			{
-				ConsolaUI::text(58, 12, "                         ", 7);
-				ConsolaUI::gotoXY(58, 12);
-				this->studentToAdd->setGender(GetLine());
-			}
-			else if (key == '6')
-			{
-				ConsolaUI::text(58, 13, "                         ", 7);
-				ConsolaUI::gotoXY(58, 13);
-				string inputID = GetLine();
-				this->studentToAdd->setStudentID(stoi(inputID));
-			}
-			else if (key == '7')
-			{
-				ConsolaUI::text(58, 14, "                         ", 7);
-				ConsolaUI::gotoXY(58, 14);
-				this->studentToAdd->setClassName(GetLine());
-			}
-			else if (key == '8')
-			{
-				ConsolaUI::text(58, 15, "                         ", 7);
-				ConsolaUI::gotoXY(58, 15);
-				this->studentToAdd->setFaculty(GetLine());
-			}
-			else if (key == '9')
-			{
-				ConsolaUI::text(58, 16, "                         ", 7);
-				ConsolaUI::gotoXY(58, 16);
-				this->studentToAdd->setPhoneNumber(GetLine());
-			}
-			else if (key == '0')
-			{
-				ConsolaUI::text(58, 17, "                         ", 7);
-				ConsolaUI::gotoXY(58, 17);
-				this->studentToAdd->setEmail(GetLine());
-			}
-			else if (key == 13)
-			{
-				Date dob(this->tempDay, this->tempMonth, this->tempYear);
-				this->studentToAdd->setDateOfBirth(dob);
-				this->isAddStudentSucessfull = this->studentService->Add(*this->studentToAdd);
-				this->studentToAdd = new Student();
-				this->tempDay = 0;
-				this->tempMonth = 0;
-				this->tempYear = 0;
 			}
 		}
 	}
@@ -279,12 +133,10 @@ void EmployeePage::drawEmployeePage()
 	switch (menuSelected)
 	{
 	case 0:
-		drawSidebarInfomation(width, height);
-		drawInfomationContent(width, height);
+		this->infoManageView->show();
 		break;
 	case 1:
-		drawSidebarStudent(width, height);
-		drawStudentServiceContent(width, height);
+		this->studentManageView->show();
 		break;
 	case 2:
 		drawSidebarRoom(width, height);
@@ -320,79 +172,8 @@ void EmployeePage::drawFooter(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 27, height + 1, "Su dung cac phim [<-] [->] de di chuyen giua cac trang", 2);
 }
-void EmployeePage::drawInfomationContent(const int& width, const int& height)
-{
-	Employee* temp = this->employeeService->getEmployeeById(/*this->accountService->getEmployeeID()*/1001);
-	switch (this->sidebarInfoSelected)
-	{
-	case 0:
-		ConsolaUI::text(30, 7, "THONG TIN NHAN VIEN:", 14);
-		ConsolaUI::text(33, 8, "Ho Va Ten: ", 15);
-		ConsolaUI::text(63, 8, temp->getFullName(), 15);
-		ConsolaUI::text(33, 10, "Ma Nhan Vien:", 15);
-		ConsolaUI::text(63, 10, to_string(temp->getEmployeeID()), 15);
-		ConsolaUI::text(33, 12, "Ngay Sinh:", 15);
-		ConsolaUI::gotoXY(63, 12); ConsolaUI::setTextColor(15); cout << temp->getDateOfBirth();
-		ConsolaUI::text(33, 14, "Gioi Tinh:", 15);
-		ConsolaUI::text(63, 14, temp->getGender(), 15);
-		ConsolaUI::text(33, 16, "Chuc Vu:", 15);
-		ConsolaUI::text(63, 16, temp->getPosition(), 15);
-		ConsolaUI::text(33, 18, "Email:", 15);
-		ConsolaUI::text(63, 18, temp->getEmail(), 15);
-		ConsolaUI::text(33, 20, "So Dien Thoai:", 15);
-		ConsolaUI::text(63, 20, temp->getPhoneNumber(), 15);
-		break;
-	case 1:
-		ConsolaUI::text(30, 7, "DOI MAT KHAU:", 14);
-		ConsolaUI::text(width / 2 - 20, height / 2 - 2, "1. Nhap Mat Khau Cu", (1 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 - 20, height / 2 + 1, "2. Nhap Mat Khau Moi", (2 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 - 20, height / 2 + 4, "3. Nhap Lai Mat Khau Moi", (3 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 + 12, height / 2 - 2, ((this->oldPass == "") ? "" : this->oldPass), (1 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 + 12, height / 2 + 1, ((this->newPass == "") ? "" : this->newPass), (2 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 + 12, height / 2 + 4, ((this->reEnterNewPass == "") ? "" : this->reEnterNewPass), (3 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2, height / 2 + 7, "Nhan           De Thay Doi Mat Khau", 15);
-		ConsolaUI::text(width / 2 + 5, height / 2 + 7, "[ Enter ]", 2);
 
-		if (this->isChangePass)
-		{
-			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Doi Mat Khau Thanh Cong", 2);
-		}
 
-		ConsolaUI::drawBox(width / 2 + 10, height / 2 - 3, 30, 2, (1 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::drawBox(width / 2 + 10, height / 2, 30, 2, (2 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::drawBox(width / 2 + 10, height / 2 + 3, 30, 2, (3 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::setTextColor(15);
-		switch (this->changePasswordSelected)
-		{
-		case 1:
-			ConsolaUI::gotoXY(width / 2 + 12, height / 2 - 2);
-			this->oldPass = GetLine();
-			break;
-		case 2:
-			ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 1);
-			this->newPass = GetLine();
-			break;
-		case 3:
-			ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 4);
-			this->reEnterNewPass = GetLine();
-			break;
-		}
-		this->changePasswordSelected = 0;
-
-		break;
-	case 2:
-		ConsolaUI::text(30, 7, "DANG XUAT TAI KHOAN:", 14);
-		ConsolaUI::text(53, 15, "Nhan ESC De Dang Xuat", 15);
-		break;
-	}
-}
-void EmployeePage::drawSidebarInfomation(const int& width, const int& height)
-{
-	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
-	ConsolaUI::text(5, 8, *(this->sidebarInfoList), (0 == this->sidebarInfoSelected) ? 11 : 8);
-	ConsolaUI::text(5, 12, *(this->sidebarInfoList + 1), (1 == this->sidebarInfoSelected) ? 11 : 8);
-	ConsolaUI::text(5, 16, *(this->sidebarInfoList + 2), (2 == this->sidebarInfoSelected) ? 11 : 8);
-}
 
 
 void EmployeePage::drawStudentServiceContent(const int& width, const int& height)

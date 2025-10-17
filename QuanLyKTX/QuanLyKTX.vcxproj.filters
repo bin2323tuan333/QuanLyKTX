@@ -147,6 +147,21 @@
     <ClCompile Include="StringUtil.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="InfoManageView.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="StudentManageView.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomManageView.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoiceManageView.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="ContractManageView.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">

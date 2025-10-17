@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="ContractManageView.cpp" />
     <ClCompile Include="EmployeePage.cpp" />
     <ClCompile Include="HomePage.cpp" />
     <ClInclude Include="ContractManageView.h" />
@@ -135,10 +136,14 @@
     <ClInclude Include="StringUtil.h" />
     <ClInclude Include="StudentPage.h" />
     <ClInclude Include="InfoManageView.h" />
+    <ClCompile Include="InfoManageView.cpp" />
+    <ClCompile Include="InvoiceManageView.cpp" />
     <ClCompile Include="PageManager.cpp" />
     <ClInclude Include="RoomManageView.h" />
+    <ClCompile Include="RoomManageView.cpp" />
     <ClCompile Include="StringUtil.cpp" />
     <ClInclude Include="StudentManageView.h" />
+    <ClCompile Include="StudentManageView.cpp" />
     <ClCompile Include="StudentService.cpp" />
     <ClCompile Include="AccountService.cpp" />
     <ClCompile Include="ConsolaUI.cpp" />
