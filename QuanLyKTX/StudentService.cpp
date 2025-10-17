@@ -19,8 +19,23 @@ Student* StudentService::SearchByID(const int& studentID)
 
 bool StudentService::Add(Student& student)
 {
+
+	if (!(student.getGender() == "Nam" ||
+		student.getGender() == "Nu"))
+		return false;
 	if (!(student.getDateOfBirth()).isValid())
 		return false;
-    
-    return true;
+	this->studentRepo.Add(student);
+	this->studentRepo.SaveDateToFile();
+	return true;
+}
+
+bool StudentService::Delete(Student& student)
+{
+	this->studentRepo.Delete(student.getStudentID());
+	this->studentRepo.SaveDateToFile();
+	if (this->studentRepo.Search(student.getStudentID()) == nullptr)
+		return true;
+	else
+		return false;
 }

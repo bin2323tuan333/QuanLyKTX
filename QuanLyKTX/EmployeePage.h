@@ -43,6 +43,9 @@ private:
 	Student* studentToAct;
 	int studentIDToSearch;
 	int keyToSearchStudent;
+	int keyToActStudent;
+	bool isShowBoxDeleteStudent;
+	bool isShowBoxUpdateStudent;
 
 	Student* studentToAdd;
 	int tempDay, tempMonth, tempYear;

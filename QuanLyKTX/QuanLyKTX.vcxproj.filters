@@ -144,6 +144,9 @@
     <ClCompile Include="AccountRepository.cpp">
       <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
+    <ClCompile Include="StringUtil.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="PageManager.h">
       <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtil.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

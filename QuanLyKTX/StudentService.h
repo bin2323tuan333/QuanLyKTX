@@ -15,6 +15,7 @@ public:
 	Student* SearchByID(const int&);
 
 	bool Add(Student&);
+	bool Delete(Student&);
 };
 
 
