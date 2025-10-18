@@ -5,12 +5,15 @@ PageManager::PageManager(ServiceManager* service)
 	:service(service)
 {
 	this->homePage = new HomePage(
-		service->getAccountService()
+		this->service->getAccountService()
 	);
 	this->employeePage = new EmployeePage(
-		service->getAccountService(),
-		service->getEmployeeService(),
-		service->getStudentService()
+		this->service->getAccountService(),
+		this->service->getEmployeeService(),
+		this->service->getStudentService(),
+		this->service->getRoomService(),
+		this->service->getInvoiceService(),
+		this->service->getContractService()
 	);
 }
 PageManager::~PageManager()

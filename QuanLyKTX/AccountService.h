@@ -18,7 +18,7 @@ public:
 
 
     bool signIn(const string&, const string&);
-    bool changePassword(const int&, const string&, const string&, const string&);
+    int changePassword(const int&, const string&, const string&, const string&);
     bool isSignIn();
     void setSignIn(bool);
     int getEmployeeID();

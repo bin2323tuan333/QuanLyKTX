@@ -2,8 +2,21 @@
 #include "ConsolaUI.h"
 #include <sstream>
 
-EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* employeeService, StudentService* studentService)
-	:accountService(accountService), employeeService(employeeService), studentService(studentService), isRunning(true)
+EmployeePage::EmployeePage(
+	AccountService* accountService,
+	EmployeeService* employeeService,
+	StudentService* studentService,
+	RoomService* roomService,
+	InvoiceService* invoiceService,
+	ContractService* contractService
+)
+	:accountService(accountService), 
+	employeeService(employeeService), 
+	studentService(studentService),
+	roomService(roomService),
+	invoiceService(invoiceService),
+	contractService(contractService),
+	isRunning(true)
 {
 	this->menuSelected = 0;
 	this->menuSize = 5;
@@ -16,35 +29,6 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 		"Quan Ly Hoa Don"
 	};
 
-	this->sidebarRoomSelected = 0;
-	this->sidebarRoomSize = 2;
-	this->sidebarRoomList = new string[this->sidebarRoomSize]
-	{
-		"Xem Danh Sach Phong",
-		"Loc Theo Trang Thai"
-		//Xem Chi Tiet Phong
-	};
-
-	this->sidebarContractSelected = 0;
-	this->sidebarContractSize = 2;
-	this->sidebarContractList = new string[this->sidebarContractSize]
-	{
-		"Tao Hop Dong Moi",
-		"Ket Thuc Hop Dong"
-		//Chuyen Phong
-		//Gia Han Hop Dong
-
-	};
-
-	this->sidebarInvoiceSelected = 0;
-	this->sidebarInvoiceSize = 2;
-	this->sidebarInvoiceList = new string[this->sidebarInvoiceSize]
-	{
-		"Tao Hoa Don",
-		"Cap Nhat Trang Thai"
-		//Tu Dong Tao Hoa Don
-	};
-
 
 	this->infoManageView = new InfoManageView(
 		this->accountService, 
@@ -53,18 +37,20 @@ EmployeePage::EmployeePage(AccountService* accountService, EmployeeService* empl
 	this->studentManageView = new StudentManageView(
 		this->studentService
 	);
-	
+	this->roomManageView = new RoomManageView(
+		this->roomService
+	);
+	this->invoiceManageView = new InvoiceManageView(
+		this->invoiceService
+	);
+	this->contractManageView = new ContractManageView(
+		this->contractService
+	);
 }
 
 EmployeePage::~EmployeePage()
 {
 	delete[] this->menuList;
-	delete[] this->sidebarStudentList;
-	delete[] this->sidebarRoomList;
-	delete[] this->sidebarContractList;
-	delete[] this->sidebarInvoiceList;
-
-
 	delete this->infoManageView;
 	delete this->studentManageView;
 }
@@ -92,13 +78,13 @@ void EmployeePage::show()
 			this->studentManageView->handleInput(key);
 			break;
 		case 2:
-			//handleArrowUD(key, this->sidebarRoomSelected, this->sidebarRoomSize);
+			this->roomManageView->handleInput(key);
 			break;
 		case 3:
-			//handleArrowUD(key, this->sidebarContractSelected, this->sidebarContractSize);
+			this->contractManageView->handleInput(key);
 			break;
 		case 4:
-			//handleArrowUD(key, this->sidebarInvoiceSelected, this->sidebarInvoiceSize);
+			this->invoiceManageView->handleInput(key);
 			break;
 		}
 		if (!this->accountService->isSignIn())
@@ -130,16 +116,13 @@ void EmployeePage::drawEmployeePage()
 		this->studentManageView->show();
 		break;
 	case 2:
-		drawSidebarRoom(width, height);
-		drawRoomServiceContent(width, height);
+		this->roomManageView->show();
 		break;
 	case 3:
-		drawSidebarContract(width, height);
-		drawContractServiceContent(width, height);
+		this->contractManageView->show();
 		break;
 	case 4:
-		drawSidebarInvoice(width, height);
-		drawInvoiceServiceContent(width, height);
+		this->invoiceManageView->show();
 		break;
 	};
 }
@@ -163,68 +146,6 @@ void EmployeePage::drawFooter(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 27, height + 1, "Su dung cac phim [<-] [->] de di chuyen giua cac trang", 2);
 }
-
-
-
-
-void EmployeePage::drawRoomServiceContent(const int& width, const int& height)
-{
-	switch (this->sidebarRoomSelected)
-	{
-	case 0:
-		ConsolaUI::text(30, 7, "XEM DANH SACH PHONG:", 14);
-		break;
-	case 1:
-		ConsolaUI::text(30, 7, "LOC THEO TRANG THAI:", 14);
-		break;
-	}
-}
-void EmployeePage::drawSidebarRoom(const int& width, const int& height)
-{
-	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
-	ConsolaUI::text(5, 8, *(this->sidebarRoomList), (0 == this->sidebarRoomSelected) ? 11 : 8);
-	ConsolaUI::text(5, 12, *(this->sidebarRoomList + 1), (1 == this->sidebarRoomSelected) ? 11 : 8);
-}
-
-void EmployeePage::drawContractServiceContent(const int& width, const int& height)
-{
-	switch (this->sidebarContractSelected)
-	{
-	case 0:
-		ConsolaUI::text(30, 7, "TAO HOP DONG MOI:", 14);
-		break;
-	case 1:
-		ConsolaUI::text(30, 7, "KET THUC HOP DONG:", 14);
-		break;
-	}
-}
-void EmployeePage::drawSidebarContract(const int& width, const int& height)
-{
-	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
-	ConsolaUI::text(5, 8, *(this->sidebarContractList), (0 == this->sidebarContractSelected) ? 11 : 8);
-	ConsolaUI::text(5, 12, *(this->sidebarContractList + 1), (1 == this->sidebarContractSelected) ? 11 : 8);
-}
-
-
-void EmployeePage::drawInvoiceServiceContent(const int& width, const int& height)
-{
-	switch (this->sidebarInvoiceSelected)
-	{
-	case 0:
-		ConsolaUI::text(30, 7, "TAO HOA DON:", 14);
-		break;
-	case 1:
-		ConsolaUI::text(30, 7, "CAP NHAT TRANG THAI:", 14);
-		break;
-	}
-}
-void EmployeePage::drawSidebarInvoice(const int& width, const int& height)
-{
-	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
-	ConsolaUI::text(5, 8, *(this->sidebarInvoiceList), (0 == this->sidebarInvoiceSelected) ? 11 : 8);
-	ConsolaUI::text(5, 12, *(this->sidebarInvoiceList + 1), (1 == this->sidebarInvoiceSelected) ? 11 : 8);
-}
-
 
 void EmployeePage::handleArrowLR(int key, int& index, const int& size)
 {

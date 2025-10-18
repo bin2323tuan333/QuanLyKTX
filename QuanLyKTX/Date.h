@@ -7,7 +7,7 @@ class Date
 private:
 	int day, month, year;
 public:
-	Date(const int& = 1, const int& = 1, const int& = 2000);
+	Date(const int& = 0, const int& = 0, const int& = 0);
 	Date(const Date&);
 	~Date();
 

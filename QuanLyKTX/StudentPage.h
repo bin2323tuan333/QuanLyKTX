@@ -1,19 +1,19 @@
 #pragma once
 #include "StudentService.h"
 #include "RoomService.h"
-#include "PaymentService.h"
+#include "InvoiceService.h"
 
 class StudentPage {
 private:
     StudentService* studentService;
     RoomService* roomService;
-    PaymentService* paymentService;
+    InvoiceService* invoiceService;
     string currentStudentId;
 
 public:
     StudentPage();
 
-    void setServices(StudentService*, RoomService*, PaymentService*);
+    void setServices(StudentService*, RoomService*, InvoiceService*);
     void setCurrentStudent(const string&);
     void show();
 

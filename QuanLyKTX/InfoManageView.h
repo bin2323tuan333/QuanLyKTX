@@ -13,7 +13,7 @@ private:
 
     int changePasswordSelected;
     string oldPass, newPass, reEnterNewPass;
-    bool isChangePass;
+    int isError;
 
 public:
     InfoManageView(AccountService*, EmployeeService*);

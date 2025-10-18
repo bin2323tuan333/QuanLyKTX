@@ -19,6 +19,7 @@ private:
     Student* studentToAdd;
     int tempDay, tempMonth, tempYear;
     bool isAddStudentSucessfull;
+    Student studentToUpdate;
 
 public:
     StudentManageView(StudentService*);

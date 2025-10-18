@@ -2,7 +2,7 @@
 #include "AccountService.h"
 #include "ContractService.h"
 #include "EmployeeService.h"
-#include "PaymentService.h"
+#include "InvoiceService.h"
 #include "RoomService.h"
 #include "StudentService.h"
 
@@ -19,7 +19,7 @@ private:
 	AccountService* accountService;
 	ContractService* contractService;
 	EmployeeService* employeeService;
-	PaymentService* paymentService;
+	InvoiceService* invoiceService;
 	RoomService* roomService;
 	StudentService* studentService;
 
@@ -30,7 +30,7 @@ public:
 	AccountService* getAccountService();
 	ContractService* getContractService();
 	EmployeeService* getEmployeeService();
-	PaymentService* getPaymentService();
+	InvoiceService* getInvoiceService();
 	RoomService* getRoomService();
 	StudentService* getStudentService();
 };

@@ -13,7 +13,7 @@ void ServiceManager::initialize()
 	this->accountService = new AccountService(*accountRepo);
 	this->contractService = new ContractService(*contractRepo, *studentRepo);
 	this->employeeService = new EmployeeService(*employeeRepo);
-	this->paymentService = new PaymentService(*invoiceRepo);
+	this->invoiceService = new InvoiceService(*invoiceRepo);
 	this->roomService = new RoomService(*roomRepo, *studentRepo);
 	this->studentService = new StudentService(*studentRepo);
 }
@@ -23,7 +23,7 @@ void ServiceManager::shutdown()
 	delete accountService; 
 	delete contractService; 
 	delete employeeService; 
-	delete paymentService; 
+	delete invoiceService; 
 	delete roomService;
 	delete studentService;
 
@@ -45,9 +45,9 @@ ContractService* ServiceManager::getContractService()
 	return contractService;
 }
 
-PaymentService* ServiceManager::getPaymentService()
+InvoiceService* ServiceManager::getInvoiceService()
 {
-	return paymentService;
+	return invoiceService;
 }
 
 EmployeeService* ServiceManager::getEmployeeService()

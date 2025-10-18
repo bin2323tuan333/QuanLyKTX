@@ -1,10 +1,10 @@
-#include "PaymentService.h"
+#include "InvoiceService.h"
 
-PaymentService::PaymentService(InvoiceRepository& invRepo)
+InvoiceService::InvoiceService(InvoiceRepository& invRepo)
 	:invoiceRepo(invRepo)
 {
 }
 
-PaymentService::~PaymentService()
+InvoiceService::~InvoiceService()
 {
 }

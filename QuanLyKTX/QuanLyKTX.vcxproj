@@ -153,7 +153,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="EmployeePage.h" />
     <ClInclude Include="HomePage.h" />
-    <ClInclude Include="PaymentService.h" />
+    <ClInclude Include="InvoiceService.h" />
     <ClInclude Include="ContractService.h" />
     <ClInclude Include="EmployeeService.h" />
     <ClCompile Include="PaymentService.cpp" />
@@ -198,6 +198,7 @@
     <Text Include="Building.txt" />
     <Text Include="Contract.txt" />
     <Text Include="Employee.txt" />
+    <Text Include="Room.txt" />
     <Text Include="Student.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

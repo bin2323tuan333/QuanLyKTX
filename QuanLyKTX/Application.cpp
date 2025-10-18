@@ -13,7 +13,7 @@ Application::~Application()
 void Application::run()
 {
 	this->isRunning = true;
-	/*while (isRunning)
+	while (isRunning)
 	{
 		this->isSignIn = this->page->service->getAccountService()->isSignIn();
 		if (!isSignIn)
@@ -31,7 +31,7 @@ void Application::run()
 
 			}
 		}
-	}*/
-	(this->page->getEmployeePage()).show();
-
+	}
+	
+	ConsolaUI::clearScreen();
 }

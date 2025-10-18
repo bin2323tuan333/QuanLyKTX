@@ -221,7 +221,7 @@
     <ClInclude Include="RoomService.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
-    <ClInclude Include="PaymentService.h">
+    <ClInclude Include="InvoiceService.h">
       <Filter>Header Files\BusinessLogic\Services</Filter>
     </ClInclude>
     <ClInclude Include="StudentService.h">
@@ -275,6 +275,9 @@
       <Filter>Data Files</Filter>
     </Text>
     <Text Include="Employee.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="Room.txt">
       <Filter>Data Files</Filter>
     </Text>
   </ItemGroup>

@@ -1,13 +1,13 @@
 #pragma once
 #include "InvoiceRepository.h"
 
-class PaymentService {
+class InvoiceService {
 private:
     InvoiceRepository& invoiceRepo;
 
 public:
-    PaymentService(InvoiceRepository& invRepo);
-    ~PaymentService();
+    InvoiceService(InvoiceRepository& invRepo);
+    ~InvoiceService();
 
     //Invoice getInvoice(const string&, int, int);
 

@@ -16,16 +16,17 @@ InfoManageView::InfoManageView(AccountService* accountService, EmployeeService* 
 	this->oldPass = "";
 	this->newPass = "";
 	this->reEnterNewPass = "";
-	this->isChangePass = false;
+	this->isError = 1;
 }
 InfoManageView::~InfoManageView()
 {
 	delete[] this->sidebarInfoList;
 }
 
-
 void InfoManageView::handleInput(int key)
 {
+	int width = ConsolaUI::getConsoleWidth();
+	int height = ConsolaUI::getConsoleHeight();
 	if (key == 72 || key == 80)
 	{
 		sidebarInfoSelected = (sidebarInfoSelected + (key == 72 ? -1 : 1) + sidebarInfoSize) % sidebarInfoSize;
@@ -37,11 +38,29 @@ void InfoManageView::handleInput(int key)
 	else if (this->sidebarInfoSelected == 1)
 	{
 		if (key >= '1' && key <= '3') {
-			changePasswordSelected = key - '0';
+			this->changePasswordSelected = key - '0';
+		}
+		if (this->changePasswordSelected > 0)
+		{
+			ConsolaUI::setTextColor(1);
+			if (this->changePasswordSelected == 1) {
+				ConsolaUI::gotoXY(width / 2 + 12, height / 2 - 2);
+				this->oldPass = GetLine();
+			}
+			else if (this->changePasswordSelected == 2) {
+				ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 1);
+				this->newPass = GetLine();
+			}
+			else if (this->changePasswordSelected == 3) {
+				ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 4);
+				this->reEnterNewPass = GetLine();
+			}
+			this->changePasswordSelected = 0;
+			this->isError = 1;
 		}
 		if (key == 13)
 		{
-			this->isChangePass = this->accountService->changePassword(
+			this->isError = this->accountService->changePassword(
 				this->accountService->getEmployeeID(),
 				this->oldPass,
 				this->newPass,
@@ -64,7 +83,7 @@ void InfoManageView::show()
 
 void InfoManageView::drawInfomationContent(const int& width, const int& height)
 {
-	Employee* temp = this->employeeService->getEmployeeById(/*this->accountService->getEmployeeID()*/1001);
+	Employee* temp = this->employeeService->getEmployeeById(this->accountService->getEmployeeID());
 	switch (this->sidebarInfoSelected)
 	{
 	case 0:
@@ -86,45 +105,34 @@ void InfoManageView::drawInfomationContent(const int& width, const int& height)
 		break;
 	case 1:
 		ConsolaUI::text(30, 7, "DOI MAT KHAU:", 14);
-		ConsolaUI::text(width / 2 - 20, height / 2 - 2, "1. Nhap Mat Khau Cu", (1 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 - 20, height / 2 + 1, "2. Nhap Mat Khau Moi", (2 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 - 20, height / 2 + 4, "3. Nhap Lai Mat Khau Moi", (3 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 + 12, height / 2 - 2, ((this->oldPass == "") ? "" : this->oldPass), (1 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 + 12, height / 2 + 1, ((this->newPass == "") ? "" : this->newPass), (2 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::text(width / 2 + 12, height / 2 + 4, ((this->reEnterNewPass == "") ? "" : this->reEnterNewPass), (3 == this->changePasswordSelected) ? 11 : 8);
+		ConsolaUI::text(width / 2 - 20, height / 2 - 2, "1. Nhap Mat Khau Cu", 15);
+		ConsolaUI::text(width / 2 - 20, height / 2 + 1, "2. Nhap Mat Khau Moi", 15);
+		ConsolaUI::text(width / 2 - 20, height / 2 + 4, "3. Nhap Lai Mat Khau Moi", 15);
+		ConsolaUI::text(width / 2 + 12, height / 2 - 2, ((this->oldPass == "") ? "" : this->oldPass), 15);
+		ConsolaUI::text(width / 2 + 12, height / 2 + 1, ((this->newPass == "") ? "" : this->newPass), 15);
+		ConsolaUI::text(width / 2 + 12, height / 2 + 4, ((this->reEnterNewPass == "") ? "" : this->reEnterNewPass), 15);
 		ConsolaUI::text(width / 2, height / 2 + 7, "Nhan [       ] De Thay Doi Mat Khau", 15);
 		ConsolaUI::text(width / 2 + 7, height / 2 + 7, "Enter", 2);
+		ConsolaUI::drawBox(width / 2 + 10, height / 2 - 3, 30, 2, 15);
+		ConsolaUI::drawBox(width / 2 + 10, height / 2, 30, 2, 15);
+		ConsolaUI::drawBox(width / 2 + 10, height / 2 + 3, 30, 2, 15);
 
-		if (this->isChangePass)
+		if (this->isError == 0)
 		{
-			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Doi Mat Khau Thanh Cong", 2);
+			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Doi Mat Khau Thanh Cong                ", 2);
 		}
-		else
+		else if (this->isError == 2)
 		{
-			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "                       ", 12);
+			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Khong Duoc De Trong Phan Nhap Mat Khau ", 12);
 		}
-
-		ConsolaUI::drawBox(width / 2 + 10, height / 2 - 3, 30, 2, (1 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::drawBox(width / 2 + 10, height / 2, 30, 2, (2 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::drawBox(width / 2 + 10, height / 2 + 3, 30, 2, (3 == this->changePasswordSelected) ? 11 : 8);
-		ConsolaUI::setTextColor(15);
-		switch (this->changePasswordSelected)
+		else if (this->isError == 3)
 		{
-		case 1:
-			ConsolaUI::gotoXY(width / 2 + 12, height / 2 - 2);
-			this->oldPass = GetLine();
-			break;
-		case 2:
-			ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 1);
-			this->newPass = GetLine();
-			break;
-		case 3:
-			ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 4);
-			this->reEnterNewPass = GetLine();
-			break;
+			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Nhap Lai Mat Khau Khong Khop           ", 12);
 		}
-		this->changePasswordSelected = 0;
-
+		else if (this->isError == 4)
+		{
+			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Mat Khau Cu Nhap Khong Dung            ", 12);
+		}
 		break;
 	case 2:
 		ConsolaUI::text(30, 7, "DANG XUAT TAI KHOAN:", 14);
@@ -140,8 +148,6 @@ void InfoManageView::drawSidebarInfomation(const int& width, const int& height)
 	ConsolaUI::text(5, 12, *(this->sidebarInfoList + 1), (1 == this->sidebarInfoSelected) ? 11 : 8);
 	ConsolaUI::text(5, 16, *(this->sidebarInfoList + 2), (2 == this->sidebarInfoSelected) ? 11 : 8);
 }
-
-
 
 
 string InfoManageView::GetLine()
