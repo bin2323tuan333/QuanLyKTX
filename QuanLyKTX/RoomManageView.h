@@ -1,7 +1,8 @@
 #pragma once
 #include "RoomService.h"
+#include "ManageViewBase.h"
 
-class RoomManageView
+class RoomManageView : public ManageViewBase
 {
 private:
 	RoomService* roomService;
@@ -13,12 +14,12 @@ private:
 public:
 	RoomManageView(RoomService*);
 	~RoomManageView();
-	void show();
-	void handleInput(int);
+
+	void show() override; 
+	void handleInput(int) override;
 
 
 private:
-	void draw();
 	void drawRoomServiceContent(const int&, const int&);
 	void drawSidebarRoom(const int&, const int&);
 

@@ -1,8 +1,10 @@
 #pragma once
+#include "ManageViewBase.h"
 #include "AccountService.h"
 #include "EmployeeService.h"
 
-class InfoManageView {
+class InfoManageView : public ManageViewBase
+{
 private:
     AccountService* accountService;
     EmployeeService* employeeService;
@@ -19,11 +21,10 @@ public:
     InfoManageView(AccountService*, EmployeeService*);
     ~InfoManageView();
 
-    void show();
-    void handleInput(int);
+    void show() override;
+    void handleInput(int) override;
 
 private:
-    void draw();
     void drawInfomationContent(const int&, const int&);
     void drawSidebarInfomation(const int&, const int&);
     string GetLine();

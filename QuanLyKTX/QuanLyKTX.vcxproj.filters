@@ -64,6 +64,12 @@
     <Filter Include="Source Files\DataAccess\Repositories">
       <UniqueIdentifier>{a9a172ca-8ed9-42af-a454-dca8a0510462}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Presentation\Views\ManagerView">
+      <UniqueIdentifier>{2349f6ac-4bae-4478-8dcb-2157a19483f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Presentation\Views\ManagerView">
+      <UniqueIdentifier>{d096ab64-7c3d-49fc-817f-e2941a085e69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -138,29 +144,35 @@
     <ClCompile Include="PageManager.cpp">
       <Filter>Source Files\Presentation\Views</Filter>
     </ClCompile>
-    <ClCompile Include="EmployeePage.cpp">
-      <Filter>Source Files\Presentation\Views</Filter>
-    </ClCompile>
     <ClCompile Include="AccountRepository.cpp">
       <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
     <ClCompile Include="StringUtil.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="InfoManageView.cpp">
-      <Filter>Source Files\Presentation\Views</Filter>
+    <ClCompile Include="ContractManageView.cpp">
+      <Filter>Source Files\Presentation\Views\ManagerView</Filter>
     </ClCompile>
-    <ClCompile Include="StudentManageView.cpp">
-      <Filter>Source Files\Presentation\Views</Filter>
-    </ClCompile>
-    <ClCompile Include="RoomManageView.cpp">
-      <Filter>Source Files\Presentation\Views</Filter>
+    <ClCompile Include="ManageViewBase.cpp">
+      <Filter>Source Files\Presentation\Views\ManagerView</Filter>
     </ClCompile>
     <ClCompile Include="InvoiceManageView.cpp">
-      <Filter>Source Files\Presentation\Views</Filter>
+      <Filter>Source Files\Presentation\Views\ManagerView</Filter>
     </ClCompile>
-    <ClCompile Include="ContractManageView.cpp">
-      <Filter>Source Files\Presentation\Views</Filter>
+    <ClCompile Include="InfoManageView.cpp">
+      <Filter>Source Files\Presentation\Views\ManagerView</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeePage.cpp">
+      <Filter>Source Files\Presentation\Views\ManagerView</Filter>
+    </ClCompile>
+    <ClCompile Include="StudentManageView.cpp">
+      <Filter>Source Files\Presentation\Views\ManagerView</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomManageView.cpp">
+      <Filter>Source Files\Presentation\Views\ManagerView</Filter>
+    </ClCompile>
+    <ClCompile Include="HashTable.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,9 +245,6 @@
     <ClInclude Include="Application.h">
       <Filter>Header Files\Presentation</Filter>
     </ClInclude>
-    <ClInclude Include="EmployeePage.h">
-      <Filter>Header Files\Presentation\Views</Filter>
-    </ClInclude>
     <ClInclude Include="StudentPage.h">
       <Filter>Header Files\Presentation\Views</Filter>
     </ClInclude>
@@ -245,20 +254,29 @@
     <ClInclude Include="StringUtil.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="InfoManageView.h">
-      <Filter>Header Files\Presentation\Views</Filter>
-    </ClInclude>
-    <ClInclude Include="RoomManageView.h">
-      <Filter>Header Files\Presentation\Views</Filter>
-    </ClInclude>
-    <ClInclude Include="StudentManageView.h">
-      <Filter>Header Files\Presentation\Views</Filter>
+    <ClInclude Include="ContractManageView.h">
+      <Filter>Header Files\Presentation\Views\ManagerView</Filter>
     </ClInclude>
     <ClInclude Include="InvoiceManageView.h">
-      <Filter>Header Files\Presentation\Views</Filter>
+      <Filter>Header Files\Presentation\Views\ManagerView</Filter>
     </ClInclude>
-    <ClInclude Include="ContractManageView.h">
-      <Filter>Header Files\Presentation\Views</Filter>
+    <ClInclude Include="InfoManageView.h">
+      <Filter>Header Files\Presentation\Views\ManagerView</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomManageView.h">
+      <Filter>Header Files\Presentation\Views\ManagerView</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentManageView.h">
+      <Filter>Header Files\Presentation\Views\ManagerView</Filter>
+    </ClInclude>
+    <ClInclude Include="ManageViewBase.h">
+      <Filter>Header Files\Presentation\Views\ManagerView</Filter>
+    </ClInclude>
+    <ClInclude Include="EmployeePage.h">
+      <Filter>Header Files\Presentation\Views\ManagerView</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

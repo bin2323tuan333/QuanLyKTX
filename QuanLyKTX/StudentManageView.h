@@ -1,7 +1,9 @@
 #pragma once
 #include "StudentService.h"
+#include "ManageViewBase.h"
 
-class StudentManageView {
+class StudentManageView : public ManageViewBase
+{
 private:
     StudentService* studentService;
 
@@ -25,11 +27,10 @@ public:
     StudentManageView(StudentService*);
     ~StudentManageView();
 
-    void show();
-    void handleInput(int);
+    void show() override;
+    void handleInput(int) override;
 
 private:
-    void draw();
     void drawStudentServiceContent(const int&, const int&);
     void drawSidebarStudent(const int&, const int&);
     string GetLine();

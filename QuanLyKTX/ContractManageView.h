@@ -1,7 +1,8 @@
 #pragma once
+#include "ManageViewBase.h"
 #include "ContractService.h"
 
-class ContractManageView
+class ContractManageView : public ManageViewBase
 {
 private:
 	ContractService* contractService;
@@ -13,12 +14,11 @@ private:
 public:
 	ContractManageView(ContractService*);
 	~ContractManageView();
-	void show();
-	void handleInput(int);
 
+	void show() override;
+	void handleInput(int) override;
 
 private:
-	void draw();
 	void drawContractServiceContent(const int&, const int&);
 	void drawSidebarContract(const int&, const int&);
 

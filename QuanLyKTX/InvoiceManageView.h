@@ -1,7 +1,8 @@
 #pragma once
+#include "ManageViewBase.h"
 #include "InvoiceService.h"
 
-class InvoiceManageView
+class InvoiceManageView : public ManageViewBase
 {
 private:
 	InvoiceService* invoiceService;
@@ -13,12 +14,11 @@ private:
 public:
 	InvoiceManageView(InvoiceService*);
 	~InvoiceManageView();
-	void show();
-	void handleInput(int);
 
+	void show() override;
+	void handleInput(int) override;
 
 private:
-	void draw();
 	void drawInvoiceServiceContent(const int&, const int&);
 	void drawSidebarInvoice(const int&, const int&);
 
