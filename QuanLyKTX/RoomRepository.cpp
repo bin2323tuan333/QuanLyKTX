@@ -8,9 +8,11 @@ RoomRepository::RoomRepository()
 {
 	this->p = nullptr;
 	this->n = 0;
+	LoadDataFromFile();
 }
 RoomRepository::~RoomRepository()
 {
+	SaveDateToFile();
 	delete[] this->p;
 }
 
@@ -61,19 +63,23 @@ int RoomRepository::IndexOf(const int& roomID)
 	}
 	return index;
 }
-Room RoomRepository::Search(const int& roomID)
+Room* RoomRepository::Search(const int& roomID)
 {
 	int index = IndexOf(roomID);
 	if (index != -1)
 	{
-		return *(this->p + index);
+		return (this->p + index);
 	}
-	return Room();
+	return nullptr;
 }
 
 Room* RoomRepository::getAll()
 {
 	return this->p;
+}
+int RoomRepository::getSize()
+{
+	return this->n;
 }
 
 // Update

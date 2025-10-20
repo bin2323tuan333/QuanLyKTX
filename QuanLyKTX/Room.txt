@@ -1,120 +1,120 @@
-101;P101;Phong Tieu chuan;2;2;1;A;1
-102;P102;Phong Tieu chuan;2;1;1;A;1
-103;P103;Phong Tieu chuan;2;2;1;A;1
-104;P104;Phong Cao cap;4;3;1;A;1
-105;P105;Phong Dich vu;1;0;1;A;0
-201;P201;Phong Tieu chuan;2;1;2;A;1
-202;P202;Phong Tieu chuan;2;0;2;A;1
-203;P203;Phong Tieu chuan;2;2;2;A;1
-204;P204;Phong Cao cap;4;4;2;A;1
-205;P205;Phong Dich vu;1;0;2;A;0
-301;P301;Phong Tieu chuan;2;2;3;A;1
-302;P302;Phong Tieu chuan;2;1;3;A;1
-303;P303;Phong Tieu chuan;2;0;3;A;1
-304;P304;Phong Cao cap;4;3;3;A;1
-305;P305;Phong Dich vu;1;0;3;A;0
-401;P401;Phong Tieu chuan;2;2;4;A;1
-402;P402;Phong Tieu chuan;2;2;4;A;1
-403;P403;Phong Tieu chuan;2;1;4;A;1
-404;P404;Phong Cao cap;4;4;4;A;1
-405;P405;Phong Dich vu;1;0;4;A;0
-501;P501;Phong Tieu chuan;2;1;5;A;1
-502;P502;Phong Tieu chuan;2;1;5;A;1
-503;P503;Phong Tieu chuan;2;2;5;A;1
-504;P504;Phong Cao cap;4;3;5;A;1
-505;P505;Phong Dich vu;1;0;5;A;0
-601;P601;Phong Tieu chuan;2;2;6;A;1
-602;P602;Phong Tieu chuan;2;2;6;A;1
-603;P603;Phong Tieu chuan;2;1;6;A;1
-604;P604;Phong Cao cap;4;4;6;A;1
-605;P605;Phong Dich vu;1;0;6;A;0
-701;P701;Phong Tieu chuan;2;1;7;A;1
-702;P702;Phong Tieu chuan;2;1;7;A;1
-703;P703;Phong Tieu chuan;2;2;7;A;1
-704;P704;Phong Cao cap;4;3;7;A;1
-705;P705;Phong Dich vu;1;0;7;A;0
-801;P801;Phong Tieu chuan;2;2;8;A;1
-802;P802;Phong Tieu chuan;2;1;8;A;1
-803;P803;Phong Tieu chuan;2;2;8;A;1
-804;P804;Phong Cao cap;4;4;8;A;1
-805;P805;Phong Dich vu;1;0;8;A;0
-901;P901;Phong Tieu chuan;2;1;9;A;1
-902;P902;Phong Tieu chuan;2;1;9;A;1
-903;P903;Phong Tieu chuan;2;2;9;A;1
-904;P904;Phong Cao cap;4;3;9;A;1
-905;P905;Phong Dich vu;1;0;9;A;0
-1001;P1001;Phong Tieu chuan;2;2;10;A;1
-1002;P1002;Phong Tieu chuan;2;2;10;A;1
-1003;P1003;Phong Tieu chuan;2;1;10;A;1
-1004;P1004;Phong Cao cap;4;4;10;A;1
-1005;P1005;Phong Dich vu;1;0;10;A;0
-1101;P1101;Phong Tieu chuan;2;1;11;A;1
-1102;P1102;Phong Tieu chuan;2;1;11;A;1
-1103;P1103;Phong Tieu chuan;2;2;11;A;1
-1104;P1104;Phong Cao cap;4;3;11;A;1
-1105;P1105;Phong Dich vu;1;0;11;A;0
-1201;P1201;Phong Tieu chuan;2;2;12;A;1
-1202;P1202;Phong Tieu chuan;2;1;12;A;1
-1203;P1203;Phong Tieu chuan;2;2;12;A;1
-1204;P1204;Phong Cao cap;4;4;12;A;1
-1205;P1205;Phong Dich vu;1;0;12;A;0
-1301;P1301;Phong Tieu chuan;2;1;13;A;1
-1302;P1302;Phong Tieu chuan;2;1;13;A;1
-1303;P1303;Phong Tieu chuan;2;2;13;A;1
-1304;P1304;Phong Cao cap;4;3;13;A;1
-1305;P1305;Phong Dich vu;1;0;13;A;0
-1401;P1401;Phong Tieu chuan;2;2;14;A;1
-1402;P1402;Phong Tieu chuan;2;2;14;A;1
-1403;P1403;Phong Tieu chuan;2;1;14;A;1
-1404;P1404;Phong Cao cap;4;4;14;A;1
-1405;P1405;Phong Dich vu;1;0;14;A;0
-1501;P1501;Phong Tieu chuan;2;1;15;A;1
-1502;P1502;Phong Tieu chuan;2;1;15;A;1
-1503;P1503;Phong Tieu chuan;2;2;15;A;1
-1504;P1504;Phong Cao cap;4;3;15;A;1
-1505;P1505;Phong Dich vu;1;0;15;A;0
-1601;P1601;Phong Tieu chuan;2;2;16;A;1
-1602;P1602;Phong Tieu chuan;2;1;16;A;1
-1603;P1603;Phong Tieu chuan;2;2;16;A;1
-1604;P1604;Phong Cao cap;4;4;16;A;1
-1605;P1605;Phong Dich vu;1;0;16;A;0
-1701;P1701;Phong Tieu chuan;2;1;17;A;1
-1702;P1702;Phong Tieu chuan;2;1;17;A;1
-1703;P1703;Phong Tieu chuan;2;2;17;A;1
-1704;P1704;Phong Cao cap;4;3;17;A;1
-1705;P1705;Phong Dich vu;1;0;17;A;0
-1801;P1801;Phong Tieu chuan;2;2;18;A;1
-1802;P1802;Phong Tieu chuan;2;2;18;A;1
-1803;P1803;Phong Tieu chuan;2;1;18;A;1
-1804;P1804;Phong Cao cap;4;4;18;A;1
-1805;P1805;Phong Dich vu;1;0;18;A;0
-1901;P1901;Phong Tieu chuan;2;1;19;A;1
-1902;P1902;Phong Tieu chuan;2;1;19;A;1
-1903;P1903;Phong Tieu chuan;2;2;19;A;1
-1904;P1904;Phong Cao cap;4;3;19;A;1
-1905;P1905;Phong Dich vu;1;0;19;A;0
-2001;P2001;Phong Tieu chuan;2;2;20;A;1
-2002;P2002;Phong Tieu chuan;2;1;20;A;1
-2003;P2003;Phong Tieu chuan;2;2;20;A;1
-2004;P2004;Phong Cao cap;4;4;20;A;1
-2005;P2005;Phong Dich vu;1;0;20;A;0
-2101;P2101;Phong Tieu chuan;2;1;21;A;1
-2102;P2102;Phong Tieu chuan;2;1;21;A;1
-2103;P2103;Phong Tieu chuan;2;2;21;A;1
-2104;P2104;Phong Cao cap;4;3;21;A;1
-2105;P2105;Phong Dich vu;1;0;21;A;0
-2201;P2201;Phong Tieu chuan;2;2;22;A;1
-2202;P2202;Phong Tieu chuan;2;2;22;A;1
-2203;P2203;Phong Tieu chuan;2;1;22;A;1
-2204;P2204;Phong Cao cap;4;4;22;A;1
-2205;P2205;Phong Dich vu;1;0;22;A;0
-2301;P2301;Phong Tieu chuan;2;1;23;A;1
-2302;P2302;Phong Tieu chuan;2;1;23;A;1
-2303;P2303;Phong Tieu chuan;2;2;23;A;1
-2304;P2304;Phong Cao cap;4;3;23;A;1
-2305;P2305;Phong Dich vu;1;0;23;A;0
-2401;P2401;Phong Tieu chuan;2;2;24;A;1
-2402;P2402;Phong Tieu chuan;2;1;24;A;1
-2403;P2403;Phong Tieu chuan;2;2;24;A;1
-2404;P2404;Phong Cao cap;4;4;24;A;1
-2405;P2405;Phong Dich vu;1;0;24;A;0
+101;P101;Tieu chuan;2;2;1;A;1
+102;P102;Tieu chuan;2;1;1;A;1
+103;P103;Tieu chuan;2;2;1;A;1
+104;P104;Cao cap;4;3;1;A;1
+105;P105;Dich vu;1;0;1;A;0
+201;P201;Tieu chuan;2;1;2;A;1
+202;P202;Tieu chuan;2;0;2;A;1
+203;P203;Tieu chuan;2;2;2;A;1
+204;P204;Cao cap;4;4;2;A;1
+205;P205;Dich vu;1;0;2;A;0
+301;P301;Tieu chuan;2;2;3;A;1
+302;P302;Tieu chuan;2;1;3;A;1
+303;P303;Tieu chuan;2;0;3;A;1
+304;P304;Cao cap;4;3;3;A;1
+305;P305;Dich vu;1;0;3;A;0
+401;P401;Tieu chuan;2;2;4;A;1
+402;P402;Tieu chuan;2;2;4;A;1
+403;P403;Tieu chuan;2;1;4;A;1
+404;P404;Cao cap;4;4;4;A;1
+405;P405;Dich vu;1;0;4;A;0
+501;P501;Tieu chuan;2;1;5;A;1
+502;P502;Tieu chuan;2;1;5;A;1
+503;P503;Tieu chuan;2;2;5;A;1
+504;P504;Cao cap;4;3;5;A;1
+505;P505;Dich vu;1;0;5;A;0
+601;P601;Tieu chuan;2;2;6;A;1
+602;P602;Tieu chuan;2;2;6;A;1
+603;P603;Tieu chuan;2;1;6;A;1
+604;P604;Cao cap;4;4;6;A;1
+605;P605;Dich vu;1;0;6;A;0
+701;P701;Tieu chuan;2;1;7;A;1
+702;P702;Tieu chuan;2;1;7;A;1
+703;P703;Tieu chuan;2;2;7;A;1
+704;P704;Cao cap;4;3;7;A;1
+705;P705;Dich vu;1;0;7;A;0
+801;P801;Tieu chuan;2;2;8;A;1
+802;P802;Tieu chuan;2;1;8;A;1
+803;P803;Tieu chuan;2;2;8;A;1
+804;P804;Cao cap;4;4;8;A;1
+805;P805;Dich vu;1;0;8;A;0
+901;P901;Tieu chuan;2;1;9;A;1
+902;P902;Tieu chuan;2;1;9;A;1
+903;P903;Tieu chuan;2;2;9;A;1
+904;P904;Cao cap;4;3;9;A;1
+905;P905;Dich vu;1;0;9;A;0
+1001;P1001;Tieu chuan;2;2;10;A;1
+1002;P1002;Tieu chuan;2;2;10;A;1
+1003;P1003;Tieu chuan;2;1;10;A;1
+1004;P1004;Cao cap;4;4;10;A;1
+1005;P1005;Dich vu;1;0;10;A;0
+1101;P1101;Tieu chuan;2;1;11;A;1
+1102;P1102;Tieu chuan;2;1;11;A;1
+1103;P1103;Tieu chuan;2;2;11;A;1
+1104;P1104;Cao cap;4;3;11;A;1
+1105;P1105;Dich vu;1;0;11;A;0
+1201;P1201;Tieu chuan;2;2;12;A;1
+1202;P1202;Tieu chuan;2;1;12;A;1
+1203;P1203;Tieu chuan;2;2;12;A;1
+1204;P1204;Cao cap;4;4;12;A;1
+1205;P1205;Dich vu;1;0;12;A;0
+1301;P1301;Tieu chuan;2;1;13;A;1
+1302;P1302;Tieu chuan;2;1;13;A;1
+1303;P1303;Tieu chuan;2;2;13;A;1
+1304;P1304;Cao cap;4;3;13;A;1
+1305;P1305;Dich vu;1;0;13;A;0
+1401;P1401;Tieu chuan;2;2;14;A;1
+1402;P1402;Tieu chuan;2;2;14;A;1
+1403;P1403;Tieu chuan;2;1;14;A;1
+1404;P1404;Cao cap;4;4;14;A;1
+1405;P1405;Dich vu;1;0;14;A;0
+1501;P1501;Tieu chuan;2;1;15;A;1
+1502;P1502;Tieu chuan;2;1;15;A;1
+1503;P1503;Tieu chuan;2;2;15;A;1
+1504;P1504;Cao cap;4;3;15;A;1
+1505;P1505;Dich vu;1;0;15;A;0
+1601;P1601;Tieu chuan;2;2;16;A;1
+1602;P1602;Tieu chuan;2;1;16;A;1
+1603;P1603;Tieu chuan;2;2;16;A;1
+1604;P1604;Cao cap;4;4;16;A;1
+1605;P1605;Dich vu;1;0;16;A;0
+1701;P1701;Tieu chuan;2;1;17;A;1
+1702;P1702;Tieu chuan;2;1;17;A;1
+1703;P1703;Tieu chuan;2;2;17;A;1
+1704;P1704;Cao cap;4;3;17;A;1
+1705;P1705;Dich vu;1;0;17;A;0
+1801;P1801;Tieu chuan;2;2;18;A;1
+1802;P1802;Tieu chuan;2;2;18;A;1
+1803;P1803;Tieu chuan;2;1;18;A;1
+1804;P1804;Cao cap;4;4;18;A;1
+1805;P1805;Dich vu;1;0;18;A;0
+1901;P1901;Tieu chuan;2;1;19;A;1
+1902;P1902;Tieu chuan;2;1;19;A;1
+1903;P1903;Tieu chuan;2;2;19;A;1
+1904;P1904;Cao cap;4;3;19;A;1
+1905;P1905;Dich vu;1;0;19;A;0
+2001;P2001;Tieu chuan;2;2;20;A;1
+2002;P2002;Tieu chuan;2;1;20;A;1
+2003;P2003;Tieu chuan;2;2;20;A;1
+2004;P2004;Cao cap;4;4;20;A;1
+2005;P2005;Dich vu;1;0;20;A;0
+2101;P2101;Tieu chuan;2;1;21;A;1
+2102;P2102;Tieu chuan;2;1;21;A;1
+2103;P2103;Tieu chuan;2;2;21;A;1
+2104;P2104;Cao cap;4;3;21;A;1
+2105;P2105;Dich vu;1;0;21;A;0
+2201;P2201;Tieu chuan;2;2;22;A;1
+2202;P2202;Tieu chuan;2;2;22;A;1
+2203;P2203;Tieu chuan;2;1;22;A;1
+2204;P2204;Cao cap;4;4;22;A;1
+2205;P2205;Dich vu;1;0;22;A;0
+2301;P2301;Tieu chuan;2;1;23;A;1
+2302;P2302;Tieu chuan;2;1;23;A;1
+2303;P2303;Tieu chuan;2;2;23;A;1
+2304;P2304;Cao cap;4;3;23;A;1
+2305;P2305;Dich vu;1;0;23;A;0
+2401;P2401;Tieu chuan;2;2;24;A;1
+2402;P2402;Tieu chuan;2;1;24;A;1
+2403;P2403;Tieu chuan;2;2;24;A;1
+2404;P2404;Cao cap;4;4;24;A;1
+2405;P2405;Dich vu;1;0;24;A;0

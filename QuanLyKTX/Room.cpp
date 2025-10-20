@@ -77,7 +77,7 @@ void Room::setBuilding(const string& building)
 {
     this->building = building;
 }
-bool Room::getIsActive()
+int Room::getIsActive()
 {
     return this->isActive;
 }

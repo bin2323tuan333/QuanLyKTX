@@ -12,12 +12,13 @@ public:
     ~RoomService();
 
 
-    Room* getAll();
+    void getAllRoom(Room*&, int&);
+    Room* getRoomById(const int&);
     /*bool addRoom(const Room&);
     bool updateRoom(const Room&);
     bool deleteRoom(int);
 
-    Room getRoomById(int);
+    
 
     bool assignStudentToRoom(int, const string&);
     bool removeStudentFromRoom(int, const string&);

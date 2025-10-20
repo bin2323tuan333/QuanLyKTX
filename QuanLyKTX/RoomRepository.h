@@ -20,8 +20,9 @@ public:
 
     // Read
     int IndexOf(const int&);
-    Room Search(const int&);
+    Room* Search(const int&);
     Room* getAll();
+    int getSize();
 
     // Update
     void Update(Room&);

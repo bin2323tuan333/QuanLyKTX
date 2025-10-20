@@ -11,13 +11,16 @@ private:
 	int sidebarRoomSize;
 	int sidebarRoomSelected;
 
+	int roomListIndex;
+	int maxPage;
+
+	int roomIDToSearch;
 public:
 	RoomManageView(RoomService*);
 	~RoomManageView();
 
 	void show() override; 
 	void handleInput(int) override;
-
 
 private:
 	void drawRoomServiceContent(const int&, const int&);

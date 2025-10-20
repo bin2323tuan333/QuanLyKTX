@@ -105,9 +105,9 @@ void InfoManageView::drawInfomationContent(const int& width, const int& height)
 		break;
 	case 1:
 		ConsolaUI::text(30, 7, "DOI MAT KHAU:", 14);
-		ConsolaUI::text(width / 2 - 20, height / 2 - 2, "1. Nhap Mat Khau Cu", 15);
-		ConsolaUI::text(width / 2 - 20, height / 2 + 1, "2. Nhap Mat Khau Moi", 15);
-		ConsolaUI::text(width / 2 - 20, height / 2 + 4, "3. Nhap Lai Mat Khau Moi", 15);
+		ConsolaUI::text(width / 2 - 20, height / 2 - 2, "[1] Nhap Mat Khau Cu", 15);
+		ConsolaUI::text(width / 2 - 20, height / 2 + 1, "[2] Nhap Mat Khau Moi", 15);
+		ConsolaUI::text(width / 2 - 20, height / 2 + 4, "[3] Nhap Lai Mat Khau Moi", 15);
 		ConsolaUI::text(width / 2 + 12, height / 2 - 2, ((this->oldPass == "") ? "" : this->oldPass), 15);
 		ConsolaUI::text(width / 2 + 12, height / 2 + 1, ((this->newPass == "") ? "" : this->newPass), 15);
 		ConsolaUI::text(width / 2 + 12, height / 2 + 4, ((this->reEnterNewPass == "") ? "" : this->reEnterNewPass), 15);

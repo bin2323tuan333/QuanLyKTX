@@ -230,16 +230,16 @@ void StudentManageView::drawStudentServiceContent(const int& width, const int& h
 	{
 	case 0:
 		ConsolaUI::text(30, 7, "THEM SINH VIEN MOI:", 14);
-		ConsolaUI::text(35, 8, "1. Ten Sinh Vien: ", 15);
-		ConsolaUI::text(35, 9, "2. Ngay Sinh (ngay): ", 15);
-		ConsolaUI::text(35, 10, "3. Ngay Sinh (thang):", 15);
-		ConsolaUI::text(35, 11, "4. Ngay Sinh (nam):  ", 15);
-		ConsolaUI::text(35, 12, "5. Gioi Tinh: ", 15);
-		ConsolaUI::text(35, 13, "6. Ma So Sinh Vien: ", 15);
-		ConsolaUI::text(35, 14, "7. Lop: ", 15);
-		ConsolaUI::text(35, 15, "8. Khoa: ", 15);
-		ConsolaUI::text(35, 16, "9. So Dien Thoai: ", 15);
-		ConsolaUI::text(35, 17, "0. Email: ", 15);
+		ConsolaUI::text(35, 8, "[1] Ten Sinh Vien: ", 15);
+		ConsolaUI::text(35, 9, "[2] Ngay Sinh (ngay): ", 15);
+		ConsolaUI::text(35, 10, "[3] Ngay Sinh (thang):", 15);
+		ConsolaUI::text(35, 11, "[4] Ngay Sinh (nam):  ", 15);
+		ConsolaUI::text(35, 12, "[5] Gioi Tinh: ", 15);
+		ConsolaUI::text(35, 13, "[6] Ma So Sinh Vien: ", 15);
+		ConsolaUI::text(35, 14, "[7] Lop: ", 15);
+		ConsolaUI::text(35, 15, "[8] Khoa: ", 15);
+		ConsolaUI::text(35, 16, "[9] So Dien Thoai: ", 15);
+		ConsolaUI::text(35, 17, "[0] Email: ", 15);
 
 		ConsolaUI::text(65, 8, (this->studentToAdd->getFullName() == "") ? "" : this->studentToAdd->getFullName(), 15);
 		ConsolaUI::text(65, 9, (this->tempDay == 0) ? "" : to_string(this->tempDay), 15);
@@ -267,7 +267,7 @@ void StudentManageView::drawStudentServiceContent(const int& width, const int& h
 
 	case 1:
 		ConsolaUI::text(30, 7, "TIM KIEM THEO MA SINH VIEN:", 14);
-		ConsolaUI::text(35, 9, "F. Nhap Ma Sinh Vien: ", 15);
+		ConsolaUI::text(35, 9, "[F] Nhap Ma Sinh Vien: ", 15);
 		ConsolaUI::drawBox(65, 8, 25, 2, 15);
 
 		if (this->studentIDToSearch != 0)
@@ -313,19 +313,19 @@ void StudentManageView::drawStudentServiceContent(const int& width, const int& h
 					{
 						ConsolaUI::text(36, 12 + i + 1, "                                                      ", 12);
 					}
-					ConsolaUI::text(37, 13, "1. Ten Sinh Vien: ", 15);
+					ConsolaUI::text(37, 13, "[1] Ten Sinh Vien: ", 15);
 
 					//Tach Ngay Sinh thanh 3 truong
-					ConsolaUI::text(37, 14, "2. Ngay Sinh (ngay): ", 15);
-					ConsolaUI::text(37, 15, "3. Ngay Sinh (thang):", 15);
-					ConsolaUI::text(37, 16, "4. Ngay Sinh (nam):  ", 15);
+					ConsolaUI::text(37, 14, "[2] Ngay Sinh (ngay): ", 15);
+					ConsolaUI::text(37, 15, "[3] Ngay Sinh (thang):", 15);
+					ConsolaUI::text(37, 16, "[4] Ngay Sinh (nam):  ", 15);
 
-					ConsolaUI::text(37, 17, "5. Gioi Tinh: ", 15);
-					ConsolaUI::text(37, 18, "6. Ma So Sinh Vien: ", 15);
-					ConsolaUI::text(37, 19, "7. Lop: ", 15);
-					ConsolaUI::text(37, 20, "8. Khoa: ", 15);
-					ConsolaUI::text(37, 21, "9. So Dien Thoai: ", 15);
-					ConsolaUI::text(37, 22, "0. Email: ", 15);
+					ConsolaUI::text(37, 17, "[5] Gioi Tinh: ", 15);
+					ConsolaUI::text(37, 18, "[6] Ma So Sinh Vien: ", 15);
+					ConsolaUI::text(37, 19, "[7] Lop: ", 15);
+					ConsolaUI::text(37, 20, "[8] Khoa: ", 15);
+					ConsolaUI::text(37, 21, "[9] So Dien Thoai: ", 15);
+					ConsolaUI::text(37, 22, "[0] Email: ", 15);
 
 					// Thong Tin Sinh Vien Hien Tai
 					ConsolaUI::text(65, 13, this->studentToUpdate.getFullName(), 15);

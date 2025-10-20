@@ -10,7 +10,13 @@ RoomService::~RoomService()
 }
 
 
-Room* RoomService::getAll()
+void RoomService::getAllRoom(Room*& roomList, int& size)
 {
-	return this->roomRepo.getAll();
+	roomList = this->roomRepo.getAll();
+	size = this->roomRepo.getSize();
+}
+
+Room* RoomService::getRoomById(const int& roomID)
+{
+	return this->roomRepo.Search(roomID);
 }
