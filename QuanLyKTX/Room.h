@@ -13,6 +13,7 @@ private:
     int currentOccupancy;
     int floor;
     string building;
+    bool isActive;
     
 public:
     // Constructor, Copy constructor, Destructor
@@ -41,4 +42,7 @@ public:
 
     string getBuilding();
     void setBuilding(const string&);
+
+    bool getIsActive();
+    void setIsActive(const bool&);
 };

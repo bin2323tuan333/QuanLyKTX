@@ -1,4 +1,5 @@
 #pragma once
+#include "ManageViewBase.h"
 #include "EmployeeService.h"
 #include "AccountService.h"
 #include "StudentService.h"
@@ -18,13 +19,7 @@ private:
 	InvoiceService* invoiceService;
 	ContractService* contractService;
 
-
-	InfoManageView* infoManageView;
-	StudentManageView* studentManageView;
-	RoomManageView* roomManageView;
-	InvoiceManageView* invoiceManageView;
-	ContractManageView* contractManageView;
-
+	ManageViewBase* currentView;
 
 	bool isRunning;
 	string* menuList;
@@ -50,8 +45,6 @@ private:
 	void drawFooter(const int&, const int&);
 
 	void handleArrowLR(int, int&, const int&);
-	void handleArrowUD(int, int&, const int&);
-	void handleNormalKeys(int, int&);
 	string GetLine();
 	int GetInt();
 };

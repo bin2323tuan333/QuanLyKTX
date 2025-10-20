@@ -8,3 +8,9 @@ RoomService::RoomService(RoomRepository& roomRepo, StudentRepository& studentRep
 RoomService::~RoomService()
 {
 }
+
+
+Room* RoomService::getAll()
+{
+	return this->roomRepo.getAll();
+}

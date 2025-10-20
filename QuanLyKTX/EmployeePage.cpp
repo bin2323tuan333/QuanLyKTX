@@ -17,7 +17,7 @@ EmployeePage::EmployeePage(
 	invoiceService(invoiceService),
 	contractService(contractService),
 	isRunning(true)
-{
+{ 
 	this->menuSelected = 0;
 	this->menuSize = 5;
 	this->menuList = new string[this->menuSize]
@@ -29,63 +29,71 @@ EmployeePage::EmployeePage(
 		"Quan Ly Hoa Don"
 	};
 
-
-	this->infoManageView = new InfoManageView(
-		this->accountService, 
-		this->employeeService
-	);
-	this->studentManageView = new StudentManageView(
-		this->studentService
-	);
-	this->roomManageView = new RoomManageView(
-		this->roomService
-	);
-	this->invoiceManageView = new InvoiceManageView(
-		this->invoiceService
-	);
-	this->contractManageView = new ContractManageView(
-		this->contractService
-	);
+	this->currentView = nullptr;
 }
 
 EmployeePage::~EmployeePage()
 {
 	delete[] this->menuList;
-	delete this->infoManageView;
-	delete this->studentManageView;
+	if (this->currentView != nullptr)
+		delete this->currentView;
 }
 
 
 void EmployeePage::show()
 {
 	this->isRunning = true;
+
+	this->currentView = new InfoManageView(
+		this->accountService,
+		this->employeeService
+	);
+	
 	while (isRunning)
 	{
 		drawEmployeePage();
 
 		int key = _getch();
+		int previousSelected = this->menuSelected;
 		if (key == 0 || key == 224) // Phim mui ten
 		{
 			key = _getch();
 			handleArrowLR(key, this->menuSelected, this->menuSize);
 		}
-		switch (this->menuSelected)
+		this->currentView->handleInput(key);
+		if(previousSelected != this->menuSelected)
 		{
-		case 0:
-			this->infoManageView->handleInput(key);
-			break;
-		case 1:
-			this->studentManageView->handleInput(key);
-			break;
-		case 2:
-			this->roomManageView->handleInput(key);
-			break;
-		case 3:
-			this->contractManageView->handleInput(key);
-			break;
-		case 4:
-			this->invoiceManageView->handleInput(key);
-			break;
+			delete this->currentView;
+
+			switch (this->menuSelected)
+			{
+			case 0:
+				this->currentView = new InfoManageView(
+					this->accountService,
+					this->employeeService
+				);
+				break;
+			case 1:
+				this->currentView = new StudentManageView(
+					this->studentService
+				);
+				break;
+			case 2:
+				this->currentView = new RoomManageView(
+					this->roomService
+				);
+				break;
+			case 3:
+				this->currentView = new InvoiceManageView(
+					this->invoiceService
+				);
+				break;
+			case 4:
+				this->currentView = new ContractManageView(
+					this->contractService
+				);
+				break;
+			}
 		}
 		if (!this->accountService->isSignIn())
 		{
@@ -107,24 +115,7 @@ void EmployeePage::drawEmployeePage()
 
 	drawHeader(width, height);
 	drawFooter(width, height);
-	switch (menuSelected)
-	{
-	case 0:
-		this->infoManageView->show();
-		break;
-	case 1:
-		this->studentManageView->show();
-		break;
-	case 2:
-		this->roomManageView->show();
-		break;
-	case 3:
-		this->contractManageView->show();
-		break;
-	case 4:
-		this->invoiceManageView->show();
-		break;
-	};
+	this->currentView->show();
 }
 
 void EmployeePage::drawHeader(const int& width, const int& height)
@@ -159,26 +150,7 @@ void EmployeePage::handleArrowLR(int key, int& index, const int& size)
 		break;
 	}
 }
-void EmployeePage::handleArrowUD(int key, int& index, const int& size)
-{
-	switch (key)
-	{
-	case 72:
-		index = (index - 1 + size) % size;
-		break;
-	case 80:
-		index = (index + 1) % size;
-		break;
-	}
-}
 
-void EmployeePage::handleNormalKeys(int key, int& index)
-{
-	if (key >= '1' && key <= '9')
-	{
-		index = key - '0';
-	}
-}
 
 string EmployeePage::GetLine()
 {

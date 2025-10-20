@@ -71,6 +71,11 @@ Room RoomRepository::Search(const int& roomID)
 	return Room();
 }
 
+Room* RoomRepository::getAll()
+{
+	return this->p;
+}
+
 // Update
 void RoomRepository::Update(Room& room)
 {

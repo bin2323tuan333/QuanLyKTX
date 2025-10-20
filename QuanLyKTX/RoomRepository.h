@@ -21,6 +21,7 @@ public:
     // Read
     int IndexOf(const int&);
     Room Search(const int&);
+    Room* getAll();
 
     // Update
     void Update(Room&);

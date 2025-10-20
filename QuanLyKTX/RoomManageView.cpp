@@ -10,7 +10,7 @@ RoomManageView::RoomManageView(RoomService* roomService)
 	this->sidebarRoomList = new string[this->sidebarRoomSize]
 	{
 		"Xem Danh Sach Phong",
-		"Loc Theo Trang Thai"
+		"Thong Ke Va Tong Quan"
 		//Xem Chi Tiet Phong
 	};
 }
@@ -18,14 +18,6 @@ RoomManageView::RoomManageView(RoomService* roomService)
 RoomManageView::~RoomManageView()
 {
 	delete[] this->sidebarRoomList;
-}
-
-void RoomManageView::handleInput(int key)
-{
-	if (key == 72 || key == 80)
-	{
-		this->sidebarRoomSelected = (this->sidebarRoomSelected + (key == 72 ? -1 : 1) + this->sidebarRoomSize) % this->sidebarRoomSize;
-	}
 }
 
 void RoomManageView::show()
@@ -36,16 +28,39 @@ void RoomManageView::show()
 	drawRoomServiceContent(width, height);
 }
 
+void RoomManageView::handleInput(int key)
+{
+	if (key == 72 || key == 80)
+	{
+		this->sidebarRoomSelected = (this->sidebarRoomSelected + (key == 72 ? -1 : 1) + this->sidebarRoomSize) % this->sidebarRoomSize;
+	}
+}
+
 void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 {
+
 	switch (this->sidebarRoomSelected)
 	{
 	case 0:
+	{
 		ConsolaUI::text(30, 7, "XEM DANH SACH PHONG:", 14);
+		Room* roomList = this->roomService->getAll();
+		for (int i = 0; i < 10; i++)
+		{
+			if (roomList + i != nullptr)
+				ConsolaUI::text(33 + i, 9, to_string((roomList + i)->getRoomID()), 15);
+			else break;
+		}
+		ConsolaUI::text(35, height - 1, "[ F ] Tim Kiem ID Phong", 2);
+		ConsolaUI::text(75, height - 1, "[ U ] Loc Phong", 2);
 		break;
+	}
 	case 1:
-		ConsolaUI::text(30, 7, "LOC THEO TRANG THAI:", 14);
+	{
+		ConsolaUI::text(30, 7, "THONG KE VA TONG QUAN:", 14);
+
 		break;
+	}
 	}
 }
 void RoomManageView::drawSidebarRoom(const int& width, const int& height)

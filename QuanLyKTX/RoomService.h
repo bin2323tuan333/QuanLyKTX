@@ -11,6 +11,8 @@ public:
     RoomService(RoomRepository&, StudentRepository&);
     ~RoomService();
 
+
+    Room* getAll();
     /*bool addRoom(const Room&);
     bool updateRoom(const Room&);
     bool deleteRoom(int);
