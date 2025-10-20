@@ -143,6 +143,7 @@ void RoomRepository::LoadDataFromFile()
 		getline(ss, token, ';'); temp.setCurrentOccupancy(stoi(token));
 		getline(ss, token, ';'); temp.setFloor(stoi(token));
 		getline(ss, token, ';'); temp.setBuilding(token);
+		getline(ss, token, ';'); temp.setIsActive(stoi(token));
 
 		this->Add(temp);
 	}
@@ -166,7 +167,8 @@ void RoomRepository::SaveDateToFile()
 		file << (this->p + i)->getCapacity() << ";";
 		file << (this->p + i)->getCurrentOccupancy() << ";";
 		file << (this->p + i)->getFloor() << ";";
-		file << (this->p + i)->getBuilding() << "\n";
+		file << (this->p + i)->getBuilding() << ";";
+		file << (this->p + i)->getIsActive() << "\n";
 	}
 	file.close();
 }

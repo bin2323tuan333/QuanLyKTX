@@ -126,6 +126,20 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 			{
 				ConsolaUI::text(37, 11, "Phong:    " + roomToUpdate->getRoomName(), 9);
 				ConsolaUI::text(37, 12, "So Nguoi: " + to_string(roomToUpdate->getCurrentOccupancy()) + "/" + to_string(roomToUpdate->getCapacity()), 9);
+				Student* studentList = nullptr;
+				int studentCount = 0;
+				this->roomService->getStudentInRoom(studentList, studentCount, this->roomIDToSearch);
+				if (studentCount > 0 && studentList != nullptr)
+				{
+					for (int i = 0; i < studentCount; ++i)
+					{
+						ConsolaUI::text(40, 15 + i, to_string((studentList + i)->getStudentID()) + " - " + (studentList + i)->getFullName(), 15);
+					}
+				}
+				else 
+				{
+					ConsolaUI::text(40, 15, "Chua co sinh vien nao trong phong." + to_string(studentCount), 15);
+				}
 			}
 			else
 			{

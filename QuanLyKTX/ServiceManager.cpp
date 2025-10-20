@@ -11,10 +11,17 @@ void ServiceManager::initialize()
 	this->studentRepo = new StudentRepository();
 
 	this->accountService = new AccountService(*accountRepo);
-	this->contractService = new ContractService(*contractRepo, *studentRepo);
+	this->contractService = new ContractService(
+		*contractRepo, 
+		*studentRepo
+	);
 	this->employeeService = new EmployeeService(*employeeRepo);
 	this->invoiceService = new InvoiceService(*invoiceRepo);
-	this->roomService = new RoomService(*roomRepo, *studentRepo);
+	this->roomService = new RoomService(
+		*roomRepo,
+		*studentRepo,
+		*contractRepo
+	);
 	this->studentService = new StudentService(*studentRepo);
 }
 

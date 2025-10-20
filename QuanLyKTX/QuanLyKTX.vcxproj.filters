@@ -286,7 +286,7 @@
     <Text Include="Student.txt">
       <Filter>Data Files</Filter>
     </Text>
-    <Text Include="Building.txt">
+    <Text Include="Invoice.txt">
       <Filter>Data Files</Filter>
     </Text>
     <Text Include="Contract.txt">

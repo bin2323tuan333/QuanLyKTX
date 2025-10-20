@@ -20,7 +20,9 @@ public:
 
     // Read
     int IndexOf(const int&);
-    Contract Search(const int&);
+    Contract* Search(const int&);
+    Contract* getAll();
+    int getSize();
 
     // Update
     void Update(Contract&);

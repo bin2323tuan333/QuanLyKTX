@@ -199,7 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Account.txt" />
-    <Text Include="Building.txt" />
+    <Text Include="Invoice.txt" />
     <Text Include="Contract.txt" />
     <Text Include="Employee.txt" />
     <Text Include="Room.txt" />

@@ -1,5 +1,3 @@
-1001;Le Van Thanh;01/05/1990;Male;Manager;0987123456;leva@school.edu.vn
-1002;Tran Van Nam;15/11/1988;Female;Manager;0978234567;trantb@school.edu.vn
-1003;Nguyen Thi Sau;20/07/1995;Male;Manager;0912345678;nguvanc@school.edu.vn
-1004;Vo Van Chau;05/03/1992;Female;Manager;0909456789;phamtd@school.edu.vn
-1005;Phan Nhat Minh;10/09/1985;Male;Manager;0968567890;hme@school.edu.vn
+101;Le Van An;01/05/1990;Nam;Quan ly;0987123456;an.lv@school.edu.vn
+102;Tran Thi Binh;15/11/1988;Nu;Quan ly;0978234567;binh.tt@school.edu.vn
+103;Nguyen Van Cuong;20/07/1995;Nam;Nhan vien;0912345678;cuong.nv@school.edu.vn

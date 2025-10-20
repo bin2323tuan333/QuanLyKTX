@@ -60,14 +60,22 @@ int ContractRepository::IndexOf(const int& contractID)
     }
     return index;
 }
-Contract ContractRepository::Search(const int& contractID)
+Contract* ContractRepository::Search(const int& contractID)
 {
     int index = IndexOf(contractID);
     if (index != -1)
     {
-        return *(this->p + index);
+        return (this->p + index);
     }
-    return Contract();
+    return nullptr;
+}
+Contract* ContractRepository::getAll()
+{
+    return this->p;
+}
+int ContractRepository::getSize()
+{
+    return this->n;
 }
 
 void ContractRepository::Update(Contract& contract)
