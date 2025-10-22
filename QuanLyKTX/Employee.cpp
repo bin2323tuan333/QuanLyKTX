@@ -2,77 +2,46 @@
 #include "Employee.h"
 
 // Constructor
-Employee::Employee(const int& employeeID, const string& fullName, const Date& dateOfBirth, const string& gender, 
-    const string& position, const string& phoneNumber, const string& email)
-    : employeeID(employeeID), fullName(fullName), dateOfBirth(dateOfBirth),
-    gender(gender), position(position), phoneNumber(phoneNumber), email(email) 
+Employee::Employee(const int& employeeID, const string& fullName, const Date& dateOfBirth, const string& gender,
+	const string& position, const string& phoneNumber, const string& email)
+	: Person(fullName, dateOfBirth, gender, phoneNumber, email), employeeID(employeeID), position(position)
 {
 }
 Employee::Employee(const Employee& e)
-    : employeeID(e.employeeID), fullName(e.fullName), dateOfBirth(e.dateOfBirth), 
-    gender(e.gender), position(e.position), phoneNumber(e.phoneNumber), email(e.email) 
+	: Person(e.fullName, e.dateOfBirth, e.gender, e.phoneNumber, e.email), employeeID(e.employeeID), position(e.position)
 {
 }
-Employee::~Employee() 
+Employee::~Employee()
 {
 }
-
 
 
 // Getter & Setter
-int Employee::getEmployeeID() 
+int Employee::getEmployeeID()
 {
-    return this->employeeID;
+	return this->employeeID;
 }
-void Employee::setEmployeeID(const int& employeeID) 
+void Employee::setEmployeeID(const int& employeeID)
 {
-    this->employeeID = employeeID;
+	this->employeeID = employeeID;
 }
-string Employee::getFullName() 
+string Employee::getPosition()
 {
-    return this->fullName;
+	return this->position;
 }
-void Employee::setFullName(const string& fullName) 
+void Employee::setPosition(const string& position)
 {
-    this->fullName = fullName;
+	this->position = position;
 }
-Date Employee::getDateOfBirth() 
+
+Employee& Employee::operator=(const Employee& other)
 {
-    return this->dateOfBirth;
-}
-void Employee::setDateOfBirth(const Date& dateOfBirth) 
-{
-    this->dateOfBirth = dateOfBirth;
-}
-string Employee::getGender() 
-{
-    return this->gender;
-}
-void Employee::setGender(const string& gender) 
-{
-    this->gender = gender;
-}
-string Employee::getPosition() 
-{
-    return this->position;
-}
-void Employee::setPosition(const string& position) 
-{
-    this->position = position;
-}
-string Employee::getPhoneNumber() 
-{
-    return this->phoneNumber;
-}
-void Employee::setPhoneNumber(const string& phoneNumber) 
-{
-    this->phoneNumber = phoneNumber;
-}
-string Employee::getEmail() 
-{
-    return this->email;
-}
-void Employee::setEmail(const string& email) 
-{
-    this->email = email;
+	if (this == &other)
+		return *this;
+
+	this->Person::operator=(other);
+	this->employeeID = other.employeeID;
+	this->position = other.position;
+
+	return *this;
 }

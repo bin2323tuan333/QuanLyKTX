@@ -12,6 +12,7 @@ EmployeeRepository::EmployeeRepository()
 }
 EmployeeRepository::~EmployeeRepository()
 {
+    SaveDateToFile();
     delete[] this->p;
 }
 

@@ -25,8 +25,8 @@ EmployeePage::EmployeePage(
 		"Trang Ca Nhan",
 		"Quan Ly Sinh Vien",
 		"Quan Ly Phong",
-		"Quan Ly Hop Dong",
-		"Quan Ly Hoa Don"
+		"Quan Ly Hoa Don",
+		"Quan Ly Hop Dong"
 	};
 
 	this->currentView = nullptr;

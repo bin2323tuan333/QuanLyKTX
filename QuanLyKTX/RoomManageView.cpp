@@ -18,6 +18,8 @@ RoomManageView::RoomManageView(RoomService* roomService)
 	this->maxPage = 0;
 
 	this->roomIDToSearch = 0;
+
+	this->studentIDToNewRoom = 0;
 }
 
 RoomManageView::~RoomManageView()
@@ -61,7 +63,11 @@ void RoomManageView::handleInput(int key)
 	}
 	else if (this->sidebarRoomSelected == 2)
 	{
-
+		if (key == 'F' || key == 'f')
+		{
+			ConsolaUI::gotoXY(66, 9);
+			this->studentIDToNewRoom = GetInt();
+		}
 	}
 }
 
@@ -133,8 +139,9 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 				{
 					for (int i = 0; i < studentCount; ++i)
 					{
-						ConsolaUI::text(40, 15 + i, to_string((studentList + i)->getStudentID()) + " - " + (studentList + i)->getFullName(), 15);
+						ConsolaUI::text(40, 14 + i*2, to_string((studentList + i)->getStudentID()) + " - " + (studentList + i)->getFullName(), 15);
 					}
+					delete[] studentList;
 				}
 				else 
 				{
@@ -150,8 +157,13 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 	}
 	case 2:
 	{
-		ConsolaUI::text(30, 7, "THONG KE VA TONG QUAN:", 14);
+		ConsolaUI::text(30, 7, "CHUYEN PHONG CHO SINH VIEN:", 14);
+		ConsolaUI::text(35, 9, "[F] Nhap Ma So Sinh Vien: ", 15);
+		ConsolaUI::drawBox(65, 8, 25, 2, 15);
+		if (this->studentIDToNewRoom != 0)
+		{
 
+		}
 		break;
 	}
 	}
@@ -178,16 +190,20 @@ string RoomManageView::GetLine()
 {
 	string ss;
 	ConsolaUI::ShowCursor(true);
-	while (true) {
+	while (true) 
+	{
 		int key = _getch();
 		if (key == '\r' || key == '\n') break;
-		if (key == '\b') {
-			if (ss.length() > 0) {
+		if (key == '\b') 
+		{
+			if (ss.length() > 0) 
+			{
 				ss.pop_back();
 				cout << "\b \b";
 			}
 		}
-		else {
+		else 
+		{
 			ss += char(key);
 			cout << char(key);
 		}
@@ -196,7 +212,8 @@ string RoomManageView::GetLine()
 	return ss;
 }
 
-int RoomManageView::GetInt() {
+int RoomManageView::GetInt() 
+{
 	string inputString = GetLine();
 	stringstream ss(inputString);
 	int result = 0;

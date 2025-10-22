@@ -52,4 +52,8 @@ public:
 
     Date getCreatedDate();
     void setCreatedDate(const Date&);
+
+
+    Invoice& operator=(const Invoice&);
+    bool operator==(const Invoice&);
 };

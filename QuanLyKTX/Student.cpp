@@ -4,20 +4,16 @@
 // Constructor
 Student::Student(const int& studentID, const string& fullName, const Date& dateOfBirth, const string& gender, 
     const string& className, const string& faculty, const string& phoneNumber, const string& email)
-    : studentID(studentID), fullName(fullName), dateOfBirth(dateOfBirth), gender(gender), 
-    className(className), faculty(faculty), phoneNumber(phoneNumber), email(email) 
+    : Person(fullName, dateOfBirth, gender, phoneNumber, email), studentID(studentID), className(className), faculty(faculty)
 {
 }
 Student::Student(const Student& s)
-    : studentID(s.studentID), fullName(s.fullName), dateOfBirth(s.dateOfBirth), gender(s.gender), 
-    className(s.className), faculty(s.faculty), phoneNumber(s.phoneNumber), email(s.email) 
+    : Person(s.fullName, s.dateOfBirth, s.gender, s.phoneNumber, s.email), studentID(s.studentID),className(s.className), faculty(s.faculty)
 {
 }
 Student::~Student() 
 {
 }
-
-
 
 
 // Getter & Setter
@@ -28,30 +24,6 @@ int Student::getStudentID()
 void Student::setStudentID(const int& studentID) 
 {
     this->studentID = studentID;
-}
-string Student::getFullName() 
-{
-    return this->fullName;
-}
-void Student::setFullName(const string& fullName) 
-{
-    this->fullName = fullName;
-}
-Date Student::getDateOfBirth() 
-{
-    return this->dateOfBirth;
-}
-void Student::setDateOfBirth(const Date& dateOfBirth) 
-{
-    this->dateOfBirth = dateOfBirth;
-}
-string Student::getGender() 
-{
-    return this->gender;
-}
-void Student::setGender(const string& gender) 
-{
-    this->gender = gender;
 }
 string Student::getClassName() 
 {
@@ -69,19 +41,25 @@ void Student::setFaculty(const string& faculty)
 {
     this->faculty = faculty;
 }
-string Student::getPhoneNumber() 
+
+
+Student& Student::operator=(const Student& other)
 {
-    return this->phoneNumber;
+    if (this == &other)
+        return *this;
+
+    this->Person::operator=(other);
+    this->studentID = other.studentID;
+    this->className = other.className;
+    this->faculty = other.faculty;
+
+    return *this;
 }
-void Student::setPhoneNumber(const string& phoneNumber) 
+bool Student::operator==(const Student& other)
 {
-    this->phoneNumber = phoneNumber;
-}
-string Student::getEmail() 
-{
-    return this->email;
-}
-void Student::setEmail(const string& email) 
-{
-    this->email = email;
+    if (!this->Person::operator==(other))
+        return false;
+    return (this->studentID == other.studentID &&
+        this->className == other.className &&
+        this->faculty == other.faculty);
 }

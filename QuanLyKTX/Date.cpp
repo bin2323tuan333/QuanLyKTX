@@ -25,7 +25,7 @@ Date Date::getCurrentDay()
 	return Date(localTime.tm_mday, localTime.tm_mon + 1, localTime.tm_year + 1900);
 }
 
-bool Date::laNamNhuan()
+bool Date::isLeep()
 {
 	if (this->year % 400 == 0) return true;
 	if (this->year % 100 == 0) return false;
@@ -38,7 +38,7 @@ bool Date::isValid()
 	if (this->month > 12 || this->month < 1) return false;
 
 	int dayOfMonth[] = { 0, 31, 28, 31, 30, 31, 30,31, 31, 30, 31, 30, 31 };
-	if (this->month == 2 && this->laNamNhuan())
+	if (this->month == 2 && this->isLeep())
 	{
 		dayOfMonth[2] = 29;
 	}
@@ -79,4 +79,22 @@ istream& operator >> (istream& in, Date& D)
 	cout << "Month: "; in >> D.month;
 	cout << "Year: "; in >> D.year;
 	return in;
+}
+
+Date& Date::operator=(const Date& date)
+{
+	if (this == &date)
+		return *this;
+
+	this->day = date.day;
+	this->year = date.year;
+	this->month = date.month;
+	return *this;
+}
+
+bool Date::operator==(const Date& date)
+{
+	return (this->day == date.day && 
+		this->month == date.month && 
+		this->year == date.year);
 }

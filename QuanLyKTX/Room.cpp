@@ -3,17 +3,17 @@
 
 // Constructor
 Room::Room(const int& roomID, const string& roomName, const string& roomType,
-    const int& capacity, const int& currentOccupancy, const int& floor, const string& building)
-    : roomID(roomID), roomName(roomName), roomType(roomType),
-    capacity(capacity), currentOccupancy(currentOccupancy), floor(floor), building(building) 
+	const int& capacity, const int& currentOccupancy, const int& floor, const string& building)
+	: roomID(roomID), roomName(roomName), roomType(roomType),
+	capacity(capacity), currentOccupancy(currentOccupancy), floor(floor), building(building)
 {
 }
 Room::Room(const Room& r)
-    : roomID(r.roomID), roomName(r.roomName), roomType(r.roomType),
-    capacity(r.capacity), currentOccupancy(r.currentOccupancy), floor(r.floor), building(r.building)
+	: roomID(r.roomID), roomName(r.roomName), roomType(r.roomType),
+	capacity(r.capacity), currentOccupancy(r.currentOccupancy), floor(r.floor), building(r.building)
 {
 }
-Room::~Room() 
+Room::~Room()
 {
 }
 
@@ -21,67 +21,96 @@ Room::~Room()
 
 
 // Getter & Setter
-int Room::getRoomID() 
+int Room::getRoomID()
 {
-    return this->roomID;
+	return this->roomID;
 }
-void Room::setRoomID(const int& roomID) 
+void Room::setRoomID(const int& roomID)
 {
-    this->roomID = roomID;
+	this->roomID = roomID;
 }
-string Room::getRoomName() 
+string Room::getRoomName()
 {
-    return this->roomName;
+	return this->roomName;
 }
-void Room::setRoomName(const string& roomName) 
+void Room::setRoomName(const string& roomName)
 {
-    this->roomName = roomName;
+	this->roomName = roomName;
 }
-string Room::getRoomType() 
+string Room::getRoomType()
 {
-    return this->roomType;
+	return this->roomType;
 }
-void Room::setRoomType(const string& roomType) 
+void Room::setRoomType(const string& roomType)
 {
-    this->roomType = roomType;
+	this->roomType = roomType;
 }
-int Room::getCapacity() 
+int Room::getCapacity()
 {
-    return this->capacity;
+	return this->capacity;
 }
-void Room::setCapacity(const int& capacity) 
+void Room::setCapacity(const int& capacity)
 {
-    this->capacity = capacity;
+	this->capacity = capacity;
 }
-int Room::getCurrentOccupancy() 
+int Room::getCurrentOccupancy()
 {
-    return this->currentOccupancy;
+	return this->currentOccupancy;
 }
-void Room::setCurrentOccupancy(const int& currentOccupancy) 
+void Room::setCurrentOccupancy(const int& currentOccupancy)
 {
-    this->currentOccupancy = currentOccupancy;
+	this->currentOccupancy = currentOccupancy;
 }
 int Room::getFloor()
 {
-    return this->floor;
+	return this->floor;
 }
 void Room::setFloor(const int& floor)
 {
-    this->floor = floor;
+	this->floor = floor;
 }
-string Room::getBuilding() 
+string Room::getBuilding()
 {
-    return this->building;
+	return this->building;
 }
 void Room::setBuilding(const string& building)
 {
-    this->building = building;
+	this->building = building;
 }
 int Room::getIsActive()
 {
-    return this->isActive;
+	return this->isActive;
 }
 void Room::setIsActive(const bool& isActive)
 {
-    this->isActive = isActive;
+	this->isActive = isActive;
+}
+
+
+Room& Room::operator=(const Room& other)
+{
+	if (this == &other)
+		return *this;
+
+	this->roomID = other.roomID;
+	this->roomName = other.roomName;
+	this->roomType = other.roomType;
+	this->capacity = other.capacity;
+	this->currentOccupancy = other.currentOccupancy;
+	this->floor = other.floor;
+	this->building = other.building;
+	this->isActive = other.isActive;
+
+	return *this;
+}
+bool Room::operator==(const Room& other)
+{
+	return(this->roomID == other.roomID &&
+		this->roomName == other.roomName &&
+		this->roomType == other.roomType &&
+		this->capacity == other.capacity &&
+		this->currentOccupancy == other.currentOccupancy &&
+		this->floor == other.floor &&
+		this->building == other.building &&
+		this->isActive == other.isActive);
 }

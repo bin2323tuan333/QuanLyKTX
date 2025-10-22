@@ -1,4 +1,4 @@
-1;manager01;pass123;Manager;0;101
+1;manager01;123123;Manager;0;101
 2;manager02;pass456;Manager;0;102
 3;staff01;pass789;Manager;0;103
 10;student201;svpass1;Student;201;0

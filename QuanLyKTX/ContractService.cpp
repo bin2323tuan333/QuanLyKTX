@@ -13,3 +13,8 @@ bool ContractService::createContract(const int&, const int&, const int&)
 {
 	return false;
 }
+
+Contract* ContractService::getContractByStudentId(const int& studentID)
+{
+	return this->contractRepo.Search(studentID);
+}

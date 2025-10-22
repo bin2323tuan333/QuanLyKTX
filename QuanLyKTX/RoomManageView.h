@@ -15,6 +15,8 @@ private:
 	int maxPage;
 
 	int roomIDToSearch;
+
+	int studentIDToNewRoom;
 public:
 	RoomManageView(RoomService*);
 	~RoomManageView();

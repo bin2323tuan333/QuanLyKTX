@@ -6,11 +6,14 @@ using namespace std;
 
 ContractRepository::ContractRepository()
 {
+    
     this->p = nullptr;
     this->n = 0;
+    LoadDataFromFile();
 }
 ContractRepository::~ContractRepository()
 {
+    SaveDateToFile();
     delete[] this->p;
 }
 
@@ -60,6 +63,17 @@ int ContractRepository::IndexOf(const int& contractID)
     }
     return index;
 }
+Contract* ContractRepository::SearchByStudentID(const int& studnetID)
+{
+    for (int i = 0; i < this->n; i++)
+    {
+        if ((this->p + i)->getStudentID() == studnetID)
+        {
+            return (this->p + i);
+        }
+    }
+    return nullptr;
+}
 Contract* ContractRepository::Search(const int& contractID)
 {
     int index = IndexOf(contractID);
@@ -88,7 +102,8 @@ void ContractRepository::Update(Contract& contract)
     (this->p + index)->setRoomID(contract.getRoomID());
     (this->p + index)->setStudentID(contract.getStudentID());
     (this->p + index)->setDuration(contract.getDuration());
-    (this->p + index)->setRegistrationDate(contract.getRegistrationDate());
+    (this->p + index)->setStartDate(contract.getStartDate());
+    (this->p + index)->setEndDate(contract.getEndDate());
     
 }
 
@@ -130,12 +145,19 @@ void ContractRepository::LoadDataFromFile()
 
         getline(ss, token, ';'); temp.setContractID(stoi(token));
         getline(ss, token, ';'); temp.setDuration(stoi(token));
-        getline(ss, token, ';'); 
+        
         int d, m, y;
         char sep1, sep2;
+        getline(ss, token, ';');
         stringstream dateStream(token);
         dateStream >> d >> sep1 >> m >> sep2 >> y;
-        temp.setRegistrationDate(Date(d, m, y));
+        temp.setStartDate(Date(d, m, y));
+
+        getline(ss, token, ';');
+        stringstream date(token);
+        date >> d >> sep1 >> m >> sep2 >> y;
+        temp.setEndDate(Date(d, m, y));
+
         getline(ss, token, ';'); temp.setRoomID(stoi(token));
         getline(ss, token, ';'); temp.setStudentID(stoi(token));
 
@@ -157,7 +179,8 @@ void ContractRepository::SaveDateToFile()
     {
         file << (this->p + i)->getContractID() << ";";
         file << (this->p + i)->getDuration() << ";";
-        file << (this->p + i)->getRegistrationDate() << ";";
+        file << (this->p + i)->getStartDate() << ";";
+        file << (this->p + i)->getEndDate() << ";";
         file << (this->p + i)->getRoomID() << ";";
         file << (this->p + i)->getStudentID() << "\n";
     }

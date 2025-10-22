@@ -8,6 +8,7 @@ private:
     AccountRepository& accountRepo;
     bool isLogin;
     string role;
+    int accountID;
     int employeeID;
     int studentID;
     string username;
@@ -21,6 +22,7 @@ public:
     int changePassword(const int&, const string&, const string&, const string&);
     bool isSignIn();
     void setSignIn(bool);
+    int getAccountID();
     int getEmployeeID();
     int getStudentID();
     string getUsername();

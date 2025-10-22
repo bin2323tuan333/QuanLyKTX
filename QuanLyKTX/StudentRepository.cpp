@@ -10,8 +10,8 @@ StudentRepository::StudentRepository()
 }
 StudentRepository::~StudentRepository()
 {
-	delete[] this->p;
 	SaveDateToFile();
+	delete[] this->p;
 }
 
 // Create

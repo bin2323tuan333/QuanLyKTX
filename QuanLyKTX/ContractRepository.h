@@ -20,6 +20,7 @@ public:
 
     // Read
     int IndexOf(const int&);
+    Contract* SearchByStudentID(const int&);
     Contract* Search(const int&);
     Contract* getAll();
     int getSize();

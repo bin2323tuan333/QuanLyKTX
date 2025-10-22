@@ -2,58 +2,96 @@
 #include "Contract.h"
 
 // Constructor
-Contract::Contract(const int& contractID, const int& studentID, const int& roomID, const Date& registrationDate, const int& duration)
-    : contractID(contractID), studentID(studentID), roomID(roomID), registrationDate(registrationDate), duration(duration)
+Contract::Contract(const int& contractID, const int& studentID, const int& roomID, const Date& startDate, const Date& endDate, const int& duration)
+	: contractID(contractID), studentID(studentID), roomID(roomID), startDate(endDate), endDate(endDate), duration(duration)
 {
 }
 Contract::Contract(const Contract& c)
-    : contractID(c.contractID), registrationDate(c.registrationDate), duration(c.duration), studentID(c.studentID), roomID(c.roomID) 
+	: contractID(c.contractID), startDate(c.startDate), endDate(c.endDate), duration(c.duration), studentID(c.studentID), roomID(c.roomID)
 {
 }
-Contract::~Contract() 
+Contract::~Contract()
 {
 }
 
 
 
 // Getter & Setter
-int Contract::getContractID() 
+int Contract::getContractID()
 {
-    return this->contractID;
+	return this->contractID;
 }
-void Contract::setContractID(const int& contractID) 
+void Contract::setContractID(const int& contractID)
 {
-    this->contractID = contractID;
+	this->contractID = contractID;
 }
-Date Contract::getRegistrationDate() 
+
+Date Contract::getStartDate()
 {
-    return this->registrationDate;
+	return this->startDate;
 }
-void Contract::setRegistrationDate(const Date& registrationDate) 
+void Contract::setStartDate(const Date& startDate)
 {
-    this->registrationDate = registrationDate;
+	this->startDate = startDate;
 }
-int Contract::getDuration() 
+
+Date Contract::getEndDate()
 {
-    return this->duration;
+	return this->endDate;
 }
-void Contract::setDuration(const int& duration) 
+void Contract::setEndDate(const Date& endDate)
 {
-    this->duration = duration;
+	this->endDate = endDate;
 }
-int Contract::getStudentID() 
+
+int Contract::getDuration()
 {
-    return this->studentID;
+	return this->duration;
 }
-void Contract::setStudentID(const int& studentID) 
+void Contract::setDuration(const int& duration)
 {
-    this->studentID = studentID;
+	this->duration = duration;
 }
-int Contract::getRoomID() 
+
+int Contract::getStudentID()
 {
-    return this->roomID;
+	return this->studentID;
 }
-void Contract::setRoomID(const int& roomID) 
+void Contract::setStudentID(const int& studentID)
 {
-    this->roomID = roomID;
+	this->studentID = studentID;
+}
+
+int Contract::getRoomID()
+{
+	return this->roomID;
+}
+void Contract::setRoomID(const int& roomID)
+{
+	this->roomID = roomID;
+}
+
+Contract& Contract::operator=(const Contract& other)
+{
+	if (this == &other)
+		return *this;
+
+	this->contractID = other.contractID;
+	this->studentID = other.studentID;
+	this->roomID = other.roomID;
+	this->startDate = other.startDate;
+	this->endDate = other.endDate;
+	this->duration = other.duration;
+
+	return *this;
+}
+
+bool Contract::operator==(const Contract& other)
+{
+	return(this->contractID == other.contractID &&
+		this->studentID == other.studentID &&
+		this->roomID == other.roomID &&
+		this->startDate == other.startDate &&
+		this->endDate == other.endDate &&
+		this->duration == other.duration);
 }

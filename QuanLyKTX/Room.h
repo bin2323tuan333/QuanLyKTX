@@ -45,4 +45,8 @@ public:
 
     int getIsActive();
     void setIsActive(const bool&);
+
+
+    Room& operator=(const Room&);
+    bool operator==(const Room&);
 };

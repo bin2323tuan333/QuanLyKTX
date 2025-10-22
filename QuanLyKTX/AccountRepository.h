@@ -1,36 +1,26 @@
 #pragma once
 #include "Account.h"
-
-
+#include "LinkedList.h"
 
 
 class AccountRepository
 {
 private:
-	Account* p;
-	int n;
+	LinkedList<Account> list;
 
 public:
 	AccountRepository();
 	~AccountRepository();
 
-	// Create
-	void Add(const Account&);
-	void Insert(const Account&, const int&);
+    void Add(const Account&);
+    bool Delete(const int&);
+    bool Update(Account&);
+    LinkedList<Account> GetAll();
+    Account* GetById(const int&);
+    Account* GetByUsername(const string&);
 
-	// Read
-	int IndexOf(const int&);
-	Account SearchByID(const int&);
-	Account SearchByUsername(const string&);
+    int GetSize();
 
-	// Update
-	void Update(Account&);
-
-	// Delete
-	void Delete(const int&); 
-
-
-	void LoadDataFromFile();
-	void SaveDateToFile();
-
+    void LoadDataFromFile();
+    void SaveDataToFile();
 };

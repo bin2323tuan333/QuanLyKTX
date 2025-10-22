@@ -11,6 +11,7 @@ private:
 	int sidebarContractSize;
 	int sidebarContractSelected;
 
+	int studentIDToSearch;
 public:
 	ContractManageView(ContractService*);
 	~ContractManageView();

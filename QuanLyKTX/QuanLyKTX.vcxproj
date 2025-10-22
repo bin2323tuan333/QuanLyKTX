@@ -134,8 +134,10 @@
     <ClInclude Include="ContractManageView.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="InvoiceManageView.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="ManageViewBase.h" />
     <ClInclude Include="PageManager.h" />
+    <ClInclude Include="Person.h" />
     <ClInclude Include="StringUtil.h" />
     <ClInclude Include="StudentPage.h" />
     <ClInclude Include="InfoManageView.h" />
@@ -144,6 +146,7 @@
     <ClCompile Include="ManageViewBase.cpp" />
     <ClCompile Include="PageManager.cpp" />
     <ClInclude Include="RoomManageView.h" />
+    <ClCompile Include="Person.cpp" />
     <ClCompile Include="RoomManageView.cpp" />
     <ClCompile Include="StringUtil.cpp" />
     <ClInclude Include="StudentManageView.h" />

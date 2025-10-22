@@ -61,7 +61,7 @@ void InfoManageView::handleInput(int key)
 		if (key == 13)
 		{
 			this->isError = this->accountService->changePassword(
-				this->accountService->getEmployeeID(),
+				this->accountService->getAccountID(),
 				this->oldPass,
 				this->newPass,
 				this->reEnterNewPass

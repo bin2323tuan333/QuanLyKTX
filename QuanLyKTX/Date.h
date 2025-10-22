@@ -12,7 +12,7 @@ public:
 	~Date();
 
 	static Date getCurrentDay();
-	bool laNamNhuan();
+	bool isLeep();
 	bool isValid();
 
 	int getDay();
@@ -21,7 +21,8 @@ public:
 
 	string getDate();
 
-
 	friend ostream& operator << (ostream&, const Date&);
 	friend istream& operator >> (istream&, Date&);
+	Date& operator=(const Date&);
+	bool operator==(const Date&);
 };

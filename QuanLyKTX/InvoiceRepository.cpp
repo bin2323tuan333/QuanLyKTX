@@ -6,9 +6,11 @@ InvoiceRepository::InvoiceRepository()
 {
     this->p = nullptr;
     this->n = 0;
+    LoadDataFromFile();
 }
 InvoiceRepository::~InvoiceRepository()
 {
+    SaveDateToFile();
     delete[] this->p;
 }
 

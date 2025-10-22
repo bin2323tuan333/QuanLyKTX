@@ -37,4 +37,9 @@ public:
     int getEmployeeID();
     void setEmployeeID(const int&);
 
+
+
+    Account& operator=(const Account&);
+    bool operator==(const Account&);
+    bool operator!=(const Account&);
 };

@@ -16,8 +16,8 @@ public:
     bool extendContract(const int&, const int&);
 
 
-    Contract getContractById(int);
-    Contract getContractByStudentId(const int&);
+    Contract* getContractById(int);
+    Contract* getContractByStudentId(const int&);
 
     bool isValidRoom(const int&);
 };

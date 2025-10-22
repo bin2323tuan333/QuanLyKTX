@@ -143,7 +143,7 @@ void RoomRepository::LoadDataFromFile()
 		getline(ss, token, ';'); temp.setCurrentOccupancy(stoi(token));
 		getline(ss, token, ';'); temp.setFloor(stoi(token));
 		getline(ss, token, ';'); temp.setBuilding(token);
-		getline(ss, token, ';'); temp.setIsActive(stoi(token));
+		getline(ss, token); temp.setIsActive(stoi(token));
 
 		this->Add(temp);
 	}

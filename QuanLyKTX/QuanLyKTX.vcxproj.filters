@@ -22,9 +22,6 @@
     <Filter Include="Header Files\DataAccess">
       <UniqueIdentifier>{c1c29190-9a6b-45b5-9a48-98175052fda1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\DataAccess\Models">
-      <UniqueIdentifier>{6b4094f6-b30f-4ce7-b8a2-a4c8b4cbe527}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\DataAccess\Repositories">
       <UniqueIdentifier>{555edeeb-d3ec-4704-aacc-8a346f6d3be1}</UniqueIdentifier>
     </Filter>
@@ -58,9 +55,6 @@
     <Filter Include="Source Files\DataAccess">
       <UniqueIdentifier>{f6e40664-ba3f-4d6d-b4dc-0629e4ff59df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\DataAccess\Models">
-      <UniqueIdentifier>{65f161aa-f770-4a2c-ba12-4b6442dc08cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\DataAccess\Repositories">
       <UniqueIdentifier>{a9a172ca-8ed9-42af-a454-dca8a0510462}</UniqueIdentifier>
     </Filter>
@@ -69,6 +63,12 @@
     </Filter>
     <Filter Include="Header Files\Presentation\Views\ManagerView">
       <UniqueIdentifier>{d096ab64-7c3d-49fc-817f-e2941a085e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BusinessLogic\Models">
+      <UniqueIdentifier>{6b4094f6-b30f-4ce7-b8a2-a4c8b4cbe527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BusinessLogic\Models">
+      <UniqueIdentifier>{65f161aa-f770-4a2c-ba12-4b6442dc08cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,16 +79,16 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Account.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
+      <Filter>Source Files\BusinessLogic\Models</Filter>
     </ClCompile>
     <ClCompile Include="Room.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
+      <Filter>Source Files\BusinessLogic\Models</Filter>
     </ClCompile>
     <ClCompile Include="Contract.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
+      <Filter>Source Files\BusinessLogic\Models</Filter>
     </ClCompile>
     <ClCompile Include="Invoice.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
+      <Filter>Source Files\BusinessLogic\Models</Filter>
     </ClCompile>
     <ClCompile Include="InvoiceRepository.cpp">
       <Filter>Source Files\DataAccess\Repositories</Filter>
@@ -106,10 +106,10 @@
       <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
     <ClCompile Include="Student.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
+      <Filter>Source Files\BusinessLogic\Models</Filter>
     </ClCompile>
     <ClCompile Include="Employee.cpp">
-      <Filter>Source Files\DataAccess\Models</Filter>
+      <Filter>Source Files\BusinessLogic\Models</Filter>
     </ClCompile>
     <ClCompile Include="AccountService.cpp">
       <Filter>Source Files\BusinessLogic\Services</Filter>
@@ -153,9 +153,6 @@
     <ClCompile Include="ContractManageView.cpp">
       <Filter>Source Files\Presentation\Views\ManagerView</Filter>
     </ClCompile>
-    <ClCompile Include="ManageViewBase.cpp">
-      <Filter>Source Files\Presentation\Views\ManagerView</Filter>
-    </ClCompile>
     <ClCompile Include="InvoiceManageView.cpp">
       <Filter>Source Files\Presentation\Views\ManagerView</Filter>
     </ClCompile>
@@ -174,22 +171,28 @@
     <ClCompile Include="HashTable.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="ManageViewBase.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files\BusinessLogic\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
+      <Filter>Header Files\BusinessLogic\Models</Filter>
     </ClInclude>
     <ClInclude Include="Date.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Invoice.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
+      <Filter>Header Files\BusinessLogic\Models</Filter>
     </ClInclude>
     <ClInclude Include="Contract.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
+      <Filter>Header Files\BusinessLogic\Models</Filter>
     </ClInclude>
     <ClInclude Include="Room.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
+      <Filter>Header Files\BusinessLogic\Models</Filter>
     </ClInclude>
     <ClInclude Include="StudentRepository.h">
       <Filter>Header Files\DataAccess\Repositories</Filter>
@@ -207,10 +210,10 @@
       <Filter>Header Files\DataAccess\Repositories</Filter>
     </ClInclude>
     <ClInclude Include="Student.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
+      <Filter>Header Files\BusinessLogic\Models</Filter>
     </ClInclude>
     <ClInclude Include="Employee.h">
-      <Filter>Header Files\DataAccess\Models</Filter>
+      <Filter>Header Files\BusinessLogic\Models</Filter>
     </ClInclude>
     <ClInclude Include="AccountRepository.h">
       <Filter>Header Files\DataAccess\Repositories</Filter>
@@ -269,14 +272,20 @@
     <ClInclude Include="StudentManageView.h">
       <Filter>Header Files\Presentation\Views\ManagerView</Filter>
     </ClInclude>
-    <ClInclude Include="ManageViewBase.h">
-      <Filter>Header Files\Presentation\Views\ManagerView</Filter>
-    </ClInclude>
     <ClInclude Include="EmployeePage.h">
       <Filter>Header Files\Presentation\Views\ManagerView</Filter>
     </ClInclude>
     <ClInclude Include="HashTable.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ManageViewBase.h">
+      <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Header Files\BusinessLogic\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

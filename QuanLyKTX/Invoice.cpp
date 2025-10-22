@@ -2,126 +2,160 @@
 
 
 Invoice::Invoice(const int& invoiceID, const int& studentID, const int& employeeID, const int& month, const int& year, const int& roomFee,
-    const int& internetFee, const int& electricFee, const int& waterFee, const int& totalAmount, const Date& createdDate)
-    : invoiceID(invoiceID), studentID(studentID), employeeID(employeeID), month(month), year(year), roomFee(roomFee), 
-    internetFee(internetFee), electricFee(electricFee), waterFee(waterFee), totalAmount(totalAmount), createdDate(createdDate) 
+	const int& internetFee, const int& electricFee, const int& waterFee, const int& totalAmount, const Date& createdDate)
+	: invoiceID(invoiceID), studentID(studentID), employeeID(employeeID), month(month), year(year), roomFee(roomFee),
+	internetFee(internetFee), electricFee(electricFee), waterFee(waterFee), totalAmount(totalAmount), createdDate(createdDate)
 {
 }
 Invoice::Invoice(const Invoice& iv)
-    :invoiceID(iv.invoiceID), studentID(iv.studentID), employeeID(iv.employeeID), month(iv.month), year(iv.year), roomFee(iv.roomFee),
-    internetFee(iv.internetFee), electricFee(iv.electricFee), waterFee(iv.waterFee), totalAmount(iv.totalAmount), createdDate(iv.createdDate)
+	:invoiceID(iv.invoiceID), studentID(iv.studentID), employeeID(iv.employeeID), month(iv.month), year(iv.year), roomFee(iv.roomFee),
+	internetFee(iv.internetFee), electricFee(iv.electricFee), waterFee(iv.waterFee), totalAmount(iv.totalAmount), createdDate(iv.createdDate)
 {
 }
-Invoice::~Invoice() 
+Invoice::~Invoice()
 {
 }
 
 // Getter & Setter implementations
 int Invoice::getInvoiceID() {
-    return this->invoiceID;
+	return this->invoiceID;
 }
 
-void Invoice::setInvoiceID(const int& id) 
+void Invoice::setInvoiceID(const int& id)
 {
-    this->invoiceID = id;
+	this->invoiceID = id;
 }
 
-int Invoice::getStudentID() 
+int Invoice::getStudentID()
 {
-    return this->studentID;
+	return this->studentID;
 }
 
-void Invoice::setStudentID(const int& id) 
+void Invoice::setStudentID(const int& id)
 {
-    this->studentID = id;
+	this->studentID = id;
 }
 
-int Invoice::getEmployeeID() 
+int Invoice::getEmployeeID()
 {
-    return this->employeeID;
+	return this->employeeID;
 }
 
-void Invoice::setEmployeeID(const int& id) 
+void Invoice::setEmployeeID(const int& id)
 {
-    this->employeeID = id;
+	this->employeeID = id;
 }
 
-int Invoice::getMonth() 
+int Invoice::getMonth()
 {
-    return this->month;
+	return this->month;
 }
 
-void Invoice::setMonth(const int& m) 
+void Invoice::setMonth(const int& m)
 {
-    this->month = m;
+	this->month = m;
 }
 
-int Invoice::getYear() 
+int Invoice::getYear()
 {
-    return this->year;
+	return this->year;
 }
 
-void Invoice::setYear(const int& y) 
+void Invoice::setYear(const int& y)
 {
-    this->year = y;
+	this->year = y;
 }
 
-int Invoice::getRoomFee() 
+int Invoice::getRoomFee()
 {
-    return this->roomFee;
+	return this->roomFee;
 }
 
-void Invoice::setRoomFee(const int& fee) 
+void Invoice::setRoomFee(const int& fee)
 {
-    this->roomFee = fee;
+	this->roomFee = fee;
 }
 
-int Invoice::getInternetFee() 
+int Invoice::getInternetFee()
 {
-    return this->internetFee;
+	return this->internetFee;
 }
 
-void Invoice::setInternetFee(const int& fee) 
+void Invoice::setInternetFee(const int& fee)
 {
-    this->internetFee = fee;
+	this->internetFee = fee;
 }
 
-int Invoice::getElectricFee() 
+int Invoice::getElectricFee()
 {
-    return this->electricFee;
+	return this->electricFee;
 }
 
-void Invoice::setElectricFee(const int& fee) 
+void Invoice::setElectricFee(const int& fee)
 {
-    this->electricFee = fee;
+	this->electricFee = fee;
 }
 
-int Invoice::getWaterFee() 
+int Invoice::getWaterFee()
 {
-    return this->waterFee;
+	return this->waterFee;
 }
 
-void Invoice::setWaterFee(const int& fee) 
+void Invoice::setWaterFee(const int& fee)
 {
-    this->waterFee = fee;
+	this->waterFee = fee;
 }
 
-int Invoice::getTotalAmount() 
+int Invoice::getTotalAmount()
 {
-    return this->totalAmount;
+	return this->totalAmount;
 }
 
-void Invoice::setTotalAmount(const int& amount) 
+void Invoice::setTotalAmount(const int& amount)
 {
-    this->totalAmount = amount;
+	this->totalAmount = amount;
 }
 
-Date Invoice::getCreatedDate() 
+Date Invoice::getCreatedDate()
 {
-    return this->createdDate;
+	return this->createdDate;
 }
 
-void Invoice::setCreatedDate(const Date& date) 
+void Invoice::setCreatedDate(const Date& date)
 {
-    this->createdDate = date;
+	this->createdDate = date;
+}
+
+
+Invoice& Invoice::operator=(const Invoice& other)
+{
+	if (this == &other)
+		return *this;
+
+	this->invoiceID = other.invoiceID;
+	this->studentID = other.studentID;
+	this->employeeID = other.employeeID;
+	this->month = other.month;
+	this->year = other.year;
+	this->roomFee = other.roomFee;
+	this->internetFee = other.internetFee;
+	this->electricFee = other.electricFee;
+	this->waterFee = other.waterFee;
+	this->totalAmount = other.totalAmount;
+	this->createdDate = other.createdDate;
+	return *this;
+}
+bool Invoice::operator==(const Invoice& other)
+{
+	return(this->invoiceID == other.invoiceID &&
+		this->studentID == other.studentID &&
+		this->employeeID == other.employeeID &&
+		this->month == other.month &&
+		this->year == other.year &&
+		this->roomFee == other.roomFee &&
+		this->internetFee == other.internetFee &&
+		this->electricFee == other.electricFee &&
+		this->waterFee == other.waterFee &&
+		this->totalAmount == other.totalAmount &&
+		this->createdDate == other.createdDate);
 }

@@ -14,13 +14,14 @@ AccountService::~AccountService()
 
 bool AccountService::signIn(const string& username, const string& password)
 {
-	Account temp = (this->accountRepo.SearchByUsername(username));
-	if (username == temp.getUsername() && password == temp.getPassword())
+	Account* temp = (this->accountRepo.GetByUsername(username));
+	if (username == temp->getUsername() && password == temp->getPassword())
 	{
-		this->role = temp.getRole();
-		this->username = temp.getUsername();
-		this->studentID = temp.getStudentID();
-		this->employeeID = temp.getEmployeeID();
+		this->role = temp->getRole();
+		this->accountID = temp->getAccountID();
+		this->username = temp->getUsername();
+		this->studentID = temp->getStudentID();
+		this->employeeID = temp->getEmployeeID();
 		this->isLogin = true;
 		return true;
 	}
@@ -33,20 +34,20 @@ int AccountService::changePassword(const int& id, const string& oldPass, const s
 
 	
 
-	Account tempAccount = this->accountRepo.SearchByID(id);
+	Account* tempAccount = this->accountRepo.GetById(id);
 
-	if (tempAccount.getAccountID() == 0)
+	if (tempAccount->getAccountID() == 0)
 		return 2;
 
-	if (tempAccount.getPassword() != oldPass)
+	if (tempAccount->getPassword() != oldPass)
 		return 4;
 	if (newPass != reEnterNewPass)
 		return 3;
 
-	tempAccount.setPassword(newPass);
-	this->accountRepo.Update(tempAccount);
+	tempAccount->setPassword(newPass);
+	this->accountRepo.Update(*tempAccount);
 
-	this->accountRepo.SaveDateToFile();
+	this->accountRepo.SaveDataToFile();
 	return 0;
 }
 bool AccountService::isSignIn()
@@ -60,6 +61,10 @@ void AccountService::setSignIn(bool b)
 string AccountService::getRole()
 {
 	return this->role;
+}
+int AccountService::getAccountID()
+{
+	return this->accountID;
 }
 int AccountService::getEmployeeID()
 {
