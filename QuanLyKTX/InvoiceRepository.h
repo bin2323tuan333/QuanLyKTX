@@ -1,35 +1,26 @@
 #pragma once
 #include "Invoice.h"
-
-
+#include "LinkedList.h"
 
 
 class InvoiceRepository
 {
 private:
-    Invoice* p;
-    int n;
+    string fileName;
+    LinkedList<Invoice> list;
 
 public:
-    InvoiceRepository();
+    InvoiceRepository(const string&);
     ~InvoiceRepository();
 
-    // Create
+    void loadData();
+    void saveData();
+
     void Add(const Invoice&);
-    void Insert(const Invoice&, const int&);
+    void Update(const Invoice&);
+    void Delete(const Invoice&);
+    Invoice* GetById(const int&);
+    LinkedList<Invoice> GetAll();
 
-    // Read
-    int IndexOf(const int&);
-    Invoice Search(const int&);
-    Invoice SearchByStudentID(const int&);
-    
-
-    // Update
-    void Update(Invoice&);
-
-    // Delete
-    void Delete(const int&);
-
-    void LoadDataFromFile();
-    void SaveDateToFile();
+    int GetSize();
 };

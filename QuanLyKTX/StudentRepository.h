@@ -1,33 +1,26 @@
 #pragma once
 #include "Student.h"
-
-
+#include "LinkedList.h"
 
 
 class StudentRepository
 {
 private:
-    Student* p;
-    int n;
+    string fileName;
+    LinkedList<Student> list;
 
 public:
-    StudentRepository();
+    StudentRepository(const string&);
     ~StudentRepository();
 
-    // Create
+    void loadData();
+    void saveData();
+
     void Add(const Student&);
-    void Insert(const Student&, const int&);
+    void Update(const Student&);
+    void Delete(const Student&);
+    Student* GetById(const int&);
+    LinkedList<Student> GetAll();
 
-    // Read
-    int IndexOf(const int&);
-    Student* Search(const int&);
-
-    // Update
-    void Update(Student&);
-
-    // Delete
-    void Delete(const int&);
-
-    void LoadDataFromFile();
-    void SaveDateToFile();
+    int GetSize();
 };

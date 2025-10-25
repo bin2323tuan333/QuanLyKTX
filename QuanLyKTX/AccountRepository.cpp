@@ -2,77 +2,25 @@
 #include <fstream>
 #include <sstream>
 
-AccountRepository::AccountRepository()
+AccountRepository::AccountRepository(const string& fileName)
+	:fileName(fileName)
 {
-	LoadDataFromFile();
 }
 AccountRepository::~AccountRepository()
 {
-	SaveDataToFile();
 }
 
-void AccountRepository::Add(const Account& account)
-{
-	this->list.add(account);
-}
-
-bool AccountRepository::Delete(const int& id)
-{
-	Account* temp = this->GetById(id);
-	if (temp == nullptr) return false;
-	this->list.remove(*temp);
-	return true;
-}
-bool AccountRepository::Update(Account& acc)
-{
-	bool temp = this->Delete(acc.getAccountID());
-	if (temp == false) return false;
-	this->Add(acc);
-	return true;
-}
-LinkedList<Account> AccountRepository::GetAll()
-{
-	return this->list;
-}
-Account* AccountRepository::GetById(const int& accountID)
-{
-	for (int i = 0; i < this->list.getSize(); i++)
-	{
-		Account* temp = this->list.getAt(i);
-		if (temp->getAccountID() == accountID)
-			return temp;
-	}
-	return nullptr;
-}
-Account* AccountRepository::GetByUsername(const string& username)
-{
-	for (int i = 0; i < this->list.getSize(); i++)
-	{
-		Account* temp = this->list.getAt(i);
-		if (temp->getUsername() == username)
-			return temp;
-	}
-	return nullptr;
-}
-
-int AccountRepository::GetSize()
-{
-	return this->list.getSize();
-}
-
-void AccountRepository::LoadDataFromFile()
+void AccountRepository::loadData()
 {
 	string filename = "Account.txt";
 	ifstream file(filename);
-	if (!file.is_open()) 
+	if (!file.is_open())
 		return;
 	string line;
 	while (getline(file, line)) {
 		if (line.empty()) continue;
-
 		stringstream ss(line);
 		string token;
-
 		Account temp;
 
 		getline(ss, token, ';'); temp.setAccountID(stoi(token));
@@ -81,31 +29,73 @@ void AccountRepository::LoadDataFromFile()
 		getline(ss, token, ';'); temp.setRole(token);
 		getline(ss, token, ';'); temp.setStudentID(stoi(token));
 		getline(ss, token, ';'); temp.setEmployeeID(stoi(token));
-
-		this->Add(temp);
+		this->list.add(temp);
 	}
 	file.close();
 }
-void AccountRepository::SaveDataToFile()
+void AccountRepository::saveData()
 {
 	string filename = "Account.txt";
 	ofstream file(filename);
 	if (!file.is_open())
 		return;
 
-	for (int i = 0; i < this->list.getSize(); i++)
+	for (ListNode<Account>* p = this->list.getHead(); p != nullptr; p = p->next)
 	{
-		Account* acc = this->list.getAt(i);
-
-		if (acc != nullptr)
-		{
-			file << acc->getAccountID() << ";";
-			file << acc->getUsername() << ";";
-			file << acc->getPassword() << ";";
-			file << acc->getRole() << ";";
-			file << acc->getStudentID() << ";";
-			file << acc->getEmployeeID() << "\n";
-		}
+		file << p->value.getAccountID() << ";";
+		file << p->value.getUsername() << ";";
+		file << p->value.getPassword() << ";";
+		file << p->value.getRole() << ";";
+		file << p->value.getStudentID() << ";";
+		file << p->value.getEmployeeID() << "\n";
 	}
 	file.close();
+}
+
+
+
+void AccountRepository::Add(const Account& account)
+{
+	this->list.add(account);
+	this->saveData();
+}
+
+void AccountRepository::Delete(const Account& account)
+{
+	Account* temp = this->GetById(account.getAccountID());
+	if (temp == nullptr) return;
+	this->list.remove(*temp);
+	this->saveData();
+}
+void AccountRepository::Update(const Account& account)
+{
+	Account* temp = this->GetById(account.getAccountID());
+	*temp = account;
+}
+LinkedList<Account> AccountRepository::GetAll()
+{
+	return this->list;
+}
+Account* AccountRepository::GetById(const int& accountID)
+{
+	for (ListNode<Account>* p = this->list.getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value.getAccountID() == accountID)
+			return &(p->value);
+	}
+	return nullptr;
+}
+Account* AccountRepository::GetByUsername(const string& username)
+{
+	for (ListNode<Account>* p = this->list.getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value.getUsername() == username)
+			return &(p->value);
+	}
+	return nullptr;
+}
+
+int AccountRepository::GetSize()
+{
+	return this->list.getSize();
 }

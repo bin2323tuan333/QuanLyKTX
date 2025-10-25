@@ -2,132 +2,16 @@
 #include <fstream>
 #include <sstream>
 
-InvoiceRepository::InvoiceRepository()
+InvoiceRepository::InvoiceRepository(const string& fileName)
+    :fileName(fileName)
 {
-    this->p = nullptr;
-    this->n = 0;
-    LoadDataFromFile();
 }
 InvoiceRepository::~InvoiceRepository()
 {
-    SaveDateToFile();
-    delete[] this->p;
+
 }
 
-// Create
-void InvoiceRepository::Add(const Invoice& invoice)
-{
-    Invoice* temp = new Invoice[this->n + 1];
-    for (int i = 0; i < this->n; i++)
-    {
-        *(temp + i) = *(this->p + i);
-    }
-    *(temp + this->n) = invoice;
-    delete[] this->p;
-    this->p = temp;
-    (this->n)++;
-}
-void InvoiceRepository::Insert(const Invoice& invoice, const int& index)
-{
-    if (index < 0 || index > this->n)
-        return;
-
-    Invoice* temp = new Invoice[this->n + 1];
-    for (int i = 0; i < index; i++)
-    {
-        *(temp + i) = *(this->p + i);
-    }
-    *(temp + index) = invoice;
-    for (int i = index; i < this->n; i++)
-    {
-        *(temp + i + 1) = *(this->p + i);
-    }
-    delete[] this->p;
-    this->p = temp;
-    (this->n)++;
-}
-
-// Read
-int InvoiceRepository::IndexOf(const int& invoiceID)
-{
-    int index = -1;
-    for (int i = 0; i < this->n; i++)
-    {
-        if (invoiceID == (this->p + i)->getInvoiceID())
-        {
-            index = i;
-            break;
-        }
-    }
-    return index;
-}
-Invoice InvoiceRepository::Search(const int& invoiceID)
-{
-    int index = IndexOf(invoiceID);
-    if (index != -1)
-    {
-        return *(this->p + index);
-    }
-    return Invoice();
-}
-Invoice InvoiceRepository::SearchByStudentID(const int& studentID)
-{
-    int index = -1;
-    for (int i = 0; i < this->n; i++)
-    {
-        if (studentID == (this->p + i)->getStudentID())
-        {
-            index = i;
-            break;
-        }
-    }
-    if (index == -1)
-        return Invoice();
-    return *(this->p + index);
-}
-
-// Update
-void InvoiceRepository::Update(Invoice& invoice)
-{
-    int index = IndexOf(invoice.getInvoiceID());
-    if (index == -1)
-        return;
-
-    (this->p + index)->setStudentID(invoice.getStudentID());
-    (this->p + index)->setEmployeeID(invoice.getEmployeeID());
-    (this->p + index)->setMonth(invoice.getMonth());
-    (this->p + index)->setYear(invoice.getYear());
-    (this->p + index)->setRoomFee(invoice.getRoomFee());
-    (this->p + index)->setInternetFee(invoice.getInternetFee());
-    (this->p + index)->setElectricFee(invoice.getElectricFee());
-    (this->p + index)->setWaterFee(invoice.getWaterFee());
-    (this->p + index)->setTotalAmount(invoice.getTotalAmount());
-    (this->p + index)->setCreatedDate(invoice.getCreatedDate());
-}
-
-// Delete
-void InvoiceRepository::Delete(const int& invoiceID)
-{
-    int index = IndexOf(invoiceID);
-    if (index == -1) return;
-
-    Invoice* temp = new Invoice[this->n - 1];
-    for (int i = 0; i < index; i++)
-    {
-        *(temp + i) = *(this->p + i);
-    }
-    for (int i = index; i < this->n - 1; i++)
-    {
-        *(temp + i) = *(this->p + i + 1);
-    }
-    delete[] this->p;
-    this->p = temp;
-    (this->n)--;
-}
-
-
-
-void InvoiceRepository::LoadDataFromFile()
+void InvoiceRepository::loadData()
 {
     string filename = "Invoice.txt";
     ifstream file(filename);
@@ -161,11 +45,11 @@ void InvoiceRepository::LoadDataFromFile()
         dateStream >> d >> sep1 >> m >> sep2 >> y;
         temp.setCreatedDate(Date(d, m, y));
 
-        this->Add(temp);
+        this->list.add(temp);
     }
     file.close();
 }
-void InvoiceRepository::SaveDateToFile()
+void InvoiceRepository::saveData()
 {
     string filename = "Invoice.txt";
     ofstream file(filename);
@@ -174,20 +58,60 @@ void InvoiceRepository::SaveDateToFile()
         cout << "Khong the mo file: " << filename << "!";
         return;
     }
-
-    for (int i = 0; i < this->n; i++)
+    for (ListNode<Invoice>* p = this->list.getHead(); p != nullptr; p = p->next)
     {
-        file << (this->p + i)->getInvoiceID() << ";";
-        file << (this->p + i)->getStudentID() << ";";
-        file << (this->p + i)->getEmployeeID() << ";";
-        file << (this->p + i)->getMonth() << ";";
-        file << (this->p + i)->getYear() << ";";
-        file << (this->p + i)->getRoomFee() << ";";
-        file << (this->p + i)->getInternetFee() << ";";
-        file << (this->p + i)->getElectricFee() << ";";
-        file << (this->p + i)->getWaterFee() << ";";
-        file << (this->p + i)->getTotalAmount() << ";";
-        file << (this->p + i)->getCreatedDate() << "\n";
+        file << p->value.getInvoiceID() << ";";
+        file << p->value.getStudentID() << ";";
+        file << p->value.getEmployeeID() << ";";
+        file << p->value.getMonth() << ";";
+        file << p->value.getYear() << ";";
+        file << p->value.getRoomFee() << ";";
+        file << p->value.getInternetFee() << ";";
+        file << p->value.getElectricFee() << ";";
+        file << p->value.getWaterFee() << ";";
+        file << p->value.getTotalAmount() << ";";
+        file << p->value.getCreatedDate() << "\n";
     }
     file.close();
+}
+
+
+
+
+void InvoiceRepository::Add(const Invoice& invoice)
+{
+    this->list.add(invoice);
+    this->saveData();
+}
+
+void InvoiceRepository::Delete(const Invoice& invoice)
+{
+    Invoice* temp = this->GetById(invoice.getInvoiceID());
+    if (temp == nullptr) return;
+    this->list.remove(*temp);
+    this->saveData();
+}
+void InvoiceRepository::Update(const Invoice& invoice)
+{
+    Invoice* temp = this->GetById(invoice.getInvoiceID());
+    *temp = invoice;
+}
+LinkedList<Invoice> InvoiceRepository::GetAll()
+{
+    return this->list;
+}
+Invoice* InvoiceRepository::GetById(const int& invoiceID)
+{
+    for (ListNode<Invoice>* p = this->list.getHead(); p != nullptr; p = p->next)
+    {
+        if (p->value.getEmployeeID() == invoiceID)
+            return &(p->value);
+    }
+    return nullptr;
+}
+
+
+int InvoiceRepository::GetSize()
+{
+    return this->list.getSize();
 }

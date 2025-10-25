@@ -10,6 +10,8 @@ public:
 	ListNode();
 	ListNode(const Value&);
 	~ListNode();
+
+	ListNode<Value>* getNext()
 };
 
 template<typename Value>
@@ -29,6 +31,8 @@ public:
 	int getSize();
 	void clear();
 	Value* getAt(int);
+	ListNode<Value>* getHead();
+	
 
 	void add(const Value&);
 	bool remove(const Value&);
@@ -50,6 +54,12 @@ ListNode<Value>::ListNode(const Value& value)
 template<typename Value>
 ListNode<Value>::~ListNode()
 {
+}
+
+template<typename Value>
+ListNode<Value>* ListNode<Value>::getNext()
+{
+	return this->next;
 }
 
 template<typename Value>
@@ -187,4 +197,10 @@ Value* LinkedList<Value>::getAt(int index)
 		current = current->next;
 	}
 	return &(current->value);
+}
+
+template<typename Value>
+ListNode<Value>* LinkedList<Value>::getHead()
+{
+	return this->head;
 }

@@ -4,110 +4,18 @@
 #include <sstream>
 using namespace std;
 
-EmployeeRepository::EmployeeRepository()
+EmployeeRepository::EmployeeRepository(const string& fileName)
+    :fileName(fileName)
 {
-    this->p = nullptr;
-    this->n = 0;
-    LoadDataFromFile();
+
 }
 EmployeeRepository::~EmployeeRepository()
 {
-    SaveDateToFile();
-    delete[] this->p;
-}
 
-void EmployeeRepository::Add(const Employee& employee)
-{
-    Employee* temp = new Employee[this->n + 1];
-    for (int i = 0; i < this->n; i++)
-    {
-        *(temp + i) = *(this->p + i);
-    }
-    *(temp + this->n) = employee;
-    delete[] this->p;
-    this->p = temp;
-    (this->n)++;
-}
-void EmployeeRepository::Insert(const Employee& employee, const int& index)
-{
-    if (index < 0 || index > this->n)
-        return;
-
-    Employee* temp = new Employee[this->n + 1];
-    for (int i = 0; i < index; i++)
-    {
-        *(temp + i) = *(this->p + i);
-    }
-    *(temp + index) = employee;
-    for (int i = index; i < this->n; i++)
-    {
-        *(temp + i + 1) = *(this->p + i);
-    }
-    delete[] this->p;
-    this->p = temp;
-    (this->n)++;
 }
 
 
-int EmployeeRepository::IndexOf(const int& employeeID)
-{
-    int index = -1;
-    for (int i = 0; i < this->n; i++)
-    {
-        if (employeeID == (this->p + i)->getEmployeeID())
-        {
-            index = i;
-            break;
-        }
-    }
-    return index;
-}
-Employee* EmployeeRepository::Search(const int& employeeID)
-{
-    int index = IndexOf(employeeID);
-    if (index != -1)
-    {
-        return (this->p + index);
-    }
-    return nullptr;
-}
-
-void EmployeeRepository::Update(Employee& employee)
-{
-    int index = IndexOf(employee.getEmployeeID());
-    if (index == -1)
-        return;
-
-    (this->p + index)->setEmployeeID(employee.getEmployeeID());
-    (this->p + index)->setFullName(employee.getFullName());
-    (this->p + index)->setDateOfBirth(employee.getDateOfBirth());
-    (this->p + index)->setEmail(employee.getEmail());
-    (this->p + index)->setGender(employee.getGender());
-    (this->p + index)->setPhoneNumber(employee.getPhoneNumber());
-    (this->p + index)->setPosition(employee.getPosition());
-}
-
-void EmployeeRepository::Delete(const int& employeeID)
-{
-    int index = IndexOf(employeeID);
-    if (index == -1) return;
-
-    Employee* temp = new Employee[this->n - 1];
-    for (int i = 0; i < index; i++)
-    {
-        *(temp + i) = *(this->p + i);
-    }
-    for (int i = index; i < this->n - 1; i++)
-    {
-        *(temp + i) = *(this->p + i + 1);
-    }
-    delete[] this->p;
-    this->p = temp;
-    (this->n)--;
-}
-
-
-void EmployeeRepository::LoadDataFromFile()
+void EmployeeRepository::loadData()
 {
     string filename = "Employee.txt";
     ifstream file(filename);
@@ -137,29 +45,66 @@ void EmployeeRepository::LoadDataFromFile()
         getline(ss, token, ';'); temp.setPhoneNumber(token);
         getline(ss, token, ';'); temp.setEmail(token);
 
-        this->Add(temp);
+        this->list.add(temp);
     }
     file.close();
 }
-void EmployeeRepository::SaveDateToFile()
+void EmployeeRepository::saveData()
 {
-    string filename = "Employee.txt";
-    ofstream file(filename);
+    string fileName = "Employee.txt";
+    ofstream file(fileName);
 
     if (!file.is_open()) {
-        cout << "Khong the mo file: " << filename << "!";
+        cout << "Khong the mo file: " << fileName << "!";
         return;
     }
-
-    for (int i = 0; i < this->n; i++)
+    for (ListNode<Employee>* p = this->list.getHead(); p != nullptr; p = p->next)
     {
-        file << (this->p + i)->getEmployeeID() << ";";
-        file << (this->p + i)->getFullName() << ";";
-        file << (this->p + i)->getDateOfBirth() << ";";
-        file << (this->p + i)->getGender() << ";";
-        file << (this->p + i)->getPosition() << ";";
-        file << (this->p + i)->getPhoneNumber() << ";";
-        file << (this->p + i)->getEmail() << "\n";
+        file << p->value.getEmployeeID() << ";";
+        file << p->value.getFullName() << ";";
+        file << p->value.getDateOfBirth() << ";";
+        file << p->value.getGender() << ";";
+        file << p->value.getPosition() << ";";
+        file << p->value.getPhoneNumber() << ";";
+        file << p->value.getEmail() << "\n";
     }
     file.close();
+}
+
+void EmployeeRepository::Add(const Employee& employee)
+{
+    this->list.add(employee);
+    this->saveData();
+}
+
+void EmployeeRepository::Delete(const Employee& employee)
+{
+    Employee* temp = this->GetById(employee.getEmployeeID());
+    if (temp == nullptr) return;
+    this->list.remove(*temp);
+    this->saveData();
+}
+void EmployeeRepository::Update(const Employee& employee)
+{
+    Employee* temp = this->GetById(employee.getEmployeeID());
+    *temp = employee;
+}
+LinkedList<Employee> EmployeeRepository::GetAll()
+{
+    return this->list;
+}
+Employee* EmployeeRepository::GetById(const int& employeeID)
+{
+    for (ListNode<Employee>* p = this->list.getHead(); p != nullptr; p = p->next)
+    {
+        if (p->value.getEmployeeID() == employeeID)
+            return &(p->value);
+    }
+    return nullptr;
+}
+
+
+int EmployeeRepository::GetSize()
+{
+    return this->list.getSize();
 }

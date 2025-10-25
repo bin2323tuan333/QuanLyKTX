@@ -1,38 +1,26 @@
 #pragma once
+#include "Account.h"
 #include "AccountRepository.h"
+
 
 
 class AccountService
 {
 private:
-    AccountRepository& accountRepo;
-    bool isLogin;
-    string role;
-    int accountID;
-    int employeeID;
-    int studentID;
-    string username;
+    AccountRepository* accountRepo;
 
 public:
-    AccountService(AccountRepository&);
+    AccountService(AccountRepository*);
     ~AccountService();
 
 
-    bool signIn(const string&, const string&);
-    int changePassword(const int&, const string&, const string&, const string&);
-    bool isSignIn();
-    void setSignIn(bool);
-    int getAccountID();
-    int getEmployeeID();
-    int getStudentID();
-    string getUsername();
-    string getRole();
+    int Login(const string&, const string&);
+    int GetSize();
 
-    bool createAccount(const Account&);
-    bool updateAccount(const Account&);
-    bool deleteAccount(const int&);
-
-
-    Account findAccountByUsername(const string&);
-    Account findAccountById(const int&);
+    int Add(const Account&);
+    Account* SearchByID(const int&);
+    Account* SearchByUsername(const string&);
+    LinkedList<Account> getAll();
+    int Update(const Account&);
+    int Delete(const Account&);
 };

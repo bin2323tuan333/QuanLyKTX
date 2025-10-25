@@ -17,7 +17,7 @@ Contract::~Contract()
 
 
 // Getter & Setter
-int Contract::getContractID()
+int Contract::getContractID() const
 {
 	return this->contractID;
 }

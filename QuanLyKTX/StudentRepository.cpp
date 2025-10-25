@@ -2,112 +2,14 @@
 #include <fstream>
 #include <sstream>
 
-StudentRepository::StudentRepository()
+StudentRepository::StudentRepository(const string& fileName)
+	:fileName(fileName)
 {
-	this->p = nullptr;
-	this->n = 0;
-	LoadDataFromFile();
 }
 StudentRepository::~StudentRepository()
 {
-	SaveDateToFile();
-	delete[] this->p;
 }
-
-// Create
-void StudentRepository::Add(const Student& student)
-{
-	Student* temp = new Student[this->n + 1];
-	for (int i = 0; i < this->n; i++)
-	{
-		*(temp + i) = *(this->p + i);
-	}
-	*(temp + this->n) = student;
-	delete[] this->p;
-	this->p = temp;
-	(this->n)++;
-}
-void StudentRepository::Insert(const Student& student, const int& index)
-{
-	if (index<0 || index > this->n)
-		return;
-
-	Student* temp = new Student[this->n + 1];
-	for (int i = 0; i < index; i++)
-	{
-		*(temp + i) = *(this->p + i);
-	}
-	*(temp + index) = student;
-	for (int i = index; i < this->n; i++)
-	{
-		*(temp + i + 1) = *(this->p + i);
-	}
-	delete[] this->p;
-	this->p = temp;
-	(this->n)++;
-}
-
-// Read
-int StudentRepository::IndexOf(const int& studentID)
-{
-	int index = -1;
-	for (int i = 0; i < this->n; i++)
-	{
-		if (studentID == (this->p + i)->getStudentID())
-		{
-			index = i;
-			break;
-		}
-	}
-	return index;
-}
-Student* StudentRepository::Search(const int& studentID)
-{
-	int index = IndexOf(studentID);
-	if (index != -1)
-	{
-		return (this->p + index);
-	}
-	return nullptr;
-}
-
-// Update
-void StudentRepository::Update(Student& student)
-{
-	int index = IndexOf(student.getStudentID());
-	if (index == -1)
-		return;
-
-	(this->p + index)->setStudentID(student.getStudentID());
-	(this->p + index)->setFullName(student.getFullName());
-	(this->p + index)->setDateOfBirth(student.getDateOfBirth());
-	(this->p + index)->setGender(student.getGender());
-	(this->p + index)->setClassName(student.getClassName());
-	(this->p + index)->setFaculty(student.getFaculty());
-	(this->p + index)->setPhoneNumber(student.getPhoneNumber());
-	(this->p + index)->setEmail(student.getEmail());
-}
-
-// Delete
-void StudentRepository::Delete(const int& studentID)
-{
-	int index = IndexOf(studentID);
-	Student* temp = new Student[this->n - 1];
-	for (int i = 0; i < index; i++)
-	{
-		*(temp + i) = *(this->p + i);
-	}
-	for (int i = index; i < this->n - 1; i++)
-	{
-		*(temp + i) = *(this->p + i + 1);
-	}
-	delete[] this->p;
-	this->p = temp;
-	(this->n)--;
-}
-
-
-void StudentRepository::LoadDataFromFile()
+void StudentRepository::loadData()
 {
 	string filename = "Student.txt";
 	ifstream file(filename);
@@ -138,11 +40,11 @@ void StudentRepository::LoadDataFromFile()
 		getline(ss, token, ';'); temp.setPhoneNumber(token);
 		getline(ss, token, ';'); temp.setEmail(token);
 
-		this->Add(temp);
+		this->list.add(temp);
 	}
 	file.close();
 }
-void StudentRepository::SaveDateToFile()
+void StudentRepository::saveData()
 {
 	string filename = "Student.txt";
 	ofstream file(filename);
@@ -151,17 +53,53 @@ void StudentRepository::SaveDateToFile()
 		cout << "Khong the mo file: " << filename << "!";
 		return;
 	}
-
-	for (int i = 0; i < this->n; i++)
+	for (ListNode<Student>* p = this->list.getHead(); p != nullptr; p = p->next)
 	{
-		file << (this->p + i)->getStudentID() << ";";
-		file << (this->p + i)->getFullName() << ";";
-		file << (this->p + i)->getDateOfBirth() << ";";
-		file << (this->p + i)->getGender() << ";";
-		file << (this->p + i)->getClassName() << ";";
-		file << (this->p + i)->getFaculty() << ";";
-		file << (this->p + i)->getPhoneNumber() << ";";
-		file << (this->p + i)->getEmail() << "\n";
+		file << p->value.getStudentID() << ";";
+		file << p->value.getFullName() << ";";
+		file << p->value.getDateOfBirth() << ";";
+		file << p->value.getGender() << ";";
+		file << p->value.getClassName() << ";";
+		file << p->value.getFaculty() << ";";
+		file << p->value.getPhoneNumber() << ";";
+		file << p->value.getEmail() << "\n";
 	}
 	file.close();
+}
+
+void StudentRepository::Add(const Student& student)
+{
+	this->list.add(student);
+	this->saveData();
+}
+
+void StudentRepository::Delete(const Student& student)
+{
+	Student* temp = this->GetById(student.getStudentID());
+	if (temp == nullptr) return;
+	this->list.remove(*temp);
+	this->saveData();
+}
+void StudentRepository::Update(const Student& student)
+{
+	Student* temp = this->GetById(student.getStudentID());
+	*temp = student;
+}
+LinkedList<Student> StudentRepository::GetAll()
+{
+	return this->list;
+}
+Student* StudentRepository::GetById(const int& studentID)
+{
+	for (ListNode<Student>* p = this->list.getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value.getStudentID() == studentID)
+			return &(p->value);
+	}
+	return nullptr;
+}
+
+int StudentRepository::GetSize()
+{
+	return this->list.getSize();
 }

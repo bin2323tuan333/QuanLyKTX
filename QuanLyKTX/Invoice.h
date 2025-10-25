@@ -20,7 +20,7 @@ public:
     ~Invoice();
 
     // Getter & Setter
-    int getInvoiceID();
+    int getInvoiceID() const;
     void setInvoiceID(const int&);
 
     int getStudentID();

@@ -3,24 +3,25 @@
 #include "LinkedList.h"
 
 
-class AccountRepository
+class AccountRepository 
 {
 private:
-	LinkedList<Account> list;
+    string fileName;
+    LinkedList<Account> list;
 
 public:
-	AccountRepository();
+	AccountRepository(const string&);
 	~AccountRepository();
 
+    void loadData();
+    void saveData();
+
     void Add(const Account&);
-    bool Delete(const int&);
-    bool Update(Account&);
-    LinkedList<Account> GetAll();
+    void Update(const Account&);
+    void Delete(const Account&);
     Account* GetById(const int&);
     Account* GetByUsername(const string&);
+    LinkedList<Account> GetAll();
 
     int GetSize();
-
-    void LoadDataFromFile();
-    void SaveDataToFile();
 };

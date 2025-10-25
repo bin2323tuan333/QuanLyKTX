@@ -18,7 +18,7 @@ public:
     ~Student();
 
     // Getter & Setter
-    int getStudentID();
+    int getStudentID() const;
     void setStudentID(const int&);
     string getClassName();
     void setClassName(const string&);

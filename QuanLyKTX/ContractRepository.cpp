@@ -4,185 +4,110 @@
 #include <sstream>
 using namespace std;
 
-ContractRepository::ContractRepository()
+ContractRepository::ContractRepository(const string& fileName)
+	:fileName(fileName)
 {
-    
-    this->p = nullptr;
-    this->n = 0;
-    LoadDataFromFile();
 }
 ContractRepository::~ContractRepository()
 {
-    SaveDateToFile();
-    delete[] this->p;
+}
+
+
+void ContractRepository::loadData()
+{
+	string fileName = "Contract.txt";
+	ifstream file(fileName);
+	if (!file.is_open()) {
+		cout << "Khong the mo file " << fileName << "!";
+		return;
+	}
+	string line;
+	while (getline(file, line)) {
+		if (line.empty()) continue;
+
+		stringstream ss(line);
+		string token;
+
+		Contract temp;
+
+		getline(ss, token, ';'); temp.setContractID(stoi(token));
+		getline(ss, token, ';'); temp.setDuration(stoi(token));
+
+		int d, m, y;
+		char sep1, sep2;
+		getline(ss, token, ';');
+		stringstream dateStream(token);
+		dateStream >> d >> sep1 >> m >> sep2 >> y;
+		temp.setStartDate(Date(d, m, y));
+
+		getline(ss, token, ';');
+		stringstream date(token);
+		date >> d >> sep1 >> m >> sep2 >> y;
+		temp.setEndDate(Date(d, m, y));
+
+		getline(ss, token, ';'); temp.setRoomID(stoi(token));
+		getline(ss, token, ';'); temp.setStudentID(stoi(token));
+
+		this->list.add(temp);
+	}
+	file.close();
+}
+void ContractRepository::saveData()
+{
+	string fileName = "Contract.txt";
+	ofstream file(fileName);
+
+	if (!file.is_open()) {
+		cout << "Khong the mo file: " << fileName << "!";
+		return;
+	}
+
+	for (ListNode<Contract>* p = this->list.getHead(); p != nullptr; p = p->next)
+	{
+		file << p->value.getContractID() << ";";
+		file << p->value.getDuration() << ";";
+		file << p->value.getStartDate() << ";";
+		file << p->value.getEndDate() << ";";
+		file << p->value.getRoomID() << ";";  
+		file << p->value.getStudentID() << "\n";
+	}
+	file.close();
 }
 
 void ContractRepository::Add(const Contract& contract)
 {
-    Contract* temp = new Contract[this->n + 1];
-    for (int i = 0; i < this->n; i++)
-    {
-        *(temp + i) = *(this->p + i);
-    }
-    *(temp + this->n) = contract;
-    delete[] this->p;
-    this->p = temp;
-    (this->n)++;
-}
-void ContractRepository::Insert(const Contract& contract, const int& index)
-{
-    if (index < 0 || index > this->n)
-        return;
-
-    Contract* temp = new Contract[this->n + 1];
-    for (int i = 0; i < index; i++)
-    {
-        *(temp + i) = *(this->p + i);
-    }
-    *(temp + index) = contract;
-    for (int i = index; i < this->n; i++)
-    {
-        *(temp + i + 1) = *(this->p + i);
-    }
-    delete[] this->p;
-    this->p = temp;
-    (this->n)++;
+	this->list.add(contract);
+	this->saveData();
 }
 
-
-int ContractRepository::IndexOf(const int& contractID)
+void ContractRepository::Delete(const Contract& contract)
 {
-    int index = -1;
-    for (int i = 0; i < this->n; i++)
-    {
-        if (contractID == (this->p + i)->getContractID())
-        {
-            index = i;
-            break;
-        }
-    }
-    return index;
+	Contract* temp = this->GetById(contract.getContractID());
+	if (temp == nullptr) return;
+	this->list.remove(*temp);
+	this->saveData();
 }
-Contract* ContractRepository::SearchByStudentID(const int& studnetID)
+void ContractRepository::Update(const Contract& contract)
 {
-    for (int i = 0; i < this->n; i++)
-    {
-        if ((this->p + i)->getStudentID() == studnetID)
-        {
-            return (this->p + i);
-        }
-    }
-    return nullptr;
+	Contract* temp = this->GetById(contract.getContractID());
+	*temp = contract;
 }
-Contract* ContractRepository::Search(const int& contractID)
+LinkedList<Contract> ContractRepository::GetAll()
 {
-    int index = IndexOf(contractID);
-    if (index != -1)
-    {
-        return (this->p + index);
-    }
-    return nullptr;
+	return this->list;
 }
-Contract* ContractRepository::getAll()
+Contract* ContractRepository::GetById(const int& contractID)
 {
-    return this->p;
-}
-int ContractRepository::getSize()
-{
-    return this->n;
+	for (ListNode<Contract>* p = this->list.getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value.getContractID() == contractID)
+			return &(p->value);
+	}
+	return nullptr;
 }
 
-void ContractRepository::Update(Contract& contract)
+
+int ContractRepository::GetSize()
 {
-    int index = IndexOf(contract.getContractID());
-    if (index == -1)
-        return;
-
-    (this->p + index)->setContractID(contract.getContractID());
-    (this->p + index)->setRoomID(contract.getRoomID());
-    (this->p + index)->setStudentID(contract.getStudentID());
-    (this->p + index)->setDuration(contract.getDuration());
-    (this->p + index)->setStartDate(contract.getStartDate());
-    (this->p + index)->setEndDate(contract.getEndDate());
-    
-}
-
-void ContractRepository::Delete(const int& contractID)
-{
-    int index = IndexOf(contractID);
-    if (index == -1) return;
-
-    Contract* temp = new Contract[this->n - 1];
-    for (int i = 0; i < index; i++)
-    {
-        *(temp + i) = *(this->p + i);
-    }
-    for (int i = index; i < this->n - 1; i++)
-    {
-        *(temp + i) = *(this->p + i + 1);
-    }
-    delete[] this->p;
-    this->p = temp;
-    (this->n)--;
-}
-
-void ContractRepository::LoadDataFromFile()
-{
-    string filename = "Contract.txt";
-    ifstream file(filename);
-    if (!file.is_open()) {
-        cout << "Khong the mo file " << filename << "!";
-        return;
-    }
-    string line;
-    while (getline(file, line)) {
-        if (line.empty()) continue;
-
-        stringstream ss(line);
-        string token;
-
-        Contract temp;
-
-        getline(ss, token, ';'); temp.setContractID(stoi(token));
-        getline(ss, token, ';'); temp.setDuration(stoi(token));
-        
-        int d, m, y;
-        char sep1, sep2;
-        getline(ss, token, ';');
-        stringstream dateStream(token);
-        dateStream >> d >> sep1 >> m >> sep2 >> y;
-        temp.setStartDate(Date(d, m, y));
-
-        getline(ss, token, ';');
-        stringstream date(token);
-        date >> d >> sep1 >> m >> sep2 >> y;
-        temp.setEndDate(Date(d, m, y));
-
-        getline(ss, token, ';'); temp.setRoomID(stoi(token));
-        getline(ss, token, ';'); temp.setStudentID(stoi(token));
-
-        this->Add(temp);
-    }
-    file.close();
-}
-void ContractRepository::SaveDateToFile()
-{
-    string filename = "Contract.txt";
-    ofstream file(filename);
-
-    if (!file.is_open()) {
-        cout << "Khong the mo file: " << filename << "!";
-        return;
-    }
-
-    for (int i = 0; i < this->n; i++)
-    {
-        file << (this->p + i)->getContractID() << ";";
-        file << (this->p + i)->getDuration() << ";";
-        file << (this->p + i)->getStartDate() << ";";
-        file << (this->p + i)->getEndDate() << ";";
-        file << (this->p + i)->getRoomID() << ";";
-        file << (this->p + i)->getStudentID() << "\n";
-    }
-    file.close();
+	return this->list.getSize();
 }

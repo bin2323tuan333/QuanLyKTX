@@ -1,33 +1,26 @@
 #pragma once
 #include "Employee.h"
-
-
+#include "LinkedList.h"
 
 
 class EmployeeRepository
 {
 private:
-    Employee* p;
-    int n;
+    string fileName;
+    LinkedList<Employee> list;
 
 public:
-    EmployeeRepository();
+    EmployeeRepository(const string&);
     ~EmployeeRepository();
 
-    // Create
+    void loadData();
+    void saveData();
+
     void Add(const Employee&);
-    void Insert(const Employee&, const int&);
+    void Update(const Employee&);
+    void Delete(const Employee&);
+    Employee* GetById(const int&);
+    LinkedList<Employee> GetAll();
 
-    // Read
-    int IndexOf(const int&);
-    Employee* Search(const int&);
-
-    // Update
-    void Update(Employee&);
-
-    // Delete
-    void Delete(const int&);
-
-    void LoadDataFromFile();
-    void SaveDateToFile();
+    int GetSize();
 };

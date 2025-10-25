@@ -20,7 +20,7 @@ Account::~Account()
 
 
 // Getter & setter
-int Account::getAccountID()
+int Account::getAccountID() const
 {
 	return this->accountID;
 }
@@ -28,7 +28,7 @@ void Account::setAccountID(const int& accountID)
 {
 	this->accountID = accountID;
 }
-string Account::getUsername()
+string Account::getUsername() const
 {
 	return this->username;
 }

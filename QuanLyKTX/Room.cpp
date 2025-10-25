@@ -21,7 +21,7 @@ Room::~Room()
 
 
 // Getter & Setter
-int Room::getRoomID()
+int Room::getRoomID() const
 {
 	return this->roomID;
 }

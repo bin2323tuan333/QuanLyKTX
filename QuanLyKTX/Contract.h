@@ -18,7 +18,7 @@ public:
     ~Contract();
 
     // Getter & Setter
-    int getContractID();
+    int getContractID() const;
     void setContractID(const int&);
 
     Date getStartDate();

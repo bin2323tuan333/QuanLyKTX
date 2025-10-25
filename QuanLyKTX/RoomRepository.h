@@ -1,35 +1,26 @@
 #pragma once
 #include "Room.h"
-
-
+#include "LinkedList.h"
 
 
 class RoomRepository
 {
 private:
-    Room* p;
-    int n;
+    string fileName;
+    LinkedList<Room> list;
 
 public:
-    RoomRepository();
+    RoomRepository(const string&);
     ~RoomRepository();
 
-    // Create
+    void loadData();
+    void saveData();
+
     void Add(const Room&);
-    void Insert(const Room&, const int&);
+    void Update(const Room&);
+    void Delete(const Room&);
+    Room* GetById(const int&);
+    LinkedList<Room> GetAll();
 
-    // Read
-    int IndexOf(const int&);
-    Room* Search(const int&);
-    Room* getAll();
-    int getSize();
-
-    // Update
-    void Update(Room&);
-
-    // Delete
-    void Delete(const int&);
-
-    void LoadDataFromFile();
-    void SaveDateToFile();
+    int GetSize();
 };

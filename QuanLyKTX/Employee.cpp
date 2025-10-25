@@ -17,7 +17,7 @@ Employee::~Employee()
 
 
 // Getter & Setter
-int Employee::getEmployeeID()
+int Employee::getEmployeeID() const
 {
 	return this->employeeID;
 }

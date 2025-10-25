@@ -1,36 +1,27 @@
 #pragma once
 #include "Contract.h"
-
-
+#include "LinkedList.h"
 
 
 class ContractRepository
 {
 private:
-    Contract* p;
-    int n;
+	string fileName;
+	LinkedList<Contract> list;
 
 public:
-    ContractRepository();
-    ~ContractRepository();
+	ContractRepository(const string&);
+	~ContractRepository();
 
-    // Create
-    void Add(const Contract&);
-    void Insert(const Contract&, const int&);
+	void loadData();
+	void saveData();
 
-    // Read
-    int IndexOf(const int&);
-    Contract* SearchByStudentID(const int&);
-    Contract* Search(const int&);
-    Contract* getAll();
-    int getSize();
+	void Add(const Contract&);
+	void Update(const Contract&);
+	void Delete(const Contract&);
+	Contract* GetById(const int&);
+	LinkedList<Contract> GetAll();
 
-    // Update
-    void Update(Contract&);
-
-    // Delete
-    void Delete(const int&);
-
-    void LoadDataFromFile();
-    void SaveDateToFile();
+	int GetSize();
 };
+

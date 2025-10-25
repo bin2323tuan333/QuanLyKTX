@@ -17,7 +17,8 @@ Invoice::~Invoice()
 }
 
 // Getter & Setter implementations
-int Invoice::getInvoiceID() {
+int Invoice::getInvoiceID() const
+{
 	return this->invoiceID;
 }
 

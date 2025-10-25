@@ -22,7 +22,7 @@ public:
     ~Room();
 
     // Getter & Setter
-    int getRoomID();
+    int getRoomID() const;
     void setRoomID(const int&);
 
     string getRoomName();

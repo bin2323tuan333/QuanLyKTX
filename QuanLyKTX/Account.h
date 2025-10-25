@@ -19,10 +19,10 @@ public:
     ~Account();
 
     // Getter & Setter
-    int getAccountID();
+    int getAccountID() const;
     void setAccountID(const int&);
 
-    string getUsername();
+    string getUsername() const;
     void setUsername(const string&);
 
     string getPassword();

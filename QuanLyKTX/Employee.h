@@ -16,7 +16,7 @@ public:
     ~Employee();
 
     // Getter & Setter
-    int getEmployeeID();
+    int getEmployeeID() const;
     void setEmployeeID(const int&);
     string getPosition();
     void setPosition(const string&);
