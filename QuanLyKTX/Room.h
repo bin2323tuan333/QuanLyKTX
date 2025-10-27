@@ -17,7 +17,16 @@ private:
     
 public:
     // Constructor, Copy constructor, Destructor
-    Room(const int& = 0, const string & = "", const string & = "", const int& = 0, const int& = 0, const int& = 0, const string& = "");
+    Room(
+        const int& = 0, 
+        const string & = "", 
+        const string & = "", 
+        const int& = 0, 
+        const int& = 0, 
+        const int& = 0, 
+        const string& = "",
+        const int& = 1
+    );
     Room(const Room&);
     ~Room();
 
@@ -49,4 +58,5 @@ public:
 
     Room& operator=(const Room&);
     bool operator==(const Room&);
+    bool operator!=(const Room&);
 };

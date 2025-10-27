@@ -39,4 +39,5 @@ public:
 
     Contract& operator=(const Contract&);
     bool operator==(const Contract&);
+    bool operator!=(const Contract&);
 };

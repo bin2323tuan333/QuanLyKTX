@@ -126,7 +126,7 @@
     <ClCompile Include="EmployeeService.cpp">
       <Filter>Source Files\BusinessLogic\Services</Filter>
     </ClCompile>
-    <ClCompile Include="PaymentService.cpp">
+    <ClCompile Include="InvoiceService.cpp">
       <Filter>Source Files\BusinessLogic\Services</Filter>
     </ClCompile>
     <ClCompile Include="RoomService.cpp">
@@ -140,9 +140,6 @@
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Source Files\Presentation</Filter>
-    </ClCompile>
-    <ClCompile Include="PageManager.cpp">
-      <Filter>Source Files\Presentation\Views</Filter>
     </ClCompile>
     <ClCompile Include="AccountRepository.cpp">
       <Filter>Source Files\DataAccess\Repositories</Filter>
@@ -159,9 +156,6 @@
     <ClCompile Include="InfoManageView.cpp">
       <Filter>Source Files\Presentation\Views\ManagerView</Filter>
     </ClCompile>
-    <ClCompile Include="EmployeePage.cpp">
-      <Filter>Source Files\Presentation\Views\ManagerView</Filter>
-    </ClCompile>
     <ClCompile Include="StudentManageView.cpp">
       <Filter>Source Files\Presentation\Views\ManagerView</Filter>
     </ClCompile>
@@ -176,6 +170,12 @@
     </ClCompile>
     <ClCompile Include="Person.cpp">
       <Filter>Source Files\BusinessLogic\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeePage.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="StudentPage.cpp">
+      <Filter>Source Files\Presentation\Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,9 +251,6 @@
     <ClInclude Include="StudentPage.h">
       <Filter>Header Files\Presentation\Views</Filter>
     </ClInclude>
-    <ClInclude Include="PageManager.h">
-      <Filter>Header Files\Presentation\Views</Filter>
-    </ClInclude>
     <ClInclude Include="StringUtil.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
@@ -272,9 +269,6 @@
     <ClInclude Include="StudentManageView.h">
       <Filter>Header Files\Presentation\Views\ManagerView</Filter>
     </ClInclude>
-    <ClInclude Include="EmployeePage.h">
-      <Filter>Header Files\Presentation\Views\ManagerView</Filter>
-    </ClInclude>
     <ClInclude Include="HashTable.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
@@ -286,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="Person.h">
       <Filter>Header Files\BusinessLogic\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="EmployeePage.h">
+      <Filter>Header Files\Presentation\Views</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

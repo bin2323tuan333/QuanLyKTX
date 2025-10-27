@@ -56,4 +56,5 @@ public:
 
     Invoice& operator=(const Invoice&);
     bool operator==(const Invoice&);
+    bool operator!=(const Invoice&);
 };

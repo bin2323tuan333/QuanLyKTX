@@ -24,4 +24,5 @@ public:
 
     Employee& operator=(const Employee&);
     bool operator==(const Employee&);
+    bool operator!=(const Employee&);
 };

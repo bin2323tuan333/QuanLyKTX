@@ -79,18 +79,16 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 	case 0:
 	{
 		ConsolaUI::text(30, 7, "XEM DANH SACH PHONG:", 14);
-		Room* roomList;
-		int size;
-		this->roomService->getAllRoom(roomList, size);
+		LinkedList<Room> list = this->roomService->GetAll();
 
-		if (size == 0 || roomList == nullptr) {
+		if (list.getSize() == 0) 
+		{
 			ConsolaUI::text(33, 9, "Khong co phong nao trong danh sach!", 12);
 		}
 		else
 		{
 			int itemsPerPage = height - 13;
-			int totalPages = (size + itemsPerPage - 1) / itemsPerPage;
-
+			int totalPages = (list.getSize() + itemsPerPage - 1) / itemsPerPage;
 			this->maxPage = totalPages - 1;
 			ConsolaUI::text(33, 8, "ID", 11);
 			ConsolaUI::text(40, 8, "Ten Phong", 11);
@@ -102,15 +100,16 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 			for (int i = 0; i < itemsPerPage; i++)
 			{
 				int yPos = 9 + i;
-				if (i + roomListIndex * itemsPerPage < size)
+				if (i + roomListIndex * itemsPerPage < list.getSize())
 				{
-					ConsolaUI::text(33, yPos, to_string((roomList + i + roomListIndex * itemsPerPage)->getRoomID()), 15);
-					ConsolaUI::text(40, yPos, (roomList + i + roomListIndex * itemsPerPage)->getRoomName(), 15);
-					ConsolaUI::text(53, yPos, (roomList + i + roomListIndex * itemsPerPage)->getRoomType(), 15);
-					ConsolaUI::text(65, yPos, to_string((roomList + i + roomListIndex * itemsPerPage)->getCurrentOccupancy()) + "/" + to_string((roomList + i + roomListIndex * itemsPerPage)->getCapacity()), ((roomList + i + roomListIndex * itemsPerPage)->getCurrentOccupancy() == (roomList + i + roomListIndex * itemsPerPage)->getCapacity()) ? 6 : 10);
-					ConsolaUI::text(80, yPos, to_string((roomList + i + roomListIndex * itemsPerPage)->getFloor()), 15);
-					ConsolaUI::text(90, yPos, (roomList + i + roomListIndex * itemsPerPage)->getBuilding(), 15);
-					ConsolaUI::text(105, yPos, (roomList + i + roomListIndex * itemsPerPage)->getIsActive() ? "Hoat dong" : "Khong HD", (roomList + i + roomListIndex * itemsPerPage)->getIsActive() ? 10 : 12);
+					Room* room = list.getAt(i + roomListIndex * itemsPerPage);
+					ConsolaUI::text(33, yPos, to_string(room->getRoomID()), 15);
+					ConsolaUI::text(40, yPos, room->getRoomName(), 15);
+					ConsolaUI::text(53, yPos, room->getRoomType(), 15);
+					ConsolaUI::text(65, yPos, to_string(room->getCurrentOccupancy()) + "/" + to_string(room->getCapacity()), (room->getCurrentOccupancy() == room->getCapacity()) ? 6 : 10);
+					ConsolaUI::text(80, yPos, to_string(room->getFloor()), 15);
+					ConsolaUI::text(90, yPos, room->getBuilding(), 15);
+					ConsolaUI::text(105, yPos, room->getIsActive() ? "Hoat dong" : "Khong HD", room->getIsActive() ? 10 : 12);
 				}
 				else break;
 			}
@@ -125,27 +124,25 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 		ConsolaUI::text(30, 7, "TIM KIEM THEO ID PHONG", 14);
 		ConsolaUI::text(35, 9, "[F] Nhap Ma Phong: ", 15);
 		ConsolaUI::drawBox(65, 8, 25, 2, 15);
-		Room* roomToUpdate = this->roomService->getRoomById(this->roomIDToSearch);
+		Room* roomToUpdate = this->roomService->SearchByID(this->roomIDToSearch);
 		if (this->roomIDToSearch != 0)
 		{
 			if (roomToUpdate != nullptr)
 			{
 				ConsolaUI::text(37, 11, "Phong:    " + roomToUpdate->getRoomName(), 9);
 				ConsolaUI::text(37, 12, "So Nguoi: " + to_string(roomToUpdate->getCurrentOccupancy()) + "/" + to_string(roomToUpdate->getCapacity()), 9);
-				Student* studentList = nullptr;
-				int studentCount = 0;
-				this->roomService->getStudentInRoom(studentList, studentCount, this->roomIDToSearch);
-				if (studentCount > 0 && studentList != nullptr)
+				LinkedList<Student> studentList = this->roomService->GetStudentsInRoom(this->roomIDToSearch);
+				if (studentList.getSize() > 0)
 				{
-					for (int i = 0; i < studentCount; ++i)
+					int i = 0;
+					for (ListNode<Student>* p = studentList.getHead(); p != nullptr; p = p->next)
 					{
-						ConsolaUI::text(40, 14 + i*2, to_string((studentList + i)->getStudentID()) + " - " + (studentList + i)->getFullName(), 15);
+						ConsolaUI::text(40, 14 + i * 2, to_string((p->value).getStudentID()) + " - " + (p->value).getFullName(), 15);
 					}
-					delete[] studentList;
 				}
 				else 
 				{
-					ConsolaUI::text(40, 15, "Chua co sinh vien nao trong phong." + to_string(studentCount), 15);
+					ConsolaUI::text(40, 15, "Chua co sinh vien nao trong phong.", 15);
 				}
 			}
 			else

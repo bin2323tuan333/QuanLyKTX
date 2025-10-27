@@ -57,9 +57,19 @@ Student& Student::operator=(const Student& other)
 }
 bool Student::operator==(const Student& other)
 {
-    if (!this->Person::operator==(other))
+    if (!(this->Person::operator==(other)))
         return false;
     return (this->studentID == other.studentID &&
         this->className == other.className &&
         this->faculty == other.faculty);
+}
+
+
+bool Student::operator!=(const Student& other)
+{
+    if (this->Person::operator!=(other))
+        return true;
+    return (this->studentID != other.studentID ||
+        this->className != other.className ||
+        this->faculty != other.faculty);
 }

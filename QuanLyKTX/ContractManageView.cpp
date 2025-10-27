@@ -67,7 +67,7 @@ void ContractManageView::drawContractServiceContent(const int& width, const int&
 
 		if (this->studentIDToSearch != 0)
 		{
-			Contract* contractToShow = this->contractService->getContractByStudentId(this->studentIDToSearch);
+			/*Contract* contractToShow = this->contractService->ge(this->studentIDToSearch);*/
 		}
 		break;
 	case 1:

@@ -10,47 +10,36 @@ RoomService::~RoomService()
 }
 
 
-void RoomService::getAllRoom(Room*& roomList, int& size)
+int RoomService::Add(const Room& temp)
 {
-	roomList = this->roomRepo.getAll();
-	size = this->roomRepo.getSize();
+	this->roomRepo.Add(temp);
+	return 1;
 }
-
-Room* RoomService::getRoomById(const int& roomID)
+Room* RoomService::SearchByID(const int& id)
 {
-	return this->roomRepo.Search(roomID);
+	return this->roomRepo.GetById(id);
 }
-void RoomService::getStudentInRoom(Student*& studentList, int& count, const int& roomID)
+LinkedList<Room> RoomService::GetAll()
 {
-	count = 0;
-	Contract* allContracts = this->contractRepo.getAll();
-	int contractSize = this->contractRepo.getSize();
-
-	for (int i = 0; i < contractSize; i++)
+	return this->roomRepo.GetAll();
+}
+LinkedList<Student> RoomService::GetStudentsInRoom(const int& roomId)
+{
+	LinkedList<int> studentIds = this->contractRepo.GetStudentIdsByRoomId(roomId);
+	LinkedList<Student> students;
+	for (ListNode<int>* p = studentIds.getHead(); p != nullptr; p = p->next)
 	{
-		if ((allContracts + i)->getRoomID() == roomID)
-		{
-			count++;
-		}
+		students.add(*this->studentRepo.GetById(p->value));
 	}
-
-	if (count == 0)
-	{
-		studentList = nullptr;
-		return;
-	}
-
-	studentList = new Student[count];
-	int currentIndex = 0;
-
-	for (int i = 0; i < contractSize; i++)
-	{
-		if ((allContracts + i)->getRoomID() == roomID)
-		{
-			int studentID = (allContracts + i)->getStudentID();
-			Student* student = studentRepo.Search(studentID);
-			if (student != nullptr)
-				*(studentList + currentIndex++) = *student;
-		}
-	}
+	return students;
+}
+int RoomService::Update(const Room& temp)
+{
+	this->roomRepo.Update(temp);
+	return 1;
+}
+int RoomService::Delete(const Room& temp)
+{
+	this->roomRepo.Delete(temp);
+	return 1;
 }

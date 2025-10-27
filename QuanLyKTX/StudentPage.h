@@ -12,6 +12,7 @@ private:
 
 public:
     StudentPage();
+    ~StudentPage();
 
     void setServices(StudentService*, RoomService*, InvoiceService*);
     void setCurrentStudent(const string&);

@@ -25,4 +25,5 @@ public:
 	friend istream& operator >> (istream&, Date&);
 	Date& operator=(const Date&);
 	bool operator==(const Date&);
+	bool operator!=(const Date&);
 };

@@ -11,7 +11,7 @@ public:
 	ListNode(const Value&);
 	~ListNode();
 
-	ListNode<Value>* getNext()
+	ListNode<Value>* getNext();
 };
 
 template<typename Value>

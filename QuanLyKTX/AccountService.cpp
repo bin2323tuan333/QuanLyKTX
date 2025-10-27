@@ -1,104 +1,76 @@
 #include "AccountService.h"
 
 
-
-
 AccountService::AccountService(AccountRepository& repo)
-	: accountRepo(repo), isLogin(false), role("")
+	: accountRepo(repo), isLogin(false)
 {
+	this->currentID = 0;
 }
 AccountService::~AccountService()
 {
 }
 
-
-bool AccountService::signIn(const string& username, const string& password)
+int AccountService::SignIn(const string& username, const string& password)
 {
-	Account* temp = (this->accountRepo.GetByUsername(username));
-	if (username == temp->getUsername() && password == temp->getPassword())
-	{
-		this->role = temp->getRole();
-		this->accountID = temp->getAccountID();
-		this->username = temp->getUsername();
-		this->studentID = temp->getStudentID();
-		this->employeeID = temp->getEmployeeID();
-		this->isLogin = true;
-		return true;
-	}
-	return false;
-}
-int AccountService::changePassword(const int& id, const string& oldPass, const string& newPass, const string& reEnterNewPass)
-{
-	if (newPass == "" || reEnterNewPass == "" || oldPass == "")
-		return 2;
-
+	Account* temp = this->SearchByUsername(username);
+	if (temp == nullptr) return 0;
+	else if (temp->getPassword() != password) return 0;
 	
-
-	Account* tempAccount = this->accountRepo.GetById(id);
-
-	if (tempAccount->getAccountID() == 0)
-		return 2;
-
-	if (tempAccount->getPassword() != oldPass)
-		return 4;
-	if (newPass != reEnterNewPass)
-		return 3;
-
-	tempAccount->setPassword(newPass);
-	this->accountRepo.Update(*tempAccount);
-
-	this->accountRepo.SaveDataToFile();
-	return 0;
+	this->currentID = temp->getAccountID();
+	this->isLogin = true;
+	return 1;
 }
 bool AccountService::isSignIn()
 {
 	return this->isLogin;
 }
-void AccountService::setSignIn(bool b)
+void AccountService::setSignIn(const bool& bol)
 {
-	this->isLogin = b;
+	this->isLogin = bol;
 }
-string AccountService::getRole()
+int AccountService::getCurrentID()
 {
-	return this->role;
+	return this->currentID;
 }
-int AccountService::getAccountID()
+int AccountService::changePassword(const int& accountID, const string& oldPass, const string& newPass, const string& reNewPass)
 {
-	return this->accountID;
-}
-int AccountService::getEmployeeID()
-{
-	return this->employeeID;
-}
-int AccountService::getStudentID()
-{
-	return this->studentID;
-}
-string AccountService::getUsername()
-{
-	return this->username;
-}
+	if (oldPass == "" || newPass == "" || reNewPass == "") return -1;
+	if (oldPass == newPass) return 0;
+	if (newPass != reNewPass) return -4;
+	Account* temp = this->SearchByID(accountID);
+	if (temp == nullptr) return -2;
+	if (temp->getPassword() != oldPass) return -3;
 
-bool AccountService::createAccount(const Account& account)
-{
-	return false;
-}
-bool AccountService::updateAccount(const Account& account)
-{
-	return false;
-}
-bool AccountService::deleteAccount(const int& accountID)
-{
-	return false;
+	temp->setPassword(newPass);
+	return 1;
 }
 
 
-Account AccountService::findAccountByUsername(const string& username)
-{
 
-	return Account();
-}
-Account AccountService::findAccountById(const int&)
+int AccountService::Add(const Account& temp)
 {
-	return Account();
+	this->accountRepo.Add(temp);
+	return 1;
+}
+Account* AccountService::SearchByID(const int& accountID)
+{
+	return this->accountRepo.GetById(accountID);
+}
+Account* AccountService::SearchByUsername(const string& username)
+{
+	return this->accountRepo.GetByUsername(username);
+}
+LinkedList<Account> AccountService::GetAll()
+{
+	return this->accountRepo.GetAll();
+}
+int AccountService::Update(const Account& temp)
+{
+	this->accountRepo.Update(temp);
+	return 1;
+}
+int AccountService::Delete(const Account& temp)
+{
+	this->accountRepo.Delete(temp);
+	return 1;
 }

@@ -1,12 +1,13 @@
 ﻿#include "HomePage.h"
 #include "ConsolaUI.h"
+#include <sstream>
 #include <conio.h>
 HomePage::HomePage(AccountService* service)
 	:accountService(service), 
 	username(""), 
 	password(""), 
 	isRunning(true), 
-	isError(false)
+	loginError(1)
 {
 	this->menuSelected = 0;
 	this->menuSize = 3;
@@ -42,24 +43,41 @@ void HomePage::show()
 		drawHomePage();
 
 		int key = _getch();
-		if (key == 0 || key == 224) // Phim mui ten
-		{
-			key = _getch();
-			handleArrowKeys(key, this->menuSelected, this->menuSize);
-		}
-		if (this->menuSelected == 2)
-		{
-			if (key == 13)
-			{
-				this->isError = !this->accountService->signIn(this->username, this->password);
-			}
-			handleNormalKeys(key, this->loginFormSelected, this->loginFormSize);
-		}
+		handleInput(key);
 		if (this->accountService->isSignIn())
 		{
 			this->username = "";
 			this->password = "";
 			break;
+		}
+	}
+}
+void HomePage::handleInput(int key)
+{
+	int width = ConsolaUI::getConsoleWidth();
+	int height = ConsolaUI::getConsoleHeight();
+	if (key == 0 || key == 224)
+	{
+		key = _getch();
+		handleArrowKeys(key, this->menuSelected, this->menuSize);
+	}
+	if (this->menuSelected == 2)
+	{
+		if (key == 13)
+		{
+			this->loginError = this->accountService->SignIn(this->username, this->password);
+			this->username = "";
+			this->password = "";
+		}
+		else if (key == '1')
+		{
+			ConsolaUI::gotoXY(width / 2 - 23, height / 2 + 1);
+			this->username = GetLine();
+		}
+		else if (key == '2')
+		{
+			ConsolaUI::gotoXY(width / 2 - 23, height / 2 + 5);
+			this->password = GetLine();
 		}
 	}
 }
@@ -94,10 +112,8 @@ void HomePage::drawLoginContent(const int& width, const int& height)
 {
 
 	ConsolaUI::text(width / 2 - 4, height / 2 - 3, "DANG NHAP", 14);
-	if (this->isError)
-	{
+	if (this->loginError != 1)
 		ConsolaUI::text(width / 2 - 19, height / 2 - 2, "Ten dang nhap hoac mat khau khong dung", 14);
-	}
 		
 	ConsolaUI::drawBox(width / 2 - 25, height / 2, 50, 2, (0 == this->loginFormSelected) ? 1 : 11);
 	ConsolaUI::text(width / 2 - 20, height / 2, " 1. "+ *(this->loginFormList) + " ", (0 == this->loginFormSelected) ? 1 : 11);
@@ -109,23 +125,6 @@ void HomePage::drawLoginContent(const int& width, const int& height)
 		ConsolaUI::text(width / 2 - 23, height / 2 + 1, this->username, (0 == this->loginFormSelected) ? 1 : 11);
 	if (this->password != "")
 		ConsolaUI::text(width / 2 - 23, height / 2 + 5, this->password, (1 == this->loginFormSelected) ? 1 : 11);
-
-	if (0 == this->loginFormSelected || 1 == this->loginFormSelected)
-	{
-		ConsolaUI::ShowCursor(true);
-		if (0 == this->loginFormSelected)
-		{
-			ConsolaUI::gotoXY(width / 2 - 23, height / 2 + 1);
-			getline(cin, this->username);
-		}
-		else
-		{
-			ConsolaUI::gotoXY(width / 2 - 23, height / 2 + 5);
-			getline(cin, this->password);
-		}
-		ConsolaUI::ShowCursor(false);
-		
-	}
 	
 	this->loginFormSelected = -1;
 }
@@ -224,4 +223,42 @@ bool HomePage::handleNormalKeys(int key, int& index, const int& size)
 		}
 		return false;
 	}
+}
+
+string HomePage::GetLine()
+{
+	string ss;
+	ConsolaUI::ShowCursor(true);
+	while (true)
+	{
+		int key = _getch();
+		if (key == '\r' || key == '\n')
+		{
+			break;
+		}
+		if (key == '\b')
+		{
+			if (ss.length() > 0)
+			{
+				ss.resize(ss.length() - 1);
+				cout << "\b \b";
+			}
+		}
+		else
+		{
+			ss += char(key);
+			cout << char(key);
+		}
+	}
+	ConsolaUI::ShowCursor(false);
+	return ss;
+}
+
+int HomePage::GetInt()
+{
+	string inputString = GetLine();
+	stringstream ss(inputString);
+	int result = 0;
+	ss >> result;
+	return result;
 }

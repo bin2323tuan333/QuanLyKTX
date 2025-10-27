@@ -7,20 +7,26 @@
 class AccountService
 {
 private:
-    AccountRepository* accountRepo;
+    AccountRepository& accountRepo;
+
+    bool isLogin;
+    int currentID;
 
 public:
-    AccountService(AccountRepository*);
+    AccountService(AccountRepository&);
     ~AccountService();
 
 
-    int Login(const string&, const string&);
-    int GetSize();
+    int SignIn(const string&, const string&);
+    bool isSignIn();
+    void setSignIn(const bool&);
+    int getCurrentID();
+    int changePassword(const int&, const string&, const string&, const string&);
 
     int Add(const Account&);
     Account* SearchByID(const int&);
     Account* SearchByUsername(const string&);
-    LinkedList<Account> getAll();
+    LinkedList<Account> GetAll();
     int Update(const Account&);
     int Delete(const Account&);
 };

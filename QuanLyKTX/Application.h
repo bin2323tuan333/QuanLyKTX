@@ -1,15 +1,23 @@
 #pragma once
-#include "PageManager.h"
+#include "ServiceManager.h"
+#include "HomePage.h"
+#include "EmployeePage.h"
+#include "StudentPage.h"
 
 class Application
 {
 private:
-    PageManager* page;
+    ServiceManager* service;
+
+    HomePage* homePage;
+    EmployeePage* employeePage;
+    StudentPage* studentPage;
+
     bool isRunning;
     bool isSignIn;
 
 public:
-    Application(PageManager*);
+    Application(ServiceManager*);
     ~Application();
     void run();
 };

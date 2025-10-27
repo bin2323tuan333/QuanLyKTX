@@ -160,3 +160,17 @@ bool Invoice::operator==(const Invoice& other)
 		this->totalAmount == other.totalAmount &&
 		this->createdDate == other.createdDate);
 }
+bool Invoice::operator!=(const Invoice& other)
+{
+	return(this->invoiceID != other.invoiceID ||
+		this->studentID != other.studentID ||
+		this->employeeID != other.employeeID ||
+		this->month != other.month ||
+		this->year != other.year ||
+		this->roomFee != other.roomFee ||
+		this->internetFee != other.internetFee ||
+		this->electricFee != other.electricFee ||
+		this->waterFee != other.waterFee ||
+		this->totalAmount != other.totalAmount ||
+		this->createdDate != other.createdDate);
+}

@@ -95,3 +95,12 @@ bool Contract::operator==(const Contract& other)
 		this->endDate == other.endDate &&
 		this->duration == other.duration);
 }
+bool Contract::operator!=(const Contract& other)
+{
+	return(this->contractID != other.contractID ||
+		this->studentID != other.studentID ||
+		this->roomID != other.roomID ||
+		this->startDate != other.startDate ||
+		this->endDate != other.endDate ||
+		this->duration != other.duration);
+}

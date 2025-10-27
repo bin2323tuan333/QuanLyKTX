@@ -7,20 +7,20 @@ using namespace std;
 RoomRepository::RoomRepository(const string& fileName)
 	:fileName(fileName)
 {
+	this->loadData();
 }
 RoomRepository::~RoomRepository()
 {
+	this->saveData();
 }
 
 void RoomRepository::loadData()
 {
-	string filename = "Room.txt";
-	ifstream file(filename);
-	if (!file.is_open()) {
-		cout << "Khong the mo file " << filename << "!";
+	ifstream file(this->fileName);
+	if (!file.is_open())
 		return;
-	}
 	string line;
+
 	while (getline(file, line)) {
 		if (line.empty()) continue;
 		stringstream ss(line);
@@ -68,7 +68,6 @@ void RoomRepository::saveData()
 void RoomRepository::Add(const Room& room)
 {
 	this->list.add(room);
-	this->saveData();
 }
 
 void RoomRepository::Delete(const Room& room)
@@ -76,7 +75,6 @@ void RoomRepository::Delete(const Room& room)
 	Room* temp = this->GetById(room.getRoomID()); 
 	if (temp == nullptr) return;
 	this->list.remove(*temp);
-	this->saveData();
 }
 void RoomRepository::Update(const Room& room)
 {

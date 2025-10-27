@@ -10,39 +10,26 @@ StudentService::~StudentService()
 }
 
 
-Student* StudentService::SearchByID(const int& studentID)
+int StudentService::Add(const Student& temp)
 {
-	Student* student = this->studentRepo.Search(studentID);
-	return student;
+	this->studentRepo.Add(temp);
+	return 1;
 }
-
-
-bool StudentService::Add(Student& student)
+Student* StudentService::SearchByID(const int& id)
 {
-
-	if (!(student.getGender() == "Nam" ||
-		student.getGender() == "Nu"))
-		return false;
-	if (!(student.getDateOfBirth()).isValid())
-		return false;
-	this->studentRepo.Add(student);
-	this->studentRepo.SaveDateToFile();
-	return true;
+	return this->studentRepo.GetById(id);
 }
-
-bool StudentService::Delete(Student& student)
+LinkedList<Student> StudentService::GetAll()
 {
-	this->studentRepo.Delete(student.getStudentID());
-	this->studentRepo.SaveDateToFile();
-	if (this->studentRepo.Search(student.getStudentID()) == nullptr)
-		return true;
-	else
-		return false;
+	return this->studentRepo.GetAll();
 }
-
-bool StudentService::Update(Student& student)
+int StudentService::Update(const Student& temp)
 {
-	this->studentRepo.Update(student);
-	this->studentRepo.SaveDateToFile();
-	return true;
+	this->studentRepo.Update(temp);
+	return 1;
+}
+int StudentService::Delete(const Student& temp)
+{
+	this->studentRepo.Delete(temp);
+	return 1;
 }

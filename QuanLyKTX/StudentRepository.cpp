@@ -5,25 +5,23 @@
 StudentRepository::StudentRepository(const string& fileName)
 	:fileName(fileName)
 {
+	this->loadData();
 }
 StudentRepository::~StudentRepository()
 {
+	this->saveData();
 }
 void StudentRepository::loadData()
 {
-	string filename = "Student.txt";
-	ifstream file(filename);
-	if (!file.is_open()) {
-		cout << "Khong the mo file " << filename << "!";
+	ifstream file(this->fileName);
+	if (!file.is_open()) 
 		return;
-	}
 	string line;
+
 	while (getline(file, line)) {
 		if (line.empty()) continue;
-
 		stringstream ss(line);
 		string token;
-
 		Student temp;
 
 		getline(ss, token, ';'); temp.setStudentID(stoi(token));
@@ -39,20 +37,16 @@ void StudentRepository::loadData()
 		getline(ss, token, ';'); temp.setFaculty(token);
 		getline(ss, token, ';'); temp.setPhoneNumber(token);
 		getline(ss, token, ';'); temp.setEmail(token);
-
 		this->list.add(temp);
 	}
 	file.close();
 }
 void StudentRepository::saveData()
 {
-	string filename = "Student.txt";
-	ofstream file(filename);
-
-	if (!file.is_open()) {
-		cout << "Khong the mo file: " << filename << "!";
+	ofstream file(fileName);
+	if (!file.is_open())
 		return;
-	}
+
 	for (ListNode<Student>* p = this->list.getHead(); p != nullptr; p = p->next)
 	{
 		file << p->value.getStudentID() << ";";
@@ -70,7 +64,6 @@ void StudentRepository::saveData()
 void StudentRepository::Add(const Student& student)
 {
 	this->list.add(student);
-	this->saveData();
 }
 
 void StudentRepository::Delete(const Student& student)
@@ -78,7 +71,6 @@ void StudentRepository::Delete(const Student& student)
 	Student* temp = this->GetById(student.getStudentID());
 	if (temp == nullptr) return;
 	this->list.remove(*temp);
-	this->saveData();
 }
 void StudentRepository::Update(const Student& student)
 {

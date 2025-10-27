@@ -19,8 +19,10 @@ public:
 	void Add(const Contract&);
 	void Update(const Contract&);
 	void Delete(const Contract&);
-	Contract* GetById(const int&);
 	LinkedList<Contract> GetAll();
+	Contract* GetById(const int&);
+	Contract* GetByStudentID(const int&);
+	LinkedList<int> GetStudentIdsByRoomId(const int&);
 
 	int GetSize();
 };

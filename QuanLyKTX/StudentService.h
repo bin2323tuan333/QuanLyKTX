@@ -12,11 +12,11 @@ public:
 	~StudentService();
 
 
+	int Add(const Student&);
 	Student* SearchByID(const int&);
-
-	bool Add(Student&);
-	bool Delete(Student&);
-	bool Update(Student&);
+	LinkedList<Student> GetAll();
+	int Update(const Student&);
+	int Delete(const Student&);
 };
 
 

@@ -1,14 +1,24 @@
 #include "ServiceManager.h"
 
 
+ServiceManager::ServiceManager()
+{
+	this->initialize();
+}
+ServiceManager::~ServiceManager()
+{
+	this->shutdown();
+}
+
+
 void ServiceManager::initialize()
 {
-	this->accountRepo = new AccountRepository();
-	this->contractRepo = new ContractRepository();
-	this->employeeRepo = new EmployeeRepository();
-	this->invoiceRepo = new InvoiceRepository();
-	this->roomRepo = new RoomRepository();
-	this->studentRepo = new StudentRepository();
+	this->accountRepo = new AccountRepository("Account.txt");
+	this->contractRepo = new ContractRepository("Contract.txt");
+	this->employeeRepo = new EmployeeRepository("Employee.txt");
+	this->invoiceRepo = new InvoiceRepository("Invoice.txt");
+	this->roomRepo = new RoomRepository("Room.txt");
+	this->studentRepo = new StudentRepository("Student.txt");
 
 	this->accountService = new AccountService(*accountRepo);
 	this->contractService = new ContractService(

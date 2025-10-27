@@ -16,7 +16,7 @@ InfoManageView::InfoManageView(AccountService* accountService, EmployeeService* 
 	this->oldPass = "";
 	this->newPass = "";
 	this->reEnterNewPass = "";
-	this->isError = 1;
+	this->isError = 2;
 }
 InfoManageView::~InfoManageView()
 {
@@ -43,25 +43,31 @@ void InfoManageView::handleInput(int key)
 		if (this->changePasswordSelected > 0)
 		{
 			ConsolaUI::setTextColor(1);
-			if (this->changePasswordSelected == 1) {
+			if (this->changePasswordSelected == 1) 
+			{
+				ConsolaUI::text(width / 2 + 12, height / 2 - 2, "                         ", 15);
 				ConsolaUI::gotoXY(width / 2 + 12, height / 2 - 2);
 				this->oldPass = GetLine();
 			}
-			else if (this->changePasswordSelected == 2) {
+			else if (this->changePasswordSelected == 2) 
+			{
+				ConsolaUI::text(width / 2 + 12, height / 2 + 1, "                         ", 15);
 				ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 1);
 				this->newPass = GetLine();
 			}
-			else if (this->changePasswordSelected == 3) {
+			else if (this->changePasswordSelected == 3) 
+			{
+				ConsolaUI::text(width / 2 + 12, height / 2 + 4, "                         ", 15);
 				ConsolaUI::gotoXY(width / 2 + 12, height / 2 + 4);
 				this->reEnterNewPass = GetLine();
 			}
 			this->changePasswordSelected = 0;
-			this->isError = 1;
+			this->isError = 2;
 		}
 		if (key == 13)
 		{
 			this->isError = this->accountService->changePassword(
-				this->accountService->getAccountID(),
+				this->accountService->getCurrentID(),
 				this->oldPass,
 				this->newPass,
 				this->reEnterNewPass
@@ -83,7 +89,8 @@ void InfoManageView::show()
 
 void InfoManageView::drawInfomationContent(const int& width, const int& height)
 {
-	Employee* temp = this->employeeService->getEmployeeById(this->accountService->getEmployeeID());
+	Account* account = this->accountService->SearchByID(this->accountService->getCurrentID());
+	Employee* temp = this->employeeService->SearchByID(account->getEmployeeID());
 	switch (this->sidebarInfoSelected)
 	{
 	case 0:
@@ -117,21 +124,25 @@ void InfoManageView::drawInfomationContent(const int& width, const int& height)
 		ConsolaUI::drawBox(width / 2 + 10, height / 2, 30, 2, 15);
 		ConsolaUI::drawBox(width / 2 + 10, height / 2 + 3, 30, 2, 15);
 
-		if (this->isError == 0)
+		if (this->isError == 1)
 		{
 			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Doi Mat Khau Thanh Cong                ", 2);
 		}
-		else if (this->isError == 2)
+		else if (this->isError == -1)
 		{
 			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Khong Duoc De Trong Phan Nhap Mat Khau ", 12);
 		}
-		else if (this->isError == 3)
+		else if (this->isError == -4)
 		{
 			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Nhap Lai Mat Khau Khong Khop           ", 12);
 		}
-		else if (this->isError == 4)
+		else if (this->isError == -3)
 		{
 			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Mat Khau Cu Nhap Khong Dung            ", 12);
+		}
+		else if (this->isError == 0)
+		{
+			ConsolaUI::text(width / 2 - 5, height / 2 - 5, "Khong Duoc Su Sung Mat Khau Cu         ", 12);
 		}
 		break;
 	case 2:

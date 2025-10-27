@@ -30,4 +30,5 @@ public:
 
 	Person& operator=(const Person&);
 	bool operator==(const Person&);
+	bool operator!=(const Person&);
 };

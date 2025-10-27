@@ -9,12 +9,31 @@ ContractService::~ContractService()
 {
 }
 
-bool ContractService::createContract(const int&, const int&, const int&)
-{
-	return false;
-}
 
-Contract* ContractService::getContractByStudentId(const int& studentID)
+int ContractService::Add(const Contract& temp)
 {
-	return this->contractRepo.Search(studentID);
+	this->contractRepo.Add(temp);
+	return 1;
+}
+Contract* ContractService::SearchByID(const int& id)
+{
+	return this->contractRepo.GetById(id);
+}
+Contract* ContractService::SearchByStudentID(const int& id)
+{
+	return this->contractRepo.GetByStudentID(id);
+}
+LinkedList<Contract> ContractService::GetAll()
+{
+	return this->contractRepo.GetAll();
+}
+int ContractService::Update(const Contract& temp)
+{
+	this->contractRepo.Update(temp);
+	return 1;
+}
+int ContractService::Delete(const Contract& temp)
+{
+	this->contractRepo.Delete(temp);
+	return 1;
 }

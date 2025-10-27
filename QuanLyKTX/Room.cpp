@@ -3,14 +3,14 @@
 
 // Constructor
 Room::Room(const int& roomID, const string& roomName, const string& roomType,
-	const int& capacity, const int& currentOccupancy, const int& floor, const string& building)
+	const int& capacity, const int& currentOccupancy, const int& floor, const string& building, const int& active)
 	: roomID(roomID), roomName(roomName), roomType(roomType),
-	capacity(capacity), currentOccupancy(currentOccupancy), floor(floor), building(building)
+	capacity(capacity), currentOccupancy(currentOccupancy), floor(floor), building(building), isActive(active)
 {
 }
 Room::Room(const Room& r)
 	: roomID(r.roomID), roomName(r.roomName), roomType(r.roomType),
-	capacity(r.capacity), currentOccupancy(r.currentOccupancy), floor(r.floor), building(r.building)
+	capacity(r.capacity), currentOccupancy(r.currentOccupancy), floor(r.floor), building(r.building), isActive(r.isActive)
 {
 }
 Room::~Room()
@@ -113,4 +113,15 @@ bool Room::operator==(const Room& other)
 		this->floor == other.floor &&
 		this->building == other.building &&
 		this->isActive == other.isActive);
+}
+bool Room::operator!=(const Room& other)
+{
+	return(this->roomID != other.roomID ||
+		this->roomName != other.roomName ||
+		this->roomType != other.roomType ||
+		this->capacity != other.capacity ||
+		this->currentOccupancy != other.currentOccupancy ||
+		this->floor != other.floor ||
+		this->building != other.building ||
+		this->isActive != other.isActive);
 }

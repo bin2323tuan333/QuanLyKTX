@@ -5,18 +5,21 @@
 AccountRepository::AccountRepository(const string& fileName)
 	:fileName(fileName)
 {
+	this->loadData();
+	
 }
 AccountRepository::~AccountRepository()
 {
+	this->saveData();
 }
 
 void AccountRepository::loadData()
 {
-	string filename = "Account.txt";
-	ifstream file(filename);
+	ifstream file(this->fileName);
 	if (!file.is_open())
 		return;
 	string line;
+
 	while (getline(file, line)) {
 		if (line.empty()) continue;
 		stringstream ss(line);
@@ -35,8 +38,7 @@ void AccountRepository::loadData()
 }
 void AccountRepository::saveData()
 {
-	string filename = "Account.txt";
-	ofstream file(filename);
+	ofstream file(this->fileName);
 	if (!file.is_open())
 		return;
 
@@ -57,15 +59,12 @@ void AccountRepository::saveData()
 void AccountRepository::Add(const Account& account)
 {
 	this->list.add(account);
-	this->saveData();
 }
-
 void AccountRepository::Delete(const Account& account)
 {
 	Account* temp = this->GetById(account.getAccountID());
 	if (temp == nullptr) return;
 	this->list.remove(*temp);
-	this->saveData();
 }
 void AccountRepository::Update(const Account& account)
 {

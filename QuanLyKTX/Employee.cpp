@@ -45,3 +45,20 @@ Employee& Employee::operator=(const Employee& other)
 
 	return *this;
 }
+
+bool Employee::operator==(const Employee& other)
+{
+	if (!(this->Person::operator==(other)))
+		return false;
+	return (this->employeeID == other.employeeID &&
+		this->position == other.position);
+}
+
+
+bool Employee::operator!=(const Employee& other)
+{
+	if (this->Person::operator!=(other))
+		return true;
+	return (this->employeeID != other.employeeID ||
+		this->position != other.position);
+}

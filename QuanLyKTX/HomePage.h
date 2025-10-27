@@ -18,7 +18,7 @@ private:
 	string username;
 	string password;
 	bool isRunning;
-	bool isError;
+	int loginError;
 
 public:
 	HomePage(AccountService*);
@@ -27,6 +27,8 @@ public:
 	void drawHomePage();
 
 private:
+	void handleInput(int);
+
 	void drawHeader(const int&, const int&);
 	void drawMenuItems(const int&, const int&);
 	void drawFooter(const int&, const int&);
@@ -37,4 +39,7 @@ private:
 
 	void handleArrowKeys(int, int&, const int&);
 	bool handleNormalKeys(int, int&, const int&);
+
+	string GetLine();
+	int GetInt();
 };

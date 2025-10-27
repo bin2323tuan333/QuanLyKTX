@@ -24,6 +24,10 @@ private:
 	StudentService* studentService;
 
 public:
+	ServiceManager();
+	~ServiceManager();
+
+
 	void initialize();
 	void shutdown();
 

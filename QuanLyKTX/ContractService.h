@@ -11,13 +11,11 @@ public:
     ContractService(ContractRepository&, StudentRepository&);
     ~ContractService();
 
-    bool createContract(const int&, const int&, const int&);
-    bool registerContract(const Contract&);
-    bool extendContract(const int&, const int&);
+    int Add(const Contract&);
+    LinkedList<Contract> GetAll();
+    int Update(const Contract&);
+    int Delete(const Contract&);
 
-
-    Contract* getContractById(int);
-    Contract* getContractByStudentId(const int&);
-
-    bool isValidRoom(const int&);
+    Contract* SearchByID(const int&);
+    Contract* SearchByStudentID(const int&);
 };

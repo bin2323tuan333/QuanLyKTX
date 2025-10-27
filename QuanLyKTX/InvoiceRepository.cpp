@@ -5,27 +5,24 @@
 InvoiceRepository::InvoiceRepository(const string& fileName)
     :fileName(fileName)
 {
+    this->loadData();
 }
 InvoiceRepository::~InvoiceRepository()
 {
-
+    this->saveData();
 }
 
 void InvoiceRepository::loadData()
 {
-    string filename = "Invoice.txt";
-    ifstream file(filename);
-    if (!file.is_open()) {
-        cout << "Khong the mo file " << filename << "!";
+    ifstream file(this->fileName);
+    if (!file.is_open())
         return;
-    }
+    
     string line;
     while (getline(file, line)) {
         if (line.empty()) continue;
-
         stringstream ss(line);
         string token;
-
         Invoice temp;
 
         getline(ss, token, ';'); temp.setInvoiceID(stoi(token));
@@ -51,13 +48,10 @@ void InvoiceRepository::loadData()
 }
 void InvoiceRepository::saveData()
 {
-    string filename = "Invoice.txt";
-    ofstream file(filename);
-
-    if (!file.is_open()) {
-        cout << "Khong the mo file: " << filename << "!";
+    ofstream file(this->fileName);
+    if (!file.is_open()) 
         return;
-    }
+
     for (ListNode<Invoice>* p = this->list.getHead(); p != nullptr; p = p->next)
     {
         file << p->value.getInvoiceID() << ";";
@@ -76,12 +70,9 @@ void InvoiceRepository::saveData()
 }
 
 
-
-
 void InvoiceRepository::Add(const Invoice& invoice)
 {
     this->list.add(invoice);
-    this->saveData();
 }
 
 void InvoiceRepository::Delete(const Invoice& invoice)
@@ -89,7 +80,6 @@ void InvoiceRepository::Delete(const Invoice& invoice)
     Invoice* temp = this->GetById(invoice.getInvoiceID());
     if (temp == nullptr) return;
     this->list.remove(*temp);
-    this->saveData();
 }
 void InvoiceRepository::Update(const Invoice& invoice)
 {

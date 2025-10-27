@@ -5,14 +5,9 @@
 int main() 
 {
 	ServiceManager* service = new ServiceManager();
-	service->initialize();
-	PageManager* page = new PageManager(service);
-
-	Application app(page);
-	app.run();
-
-	delete page;
-	service->shutdown();
+	Application* app = new Application(service);
+	app->run();
+	delete app;
 	delete service;
 	return 0;
 }

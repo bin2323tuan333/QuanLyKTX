@@ -78,3 +78,12 @@ bool Person::operator==(const Person& other)
 		this->email == other.email);
 }
 
+bool Person::operator!=(const Person& other)
+{
+	return (this->fullName != other.fullName ||
+		this->dateOfBirth != other.dateOfBirth ||
+		this->gender != other.gender ||
+		this->phoneNumber != other.phoneNumber ||
+		this->email != other.email);
+}
+

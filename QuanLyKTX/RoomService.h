@@ -14,19 +14,10 @@ public:
     ~RoomService();
 
 
-    void getAllRoom(Room*&, int&);
-    Room* getRoomById(const int&);
-    void getStudentInRoom(Student*&, int&, const int&);
-    /*bool addRoom(const Room&);
-    bool updateRoom(const Room&);
-    bool deleteRoom(int);
-
-    
-
-    bool assignStudentToRoom(int, const string&);
-    bool removeStudentFromRoom(int, const string&);
-
-    int getRoomCapacity(int);
-    int getCurrentOccupancy(int);
-    bool isRoomAvailable(int);*/
+    int Add(const Room&);
+    Room* SearchByID(const int&);
+    LinkedList<Room> GetAll();
+    LinkedList<Student> GetStudentsInRoom(const int&);
+    int Update(const Room&);
+    int Delete(const Room&);
 };

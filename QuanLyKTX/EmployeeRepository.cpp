@@ -7,29 +7,25 @@ using namespace std;
 EmployeeRepository::EmployeeRepository(const string& fileName)
     :fileName(fileName)
 {
-
+    this->loadData();
 }
 EmployeeRepository::~EmployeeRepository()
 {
-
+    this->saveData();
 }
 
 
 void EmployeeRepository::loadData()
 {
-    string filename = "Employee.txt";
-    ifstream file(filename);
-    if (!file.is_open()) {
-        cout << "Khong the mo file " << filename << "!";
+    ifstream file(this->fileName);
+    if (!file.is_open())
         return;
-    }
     string line;
+
     while (getline(file, line)) {
         if (line.empty()) continue;
-
         stringstream ss(line);
         string token;
-
         Employee temp;
 
         getline(ss, token, ';'); temp.setEmployeeID(stoi(token));
@@ -51,13 +47,10 @@ void EmployeeRepository::loadData()
 }
 void EmployeeRepository::saveData()
 {
-    string fileName = "Employee.txt";
-    ofstream file(fileName);
-
-    if (!file.is_open()) {
-        cout << "Khong the mo file: " << fileName << "!";
+    ofstream file(this->fileName);
+    if (!file.is_open()) 
         return;
-    }
+    
     for (ListNode<Employee>* p = this->list.getHead(); p != nullptr; p = p->next)
     {
         file << p->value.getEmployeeID() << ";";
@@ -74,7 +67,6 @@ void EmployeeRepository::saveData()
 void EmployeeRepository::Add(const Employee& employee)
 {
     this->list.add(employee);
-    this->saveData();
 }
 
 void EmployeeRepository::Delete(const Employee& employee)
@@ -82,7 +74,6 @@ void EmployeeRepository::Delete(const Employee& employee)
     Employee* temp = this->GetById(employee.getEmployeeID());
     if (temp == nullptr) return;
     this->list.remove(*temp);
-    this->saveData();
 }
 void EmployeeRepository::Update(const Employee& employee)
 {

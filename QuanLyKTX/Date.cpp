@@ -98,3 +98,9 @@ bool Date::operator==(const Date& date)
 		this->month == date.month && 
 		this->year == date.year);
 }
+bool Date::operator!=(const Date& date)
+{
+	return (this->day != date.day ||
+		this->month != date.month ||
+		this->year != date.year);
+}

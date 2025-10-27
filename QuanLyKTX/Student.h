@@ -27,4 +27,5 @@ public:
 
     Student& operator=(const Student&);
     bool operator==(const Student&);
+    bool operator!=(const Student&);
 };

@@ -7,27 +7,27 @@ using namespace std;
 ContractRepository::ContractRepository(const string& fileName)
 	:fileName(fileName)
 {
+	this->loadData();
+
 }
 ContractRepository::~ContractRepository()
 {
+	this->saveData();
 }
 
 
 void ContractRepository::loadData()
 {
-	string fileName = "Contract.txt";
-	ifstream file(fileName);
-	if (!file.is_open()) {
-		cout << "Khong the mo file " << fileName << "!";
+	ifstream file(this->fileName);
+	if (!file.is_open())
 		return;
-	}
 	string line;
-	while (getline(file, line)) {
-		if (line.empty()) continue;
 
+	while (getline(file, line)) 
+	{
+		if (line.empty()) continue;
 		stringstream ss(line);
 		string token;
-
 		Contract temp;
 
 		getline(ss, token, ';'); temp.setContractID(stoi(token));
@@ -54,13 +54,9 @@ void ContractRepository::loadData()
 }
 void ContractRepository::saveData()
 {
-	string fileName = "Contract.txt";
-	ofstream file(fileName);
-
-	if (!file.is_open()) {
-		cout << "Khong the mo file: " << fileName << "!";
+	ofstream file(this->fileName);
+	if (!file.is_open())
 		return;
-	}
 
 	for (ListNode<Contract>* p = this->list.getHead(); p != nullptr; p = p->next)
 	{
@@ -77,7 +73,6 @@ void ContractRepository::saveData()
 void ContractRepository::Add(const Contract& contract)
 {
 	this->list.add(contract);
-	this->saveData();
 }
 
 void ContractRepository::Delete(const Contract& contract)
@@ -85,7 +80,6 @@ void ContractRepository::Delete(const Contract& contract)
 	Contract* temp = this->GetById(contract.getContractID());
 	if (temp == nullptr) return;
 	this->list.remove(*temp);
-	this->saveData();
 }
 void ContractRepository::Update(const Contract& contract)
 {
@@ -105,7 +99,25 @@ Contract* ContractRepository::GetById(const int& contractID)
 	}
 	return nullptr;
 }
-
+Contract* ContractRepository::GetByStudentID(const int& studentID)
+{
+	for (ListNode<Contract>* p = this->list.getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value.getStudentID() == studentID)
+			return &(p->value);
+	}
+	return nullptr;
+}
+LinkedList<int> ContractRepository::GetStudentIdsByRoomId(const int& roomID)
+{
+	LinkedList<int> list;
+	for (ListNode<Contract>* p = this->list.getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value.getRoomID() == roomID)
+			list.add(p->value.getStudentID());
+	}
+	return list;
+}
 
 int ContractRepository::GetSize()
 {

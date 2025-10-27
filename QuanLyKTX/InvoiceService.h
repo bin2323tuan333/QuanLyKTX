@@ -9,8 +9,9 @@ public:
     InvoiceService(InvoiceRepository& invRepo);
     ~InvoiceService();
 
-    //Invoice getInvoice(const string&, int, int);
-
-    //bool CreateInvoice(const Invoice&);
-    //bool UpdateInvoice(const Invoice&);
+    int Add(const Invoice&);
+    Invoice* SearchByID(const int&);
+    LinkedList<Invoice> GetAll();
+    int Update(const Invoice&);
+    int Delete(const Invoice&);
 };

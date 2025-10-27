@@ -1,13 +1,28 @@
 ﻿#include "Application.h"
 #include "ConsolaUI.h"
 
-Application::Application(PageManager* page)
-	:page(page), isRunning(false), isSignIn(false)
+Application::Application(ServiceManager* service)
+	:service(service), isRunning(false), isSignIn(false)
 {
+	this->homePage = new HomePage(
+		service->getAccountService()
+	);
+	this->employeePage = new EmployeePage(
+		service->getAccountService(),
+		service->getEmployeeService(),
+		service->getStudentService(),
+		service->getRoomService(),
+		service->getInvoiceService(),
+		service->getContractService()
+	);
+	this->studentPage = new StudentPage();
 }
 
 Application::~Application()
 {
+	delete this->homePage;
+	delete this->employeePage;
+	delete this->studentPage;
 }
 
 void Application::run()
@@ -15,23 +30,27 @@ void Application::run()
 	this->isRunning = true;
 	while (isRunning)
 	{
-		this->isSignIn = this->page->service->getAccountService()->isSignIn();
+		this->isSignIn = this->service->getAccountService()->isSignIn();
 		if (!isSignIn)
 		{
-			(this->page->getHomePage()).show();
+			this->homePage->show();
 		}
 		else
 		{
-			if ((this->page->service->getAccountService())->getRole() == "Manager")
+			int accountID = this->service->getAccountService()->getCurrentID();
+			Account* currentAccount = this->service->getAccountService()->SearchByID(accountID);
+			if (currentAccount != nullptr)
 			{
-				(this->page->getEmployeePage()).show();
-			}
-			else if ((this->page->service->getAccountService())->getRole() == "Student")
-			{
-
+				if (currentAccount->getRole() == "Manager")
+				{
+					this->employeePage->show();
+				}
+				else if (currentAccount->getRole() == "Student")
+				{
+					//this->studentPage->show();
+				}
 			}
 		}
 	}
-	
 	ConsolaUI::clearScreen();
 }

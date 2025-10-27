@@ -9,10 +9,9 @@ public:
     EmployeeService(EmployeeRepository&);
     ~EmployeeService();
 
-    bool addEmployee(const Employee&);
-    bool updateEmployee(const Employee&);
-    bool deleteEmployee(int);
-    bool deactivateEmployee(int);
-
-    Employee* getEmployeeById(const int&);
+    int Add(const Employee&);
+    Employee* SearchByID(const int&);
+    LinkedList<Employee> GetAll();
+    int Update(const Employee&);
+    int Delete(const Employee&);
 };
