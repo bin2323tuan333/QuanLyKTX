@@ -1,17 +1,20 @@
 #pragma once
 #include "Account.h"
 #include "LinkedList.h"
+#include "HashTable.h"
 
 
-class AccountRepository 
+class AccountData 
 {
 private:
     string fileName;
-    LinkedList<Account> list;
+    LinkedList<Account*> list;
+    HashTable<string, Account*> map;
+
 
 public:
-	AccountRepository(const string&);
-	~AccountRepository();
+    AccountData(const string&);
+	~AccountData();
 
     void loadData();
     void saveData();

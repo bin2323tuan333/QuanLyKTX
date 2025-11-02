@@ -11,7 +11,7 @@ class Room
 {
 private:
     int roomId;
-    string roomName; 
+    string roomName;
     string roomType;
     int capacity;
     int currentOccupancy;
@@ -38,8 +38,8 @@ public:
     void AddContract(Contract*);
 
     // Getter & Setter
-    int getRoomID() const;
-    void setRoomID(const int&);
+    int getRoomId() const;
+    void setRoomId(const int&);
 
     string getRoomName();
     void setRoomName(const string&);

@@ -129,7 +129,6 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ContractManageView.cpp" />
     <ClCompile Include="EmployeePage.cpp" />
-    <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="HomePage.cpp" />
     <ClInclude Include="ContractManageView.h" />
     <ClInclude Include="HashTable.h" />
@@ -172,15 +171,15 @@
     <ClInclude Include="ConsolaUI.h" />
     <ClInclude Include="Employee.h" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="InvoiceRepository.cpp" />
-    <ClCompile Include="ContractRepository.cpp" />
-    <ClCompile Include="EmployeeRepository.cpp" />
-    <ClCompile Include="RoomRepository.cpp" />
+    <ClCompile Include="InvoiceData.cpp" />
+    <ClCompile Include="ContractData.cpp" />
+    <ClCompile Include="EmployeeData.cpp" />
+    <ClCompile Include="RoomData.cpp" />
     <ClCompile Include="RoomService.cpp" />
     <ClCompile Include="ServiceManager.cpp" />
-    <ClCompile Include="StudentRepository.cpp" />
-    <ClCompile Include="AccountRepository.cpp" />
-    <ClInclude Include="AccountRepository.h" />
+    <ClCompile Include="StudentData.cpp" />
+    <ClCompile Include="AccountData.cpp" />
+    <ClInclude Include="AccountData.h" />
     <ClCompile Include="Student.cpp" />
     <ClInclude Include="ServiceManager.h" />
     <ClInclude Include="Student.h" />
@@ -192,11 +191,11 @@
     <ClInclude Include="Invoice.h" />
     <ClInclude Include="Contract.h" />
     <ClInclude Include="Room.h" />
-    <ClInclude Include="InvoiceRepository.h" />
-    <ClInclude Include="ContractRepository.h" />
-    <ClInclude Include="EmployeeRepository.h" />
-    <ClInclude Include="RoomRepository.h" />
-    <ClInclude Include="StudentRepository.h" />
+    <ClInclude Include="InvoiceData.h" />
+    <ClInclude Include="ContractData.h" />
+    <ClInclude Include="EmployeeData.h" />
+    <ClInclude Include="RoomData.h" />
+    <ClInclude Include="StudentData.h" />
     <ClInclude Include="Account.h" />
   </ItemGroup>
   <ItemGroup>

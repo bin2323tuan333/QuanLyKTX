@@ -19,12 +19,6 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{ec124831-a1ec-4a22-b8e4-4e8fef552e53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\DataAccess">
-      <UniqueIdentifier>{c1c29190-9a6b-45b5-9a48-98175052fda1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\DataAccess\Repositories">
-      <UniqueIdentifier>{555edeeb-d3ec-4704-aacc-8a346f6d3be1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\BusinessLogic">
       <UniqueIdentifier>{c15267af-ee61-497b-8d91-79b5c49386e2}</UniqueIdentifier>
     </Filter>
@@ -52,12 +46,6 @@
     <Filter Include="Data Files">
       <UniqueIdentifier>{bc9ba1a0-0240-4120-afdd-33ef3838290d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\DataAccess">
-      <UniqueIdentifier>{f6e40664-ba3f-4d6d-b4dc-0629e4ff59df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\DataAccess\Repositories">
-      <UniqueIdentifier>{a9a172ca-8ed9-42af-a454-dca8a0510462}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Presentation\Views\ManagerView">
       <UniqueIdentifier>{2349f6ac-4bae-4478-8dcb-2157a19483f9}</UniqueIdentifier>
     </Filter>
@@ -69,6 +57,12 @@
     </Filter>
     <Filter Include="Source Files\BusinessLogic\Models">
       <UniqueIdentifier>{65f161aa-f770-4a2c-ba12-4b6442dc08cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileHandle">
+      <UniqueIdentifier>{f6e40664-ba3f-4d6d-b4dc-0629e4ff59df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FileHandle">
+      <UniqueIdentifier>{c1c29190-9a6b-45b5-9a48-98175052fda1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,21 +83,6 @@
     </ClCompile>
     <ClCompile Include="Invoice.cpp">
       <Filter>Source Files\BusinessLogic\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="InvoiceRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="ContractRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="EmployeeRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="RoomRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="StudentRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
     </ClCompile>
     <ClCompile Include="Student.cpp">
       <Filter>Source Files\BusinessLogic\Models</Filter>
@@ -141,9 +120,6 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files\Presentation</Filter>
     </ClCompile>
-    <ClCompile Include="AccountRepository.cpp">
-      <Filter>Source Files\DataAccess\Repositories</Filter>
-    </ClCompile>
     <ClCompile Include="StringUtil.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -162,9 +138,6 @@
     <ClCompile Include="RoomManageView.cpp">
       <Filter>Source Files\Presentation\Views\ManagerView</Filter>
     </ClCompile>
-    <ClCompile Include="HashTable.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="ManageViewBase.cpp">
       <Filter>Source Files\Presentation\Views</Filter>
     </ClCompile>
@@ -176,6 +149,24 @@
     </ClCompile>
     <ClCompile Include="StudentPage.cpp">
       <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountData.cpp">
+      <Filter>Source Files\FileHandle</Filter>
+    </ClCompile>
+    <ClCompile Include="ContractData.cpp">
+      <Filter>Source Files\FileHandle</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeeData.cpp">
+      <Filter>Source Files\FileHandle</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoiceData.cpp">
+      <Filter>Source Files\FileHandle</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomData.cpp">
+      <Filter>Source Files\FileHandle</Filter>
+    </ClCompile>
+    <ClCompile Include="StudentData.cpp">
+      <Filter>Source Files\FileHandle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,29 +185,11 @@
     <ClInclude Include="Room.h">
       <Filter>Header Files\BusinessLogic\Models</Filter>
     </ClInclude>
-    <ClInclude Include="StudentRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
-    <ClInclude Include="RoomRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
-    <ClInclude Include="EmployeeRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
-    <ClInclude Include="ContractRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
-    <ClInclude Include="InvoiceRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
-    </ClInclude>
     <ClInclude Include="Student.h">
       <Filter>Header Files\BusinessLogic\Models</Filter>
     </ClInclude>
     <ClInclude Include="Employee.h">
       <Filter>Header Files\BusinessLogic\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="AccountRepository.h">
-      <Filter>Header Files\DataAccess\Repositories</Filter>
     </ClInclude>
     <ClInclude Include="ConsolaUI.h">
       <Filter>Header Files\Utils</Filter>
@@ -283,6 +256,24 @@
     </ClInclude>
     <ClInclude Include="EmployeePage.h">
       <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountData.h">
+      <Filter>Header Files\FileHandle</Filter>
+    </ClInclude>
+    <ClInclude Include="ContractData.h">
+      <Filter>Header Files\FileHandle</Filter>
+    </ClInclude>
+    <ClInclude Include="EmployeeData.h">
+      <Filter>Header Files\FileHandle</Filter>
+    </ClInclude>
+    <ClInclude Include="InvoiceData.h">
+      <Filter>Header Files\FileHandle</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomData.h">
+      <Filter>Header Files\FileHandle</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentData.h">
+      <Filter>Header Files\FileHandle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

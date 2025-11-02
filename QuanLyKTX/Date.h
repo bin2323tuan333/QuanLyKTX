@@ -24,6 +24,7 @@ public:
 
 	string getDate();
 	static int getMaxDayOfMonth(const int&);
+	static Date stringToDate(const string&);
 
 	friend ostream& operator << (ostream&, const Date&);
 	friend istream& operator >> (istream&, Date&);

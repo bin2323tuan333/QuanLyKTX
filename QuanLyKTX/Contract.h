@@ -11,7 +11,6 @@ private:
 	int contractId;
 	Date startDate;
 	Date endDate;
-	int duration;
 
 	Student* student;
 	Room* room;
@@ -22,7 +21,6 @@ public:
 		const int& = 0,
 		const Date & = Date(),
 		const Date & = Date(),
-		const int& = 0,
 		Student* = nullptr,
 		Room* = nullptr
 	);
@@ -40,8 +38,6 @@ public:
 	void setStartDate(const Date&);
 	Date getEndDate();
 	void setEndDate(const Date&);
-	int getDuration();
-	void setDuration(const int&);
 
 	bool isActive();
 

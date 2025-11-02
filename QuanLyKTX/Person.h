@@ -12,7 +12,6 @@ protected:
 	bool gender;
 	string phoneNumber;
 	string email;
-
 	int userId;
 	Account* userAccount;
 public:

@@ -1,5 +1,6 @@
 #include <iomanip>
 #include "Date.h"
+#include <sstream>
 #include <string>
 #include <ctime>
 
@@ -23,6 +24,14 @@ Date Date::getCurrentDay()
 	localtime_s(&localTime, &now);
 
 	return Date(localTime.tm_mday, localTime.tm_mon + 1, localTime.tm_year + 1900);
+}
+Date Date::stringToDate(const string& date)
+{
+	stringstream ss(date);
+	int d, m, y;
+	char sep1, sep2;
+	ss >> d >> sep1 >> m >> sep2 >> y;
+	return Date(d, m, y);
 }
 
 bool Date::isLeep()

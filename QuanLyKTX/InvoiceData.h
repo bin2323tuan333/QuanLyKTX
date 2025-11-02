@@ -3,15 +3,15 @@
 #include "LinkedList.h"
 
 
-class InvoiceRepository
+class InvoiceData
 {
 private:
     string fileName;
-    LinkedList<Invoice> list;
+    LinkedList<Invoice*> list;
 
 public:
-    InvoiceRepository(const string&);
-    ~InvoiceRepository();
+    InvoiceData(const string&);
+    ~InvoiceData();
 
     void loadData();
     void saveData();

@@ -23,11 +23,11 @@ void Room::AddContract(Contract* contract)
 }
 
 // Getter & Setter
-int Room::getRoomID() const
+int Room::getRoomId() const
 {
 	return this->roomId;
 }
-void Room::setRoomID(const int& roomId)
+void Room::setRoomId(const int& roomId)
 {
 	this->roomId = roomId;
 }

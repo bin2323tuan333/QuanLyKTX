@@ -3,15 +3,15 @@
 #include "LinkedList.h"
 
 
-class ContractRepository
+class ContractData
 {
 private:
 	string fileName;
-	LinkedList<Contract> list;
+	LinkedList<Contract*> list;
 
 public:
-	ContractRepository(const string&);
-	~ContractRepository();
+	ContractData(const string&);
+	~ContractData();
 
 	void loadData();
 	void saveData();

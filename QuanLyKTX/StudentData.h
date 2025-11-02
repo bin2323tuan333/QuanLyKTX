@@ -1,17 +1,19 @@
 #pragma once
 #include "Student.h"
 #include "LinkedList.h"
+#include "HashTable.h"
 
 
-class StudentRepository
+class StudentData
 {
 private:
     string fileName;
-    LinkedList<Student> list;
+    LinkedList<Student*> list;
+    HashTable<int, Student*> map;
 
 public:
-    StudentRepository(const string&);
-    ~StudentRepository();
+    StudentData(const string&);
+    ~StudentData();
 
     void loadData();
     void saveData();

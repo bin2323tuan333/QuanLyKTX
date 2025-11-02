@@ -3,15 +3,15 @@
 #include "LinkedList.h"
 
 
-class RoomRepository
+class RoomData
 {
 private:
     string fileName;
-    LinkedList<Room> list;
+    LinkedList<Room*> list;
 
 public:
-    RoomRepository(const string&);
-    ~RoomRepository();
+    RoomData(const string&);
+    ~RoomData();
 
     void loadData();
     void saveData();
