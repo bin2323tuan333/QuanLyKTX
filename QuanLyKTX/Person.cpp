@@ -1,17 +1,21 @@
 #include "Person.h"
 
-Person::Person(const string& fullName, const Date& dateOfBirth, const string& gender, const string& phoneNumber, const string& email)
-	:fullName(fullName), dateOfBirth(dateOfBirth), gender(gender), phoneNumber(phoneNumber), email(email)
+Person::Person(const string& fullName, const Date& dateOfBirth, const bool& gender, const string& phoneNumber, const string& email, const int& userId, Account* acc)
+	:fullName(fullName), dateOfBirth(dateOfBirth), gender(gender), phoneNumber(phoneNumber), email(email), userId(userId), userAccount(acc)
 {
 }
 Person::Person(const Person& person)
-	:fullName(person.fullName), dateOfBirth(person.dateOfBirth), gender(person.gender), phoneNumber(person.phoneNumber), email(person.email)
+	:fullName(person.fullName), dateOfBirth(person.dateOfBirth), gender(person.gender), phoneNumber(person.phoneNumber), email(person.email), userId(person.userId), userAccount(person.userAccount)
 {
 }
 Person::~Person()
 {
 }
 
+void Person::AddAccount(Account* acc)
+{
+	this->userAccount = acc;
+}
 
 string Person::getFullName()
 {
@@ -29,11 +33,11 @@ void Person::setDateOfBirth(const Date& dateOfBirth)
 {
 	this->dateOfBirth = dateOfBirth;
 }
-string Person::getGender()
+bool Person::getGender()
 {
 	return this->gender;
 }
-void Person::setGender(const string& gender)
+void Person::setGender(const bool& gender)
 {
 	this->gender = gender;
 }
@@ -53,6 +57,14 @@ void Person::setEmail(const string& email)
 {
 	this->email = email;
 }
+int Person::getUserId()
+{
+	return this->userId;
+}
+void Person::setUserId(const int& id)
+{
+	this->userId = id;
+}
 
 
 Person& Person::operator=(const Person& other)
@@ -65,7 +77,8 @@ Person& Person::operator=(const Person& other)
 	this->email = other.email;
 	this->gender = other.gender;
 	this->phoneNumber = other.phoneNumber;
-
+	this->userId = other.userId;
+	this->userAccount = other.userAccount;
 	return *this;
 }
 
@@ -75,7 +88,9 @@ bool Person::operator==(const Person& other)
 		this->dateOfBirth == other.dateOfBirth &&
 		this->gender == other.gender &&
 		this->phoneNumber == other.phoneNumber &&
-		this->email == other.email);
+		this->email == other.email &&
+		this->userId == other.userId &&
+		this->userAccount == other.userAccount);
 }
 
 bool Person::operator!=(const Person& other)
@@ -84,6 +99,8 @@ bool Person::operator!=(const Person& other)
 		this->dateOfBirth != other.dateOfBirth ||
 		this->gender != other.gender ||
 		this->phoneNumber != other.phoneNumber ||
-		this->email != other.email);
+		this->email != other.email ||
+		this->userId != other.userId ||
+		this->userAccount != other.userAccount);
 }
 

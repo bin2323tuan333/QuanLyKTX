@@ -90,7 +90,9 @@ void EmployeePage::show()
 				break;
 			case 4:
 				this->currentView = new ContractManageView(
-					this->contractService
+					this->contractService,
+					this->studentService,
+					this->roomService
 				);
 				break;
 			}

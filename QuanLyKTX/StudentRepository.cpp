@@ -32,7 +32,7 @@ void StudentRepository::loadData()
 		stringstream dateStream(token);
 		dateStream >> d >> sep1 >> m >> sep2 >> y;
 		temp.setDateOfBirth(Date(d, m, y));
-		getline(ss, token, ';'); temp.setGender(token);
+		getline(ss, token, ';'); temp.setGender(token == "1" ? true : false);
 		getline(ss, token, ';'); temp.setClassName(token);
 		getline(ss, token, ';'); temp.setFaculty(token);
 		getline(ss, token, ';'); temp.setPhoneNumber(token);
@@ -52,7 +52,7 @@ void StudentRepository::saveData()
 		file << p->value.getStudentID() << ";";
 		file << p->value.getFullName() << ";";
 		file << p->value.getDateOfBirth() << ";";
-		file << p->value.getGender() << ";";
+		file << (p->value.getGender() == true ? "1" : "0") << ";";
 		file << p->value.getClassName() << ";";
 		file << p->value.getFaculty() << ";";
 		file << p->value.getPhoneNumber() << ";";

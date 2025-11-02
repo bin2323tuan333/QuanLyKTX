@@ -23,6 +23,7 @@ public:
 	Contract* GetById(const int&);
 	Contract* GetByStudentID(const int&);
 	LinkedList<int> GetStudentIdsByRoomId(const int&);
+	LinkedList<Contract> GetContractsByStudentId(const int&);
 
 	int GetSize();
 };

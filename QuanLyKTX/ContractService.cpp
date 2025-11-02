@@ -19,9 +19,9 @@ Contract* ContractService::SearchByID(const int& id)
 {
 	return this->contractRepo.GetById(id);
 }
-Contract* ContractService::SearchByStudentID(const int& id)
+LinkedList<Contract> ContractService::GetContractsByStudentId(const int& id)
 {
-	return this->contractRepo.GetByStudentID(id);
+	return this->contractRepo.GetContractsByStudentId(id);
 }
 LinkedList<Contract> ContractService::GetAll()
 {

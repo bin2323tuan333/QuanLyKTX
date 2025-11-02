@@ -1,43 +1,51 @@
 #pragma once
 #include "Date.h"
+#include "Room.h"
+#include "Student.h"
+#include "Invoice.h"
 
 
-
-
-class Contract 
+class Contract
 {
 private:
-    int contractID, studentID, roomID;
-    Date startDate, endDate;
-    int duration;
+	int contractId;
+	Date startDate;
+	Date endDate;
+	int duration;
 
+	Student* student;
+	Room* room;
+	LinkedList<Invoice*> invoices;
 public:
-    // Constructor, Copy constructor, Destructor
-    Contract(const int& = 0, const int& = 0, const int& = 0, const Date & = Date(), const Date & = Date(), const int& = 0);
-    Contract(const Contract&);
-    ~Contract();
+	// Constructor, Copy constructor, Destructor
+	Contract(
+		const int& = 0,
+		const Date & = Date(),
+		const Date & = Date(),
+		const int& = 0,
+		Student* = nullptr,
+		Room* = nullptr
+	);
+	Contract(const Contract&);
+	~Contract();
 
-    // Getter & Setter
-    int getContractID() const;
-    void setContractID(const int&);
+	void AddStudent(Student*);
+	void AddRoom(Room*);
+	void AddInvoice(Invoice*);
 
-    Date getStartDate();
-    void setStartDate(const Date&);
+	// Getter & Setter
+	int getContractId() const;
+	void setContractId(const int&);
+	Date getStartDate();
+	void setStartDate(const Date&);
+	Date getEndDate();
+	void setEndDate(const Date&);
+	int getDuration();
+	void setDuration(const int&);
 
-    Date getEndDate();
-    void setEndDate(const Date&);
+	bool isActive();
 
-    int getDuration();
-    void setDuration(const int&);
-
-    int getStudentID();
-    void setStudentID(const int&);
-
-    int getRoomID();
-    void setRoomID(const int&);
-
-
-    Contract& operator=(const Contract&);
-    bool operator==(const Contract&);
-    bool operator!=(const Contract&);
+	Contract& operator=(const Contract&);
+	bool operator==(const Contract&);
+	bool operator!=(const Contract&);
 };

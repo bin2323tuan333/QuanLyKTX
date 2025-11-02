@@ -17,5 +17,5 @@ public:
     int Delete(const Contract&);
 
     Contract* SearchByID(const int&);
-    Contract* SearchByStudentID(const int&);
+    LinkedList<Contract> GetContractsByStudentId(const int&);
 };

@@ -2,74 +2,83 @@
 #include <iostream>
 
 // Constructor
-Student::Student(const int& studentID, const string& fullName, const Date& dateOfBirth, const string& gender, 
-    const string& className, const string& faculty, const string& phoneNumber, const string& email)
-    : Person(fullName, dateOfBirth, gender, phoneNumber, email), studentID(studentID), className(className), faculty(faculty)
+Student::Student(const string& fullName, const Date& dateOfBirth, const bool& gender, const string & phoneNumber,
+	const string & email, const int& userId, Account* acc, const int& studentId, const string & className, const string & faculty)
+	: Person(fullName, dateOfBirth, gender, phoneNumber, email, userId, acc), studentId(studentId), className(className), faculty(faculty)
 {
 }
 Student::Student(const Student& s)
-    : Person(s.fullName, s.dateOfBirth, s.gender, s.phoneNumber, s.email), studentID(s.studentID),className(s.className), faculty(s.faculty)
+	: Person(s.fullName, s.dateOfBirth, s.gender, s.phoneNumber, s.email, s.userId, s.userAccount), studentId(s.studentId), className(s.className), faculty(s.faculty)
 {
 }
-Student::~Student() 
+Student::~Student()
 {
 }
 
 
+void Student::AddContract(Contract* contract)
+{
+	this->contracts.add(contract);
+}
+string Student::getRole()
+{
+	return "student";
+}
 // Getter & Setter
 int Student::getStudentID() const
 {
-    return this->studentID;
+	return this->studentId;
 }
-void Student::setStudentID(const int& studentID) 
+void Student::setStudentID(const int& studentId)
 {
-    this->studentID = studentID;
+	this->studentId = studentId;
 }
-string Student::getClassName() 
+string Student::getClassName()
 {
-    return this->className;
+	return this->className;
 }
-void Student::setClassName(const string& className) 
+void Student::setClassName(const string& className)
 {
-    this->className = className;
+	this->className = className;
 }
-string Student::getFaculty() 
+string Student::getFaculty()
 {
-    return this->faculty;
+	return this->faculty;
 }
-void Student::setFaculty(const string& faculty) 
+void Student::setFaculty(const string& faculty)
 {
-    this->faculty = faculty;
+	this->faculty = faculty;
 }
 
 
 Student& Student::operator=(const Student& other)
 {
-    if (this == &other)
-        return *this;
+	if (this == &other)
+		return *this;
 
-    this->Person::operator=(other);
-    this->studentID = other.studentID;
-    this->className = other.className;
-    this->faculty = other.faculty;
+	this->Person::operator=(other);
+	this->studentId = other.studentId;
+	this->className = other.className;
+	this->faculty = other.faculty;
 
-    return *this;
+	return *this;
 }
 bool Student::operator==(const Student& other)
 {
-    if (!(this->Person::operator==(other)))
-        return false;
-    return (this->studentID == other.studentID &&
-        this->className == other.className &&
-        this->faculty == other.faculty);
+	if (!(this->Person::operator==(other)))
+		return false;
+	return (this->studentId == other.studentId &&
+		this->className == other.className &&
+		this->faculty == other.faculty);
 }
 
 
 bool Student::operator!=(const Student& other)
 {
-    if (this->Person::operator!=(other))
-        return true;
-    return (this->studentID != other.studentID ||
-        this->className != other.className ||
-        this->faculty != other.faculty);
+	if (this->Person::operator!=(other))
+		return true;
+	return (this->studentId != other.studentId ||
+		this->className != other.className ||
+		this->faculty != other.faculty);
 }
+

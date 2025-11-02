@@ -1,23 +1,38 @@
 #pragma once
 #include "Date.h"
+#include "Student.h"
+#include "Employee.h"
 #include <string>
 using namespace std;
 
 class Invoice {
 private:
-    int invoiceID, studentID, employeeID;
-    int month, year;
+    int invoiceId;
     int roomFee, internetFee, electricFee, waterFee;
     int totalAmount;
     Date createdDate;
     
+    Contract* contract;
+    Employee* employee;
 
 public:
     // Constructor, Copy constructor, Destructor
-    Invoice(const int& = 0, const int& = 0, const int& = 0, const int& = 0, const int& = 0, const int& = 0,
-        const int& = 0, const int& = 0, const int& = 0, const int& = 0, const Date & = Date());
+    Invoice(
+        const int& = 0, 
+        const int& = 0, 
+        const int& = 0, 
+        const int& = 0, 
+        const int& = 0, 
+        const int& = 0,
+        const Date & = Date(),
+        Contract* = nullptr,
+        Employee* = nullptr
+    );
     Invoice(const Invoice&);
     ~Invoice();
+
+    void AddContract(Contract*);
+    void AddEmployee(Employee*);
 
     // Getter & Setter
     int getInvoiceID() const;

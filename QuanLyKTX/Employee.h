@@ -5,21 +5,38 @@
 class Employee : public Person
 {
 private:
-    int employeeID;
-    string position;
+    int employeeId;
+    string role;
+    int salary;
 
 public:
     // Constructor, Copy constructor, Destructor
-    Employee(const int& = 0, const string & = "", const Date & = Date(), const string & = "",
-        const string & = "", const string & = "", const string & = "");
+    Employee(
+        const string & = "",
+        const Date & = Date(),
+        const bool& = true,
+        const string & = "",
+        const string & = "",
+        const int& = 0,
+        Account* = nullptr,
+        const int& = 0,
+        const string& = "",
+        const int& = 0
+    );
     Employee(const Employee&);
     ~Employee();
 
+
+    string getRole() override;
+
+
     // Getter & Setter
-    int getEmployeeID() const;
-    void setEmployeeID(const int&);
-    string getPosition();
-    void setPosition(const string&);
+    int getEmployeeId() const;
+    void setEmployeeId(const int&);
+    string getRole();
+    void setRole(const string&);
+    int getSalary();
+    void setSalary(const int&);
 
 
     Employee& operator=(const Employee&);

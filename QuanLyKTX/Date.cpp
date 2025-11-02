@@ -14,7 +14,7 @@ Date::Date(const Date& D)
 }
 Date::~Date()
 {
- }
+}
 
 Date Date::getCurrentDay()
 {
@@ -37,7 +37,7 @@ bool Date::isValid()
 	if (this->year < 999) return false;
 	if (this->month > 12 || this->month < 1) return false;
 
-	int dayOfMonth[] = { 0, 31, 28, 31, 30, 31, 30,31, 31, 30, 31, 30, 31 };
+	int dayOfMonth[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	if (this->month == 2 && this->isLeep())
 	{
 		dayOfMonth[2] = 29;
@@ -61,9 +61,27 @@ int Date::getYear()
 	return this->year;
 }
 
+void Date::setDay(const int& day)
+{
+	this->day = day;
+}
+void Date::setMonth(const int& month)
+{
+	this->month = month;
+}
+void Date::setYear(const int& year)
+{
+	this->year = year;
+}
+
 string Date::getDate()
 {
 	return to_string(this->day) + "/" + to_string(this->month) + "/" + to_string(this->year);
+}
+int Date::getMaxDayOfMonth(const int& month)
+{
+	int dayOfMonth[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	return dayOfMonth[month];
 }
 
 ostream& operator << (ostream& out, const Date& D)
@@ -103,4 +121,29 @@ bool Date::operator!=(const Date& date)
 	return (this->day != date.day ||
 		this->month != date.month ||
 		this->year != date.year);
+}
+
+bool Date::operator>(const Date& other)
+{
+	if (this->year > other.year) return true;
+	if (this->year < other.year) return false;
+	if (this->month > other.month) return true;
+	if (this->month < other.month) return false;
+	return (this->day > other.day);
+}
+bool Date::operator>=(const Date& other)
+{
+	return !((*this) < other);
+}
+bool Date::operator<(const Date& other)
+{
+	if (this->year < other.year) return true;
+	if (this->year > other.year) return false;
+	if (this->month < other.month) return true;
+	if (this->month > other.month) return false;
+	return (this->day < other.day);
+}
+bool Date::operator<=(const Date& other)
+{
+	return !((*this) > other);
 }

@@ -2,13 +2,13 @@
 #include "Employee.h"
 
 // Constructor
-Employee::Employee(const int& employeeID, const string& fullName, const Date& dateOfBirth, const string& gender,
-	const string& position, const string& phoneNumber, const string& email)
-	: Person(fullName, dateOfBirth, gender, phoneNumber, email), employeeID(employeeID), position(position)
+Employee::Employee(const string& fullName, const Date& dateOfBirth, const bool& gender, const string& phoneNumber,
+	const string& email, const int& userId, Account* acc, const int& employeeId, const string & role, const int& salary)
+	:Person(fullName, dateOfBirth, gender, phoneNumber, email, userId, acc), employeeId(employeeId), role(role), salary(salary)
 {
 }
 Employee::Employee(const Employee& e)
-	: Person(e.fullName, e.dateOfBirth, e.gender, e.phoneNumber, e.email), employeeID(e.employeeID), position(e.position)
+	: Person(e.fullName, e.dateOfBirth, e.gender, e.phoneNumber, e.email, e.userId, e.userAccount), employeeId(e.employeeId), role(e.role), salary(e.salary)
 {
 }
 Employee::~Employee()
@@ -16,23 +16,38 @@ Employee::~Employee()
 }
 
 
+string Employee::getRole()
+{
+	return this->role;
+}
+
+
 // Getter & Setter
-int Employee::getEmployeeID() const
+int Employee::getEmployeeId() const
 {
-	return this->employeeID;
+	return this->employeeId;
 }
-void Employee::setEmployeeID(const int& employeeID)
+void Employee::setEmployeeId(const int& employeeId)
 {
-	this->employeeID = employeeID;
+	this->employeeId = employeeId;
 }
-string Employee::getPosition()
+string Employee::getRole()
 {
-	return this->position;
+	return this->role;
 }
-void Employee::setPosition(const string& position)
+void Employee::setRole(const string& role)
 {
-	this->position = position;
+	this->role = role;
 }
+int Employee::getSalary()
+{
+	return this->salary;
+}
+void Employee::setSalary(const int& salary)
+{
+	this->salary = salary;
+}
+
 
 Employee& Employee::operator=(const Employee& other)
 {
@@ -40,9 +55,9 @@ Employee& Employee::operator=(const Employee& other)
 		return *this;
 
 	this->Person::operator=(other);
-	this->employeeID = other.employeeID;
-	this->position = other.position;
-
+	this->employeeId = other.employeeId;
+	this->role = other.role;
+	this->salary = other.salary;
 	return *this;
 }
 
@@ -50,8 +65,9 @@ bool Employee::operator==(const Employee& other)
 {
 	if (!(this->Person::operator==(other)))
 		return false;
-	return (this->employeeID == other.employeeID &&
-		this->position == other.position);
+	return (this->employeeId == other.employeeId &&
+		this->role == other.role &&
+		this->salary == other.salary);
 }
 
 
@@ -59,6 +75,7 @@ bool Employee::operator!=(const Employee& other)
 {
 	if (this->Person::operator!=(other))
 		return true;
-	return (this->employeeID != other.employeeID ||
-		this->position != other.position);
+	return (this->employeeId != other.employeeId ||
+		this->role != other.role ||
+		this->salary != other.salary);
 }

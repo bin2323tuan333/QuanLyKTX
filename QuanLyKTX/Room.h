@@ -1,20 +1,25 @@
 #pragma once
+#include "LinkedList.h"
+#include "Contract.h"
 #include <string>
 using namespace std;
 
 
 
 
-class Room {
+class Room 
+{
 private:
-    int roomID;
-    string roomName, roomType;
+    int roomId;
+    string roomName; 
+    string roomType;
     int capacity;
     int currentOccupancy;
     int floor;
     string building;
-    int isActive;
-    
+    bool isActive;
+
+    LinkedList<Contract*> contracts;
 public:
     // Constructor, Copy constructor, Destructor
     Room(
@@ -25,10 +30,12 @@ public:
         const int& = 0, 
         const int& = 0, 
         const string& = "",
-        const int& = 1
+        const bool& = true
     );
     Room(const Room&);
     ~Room();
+
+    void AddContract(Contract*);
 
     // Getter & Setter
     int getRoomID() const;

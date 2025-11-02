@@ -73,7 +73,6 @@ void RoomManageView::handleInput(int key)
 
 void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 {
-
 	switch (this->sidebarRoomSelected)
 	{
 	case 0:
@@ -82,9 +81,7 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 		LinkedList<Room> list = this->roomService->GetAll();
 
 		if (list.getSize() == 0) 
-		{
 			ConsolaUI::text(33, 9, "Khong co phong nao trong danh sach!", 12);
-		}
 		else
 		{
 			int itemsPerPage = height - 13;
@@ -100,9 +97,9 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 			for (int i = 0; i < itemsPerPage; i++)
 			{
 				int yPos = 9 + i;
-				if (i + roomListIndex * itemsPerPage < list.getSize())
+				if (i + this->roomListIndex * itemsPerPage < list.getSize())
 				{
-					Room* room = list.getAt(i + roomListIndex * itemsPerPage);
+					Room* room = list.getAt(i + this->roomListIndex * itemsPerPage);
 					ConsolaUI::text(33, yPos, to_string(room->getRoomID()), 15);
 					ConsolaUI::text(40, yPos, room->getRoomName(), 15);
 					ConsolaUI::text(53, yPos, room->getRoomType(), 15);
@@ -137,7 +134,7 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 					int i = 0;
 					for (ListNode<Student>* p = studentList.getHead(); p != nullptr; p = p->next)
 					{
-						ConsolaUI::text(40, 14 + i * 2, to_string((p->value).getStudentID()) + " - " + (p->value).getFullName(), 15);
+						ConsolaUI::text(40, 14 + i++ * 2, to_string((p->value).getStudentID()) + " - " + (p->value).getFullName(), 15);
 					}
 				}
 				else 

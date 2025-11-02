@@ -119,7 +119,7 @@ void StudentManageView::handleInput(int key)
 				{
 					ConsolaUI::text(65, 17, "                                ", 1);
 					ConsolaUI::gotoXY(65, 17);
-					this->studentToUpdate.setGender(GetLine());
+					//this->studentToUpdate.setGender(GetLine());
 				}
 				else if (key == '6')
 				{
@@ -175,7 +175,7 @@ void StudentManageView::handleInput(int key)
 		}
 		else if (key == '5')
 		{
-			ConsolaUI::gotoXY(65, 12); this->studentToAdd->setGender(GetLine());
+			//ConsolaUI::gotoXY(65, 12); this->studentToAdd->setGender(GetLine());
 		}
 		else if (key == '6')
 		{
@@ -221,7 +221,7 @@ void StudentManageView::drawSidebarStudent(const int& width, const int& height)
 {
 	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
 	ConsolaUI::text(5, 8, *(this->sidebarStudentList), (0 == this->sidebarStudentSelected) ? 11 : 8);
-	ConsolaUI::text(5, 12, *(this->sidebarStudentList + 1), (1 == this->sidebarStudentSelected) ? 11 : 8);
+	ConsolaUI::text(5, 10, *(this->sidebarStudentList + 1), (1 == this->sidebarStudentSelected) ? 11 : 8);
 }
 
 void StudentManageView::drawStudentServiceContent(const int& width, const int& height)
@@ -229,42 +229,7 @@ void StudentManageView::drawStudentServiceContent(const int& width, const int& h
 	switch (this->sidebarStudentSelected)
 	{
 	case 0:
-		ConsolaUI::text(30, 7, "THEM SINH VIEN MOI:", 14);
-		ConsolaUI::text(35, 8, "[1] Ten Sinh Vien: ", 15);
-		ConsolaUI::text(35, 9, "[2] Ngay Sinh (ngay): ", 15);
-		ConsolaUI::text(35, 10, "[3] Ngay Sinh (thang):", 15);
-		ConsolaUI::text(35, 11, "[4] Ngay Sinh (nam):  ", 15);
-		ConsolaUI::text(35, 12, "[5] Gioi Tinh: ", 15);
-		ConsolaUI::text(35, 13, "[6] Ma So Sinh Vien: ", 15);
-		ConsolaUI::text(35, 14, "[7] Lop: ", 15);
-		ConsolaUI::text(35, 15, "[8] Khoa: ", 15);
-		ConsolaUI::text(35, 16, "[9] So Dien Thoai: ", 15);
-		ConsolaUI::text(35, 17, "[0] Email: ", 15);
-
-		ConsolaUI::text(65, 8, (this->studentToAdd->getFullName() == "") ? "" : this->studentToAdd->getFullName(), 15);
-		ConsolaUI::text(65, 9, (this->tempDay == 0) ? "" : to_string(this->tempDay), 15);
-		ConsolaUI::text(65, 10, (this->tempMonth == 0) ? "" : to_string(this->tempMonth), 15);
-		ConsolaUI::text(65, 11, (this->tempYear == 0) ? "" : to_string(this->tempYear), 15);
-		ConsolaUI::text(65, 12, (this->studentToAdd->getGender() == "") ? "" : this->studentToAdd->getGender(), 15);
-		ConsolaUI::text(65, 13, (this->studentToAdd->getStudentID() == 0) ? "" : to_string(this->studentToAdd->getStudentID()), 15);
-		ConsolaUI::text(65, 14, (this->studentToAdd->getClassName() == "") ? "" : this->studentToAdd->getClassName(), 15);
-		ConsolaUI::text(65, 15, (this->studentToAdd->getFaculty() == "") ? "" : this->studentToAdd->getFaculty(), 15);
-		ConsolaUI::text(65, 16, (this->studentToAdd->getPhoneNumber() == "") ? "" : this->studentToAdd->getPhoneNumber(), 15);
-		ConsolaUI::text(65, 17, (this->studentToAdd->getEmail() == "") ? "" : this->studentToAdd->getEmail(), 15);
-
-
-		ConsolaUI::text(80, 25, "Nhan [ ENTER ] De Them Sinh Vien", 15);
-		ConsolaUI::text(87, 25, "ENTER", 2);
-		if (this->isAddStudentSucessfull)
-		{
-			ConsolaUI::text(45, 20, "THEM SINH VIEN THANH CONG!", 2);
-		}
-		else
-		{
-			ConsolaUI::text(45, 20, "HAY NHAP DUNG THONG TIN SINH VIEN", 15);
-		}
 		break;
-
 	case 1:
 		ConsolaUI::text(30, 7, "TIM KIEM THEO MA SINH VIEN:", 14);
 		ConsolaUI::text(35, 9, "[F] Nhap Ma Sinh Vien: ", 15);
@@ -332,7 +297,7 @@ void StudentManageView::drawStudentServiceContent(const int& width, const int& h
 					ConsolaUI::text(65, 14, to_string(this->studentToUpdate.getDateOfBirth().getDay()), 15);
 					ConsolaUI::text(65, 15, to_string(this->studentToUpdate.getDateOfBirth().getMonth()), 15);
 					ConsolaUI::text(65, 16, to_string(this->studentToUpdate.getDateOfBirth().getYear()), 15);
-					ConsolaUI::text(65, 17, this->studentToUpdate.getGender(), 15);
+					ConsolaUI::text(65, 17, this->studentToUpdate.getGender() == true ? "Nam" : "Nu", 15);
 					ConsolaUI::text(65, 18, to_string(this->studentToUpdate.getStudentID()), 15);
 					ConsolaUI::text(65, 19, this->studentToUpdate.getClassName(), 15);
 					ConsolaUI::text(65, 20, this->studentToUpdate.getFaculty(), 15);

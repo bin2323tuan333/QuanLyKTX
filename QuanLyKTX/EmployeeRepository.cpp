@@ -36,7 +36,7 @@ void EmployeeRepository::loadData()
         stringstream dateStream(token);
         dateStream >> d >> sep1 >> m >> sep2 >> y;
         temp.setDateOfBirth(Date(d, m, y));
-        getline(ss, token, ';'); temp.setGender(token);
+        getline(ss, token, ';'); temp.setGender(token == "1" ? true : false);
         getline(ss, token, ';'); temp.setPosition(token);
         getline(ss, token, ';'); temp.setPhoneNumber(token);
         getline(ss, token, ';'); temp.setEmail(token);
@@ -56,7 +56,7 @@ void EmployeeRepository::saveData()
         file << p->value.getEmployeeID() << ";";
         file << p->value.getFullName() << ";";
         file << p->value.getDateOfBirth() << ";";
-        file << p->value.getGender() << ";";
+        file << (p->value.getGender() == true ? "1" : "0") << ";";
         file << p->value.getPosition() << ";";
         file << p->value.getPhoneNumber() << ";";
         file << p->value.getEmail() << "\n";

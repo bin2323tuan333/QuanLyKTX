@@ -23,7 +23,7 @@ void ContractRepository::loadData()
 		return;
 	string line;
 
-	while (getline(file, line)) 
+	while (getline(file, line))
 	{
 		if (line.empty()) continue;
 		stringstream ss(line);
@@ -64,7 +64,7 @@ void ContractRepository::saveData()
 		file << p->value.getDuration() << ";";
 		file << p->value.getStartDate() << ";";
 		file << p->value.getEndDate() << ";";
-		file << p->value.getRoomID() << ";";  
+		file << p->value.getRoomID() << ";";
 		file << p->value.getStudentID() << "\n";
 	}
 	file.close();
@@ -117,6 +117,16 @@ LinkedList<int> ContractRepository::GetStudentIdsByRoomId(const int& roomID)
 			list.add(p->value.getStudentID());
 	}
 	return list;
+}
+LinkedList<Contract> ContractRepository::GetContractsByStudentId(const int& studentID)
+{
+	LinkedList<Contract> contracts;
+	for (ListNode<Contract>* p = this->list.getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value.getStudentID() == studentID)
+			contracts.add(p->value);
+	}
+	return contracts;
 }
 
 int ContractRepository::GetSize()

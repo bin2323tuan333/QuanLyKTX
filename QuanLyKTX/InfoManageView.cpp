@@ -94,21 +94,26 @@ void InfoManageView::drawInfomationContent(const int& width, const int& height)
 	switch (this->sidebarInfoSelected)
 	{
 	case 0:
-		ConsolaUI::text(30, 7, "THONG TIN NHAN VIEN:", 14);
-		ConsolaUI::text(33, 8, "Ho Va Ten: ", 15);
-		ConsolaUI::text(63, 8, temp->getFullName(), 15);
-		ConsolaUI::text(33, 10, "Ma Nhan Vien:", 15);
-		ConsolaUI::text(63, 10, to_string(temp->getEmployeeID()), 15);
-		ConsolaUI::text(33, 12, "Ngay Sinh:", 15);
-		ConsolaUI::gotoXY(63, 12); ConsolaUI::setTextColor(15); cout << temp->getDateOfBirth();
-		ConsolaUI::text(33, 14, "Gioi Tinh:", 15);
-		ConsolaUI::text(63, 14, temp->getGender(), 15);
-		ConsolaUI::text(33, 16, "Chuc Vu:", 15);
-		ConsolaUI::text(63, 16, temp->getPosition(), 15);
-		ConsolaUI::text(33, 18, "Email:", 15);
-		ConsolaUI::text(63, 18, temp->getEmail(), 15);
-		ConsolaUI::text(33, 20, "So Dien Thoai:", 15);
-		ConsolaUI::text(63, 20, temp->getPhoneNumber(), 15);
+		ConsolaUI::text(30, 7, "THONG TIN CA NHAN (NHAN VIEN)", 14);
+		ConsolaUI::drawBox(32, 9, 50, 14, 8);
+		ConsolaUI::text(34, 10, "Thong tin dinh danh:", 11);
+		ConsolaUI::text(35, 12, "Ho Va Ten: ", 7);
+		ConsolaUI::text(51, 12, temp->getFullName(), 15);
+		ConsolaUI::text(35, 13, "Ma Nhan Vien: ", 7);
+		ConsolaUI::text(51, 13, to_string(temp->getEmployeeID()), 15);
+		ConsolaUI::text(35, 14, "Ngay Sinh: ", 7);
+		ConsolaUI::gotoXY(51, 14); ConsolaUI::setTextColor(15); cout << temp->getDateOfBirth();
+		ConsolaUI::text(35, 15, "Gioi Tinh: ", 7);
+		ConsolaUI::text(51, 15, temp->getGender() == true ? "Nam" : "Nu", 15);
+
+		ConsolaUI::text(34, 17, "---------------------------------------------", 8);
+		ConsolaUI::text(34, 18, "Thong tin lien he & Chuc vu:", 11);
+		ConsolaUI::text(35, 20, "Chuc Vu: ", 7);
+		ConsolaUI::text(51, 20, temp->getPosition(), 15);
+		ConsolaUI::text(35, 21, "Email: ", 7);
+		ConsolaUI::text(51, 21, temp->getEmail(), 15);
+		ConsolaUI::text(35, 22, "So Dien Thoai: ", 7);
+		ConsolaUI::text(51, 22, temp->getPhoneNumber(), 15);
 		break;
 	case 1:
 		ConsolaUI::text(30, 7, "DOI MAT KHAU:", 14);
@@ -146,9 +151,17 @@ void InfoManageView::drawInfomationContent(const int& width, const int& height)
 		}
 		break;
 	case 2:
+	{
 		ConsolaUI::text(30, 7, "DANG XUAT TAI KHOAN:", 14);
-		ConsolaUI::text(53, 15, "Nhan ESC De Dang Xuat", 15);
+		int boxWidth = 50;
+		int boxX = width / 2 - boxWidth / 2;
+		ConsolaUI::drawBox(boxX, 12, boxWidth, 7, 8);
+
+		ConsolaUI::text(width / 2 - 17, 14, "Ban co chac chan muon dang xuat ?", 15);
+
+		ConsolaUI::text(width / 2 - 13, 16, "Nhan [ ESC ] de xac nhan", 10);
 		break;
+	}
 	}
 }
 
@@ -156,8 +169,8 @@ void InfoManageView::drawSidebarInfomation(const int& width, const int& height)
 {
 	ConsolaUI::drawBox(2, 6, 25, height - 7, 7);
 	ConsolaUI::text(5, 8, *(this->sidebarInfoList), (0 == this->sidebarInfoSelected) ? 11 : 8);
-	ConsolaUI::text(5, 12, *(this->sidebarInfoList + 1), (1 == this->sidebarInfoSelected) ? 11 : 8);
-	ConsolaUI::text(5, 16, *(this->sidebarInfoList + 2), (2 == this->sidebarInfoSelected) ? 11 : 8);
+	ConsolaUI::text(5, 10, *(this->sidebarInfoList + 1), (1 == this->sidebarInfoSelected) ? 11 : 8);
+	ConsolaUI::text(5, 12, *(this->sidebarInfoList + 2), (2 == this->sidebarInfoSelected) ? 11 : 8);
 }
 
 

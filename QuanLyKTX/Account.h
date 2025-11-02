@@ -3,41 +3,25 @@
 using namespace std;
 
 
-
-
+class Person;
 class Account
 {
 private:
-    int accountID;
-    string username, password;
-    string role;
-    int studentID, employeeID;
+    string username;
+    string password;
 
+    Person* user;
 public:
-    Account(const int& = 0, const string & = "", const string & = "", const string & = "", const int& = 0, const int& = 0);
+    Account(const string & = "", const string & = "", Person* = nullptr);
     Account(const Account&);
     ~Account();
 
-    // Getter & Setter
-    int getAccountID() const;
-    void setAccountID(const int&);
+    void AddUser(Person*);
 
     string getUsername() const;
     void setUsername(const string&);
-
     string getPassword();
     void setPassword(const string&);
-
-    string getRole();
-    void setRole(const string&);
-
-    int getStudentID();
-    void setStudentID(const int&);
-
-    int getEmployeeID();
-    void setEmployeeID(const int&);
-
-
 
     Account& operator=(const Account&);
     bool operator==(const Account&);
