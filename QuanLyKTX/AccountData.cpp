@@ -53,25 +53,33 @@ LinkedList<Account*>* AccountData::getList()
 	return &(this->list);
 }
 
-//void AccountData::Add(const Account& account)
-//{
-//
-//}
-//void AccountData::Delete(const Account& account)
-//{
-//	
-//}
-//void AccountData::Update(const Account& account)
-//{
-//
-//}
-//LinkedList<Account> AccountData::GetAll()
-//{
-//
-//}
+void AccountData::Add(const Account& account)
+{
+	Account* acc = new Account(account);
+	this->list.add(acc);
+	this->mapUserId.insert(acc->getUserId(), acc);
+}
+void AccountData::Delete(const Account& account)
+{
+	Account* accToDelete = GetByUserId(account.getUserId());
+	if (accToDelete == nullptr)
+		return;
+	this->list.remove(accToDelete);
+	this->mapUserId.remove(accToDelete->getUserId());
+	delete accToDelete;
+}
+void AccountData::Update(const Account& account)
+{
+	Account* accToUpdate = GetByUserId(account.getUserId());
+	if (accToUpdate == nullptr)
+		return;
+	*accToUpdate = account;
+}
 Account* AccountData::GetByUserId(const int& userId)
 {
-	return *this->mapUserId.search(userId);
+	Account** acc = this->mapUserId.search(userId);
+	if (acc == nullptr) return nullptr;
+	return *acc;
 }
 Account* AccountData::GetByUsername(const string& username)
 {
@@ -82,8 +90,7 @@ Account* AccountData::GetByUsername(const string& username)
 	}
 	return nullptr;
 }
-//
-//int AccountData::GetSize()
-//{
-//	return this->list.getSize();
-//}
+int AccountData::GetSize()
+{
+	return this->list.getSize();
+}

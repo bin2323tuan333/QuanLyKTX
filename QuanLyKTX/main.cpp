@@ -1,7 +1,5 @@
 ﻿#include "Application.h"
 
-
-
 int main() 
 {
 	ServiceManager* service = new ServiceManager();

@@ -14,10 +14,10 @@ public:
     ~RoomService();
 
 
-    //int Add(const Room&);
-    //Room* SearchByID(const int&);
-    //LinkedList<Room> GetAll();
-    //LinkedList<Student> GetStudentsInRoom(const int&);
-    //int Update(const Room&);
-    //int Delete(const Room&);
+    int Add(const Room&);
+    Room* SearchByID(const int&);
+    LinkedList<Room*>* GetAll();
+    //LinkedList<Student*> GetStudentsInRoom(const int&);
+    int Update(const Room&);
+    int Delete(const Room&);
 };

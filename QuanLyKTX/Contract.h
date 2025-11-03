@@ -11,12 +11,10 @@ class Contract
 {
 private:
 	int contractId;
-	Date startDate;
-	Date endDate;
-
 	int studentId;
 	int roomId;
-
+	Date startDate;
+	Date endDate;
 
 	Student* student;
 	Room* room;

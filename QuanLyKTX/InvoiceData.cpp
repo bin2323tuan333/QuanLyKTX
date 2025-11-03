@@ -26,6 +26,8 @@ void InvoiceData::loadData()
         Invoice* invoice = new Invoice();
 
         getline(ss, token, ';'); invoice->setInvoiceId(stoi(token));
+        getline(ss, token, ';'); invoice->setContractId(stoi(token));
+        getline(ss, token, ';'); invoice->setEmployeeId(stoi(token));
         getline(ss, token, ';'); invoice->setRoomFee(stoi(token));
         getline(ss, token, ';'); invoice->setInternetFee(stoi(token));
         getline(ss, token, ';'); invoice->setElectricFee(stoi(token));
@@ -46,6 +48,8 @@ void InvoiceData::saveData()
     for (ListNode<Invoice*>* p = this->list.getHead(); p != nullptr; p = p->next)
     {
         file << p->value->getInvoiceId() << ";";
+        file << p->value->getContractId() << ";";
+        file << p->value->getEmployeeId() << ";";
         file << p->value->getRoomFee() << ";";
         file << p->value->getInternetFee() << ";";
         file << p->value->getElectricFee() << ";";
@@ -60,28 +64,37 @@ LinkedList<Invoice*>* InvoiceData::getList()
 {
     return &(this->list);
 }
-//void InvoiceData::Add(const Invoice& invoice)
-//{
-//}
-//
-//void InvoiceData::Delete(const Invoice& invoice)
-//{
-//
-//}
-//void InvoiceData::Update(const Invoice& invoice)
-//{
-//
-//}
-//LinkedList<Invoice> InvoiceData::GetAll()
-//{
-//}
-//Invoice* InvoiceData::GetById(const int& invoiceID)
-//{
-//
-//}
-//
-//
-//int InvoiceData::GetSize()
-//{
-//    return this->list.getSize();
-//}
+
+void InvoiceData::Add(const Invoice& invoice)
+{
+    Invoice* newInvoice = new Invoice(invoice);
+    this->list.add(newInvoice);
+}
+
+void InvoiceData::Delete(const Invoice& invoice)
+{
+    Invoice* inv = this->GetByInvoiceId(invoice.getInvoiceId());
+    this->list.remove(inv);
+    delete inv;
+}
+void InvoiceData::Update(const Invoice& invoice)
+{
+    Invoice* inv = this->GetByInvoiceId(invoice.getInvoiceId());
+    *inv = invoice;
+}
+
+Invoice* InvoiceData::GetByInvoiceId(const int& invoiceID)
+{
+    for (ListNode<Invoice*>* p = this->list.getHead(); p != nullptr; p = p->next)
+    {
+        if (p->value->getInvoiceId() == invoiceID)
+            return p->value;
+    }
+    return nullptr;
+}
+
+
+int InvoiceData::GetSize()
+{
+    return this->list.getSize();
+}

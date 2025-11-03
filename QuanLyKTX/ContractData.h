@@ -19,15 +19,14 @@ public:
 	void saveData();
 	LinkedList<Contract*>* getList();
 
-	//void Add(const Contract&);
-	//void Update(const Contract&);
-	//void Delete(const Contract&);
-	//LinkedList<Contract> GetAll();
+	void Add(const Contract&);
+	void Update(const Contract&);
+	void Delete(const Contract&);
 	Contract* GetByContractId(const int&);
-	//Contract* GetByStudentID(const int&);
+	Contract* GetByStudentID(const int&);
 	//LinkedList<int> GetStudentIdsByRoomId(const int&);
 	//LinkedList<Contract> GetContractsByStudentId(const int&);
 
-	//int GetSize();
+	int GetSize();
 };
 

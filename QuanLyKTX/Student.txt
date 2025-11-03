@@ -1,7 +1,7 @@
-201;Pham Quoc Tuan;08/07/2004;Nam;24T_DT4;CNTT;0812345678;tuan.pq@sv.dut.udn.vn 
-202;Nguyen Thi Dung;12/03/2004;Nu;24XDD1;Xay dung;0812345679;dung.nt@sv.dut.udn.vn 
-203;Le Van Em;25/09/2004;Nam;24HOH2;Hoa hoc;0812345680;em.lv@sv.dut.udn.vn 
-204;Tran Hoang Phi;18/01/2004;Nam;24CKT3;Co khi;0812345681;phi.th@sv.dut.udn.vn 
-205;Bui Thi Giang;30/11/2004;Nu;24KT1;Kien truc;0812345682;giang.bt@sv.dut.udn.vn 
-206;Do Xuan Hiep;05/06/2004;Nam;24DDT1;Dien-Dien tu;0812345683;hiep.dx@sv.dut.udn.vn 
-207;Hoang Van Y;11/04/2004;Nam;24MTE2;Vat lieu;0812345684;y.hv@sv.dut.udn.vn
+201;10;Pham Quoc Tuan;1;08/07/2004;0812345678;tuan.pq@sv.dut.udn.vn;24T_DT4;CNTT
+202;11;Nguyen Thi Dung;0;12/03/2004;0812345679;dung.nt@sv.dut.udn.vn;24XDD1;Xay dung
+203;12;Le Van Em;1;25/09/2004;0812345680;em.lv@sv.dut.udn.vn;24HOH2;Hoa hoc
+204;13;Tran Hoang Phi;1;18/01/2004;0812345681;phi.th@sv.dut.udn.vn;24CKT3;Co khi
+205;14;Bui Thi Giang;0;30/11/2004;0812345682;giang.bt@sv.dut.udn.vn;24KT1;Kien truc
+206;15;Do Xuan Hiep;1;05/06/2004;0812345683;hiep.dx@sv.dut.udn.vn;24DDT1;Dien-Dien tu
+207;16;Hoang Van Y;1;11/04/2004;0812345684;y.hv@sv.dut.udn.vn;24MTE2;Vat lieu

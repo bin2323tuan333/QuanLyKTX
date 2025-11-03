@@ -1,3 +1,3 @@
-101;Le Van An;01/05/1990;Nam;Quan ly;0987123456;an.lv@school.edu.vn
-102;Tran Thi Binh;15/11/1988;Nu;Quan ly;0978234567;binh.tt@school.edu.vn
-103;Nguyen Van Cuong;20/07/1995;Nam;Nhan vien;0912345678;cuong.nv@school.edu.vn
+101;1;Le Van An;1;01/05/1990;0987123456;an.lv@school.edu.vn;Manager;5000000
+102;2;Tran Thi Binh;0;15/11/1988;0978234567;binh.tt@school.edu.vn;Manager;5000000
+103;3;Nguyen Van Cuong;1;20/07/1995;0912345678;cuong.nv@school.edu.vn;Staff;3000000

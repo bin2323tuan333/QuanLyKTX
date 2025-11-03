@@ -19,11 +19,10 @@ public:
     void saveData();
     LinkedList<Room*>* getList();
 
-    //void Add(const Room&);
-    //void Update(const Room&);
-    //void Delete(const Room&);
+    void Add(const Room&);
+    void Update(const Room&);
+    void Delete(const Room&);
     Room* GetByRoomId(const int&);
-    //LinkedList<Room> GetAll();
 
-    //int GetSize();
+    int GetSize();
 };

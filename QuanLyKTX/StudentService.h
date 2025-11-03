@@ -12,11 +12,11 @@ public:
 	~StudentService();
 
 
-	//int Add(const Student&);
-	//Student* SearchByID(const int&);
-	//LinkedList<Student> GetAll();
-	//int Update(const Student&);
-	//int Delete(const Student&);
+	int Add(const Student&);
+	Student* SearchByID(const int&);
+	LinkedList<Student*>* GetAll();
+	int Update(const Student&);
+	int Delete(const Student&);
 };
 
 

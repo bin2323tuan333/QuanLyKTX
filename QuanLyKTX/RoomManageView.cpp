@@ -77,15 +77,15 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 	{
 	case 0:
 	{
-		/*ConsolaUI::text(30, 7, "XEM DANH SACH PHONG:", 14);
-		LinkedList<Room> list = this->roomService->GetAll();
+		ConsolaUI::text(30, 7, "XEM DANH SACH PHONG:", 14);
+		LinkedList<Room*>* list = this->roomService->GetAll();
 
-		if (list.getSize() == 0) 
+		if (list->getSize() == 0)
 			ConsolaUI::text(33, 9, "Khong co phong nao trong danh sach!", 12);
 		else
 		{
 			int itemsPerPage = height - 13;
-			int totalPages = (list.getSize() + itemsPerPage - 1) / itemsPerPage;
+			int totalPages = (list->getSize() + itemsPerPage - 1) / itemsPerPage;
 			this->maxPage = totalPages - 1;
 			ConsolaUI::text(33, 8, "ID", 11);
 			ConsolaUI::text(40, 8, "Ten Phong", 11);
@@ -97,9 +97,9 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 			for (int i = 0; i < itemsPerPage; i++)
 			{
 				int yPos = 9 + i;
-				if (i + this->roomListIndex * itemsPerPage < list.getSize())
+				if (i + this->roomListIndex * itemsPerPage < list->getSize())
 				{
-					Room* room = list.getAt(i + this->roomListIndex * itemsPerPage);
+					Room* room = *list->getAt(i + this->roomListIndex * itemsPerPage);
 					ConsolaUI::text(33, yPos, to_string(room->getRoomId()), 15);
 					ConsolaUI::text(40, yPos, room->getRoomName(), 15);
 					ConsolaUI::text(53, yPos, room->getRoomType(), 15);
@@ -114,17 +114,17 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 			ConsolaUI::text(35, height - 1, "[ Q ] Trang Truoc", 3);
 			ConsolaUI::text(75, height - 1, "[ P ] Trang Sau", 3);
 		}
-		break;*/
+		break;
 	}
 	case 1:
 	{
-		/*ConsolaUI::text(30, 7, "TIM KIEM THEO ID PHONG", 14);
+		ConsolaUI::text(30, 7, "TIM KIEM THEO ID PHONG", 14);
 		ConsolaUI::text(35, 9, "[F] Nhap Ma Phong: ", 15);
 		ConsolaUI::drawBox(65, 8, 25, 2, 15);
 		Room* roomToUpdate = this->roomService->SearchByID(this->roomIDToSearch);
 		if (this->roomIDToSearch != 0)
 		{
-			if (roomToUpdate != nullptr)
+			/*if (roomToUpdate != nullptr)
 			{
 				ConsolaUI::text(37, 11, "Phong:    " + roomToUpdate->getRoomName(), 9);
 				ConsolaUI::text(37, 12, "So Nguoi: " + to_string(roomToUpdate->getCurrentOccupancy()) + "/" + to_string(roomToUpdate->getCapacity()), 9);
@@ -145,8 +145,8 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 			else
 			{
 				ConsolaUI::text(35, 11, ">> KHONG TIM THAY PHONG: " + to_string(this->roomIDToSearch) + " <<", 12);
-			}
-		}*/
+			}*/
+		}
 		break;
 	}
 	case 2:

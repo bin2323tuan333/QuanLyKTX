@@ -46,11 +46,11 @@ void Application::run()
 			}
 			if (currentAccount != nullptr)
 			{
-				if (currentAccount->getUser()->getRole() == "manager")
+				if (currentAccount->getUser()->getRole() == "Manager")
 				{
 					this->employeePage->show();
 				}
-				else if (currentAccount->getUser()->getRole() == "student")
+				else if (currentAccount->getUser()->getRole() == "Student")
 				{
 					//this->studentPage->show();
 				}

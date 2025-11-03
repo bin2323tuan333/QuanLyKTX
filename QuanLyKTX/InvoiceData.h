@@ -17,11 +17,10 @@ public:
     void saveData();
     LinkedList<Invoice*>* getList();
 
-    //void Add(const Invoice&);
-    //void Update(const Invoice&);
-    //void Delete(const Invoice&);
-    //Invoice* GetById(const int&);
-    //LinkedList<Invoice> GetAll();
+    void Add(const Invoice&);
+    void Update(const Invoice&);
+    void Delete(const Invoice&);
+    Invoice* GetByInvoiceId(const int&);
 
-    //int GetSize();
+    int GetSize();
 };

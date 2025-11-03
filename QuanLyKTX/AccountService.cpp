@@ -44,14 +44,14 @@ int AccountService::changePassword(const int& userId, const string& oldPass, con
 	temp->setPassword(newPass);
 	return 1;
 }
-//
-//
-//
-//int AccountService::Add(const Account& temp)
-//{
-//	this->accountRepo.Add(temp);
-//	return 1;
-//}
+
+
+
+int AccountService::Add(const Account& temp)
+{
+	this->accountData.Add(temp);
+	return 1;
+}
 Account* AccountService::SearchByUserId(const int& userId)
 {
 	return this->accountData.GetByUserId(userId);
@@ -60,17 +60,17 @@ Account* AccountService::SearchByUsername(const string& username)
 {
 	return this->accountData.GetByUsername(username);
 }
-//LinkedList<Account> AccountService::GetAll()
-//{
-//	return this->accountRepo.GetAll();
-//}
-//int AccountService::Update(const Account& temp)
-//{
-//	this->accountRepo.Update(temp);
-//	return 1;
-//}
-//int AccountService::Delete(const Account& temp)
-//{
-//	this->accountRepo.Delete(temp);
-//	return 1;
-//}
+LinkedList<Account*>* AccountService::GetAll()
+{
+	return this->accountData.getList();
+}
+int AccountService::Update(const Account& temp)
+{
+	this->accountData.Update(temp);
+	return 1;
+}
+int AccountService::Delete(const Account& temp)
+{
+	this->accountData.Delete(temp);
+	return 1;
+}

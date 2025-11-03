@@ -68,29 +68,36 @@ LinkedList<Room*>* RoomData::getList()
 	return &(this->list);
 }
 
-//void RoomData::Add(const Room& room)
-//{
-//
-//}
-//
-//void RoomData::Delete(const Room& room)
-//{
-//
-//}
-//void RoomData::Update(const Room& room)
-//{
-//
-//}
-//LinkedList<Room> RoomData::GetAll()
-//{
-//}
+void RoomData::Add(const Room& room)
+{
+	Room* newRoom = new Room(room);
+	this->list.add(newRoom);
+	this->mapRoomId.insert(newRoom->getRoomId(), newRoom);
+}
+
+void RoomData::Delete(const Room& room)
+{
+	Room* roomToDelete = GetByRoomId(room.getRoomId());
+	if (roomToDelete == nullptr) return;
+	this->list.remove(roomToDelete);
+	this->mapRoomId.remove(roomToDelete->getRoomId());
+	delete roomToDelete;
+}
+void RoomData::Update(const Room& room)
+{
+	Room* roomToUpdate = GetByRoomId(room.getRoomId());
+	if (roomToUpdate == nullptr) return;
+	*roomToUpdate = room;
+}
 Room* RoomData::GetByRoomId(const int& roomId)
 {
-	return *this->mapRoomId.search(roomId);
+	Room** room = this->mapRoomId.search(roomId);
+	if (room == nullptr)
+		return nullptr;
+	return *room;
 }
-//
-//
-//int RoomData::GetSize()
-//{
-//	return this->list.getSize();
-//}
+	
+int RoomData::GetSize()
+{
+	return this->list.getSize();
+}

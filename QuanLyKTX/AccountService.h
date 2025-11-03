@@ -23,10 +23,10 @@ public:
     int getCurrentId();
     int changePassword(const int&, const string&, const string&, const string&);
 
-    //int Add(const Account&);
+    int Add(const Account&);
     Account* SearchByUserId(const int&);
     Account* SearchByUsername(const string&);
-    //LinkedList<Account> GetAll();
-    //int Update(const Account&);
-    //int Delete(const Account&);
+    LinkedList<Account*>* GetAll();
+    int Update(const Account&);
+    int Delete(const Account&);
 };

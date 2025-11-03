@@ -9,9 +9,9 @@ public:
     EmployeeService(EmployeeData&);
     ~EmployeeService();
 
-    //int Add(const Employee&);
-    //Employee* SearchByID(const int&);
-    //LinkedList<Employee> GetAll();
-    //int Update(const Employee&);
-    //int Delete(const Employee&);
+    int Add(const Employee&);
+    Employee* SearchByID(const int&);
+    LinkedList<Employee*>* GetAll();
+    int Update(const Employee&);
+    int Delete(const Employee&);
 };

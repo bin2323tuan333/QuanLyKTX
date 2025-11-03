@@ -10,19 +10,19 @@ RoomService::~RoomService()
 }
 
 
-//int RoomService::Add(const Room& temp)
-//{
-//	this->roomRepo.Add(temp);
-//	return 1;
-//}
-//Room* RoomService::SearchByID(const int& id)
-//{
-//	return this->roomRepo.GetById(id);
-//}
-//LinkedList<Room> RoomService::GetAll()
-//{
-//	return this->roomRepo.GetAll();
-//}
+int RoomService::Add(const Room& temp)
+{
+	this->roomData.Add(temp);
+	return 1;
+}
+Room* RoomService::SearchByID(const int& id)
+{
+	return this->roomData.GetByRoomId(id);
+}
+LinkedList<Room*>* RoomService::GetAll()
+{
+	return this->roomData.getList();
+}
 //LinkedList<Student> RoomService::GetStudentsInRoom(const int& roomId)
 //{
 //	LinkedList<int> studentIds = this->contractRepo.GetStudentIdsByRoomId(roomId);
@@ -33,13 +33,13 @@ RoomService::~RoomService()
 //	}
 //	return students;
 //}
-//int RoomService::Update(const Room& temp)
-//{
-//	this->roomRepo.Update(temp);
-//	return 1;
-//}
-//int RoomService::Delete(const Room& temp)
-//{
-//	this->roomRepo.Delete(temp);
-//	return 1;
-//}
+int RoomService::Update(const Room& temp)
+{
+	this->roomData.Update(temp);
+	return 1;
+}
+int RoomService::Delete(const Room& temp)
+{
+	this->roomData.Delete(temp);
+	return 1;
+}

@@ -19,12 +19,11 @@ public:
     void saveData();
     LinkedList<Account*>* getList();
 
-    //void Add(const Account&);
-    //void Update(const Account&);
-    //void Delete(const Account&);
+    void Add(const Account&);
+    void Update(const Account&);
+    void Delete(const Account&);
     Account* GetByUserId(const int&);
     Account* GetByUsername(const string&);
-    //LinkedList<Account> GetAll();
 
-    //int GetSize();
+    int GetSize();
 };

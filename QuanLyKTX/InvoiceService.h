@@ -9,9 +9,9 @@ public:
     InvoiceService(InvoiceData&);
     ~InvoiceService();
 
-    //int Add(const Invoice&);
-    //Invoice* SearchByID(const int&);
-    //LinkedList<Invoice> GetAll();
-    //int Update(const Invoice&);
-    //int Delete(const Invoice&);
+    int Add(const Invoice&);
+    Invoice* SearchByID(const int&);
+    LinkedList<Invoice*>* GetAll();
+    int Update(const Invoice&);
+    int Delete(const Invoice&);
 };

@@ -19,11 +19,10 @@ public:
     void saveData();
     LinkedList<Employee*>* getList();
 
-    //void Add(const Employee&);
-    //void Update(const Employee&);
-    //void Delete(const Employee&);
+    void Add(const Employee&);
+    void Update(const Employee&);
+    void Delete(const Employee&);
     Employee* GetByEmployeeId(const int&);
-    //LinkedList<Employee> GetAll();
 
-    //int GetSize();
+    int GetSize();
 };
