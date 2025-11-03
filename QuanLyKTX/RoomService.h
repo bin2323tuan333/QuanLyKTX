@@ -1,23 +1,23 @@
 #pragma once
-#include "RoomRepository.h"
-#include "StudentRepository.h"
-#include "ContractRepository.h"
+#include "RoomData.h"
+#include "StudentData.h"
+#include "ContractData.h"
 
 
 class RoomService {
 private:
-    RoomRepository& roomRepo;
-    StudentRepository& studentRepo;
-    ContractRepository& contractRepo;
+    RoomData& roomData;
+    StudentData& studentData;
+    ContractData& contractData;
 public:
-    RoomService(RoomRepository&, StudentRepository&, ContractRepository&);
+    RoomService(RoomData&, StudentData&, ContractData&);
     ~RoomService();
 
 
-    int Add(const Room&);
-    Room* SearchByID(const int&);
-    LinkedList<Room> GetAll();
-    LinkedList<Student> GetStudentsInRoom(const int&);
-    int Update(const Room&);
-    int Delete(const Room&);
+    //int Add(const Room&);
+    //Room* SearchByID(const int&);
+    //LinkedList<Room> GetAll();
+    //LinkedList<Student> GetStudentsInRoom(const int&);
+    //int Update(const Room&);
+    //int Delete(const Room&);
 };

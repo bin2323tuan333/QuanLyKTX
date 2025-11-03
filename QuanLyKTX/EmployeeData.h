@@ -9,7 +9,7 @@ class EmployeeData
 private:
     string fileName;
     LinkedList<Employee*> list;
-    HashTable<int, Employee*> map;
+    HashTable<int, Employee*> mapEmployeeId;
 
 public:
     EmployeeData(const string&);
@@ -17,12 +17,13 @@ public:
 
     void loadData();
     void saveData();
+    LinkedList<Employee*>* getList();
 
-    void Add(const Employee&);
-    void Update(const Employee&);
-    void Delete(const Employee&);
-    Employee* GetById(const int&);
-    LinkedList<Employee> GetAll();
+    //void Add(const Employee&);
+    //void Update(const Employee&);
+    //void Delete(const Employee&);
+    Employee* GetByEmployeeId(const int&);
+    //LinkedList<Employee> GetAll();
 
-    int GetSize();
+    //int GetSize();
 };

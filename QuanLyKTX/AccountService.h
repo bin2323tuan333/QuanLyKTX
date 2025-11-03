@@ -1,32 +1,32 @@
 #pragma once
 #include "Account.h"
-#include "AccountRepository.h"
+#include "AccountData.h"
 
 
 
 class AccountService
 {
 private:
-    AccountRepository& accountRepo;
+    AccountData& accountData;
 
     bool isLogin;
-    int currentID;
+    int currentId;
 
 public:
-    AccountService(AccountRepository&);
+    AccountService(AccountData&);
     ~AccountService();
 
 
     int SignIn(const string&, const string&);
     bool isSignIn();
     void setSignIn(const bool&);
-    int getCurrentID();
+    int getCurrentId();
     int changePassword(const int&, const string&, const string&, const string&);
 
-    int Add(const Account&);
-    Account* SearchByID(const int&);
+    //int Add(const Account&);
+    Account* SearchByUserId(const int&);
     Account* SearchByUsername(const string&);
-    LinkedList<Account> GetAll();
-    int Update(const Account&);
-    int Delete(const Account&);
+    //LinkedList<Account> GetAll();
+    //int Update(const Account&);
+    //int Delete(const Account&);
 };

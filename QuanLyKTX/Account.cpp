@@ -21,6 +21,10 @@ void Account::AddUser(Person* user)
 {
 	this->user = user;
 }
+Person* Account::getUser() const
+{
+	return this->user;
+}
 
 
 int Account::getUserId() const

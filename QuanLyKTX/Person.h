@@ -1,7 +1,9 @@
 #pragma once
 #include "Date.h"
+#include "Account.h"
 #include <iostream>
 using namespace std;
+
 
 class Account;
 class Person
@@ -28,6 +30,7 @@ public:
 	virtual ~Person();
 
 	void AddAccount(Account*);
+	Account* getAccount() const;
 	virtual string getRole() = 0;
 
 	string getFullName();

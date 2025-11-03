@@ -21,6 +21,11 @@ void Room::AddContract(Contract* contract)
 {
 	this->contracts.add(contract);
 }
+LinkedList<Contract*>* Room::getContracts()
+{
+	return &this->contracts;
+}
+
 
 // Getter & Setter
 int Room::getRoomId() const
@@ -79,7 +84,7 @@ void Room::setBuilding(const string& building)
 {
 	this->building = building;
 }
-int Room::getIsActive()
+bool Room::getIsActive()
 {
 	return this->isActive;
 }

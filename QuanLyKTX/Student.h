@@ -5,7 +5,7 @@
 
 
 
-
+class Contract;
 class Student : public Person
 {
 private:
@@ -31,6 +31,7 @@ public:
     ~Student();
 
     void AddContract(Contract*);
+    LinkedList<Contract*>* getContracts();
     string getRole() override;
 
     // Getter & Setter

@@ -4,6 +4,7 @@
 Application::Application(ServiceManager* service)
 	:service(service), isRunning(false), isSignIn(false)
 {
+	this->currentAccount = nullptr;
 	this->homePage = new HomePage(
 		service->getAccountService()
 	);
@@ -33,19 +34,23 @@ void Application::run()
 		this->isSignIn = this->service->getAccountService()->isSignIn();
 		if (!isSignIn)
 		{
+			this->currentAccount = nullptr;
 			this->homePage->show();
 		}
 		else
 		{
-			int accountID = this->service->getAccountService()->getCurrentID();
-			Account* currentAccount = this->service->getAccountService()->SearchByID(accountID);
+			if (this->currentAccount == nullptr)
+			{
+				int userId = this->service->getAccountService()->getCurrentId();
+				this->currentAccount = this->service->getAccountService()->SearchByUserId(userId);
+			}
 			if (currentAccount != nullptr)
 			{
-				if (currentAccount->getRole() == "Manager")
+				if (currentAccount->getUser()->getRole() == "manager")
 				{
 					this->employeePage->show();
 				}
-				else if (currentAccount->getRole() == "Student")
+				else if (currentAccount->getUser()->getRole() == "student")
 				{
 					//this->studentPage->show();
 				}

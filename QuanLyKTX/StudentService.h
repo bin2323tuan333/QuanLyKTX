@@ -1,22 +1,22 @@
 #pragma once
-#include "StudentRepository.h"
+#include "StudentData.h"
 
 
 class StudentService
 {
 private:
-	StudentRepository& studentRepo;
+	StudentData& studentData;
 
 public:
-	StudentService(StudentRepository&);
+	StudentService(StudentData&);
 	~StudentService();
 
 
-	int Add(const Student&);
-	Student* SearchByID(const int&);
-	LinkedList<Student> GetAll();
-	int Update(const Student&);
-	int Delete(const Student&);
+	//int Add(const Student&);
+	//Student* SearchByID(const int&);
+	//LinkedList<Student> GetAll();
+	//int Update(const Student&);
+	//int Delete(const Student&);
 };
 
 

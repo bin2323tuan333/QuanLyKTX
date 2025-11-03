@@ -19,22 +19,48 @@ Invoice::~Invoice()
 void Invoice::AddContract(Contract* contract)
 {
 	this->contract = contract;
+	contract->AddInvoice(this);
 }
 void Invoice::AddEmployee(Employee* employee)
 {
 	this->employee = employee;
 }
-
+Contract* Invoice::getContract()
+{
+	return this->contract;
+}
+Employee* Invoice::getEmployee()
+{
+	return this->employee;
+}
 
 // Getter & Setter implementations
-int Invoice::getInvoiceID() const
+int Invoice::getInvoiceId() const
 {
 	return this->invoiceId;
 }
 
-void Invoice::setInvoiceID(const int& id)
+void Invoice::setInvoiceId(const int& id)
 {
 	this->invoiceId = id;
+}
+int Invoice::getEmployeeId() const
+{
+	return this->employeeId;
+}
+
+void Invoice::setEmployeeId(const int& id)
+{
+	this->employeeId = id;
+}
+int Invoice::getContractId() const
+{
+	return this->contractId;
+}
+
+void Invoice::setContractId(const int& id)
+{
+	this->contractId = id;
 }
 int Invoice::getRoomFee()
 {

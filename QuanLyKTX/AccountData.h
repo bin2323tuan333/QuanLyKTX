@@ -9,8 +9,7 @@ class AccountData
 private:
     string fileName;
     LinkedList<Account*> list;
-    HashTable<string, Account*> map;
-
+    HashTable<int, Account*> mapUserId;
 
 public:
     AccountData(const string&);
@@ -18,13 +17,14 @@ public:
 
     void loadData();
     void saveData();
+    LinkedList<Account*>* getList();
 
-    void Add(const Account&);
-    void Update(const Account&);
-    void Delete(const Account&);
-    Account* GetById(const int&);
+    //void Add(const Account&);
+    //void Update(const Account&);
+    //void Delete(const Account&);
+    Account* GetByUserId(const int&);
     Account* GetByUsername(const string&);
-    LinkedList<Account> GetAll();
+    //LinkedList<Account> GetAll();
 
-    int GetSize();
+    //int GetSize();
 };

@@ -30,7 +30,7 @@ void AccountData::loadData()
 		getline(ss, token, ';'); acc->setUsername(token);
 		getline(ss, token, ';'); acc->setPassword(token);
 		this->list.add(acc);
-		this->map.insert(acc->getUsername(), acc);
+		this->mapUserId.insert(acc->getUserId(), acc);
 	}
 	file.close();
 }
@@ -48,7 +48,10 @@ void AccountData::saveData()
 	file.close();
 }
 
-
+LinkedList<Account*>* AccountData::getList()
+{
+	return &(this->list);
+}
 
 //void AccountData::Add(const Account& account)
 //{
@@ -66,14 +69,19 @@ void AccountData::saveData()
 //{
 //
 //}
-//Account* AccountData::GetById(const int& accountID)
-//{
-//
-//}
-//Account* AccountData::GetByUsername(const string& username)
-//{
-//
-//}
+Account* AccountData::GetByUserId(const int& userId)
+{
+	return *this->mapUserId.search(userId);
+}
+Account* AccountData::GetByUsername(const string& username)
+{
+	for (ListNode<Account*>* p = this->list.getHead(); p != nullptr; p = p->next)
+	{
+		if (username == p->value->getUsername())
+			return p->value;
+	}
+	return nullptr;
+}
 //
 //int AccountData::GetSize()
 //{

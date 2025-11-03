@@ -20,6 +20,10 @@ void Student::AddContract(Contract* contract)
 {
 	this->contracts.add(contract);
 }
+LinkedList<Contract*>* Student::getContracts()
+{
+	return &(this->contracts);
+}
 string Student::getRole()
 {
 	return "student";

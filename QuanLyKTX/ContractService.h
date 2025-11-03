@@ -1,21 +1,21 @@
 #pragma once
-#include "ContractRepository.h"
-#include "StudentRepository.h"
+#include "ContractData.h"
+#include "StudentData.h"
 
 class ContractService {
 private:
-    ContractRepository& contractRepo;
-    StudentRepository& studentRepo;
+    ContractData& contractData;
+    StudentData& studentData;
 
 public:
-    ContractService(ContractRepository&, StudentRepository&);
+    ContractService(ContractData&, StudentData&);
     ~ContractService();
 
-    int Add(const Contract&);
-    LinkedList<Contract> GetAll();
-    int Update(const Contract&);
-    int Delete(const Contract&);
+    //int Add(const Contract&);
+    //LinkedList<Contract> GetAll();
+    //int Update(const Contract&);
+    //int Delete(const Contract&);
 
-    Contract* SearchByID(const int&);
-    LinkedList<Contract> GetContractsByStudentId(const int&);
+    //Contract* SearchByID(const int&);
+    //LinkedList<Contract> GetContractsByStudentId(const int&);
 };

@@ -4,7 +4,9 @@
 #include "Student.h"
 #include "Invoice.h"
 
-
+class Invoice;
+class Student;
+class Room;
 class Contract
 {
 private:
@@ -12,12 +14,18 @@ private:
 	Date startDate;
 	Date endDate;
 
+	int studentId;
+	int roomId;
+
+
 	Student* student;
 	Room* room;
 	LinkedList<Invoice*> invoices;
 public:
 	// Constructor, Copy constructor, Destructor
 	Contract(
+		const int& = 0,
+		const int& = 0,
 		const int& = 0,
 		const Date & = Date(),
 		const Date & = Date(),
@@ -30,10 +38,17 @@ public:
 	void AddStudent(Student*);
 	void AddRoom(Room*);
 	void AddInvoice(Invoice*);
+	Student* getStudent();
+	Room* getRoom();
+	LinkedList<Invoice*>* getInvoices();
 
 	// Getter & Setter
 	int getContractId() const;
 	void setContractId(const int&);
+	int getStudentId() const;
+	void setStudentId(const int&);
+	int getRoomId() const;
+	void setRoomId(const int&);
 	Date getStartDate();
 	void setStartDate(const Date&);
 	Date getEndDate();

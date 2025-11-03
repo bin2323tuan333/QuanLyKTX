@@ -25,7 +25,7 @@ void InvoiceData::loadData()
         string token;
         Invoice* invoice = new Invoice();
 
-        getline(ss, token, ';'); invoice->setInvoiceID(stoi(token));
+        getline(ss, token, ';'); invoice->setInvoiceId(stoi(token));
         getline(ss, token, ';'); invoice->setRoomFee(stoi(token));
         getline(ss, token, ';'); invoice->setInternetFee(stoi(token));
         getline(ss, token, ';'); invoice->setElectricFee(stoi(token));
@@ -45,7 +45,7 @@ void InvoiceData::saveData()
 
     for (ListNode<Invoice*>* p = this->list.getHead(); p != nullptr; p = p->next)
     {
-        file << p->value->getInvoiceID() << ";";
+        file << p->value->getInvoiceId() << ";";
         file << p->value->getRoomFee() << ";";
         file << p->value->getInternetFee() << ";";
         file << p->value->getElectricFee() << ";";
@@ -56,7 +56,10 @@ void InvoiceData::saveData()
     file.close();
 }
 
-
+LinkedList<Invoice*>* InvoiceData::getList()
+{
+    return &(this->list);
+}
 //void InvoiceData::Add(const Invoice& invoice)
 //{
 //}

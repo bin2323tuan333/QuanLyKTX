@@ -1,7 +1,7 @@
 #pragma once
+#include "Person.h"
 #include <string>
 using namespace std;
-
 
 class Person;
 class Account
@@ -18,6 +18,7 @@ public:
     ~Account();
 
     void AddUser(Person*);
+    Person* getUser() const;
 
     int getUserId() const;
     void setUserId(const int&);

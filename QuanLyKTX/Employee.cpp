@@ -16,10 +16,7 @@ Employee::~Employee()
 }
 
 
-string Employee::getRole()
-{
-	return this->role;
-}
+
 
 
 // Getter & Setter

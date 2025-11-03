@@ -67,7 +67,7 @@ void InfoManageView::handleInput(int key)
 		if (key == 13)
 		{
 			this->isError = this->accountService->changePassword(
-				this->accountService->getCurrentID(),
+				this->accountService->getCurrentId(),
 				this->oldPass,
 				this->newPass,
 				this->reEnterNewPass
@@ -89,8 +89,9 @@ void InfoManageView::show()
 
 void InfoManageView::drawInfomationContent(const int& width, const int& height)
 {
-	Account* account = this->accountService->SearchByID(this->accountService->getCurrentID());
-	Employee* temp = this->employeeService->SearchByID(account->getEmployeeID());
+	Account* account = this->accountService->SearchByUserId(this->accountService->getCurrentId());
+	Person* person = account->getUser();
+	Employee* temp = dynamic_cast<Employee*>(person);
 	switch (this->sidebarInfoSelected)
 	{
 	case 0:
@@ -100,7 +101,7 @@ void InfoManageView::drawInfomationContent(const int& width, const int& height)
 		ConsolaUI::text(35, 12, "Ho Va Ten: ", 7);
 		ConsolaUI::text(51, 12, temp->getFullName(), 15);
 		ConsolaUI::text(35, 13, "Ma Nhan Vien: ", 7);
-		ConsolaUI::text(51, 13, to_string(temp->getEmployeeID()), 15);
+		ConsolaUI::text(51, 13, to_string(temp->getEmployeeId()), 15);
 		ConsolaUI::text(35, 14, "Ngay Sinh: ", 7);
 		ConsolaUI::gotoXY(51, 14); ConsolaUI::setTextColor(15); cout << temp->getDateOfBirth();
 		ConsolaUI::text(35, 15, "Gioi Tinh: ", 7);
@@ -109,7 +110,7 @@ void InfoManageView::drawInfomationContent(const int& width, const int& height)
 		ConsolaUI::text(34, 17, "---------------------------------------------", 8);
 		ConsolaUI::text(34, 18, "Thong tin lien he & Chuc vu:", 11);
 		ConsolaUI::text(35, 20, "Chuc Vu: ", 7);
-		ConsolaUI::text(51, 20, temp->getPosition(), 15);
+		ConsolaUI::text(51, 20, temp->getRole(), 15);
 		ConsolaUI::text(35, 21, "Email: ", 7);
 		ConsolaUI::text(51, 21, temp->getEmail(), 15);
 		ConsolaUI::text(35, 22, "So Dien Thoai: ", 7);

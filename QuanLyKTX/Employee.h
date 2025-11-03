@@ -27,13 +27,10 @@ public:
     ~Employee();
 
 
-    string getRole() override;
-
-
     // Getter & Setter
     int getEmployeeId() const;
     void setEmployeeId(const int&);
-    string getRole();
+    string getRole() override;
     void setRole(const string&);
     int getSalary();
     void setSalary(const int&);

@@ -62,7 +62,7 @@ template <typename Key, typename Value>
 HashTable<Key, Value>::HashTable(int size)
 	: capacity(size)
 {
-	this->table = new HashNode<Key, Value>* (this->capacity);
+	this->table = new HashNode<Key, Value>*[this->capacity];
 	for (int i = 0; i < this->capacity; ++i)
 		this->table[i] = nullptr;
 }

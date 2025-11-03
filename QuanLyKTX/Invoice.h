@@ -12,6 +12,8 @@ private:
     int totalAmount;
     Date createdDate;
     
+    int employeeId;
+    int contractId;
     Contract* contract;
     Employee* employee;
 
@@ -33,22 +35,18 @@ public:
 
     void AddContract(Contract*);
     void AddEmployee(Employee*);
+    Contract* getContract();
+    Employee* getEmployee();
 
     // Getter & Setter
-    int getInvoiceID() const;
-    void setInvoiceID(const int&);
+    int getInvoiceId() const;
+    void setInvoiceId(const int&);
 
-    int getStudentID();
-    void setStudentID(const int&);
+    int getContractId() const;
+    void setContractId(const int&);
 
-    int getEmployeeID();
-    void setEmployeeID(const int&);
-
-    int getMonth();
-    void setMonth(const int&);
-
-    int getYear();
-    void setYear(const int&);
+    int getEmployeeId() const;
+    void setEmployeeId(const int&);
 
     int getRoomFee();
     void setRoomFee(const int&);

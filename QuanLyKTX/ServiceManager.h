@@ -9,12 +9,12 @@
 
 class ServiceManager {
 private:
-	AccountRepository* accountRepo;
-	ContractRepository* contractRepo;
-	EmployeeRepository* employeeRepo;
-	InvoiceRepository* invoiceRepo;
-	RoomRepository* roomRepo;
-	StudentRepository* studentRepo;
+	AccountData* accountData;
+	ContractData* contractData;
+	EmployeeData* employeeData;
+	InvoiceData* invoiceData;
+	RoomData* roomData;
+	StudentData* studentData;
 
 	AccountService* accountService;
 	ContractService* contractService;
@@ -27,7 +27,7 @@ public:
 	ServiceManager();
 	~ServiceManager();
 
-
+	void linking();
 	void initialize();
 	void shutdown();
 

@@ -35,8 +35,8 @@ void RoomData::loadData()
 		getline(ss, token, ';'); room->setFloor(stoi(token));
 		getline(ss, token, ';'); room->setBuilding(token);
 		getline(ss, token, ';'); room->setIsActive(token == "1" ? true : false);
-
 		this->list.add(room);
+		this->mapRoomId.insert(room->getRoomId(), room);
 	}
 	file.close();
 }
@@ -63,7 +63,10 @@ void RoomData::saveData()
 	file.close();
 }
 
-
+LinkedList<Room*>* RoomData::getList()
+{
+	return &(this->list);
+}
 
 //void RoomData::Add(const Room& room)
 //{
@@ -81,10 +84,10 @@ void RoomData::saveData()
 //LinkedList<Room> RoomData::GetAll()
 //{
 //}
-//Room* RoomData::GetById(const int& roomID)
-//{
-//
-//}
+Room* RoomData::GetByRoomId(const int& roomId)
+{
+	return *this->mapRoomId.search(roomId);
+}
 //
 //
 //int RoomData::GetSize()

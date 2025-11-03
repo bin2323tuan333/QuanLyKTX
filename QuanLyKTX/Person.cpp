@@ -15,6 +15,11 @@ Person::~Person()
 void Person::AddAccount(Account* acc)
 {
 	this->userAccount = acc;
+	acc->AddUser(this);
+}
+Account* Person::getAccount() const
+{
+	return this->userAccount;
 }
 
 string Person::getFullName()

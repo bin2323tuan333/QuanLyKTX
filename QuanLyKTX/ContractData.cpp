@@ -33,6 +33,7 @@ void ContractData::loadData()
 		getline(ss, token, ';'); contract->setStartDate(Date::stringToDate(token));
 		getline(ss, token, ';'); contract->setEndDate(Date::stringToDate(token));
 		this->list.add(contract);
+		this->mapContractId.insert(contract->getContractId(), contract);
 	}
 	file.close();
 }
@@ -48,6 +49,11 @@ void ContractData::saveData()
 		file << p->value->getEndDate() << endl;
 	}
 	file.close();
+}
+
+LinkedList<Contract*>* ContractData::getList()
+{
+	return &(this->list);
 }
 
 //void ContractData::Add(const Contract& contract)
@@ -66,10 +72,10 @@ void ContractData::saveData()
 //LinkedList<Contract> ContractData::GetAll()
 //{
 //}
-//Contract* ContractData::GetById(const int& contractID)
-//{
-//
-//}
+Contract* ContractData::GetByContractId(const int& contractID)
+{
+	return *this->mapContractId.search(contractID);
+}
 //Contract* ContractData::GetByStudentID(const int& studentID)
 //{
 //

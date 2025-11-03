@@ -39,7 +39,7 @@ void EmployeeData::loadData()
         getline(ss, token, ';'); employee->setSalary(stoi(token));
 
         this->list.add(employee);
-        this->map.insert(employee->getEmployeeId(), employee);
+        this->mapEmployeeId.insert(employee->getEmployeeId(), employee);
     }
     file.close();
 }
@@ -63,7 +63,10 @@ void EmployeeData::saveData()
     }
     file.close();
 }
-
+LinkedList<Employee*>* EmployeeData::getList()
+{
+    return &(this->list);
+}
 //void EmployeeData::Add(const Employee& employee)
 //{
 //}
@@ -80,10 +83,10 @@ void EmployeeData::saveData()
 //{
 //
 //}
-//Employee* EmployeeData::GetById(const int& employeeID)
-//{
-//
-//}
+Employee* EmployeeData::GetByEmployeeId(const int& employeeID)
+{
+    return *this->mapEmployeeId.search(employeeID);
+}
 //
 //
 //int EmployeeData::GetSize()

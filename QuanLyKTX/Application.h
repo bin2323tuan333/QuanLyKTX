@@ -15,7 +15,7 @@ private:
 
     bool isRunning;
     bool isSignIn;
-
+    Account* currentAccount;
 public:
     Application(ServiceManager*);
     ~Application();

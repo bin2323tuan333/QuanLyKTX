@@ -6,7 +6,7 @@ using namespace std;
 
 
 
-
+class Contract;
 class Room 
 {
 private:
@@ -36,6 +36,7 @@ public:
     ~Room();
 
     void AddContract(Contract*);
+    LinkedList<Contract*>* getContracts();
 
     // Getter & Setter
     int getRoomId() const;
@@ -59,7 +60,7 @@ public:
     string getBuilding();
     void setBuilding(const string&);
 
-    int getIsActive();
+    bool getIsActive();
     void setIsActive(const bool&);
 
 

@@ -77,7 +77,7 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 	{
 	case 0:
 	{
-		ConsolaUI::text(30, 7, "XEM DANH SACH PHONG:", 14);
+		/*ConsolaUI::text(30, 7, "XEM DANH SACH PHONG:", 14);
 		LinkedList<Room> list = this->roomService->GetAll();
 
 		if (list.getSize() == 0) 
@@ -100,7 +100,7 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 				if (i + this->roomListIndex * itemsPerPage < list.getSize())
 				{
 					Room* room = list.getAt(i + this->roomListIndex * itemsPerPage);
-					ConsolaUI::text(33, yPos, to_string(room->getRoomID()), 15);
+					ConsolaUI::text(33, yPos, to_string(room->getRoomId()), 15);
 					ConsolaUI::text(40, yPos, room->getRoomName(), 15);
 					ConsolaUI::text(53, yPos, room->getRoomType(), 15);
 					ConsolaUI::text(65, yPos, to_string(room->getCurrentOccupancy()) + "/" + to_string(room->getCapacity()), (room->getCurrentOccupancy() == room->getCapacity()) ? 6 : 10);
@@ -114,11 +114,11 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 			ConsolaUI::text(35, height - 1, "[ Q ] Trang Truoc", 3);
 			ConsolaUI::text(75, height - 1, "[ P ] Trang Sau", 3);
 		}
-		break;
+		break;*/
 	}
 	case 1:
 	{
-		ConsolaUI::text(30, 7, "TIM KIEM THEO ID PHONG", 14);
+		/*ConsolaUI::text(30, 7, "TIM KIEM THEO ID PHONG", 14);
 		ConsolaUI::text(35, 9, "[F] Nhap Ma Phong: ", 15);
 		ConsolaUI::drawBox(65, 8, 25, 2, 15);
 		Room* roomToUpdate = this->roomService->SearchByID(this->roomIDToSearch);
@@ -146,7 +146,7 @@ void RoomManageView::drawRoomServiceContent(const int& width, const int& height)
 			{
 				ConsolaUI::text(35, 11, ">> KHONG TIM THAY PHONG: " + to_string(this->roomIDToSearch) + " <<", 12);
 			}
-		}
+		}*/
 		break;
 	}
 	case 2:

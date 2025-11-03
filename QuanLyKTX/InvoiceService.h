@@ -1,17 +1,17 @@
 #pragma once
-#include "InvoiceRepository.h"
+#include "InvoiceData.h"
 
 class InvoiceService {
 private:
-    InvoiceRepository& invoiceRepo;
+    InvoiceData& invoiceData;
 
 public:
-    InvoiceService(InvoiceRepository& invRepo);
+    InvoiceService(InvoiceData&);
     ~InvoiceService();
 
-    int Add(const Invoice&);
-    Invoice* SearchByID(const int&);
-    LinkedList<Invoice> GetAll();
-    int Update(const Invoice&);
-    int Delete(const Invoice&);
+    //int Add(const Invoice&);
+    //Invoice* SearchByID(const int&);
+    //LinkedList<Invoice> GetAll();
+    //int Update(const Invoice&);
+    //int Delete(const Invoice&);
 };

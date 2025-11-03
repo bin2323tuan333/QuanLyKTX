@@ -32,7 +32,7 @@ void StudentData::loadData()
 		getline(ss, token, ';'); student->setClassName(token);
 		getline(ss, token, ';'); student->setFaculty(token);
 		this->list.add(student);
-		this->map.insert(student->getStudentID(), student);
+		this->mapStudentId.insert(student->getStudentID(), student);
 	}
 	file.close();
 }
@@ -56,6 +56,11 @@ void StudentData::saveData()
 	file.close();
 }
 
+LinkedList<Student*>* StudentData::getList()
+{
+	return &(this->list);
+}
+
 //void StudentData::Add(const Student& student)
 //{
 //
@@ -73,10 +78,10 @@ void StudentData::saveData()
 //{
 //
 //}
-//Student* StudentData::GetById(const int& studentID)
-//{
-//
-//}
+Student* StudentData::GetByStudentId(const int& studentId)
+{
+	return *this->mapStudentId.search(studentId);
+}
 //
 //int StudentData::GetSize()
 //{
