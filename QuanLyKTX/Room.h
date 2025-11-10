@@ -37,6 +37,8 @@ public:
 
     void AddContract(Contract*);
     LinkedList<Contract*>* getContracts();
+    bool isAvailable();
+    bool isVacant();
 
     // Getter & Setter
     int getRoomId() const;

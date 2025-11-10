@@ -87,9 +87,12 @@ string Date::getDate()
 {
 	return to_string(this->day) + "/" + to_string(this->month) + "/" + to_string(this->year);
 }
-int Date::getMaxDayOfMonth(const int& month)
+int Date::getMaxDayOfMonth(const int& month, const int& year)
 {
 	int dayOfMonth[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	Date temp(1, 1, year);
+	if (temp.isLeep() && month == 2)
+		return 29;
 	return dayOfMonth[month];
 }
 

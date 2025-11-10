@@ -1,8 +1,9 @@
 #include "ContractService.h"
+#include "DB.h"
 
-ContractService::ContractService(ContractData& contractData, StudentData& studentData)
-	:contractData(contractData), studentData(studentData)
+ContractService::ContractService()
 {
+    this->database = DB::Instance();
 }
 
 ContractService::~ContractService()
@@ -10,30 +11,34 @@ ContractService::~ContractService()
 }
 
 
-int ContractService::Add(const Contract& temp)
+LinkedList<Contract*>* ContractService::getAllContracts()
 {
-	this->contractData.Add(temp);
-	return 1;
+    return DB::Instance()->getAllContracts();
 }
-Contract* ContractService::SearchByID(const int& id)
+
+LinkedList<Contract*> ContractService::getActiveContracts()
 {
-	return this->contractData.GetByContractId(id);
+    LinkedList<Contract*> tempList;
+    for (ListNode<Contract*>* p = DB::Instance()->getAllContracts()->getHead(); p != nullptr; p = p->next)
+    {
+        if (p->value->isActive()) tempList.add(p->value);
+    }
+    return tempList;
 }
-//LinkedList<Contract> ContractService::GetContractsByStudentId(const int& id)
-//{
-//	return this->contractData.GetContractsByStudentId(id);
-//}
-LinkedList<Contract*>* ContractService::GetAll()
+LinkedList<Contract*> ContractService::getExpiredContracts()
 {
-	return this->contractData.getList();
+    LinkedList<Contract*> tempList;
+    for (ListNode<Contract*>* p = DB::Instance()->getAllContracts()->getHead(); p != nullptr; p = p->next)
+    {
+        if (!p->value->isActive()) tempList.add(p->value);
+    }
+    return tempList;
 }
-int ContractService::Update(const Contract& temp)
+Contract* ContractService::getContractById(int contractId)
 {
-	this->contractData.Update(temp);
-	return 1;
+    return DB::Instance()->getContractByContractId(contractId);
 }
-int ContractService::Delete(const Contract& temp)
+LinkedList<Contract*>* ContractService::getContractsByStudent(int studentId)
 {
-	this->contractData.Delete(temp);
-	return 1;
+    return DB::Instance()->getStudentByStudentId(studentId)->getContracts();
 }

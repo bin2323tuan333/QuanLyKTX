@@ -3,10 +3,10 @@
 #include <string>
 #include <windows.h>
 #include <conio.h>
-
 using namespace std;
 
-class ConsolaUI {
+class ConsolaUI 
+{
 public:
     static int getConsoleWidth();
     static int getConsoleHeight();
@@ -16,4 +16,7 @@ public:
     static void drawBox(int, int, int, int, int);
     static void text(int, int, const string&, const int&);
     static void clearScreen();
+	static string GetLine(const string& = "");
+	static int GetInt();
 };
+

@@ -1,23 +1,29 @@
 #pragma once
-#include "ServiceManager.h"
-#include "HomePage.h"
-#include "EmployeePage.h"
-#include "StudentPage.h"
+#include "AuthService.h"
+#include "BillingService.h"
+#include "ContractService.h"
+#include "RoomService.h"
+#include "UserService.h"
+#include "HomeView.h"
+#include "StudentView.h"
+#include "EmployeeView.h"
 
 class Application
 {
 private:
-    ServiceManager* service;
+	AuthService* authService;
+	BillingService* billingService;
+	ContractService* contractService;
+	RoomService* roomService;
+	UserService* userService;
 
-    HomePage* homePage;
-    EmployeePage* employeePage;
-    StudentPage* studentPage;
-
-    bool isRunning;
-    bool isSignIn;
-    Account* currentAccount;
+	Account* currentUser;
+	BaseView* currentView;
+	bool isRunning;
 public:
-    Application(ServiceManager*);
-    ~Application();
-    void run();
+	Application();
+	~Application();
+	void run();
 };
+
+

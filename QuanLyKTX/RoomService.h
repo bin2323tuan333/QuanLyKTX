@@ -1,23 +1,27 @@
 #pragma once
-#include "RoomData.h"
-#include "StudentData.h"
-#include "ContractData.h"
+#include "DB.h"
 
+class RoomService
+{
 
-class RoomService {
 private:
-    RoomData& roomData;
-    StudentData& studentData;
-    ContractData& contractData;
+	DB* database;
 public:
-    RoomService(RoomData&, StudentData&, ContractData&);
-    ~RoomService();
+	RoomService();
+	~RoomService();
+
+	//Room* createRoom(const std::string& roomNumber, const std::string& building,
+	//	int floor, int capacity, const std::string& type,
+	//	double pricePerMonth, const std::string& status);
+	Room* getRoomById(int);
+	LinkedList<Room*>* getAllRooms();
+	int updateRoom(const Room&);
 
 
-    int Add(const Room&);
-    Room* SearchByID(const int&);
-    LinkedList<Room*>* GetAll();
-    //LinkedList<Student*> GetStudentsInRoom(const int&);
-    int Update(const Room&);
-    int Delete(const Room&);
+	LinkedList<Room*> getAvailableRooms();
+	LinkedList<Room*> getVacantRooms();
+
+
+
 };
+

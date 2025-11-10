@@ -1,60 +1,68 @@
 ﻿#include "Application.h"
 #include "ConsolaUI.h"
 
-Application::Application(ServiceManager* service)
-	:service(service), isRunning(false), isSignIn(false)
+Application::Application()
+	:isRunning(false)
 {
-	this->currentAccount = nullptr;
-	this->homePage = new HomePage(
-		service->getAccountService()
-	);
-	this->employeePage = new EmployeePage(
-		service->getAccountService(),
-		service->getEmployeeService(),
-		service->getStudentService(),
-		service->getRoomService(),
-		service->getInvoiceService(),
-		service->getContractService()
-	);
-	this->studentPage = new StudentPage();
+	this->authService = new AuthService();
+	this->billingService = new BillingService();
+	this->contractService = new ContractService();
+	this->roomService = new RoomService();
+	this->userService = new UserService();
+	this->currentUser = nullptr;
+	this->currentView = nullptr;
 }
 
 Application::~Application()
 {
-	delete this->homePage;
-	delete this->employeePage;
-	delete this->studentPage;
+	delete this->authService;
+	delete this->billingService;
+	delete this->contractService;
+	delete this->roomService;
+	delete this->userService;
 }
 
 void Application::run()
 {
+	DB::Instance();
 	this->isRunning = true;
+	this->currentView = new HomeView(currentUser, authService);
 	while (isRunning)
 	{
-		this->isSignIn = this->service->getAccountService()->isSignIn();
-		if (!isSignIn)
+		if (this->currentUser == nullptr && this->currentView == nullptr)
 		{
-			this->currentAccount = nullptr;
-			this->homePage->show();
+			this->currentView = new HomeView(currentUser, authService);
 		}
-		else
+		if (this->currentUser != nullptr && this->currentView == nullptr)
 		{
-			if (this->currentAccount == nullptr)
+			if (currentUser->getUser()->getRole() == "Student")
 			{
-				int userId = this->service->getAccountService()->getCurrentId();
-				this->currentAccount = this->service->getAccountService()->SearchByUserId(userId);
+				this->currentView = new StudentView();
 			}
-			if (currentAccount != nullptr)
+			else if (currentUser->getUser()->getRole() == "Manager")
 			{
-				if (currentAccount->getUser()->getRole() == "Manager")
-				{
-					this->employeePage->show();
-				}
-				else if (currentAccount->getUser()->getRole() == "Student")
-				{
-					//this->studentPage->show();
-				}
+				this->currentView = new EmployeeView(
+					this->currentUser, 
+					this->authService, 
+					this->userService, 
+					this->roomService,
+					this->billingService,
+					this->contractService
+				);
 			}
+		}
+
+		if (currentView != nullptr)
+		{
+			ConsolaUI::clearScreen();
+			int result = this->currentView->show();
+			if (result == 0) this->isRunning = false;
+			if (result == 2) 
+			{
+				delete this->currentView;
+				this->currentView = nullptr;
+			}
+		
 		}
 	}
 	ConsolaUI::clearScreen();

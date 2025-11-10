@@ -7,7 +7,7 @@ class Date
 private:
 	int day, month, year;
 public:
-	Date(const int& = 0, const int& = 0, const int& = 0);
+	Date(const int& = 1, const int& = 1, const int& = 2000);
 	Date(const Date&);
 	~Date();
 
@@ -23,7 +23,7 @@ public:
 	void setYear(const int&);
 
 	string getDate();
-	static int getMaxDayOfMonth(const int&);
+	static int getMaxDayOfMonth(const int&, const int&);
 	static Date stringToDate(const string&);
 
 	friend ostream& operator << (ostream&, const Date&);

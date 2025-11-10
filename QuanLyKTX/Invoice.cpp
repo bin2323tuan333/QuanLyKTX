@@ -1,15 +1,22 @@
 #include "Invoice.h"
 
 
-Invoice::Invoice(const int& invoiceId, const int& roomFee, const int& internetFee, const int& electricFee,
-	const int& waterFee, const int& totalAmount, const Date & createDate, Contract* contract, Employee* employee)
-	: invoiceId(invoiceId), roomFee(roomFee), internetFee(internetFee), electricFee(electricFee), waterFee(waterFee), totalAmount(totalAmount), 
-	createdDate(createdDate), contract(contract), employee(employee)
+Invoice::Invoice(const int& invoiceId, 
+	const int& roomFee, 
+	const int& internetFee, 
+	const int& electricFee,
+	const int& waterFee, 
+	const Date & createDate, 
+	const bool& paid,
+	const int& contractId,
+	Contract* contract)
+	: invoiceId(invoiceId), roomFee(roomFee), internetFee(internetFee), electricFee(electricFee), waterFee(waterFee),
+	createdDate(createdDate),isPaid(paid), contractId(contractId), contract(contract)
 {
 }
 Invoice::Invoice(const Invoice& iv)
-	:invoiceId(iv.invoiceId), roomFee(iv.roomFee), internetFee(iv.internetFee), electricFee(iv.electricFee), waterFee(iv.waterFee), totalAmount(iv.totalAmount),
-	createdDate(iv.createdDate), contract(iv.contract), employee(iv.employee)
+	: invoiceId(iv.invoiceId), roomFee(iv.roomFee), internetFee(iv.internetFee), electricFee(iv.electricFee), waterFee(iv.waterFee),
+	createdDate(iv.createdDate), isPaid(iv.isPaid),contractId(iv.contractId), contract(iv.contract)
 {
 }
 Invoice::~Invoice()
@@ -21,17 +28,10 @@ void Invoice::AddContract(Contract* contract)
 	this->contract = contract;
 	contract->AddInvoice(this);
 }
-void Invoice::AddEmployee(Employee* employee)
-{
-	this->employee = employee;
-}
+
 Contract* Invoice::getContract()
 {
 	return this->contract;
-}
-Employee* Invoice::getEmployee()
-{
-	return this->employee;
 }
 
 // Getter & Setter implementations
@@ -39,25 +39,14 @@ int Invoice::getInvoiceId() const
 {
 	return this->invoiceId;
 }
-
 void Invoice::setInvoiceId(const int& id)
 {
 	this->invoiceId = id;
-}
-int Invoice::getEmployeeId() const
-{
-	return this->employeeId;
-}
-
-void Invoice::setEmployeeId(const int& id)
-{
-	this->employeeId = id;
 }
 int Invoice::getContractId() const
 {
 	return this->contractId;
 }
-
 void Invoice::setContractId(const int& id)
 {
 	this->contractId = id;
@@ -96,11 +85,7 @@ void Invoice::setWaterFee(const int& fee)
 }
 int Invoice::getTotalAmount()
 {
-	return this->totalAmount;
-}
-void Invoice::setTotalAmount(const int& amount)
-{
-	this->totalAmount = amount;
+	return this->electricFee + this->waterFee + this->internetFee + this->roomFee;
 }
 Date Invoice::getCreatedDate()
 {
@@ -110,22 +95,26 @@ void Invoice::setCreatedDate(const Date& date)
 {
 	this->createdDate = date;
 }
-
+bool Invoice::getisPaid()
+{
+	return this->isPaid;
+}
+void Invoice::setisPaid(const bool& paid)
+{
+	this->isPaid = paid;
+}
 
 Invoice& Invoice::operator=(const Invoice& other)
 {
 	if (this == &other)
 		return *this;
-
 	this->invoiceId = other.invoiceId;
 	this->roomFee = other.roomFee;
 	this->internetFee = other.internetFee;
 	this->electricFee = other.electricFee;
 	this->waterFee = other.waterFee;
-	this->totalAmount = other.totalAmount;
 	this->createdDate = other.createdDate;
 	this->contract = other.contract;
-	this->employee = other.employee;
 	return *this;
 }
 bool Invoice::operator==(const Invoice& other)
@@ -135,10 +124,8 @@ bool Invoice::operator==(const Invoice& other)
 		this->internetFee == other.internetFee &&
 		this->electricFee == other.electricFee &&
 		this->waterFee == other.waterFee &&
-		this->totalAmount == other.totalAmount &&
 		this->createdDate == other.createdDate &&
-		this->contract == other.contract &&
-		this->employee == other.employee);
+		this->contract == other.contract);
 }
 bool Invoice::operator!=(const Invoice& other)
 {
@@ -147,8 +134,6 @@ bool Invoice::operator!=(const Invoice& other)
 		this->internetFee != other.internetFee ||
 		this->electricFee != other.electricFee ||
 		this->waterFee != other.waterFee ||
-		this->totalAmount != other.totalAmount ||
 		this->createdDate != other.createdDate ||
-		this->contract != other.contract ||
-		this->employee != other.employee);
+		this->contract != other.contract);
 }

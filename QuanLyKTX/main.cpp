@@ -2,10 +2,8 @@
 
 int main() 
 {
-	ServiceManager* service = new ServiceManager();
-	Application* app = new Application(service);
+	Application* app = new Application();
 	app->run();
 	delete app;
-	delete service;
 	return 0;
 }

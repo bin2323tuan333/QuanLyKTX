@@ -1,45 +1,44 @@
 #include "RoomService.h"
 
-RoomService::RoomService(RoomData& roomData, StudentData& studentData, ContractData& contractData)
-	:roomData(roomData), studentData(studentData), contractData(contractData)
+RoomService::RoomService()
 {
+	this->database = DB::Instance();
 }
 
 RoomService::~RoomService()
 {
 }
 
+LinkedList<Room*>* RoomService::getAllRooms()
+{
+	return DB::Instance()->getAllRooms();
+}
+LinkedList<Room*> RoomService::getAvailableRooms()
+{
+	LinkedList<Room*> tempList;
+	for (ListNode<Room*>* p = DB::Instance()->getAllRooms()->getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value->isAvailable()) tempList.add(p->value);
+	}
+	return tempList;
+}
+LinkedList<Room*> RoomService::getVacantRooms()
+{
+	LinkedList<Room*> tempList;
+	for (ListNode<Room*>* p = DB::Instance()->getAllRooms()->getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value->isVacant()) tempList.add(p->value);
+	}
+	return tempList;
+}
+Room* RoomService::getRoomById(int roomId)
+{
+	return DB::Instance()->getRoomByRoomId(roomId);
+}
 
-int RoomService::Add(const Room& temp)
+int RoomService::updateRoom(const Room& updatedRoom)
 {
-	this->roomData.Add(temp);
-	return 1;
-}
-Room* RoomService::SearchByID(const int& id)
-{
-	return this->roomData.GetByRoomId(id);
-}
-LinkedList<Room*>* RoomService::GetAll()
-{
-	return this->roomData.getList();
-}
-//LinkedList<Student> RoomService::GetStudentsInRoom(const int& roomId)
-//{
-//	LinkedList<int> studentIds = this->contractRepo.GetStudentIdsByRoomId(roomId);
-//	LinkedList<Student> students;
-//	for (ListNode<int>* p = studentIds.getHead(); p != nullptr; p = p->next)
-//	{
-//		students.add(*this->studentRepo.GetById(p->value));
-//	}
-//	return students;
-//}
-int RoomService::Update(const Room& temp)
-{
-	this->roomData.Update(temp);
-	return 1;
-}
-int RoomService::Delete(const Room& temp)
-{
-	this->roomData.Delete(temp);
+	// check logic
+	DB::Instance()->updateRoom(updatedRoom);
 	return 1;
 }

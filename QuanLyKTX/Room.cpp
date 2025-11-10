@@ -25,7 +25,14 @@ LinkedList<Contract*>* Room::getContracts()
 {
 	return &this->contracts;
 }
-
+bool Room::isAvailable()
+{
+	return this->currentOccupancy < this->capacity;
+}
+bool Room::isVacant()
+{
+	return this->currentOccupancy == 0;
+}
 
 // Getter & Setter
 int Room::getRoomId() const

@@ -28,12 +28,26 @@ string Student::getRole()
 {
 	return "student";
 }
+bool Student::hasActiveContract()
+{
+	if (this->contracts.getSize() == 0) {
+		return false;
+	}
+	for (ListNode<Contract*>* p = this->contracts.getHead(); p != nullptr; p = p->next) {
+		if (p->value->isActive())
+			return true;
+	}
+	return false;
+}
+
+
+
 // Getter & Setter
-int Student::getStudentID() const
+int Student::getStudentId() const
 {
 	return this->studentId;
 }
-void Student::setStudentID(const int& studentId)
+void Student::setStudentId(const int& studentId)
 {
 	this->studentId = studentId;
 }

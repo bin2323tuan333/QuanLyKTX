@@ -33,10 +33,12 @@ public:
     void AddContract(Contract*);
     LinkedList<Contract*>* getContracts();
     string getRole() override;
+    bool hasActiveContract();
+    
 
     // Getter & Setter
-    int getStudentID() const;
-    void setStudentID(const int&);
+    int getStudentId() const;
+    void setStudentId(const int&);
     string getClassName();
     void setClassName(const string&);
     string getFaculty();

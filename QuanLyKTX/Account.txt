@@ -1,10 +1,4 @@
 1;manager01;123123
 2;manager02;pass456
 3;staff01;pass789
-10;student201;svpass1
-11;student202;svpass2
-12;student203;svpass3
-13;student204;svpass4
-14;student205;svpass5
-15;student206;svpass6
-16;student207;svpass7
+4;102240229;872006

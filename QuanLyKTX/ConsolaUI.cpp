@@ -1,5 +1,5 @@
 ﻿#include "ConsolaUI.h"
-
+#include <sstream>
 
 // Ham lay chieu rong cua console
 int ConsolaUI::getConsoleWidth() {
@@ -65,7 +65,44 @@ void ConsolaUI::text(int x, int y, const string& content, const int& color)
     cout << content;
 }
 
+string ConsolaUI::GetLine(const string& type)
+{
+    string ss;
+    ConsolaUI::ShowCursor(true);
+    while (true)
+    {
+        int key = _getch();
+        if (key == '\r' || key == '\n')
+        {
+            break;
+        }
+        if (key == '\b')
+        {
+            if (ss.length() > 0)
+            {
+                ss.resize(ss.length() - 1);
+                cout << "\b \b";
+            }
+        }
+        else
+        {
+            ss += char(key);
+            if (type == "pass") cout << '*'; 
+            else cout << char(key);
+        }
+    }
+    ConsolaUI::ShowCursor(false);
+    return ss;
+}
 
+int ConsolaUI::GetInt()
+{
+    string inputString = GetLine();
+    stringstream ss(inputString);
+    int result = 0;
+    ss >> result;
+    return result;
+}
 
 
 void ConsolaUI::clearScreen() 
