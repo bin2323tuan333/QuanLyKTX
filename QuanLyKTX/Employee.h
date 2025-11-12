@@ -1,8 +1,9 @@
 #pragma once
 #include "Person.h"
+#include "IEmployee.h"
 
 
-class Employee : public Person
+class Employee : public Person, public IEmployee
 {
 private:
     int employeeId;
@@ -11,29 +12,16 @@ private:
 
 public:
     // Constructor, Copy constructor, Destructor
-    Employee(
-        const string & = "",
-        const Date & = Date(),
-        const bool& = true,
-        const string & = "",
-        const string & = "",
-        const int& = 0,
-        Account* = nullptr,
-        const int& = 0,
-        const string& = "",
-        const int& = 0
-    );
+    Employee(const string & = "", const Date & = Date(), const bool& = true, const string & = "", const string & = "", const int& = 0, IAccount* = nullptr, const int& = 0, const string& = "", const int& = 0);
     Employee(const Employee&);
     ~Employee();
 
-
-    // Getter & Setter
-    int getEmployeeId() const;
-    void setEmployeeId(const int&);
+    int getEmployeeId() const override;
+    void setEmployeeId(const int&) override;
     string getRole() override;
-    void setRole(const string&);
-    int getSalary();
-    void setSalary(const int&);
+    void setRole(const string&) override;
+    int getSalary() const override;
+    void setSalary(const int&) override;
 
 
     Employee& operator=(const Employee&);

@@ -1,31 +1,28 @@
 #pragma once
+#include "IAccount.h"
 #include "Person.h"
-#include <string>
-using namespace std;
 
-class Person;
-class Account
+class Account : public IAccount
 {
 private:
     int userId;
     string username;
     string password;
-
-    Person* user;
+    IPerson* user;
 public:
-    Account(const int& = 0, const string & = "", const string & = "", Person* = nullptr);
+    Account(const int& = 0, const string & = "", const string & = "", IPerson* = nullptr);
     Account(const Account&);
     ~Account();
 
-    void AddUser(Person*);
-    Person* getUser() const;
+    void AddUser(IPerson*) override;
+    IPerson* getUser() const override;
 
-    int getUserId() const;
-    void setUserId(const int&);
-    string getUsername() const;
-    void setUsername(const string&);
-    string getPassword();
-    void setPassword(const string&);
+    int getUserId() const override;
+    void setUserId(const int&) override;
+    string getUsername() const override;
+    void setUsername(const string&) override;
+    string getPassword() const override;
+    void setPassword(const string&) override;
 
     Account& operator=(const Account&);
     bool operator==(const Account&);

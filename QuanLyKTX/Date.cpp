@@ -25,6 +25,21 @@ Date Date::getCurrentDay()
 
 	return Date(localTime.tm_mday, localTime.tm_mon + 1, localTime.tm_year + 1900);
 }
+Date Date::increaseDate(const Date& date, int months)
+{
+	int day = date.day;
+	int month = date.month + months;
+	int year = date.year;
+	while (month > 12) 
+	{
+		month -= 12;
+		year++;
+	}
+	int daysInMonth = getMaxDayOfMonth(month, year);
+	if (day > daysInMonth) 
+		day = daysInMonth;
+	return Date(day, month, year);
+}
 Date Date::stringToDate(const string& date)
 {
 	stringstream ss(date);

@@ -12,6 +12,7 @@ public:
 	~Date();
 
 	static Date getCurrentDay();
+	static Date increaseDate(const Date&, int);
 	bool isLeep();
 	bool isValid();
 

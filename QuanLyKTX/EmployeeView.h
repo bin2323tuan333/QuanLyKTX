@@ -23,6 +23,7 @@ private:
 	int choiceToAct;
 	bool isShow;
 	bool isLogout;
+	int error;
 
 	// Info
 	void showInfoMenu(const int&, const int&);
@@ -62,6 +63,8 @@ private:
 	void showCreateNewInvoice(const int&, const int&);
 	void showFindInvoicesByStudentId(const int&, const int&);
 	int invoiceId;
+	bool isPaid;
+	Invoice invToPay;
 	void showFindInvoiceById(const int&, const int&);
 	void showUnpaidInvoices(const int&, const int&);
 	void showPaidInvoices(const int&, const int&);

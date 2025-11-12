@@ -1,1 +1,60 @@
 102240229;4;Pham Quoc Tuan;1;08/07/2006;0987654321;tuanpq@gmail.com;24T_DT4;CNTT
+107240005;5;Nguyen Duc Thien Phu;1;30/09/2006;0898787654;phundt@gmail.com;24H5A;Hoa
+109240087;6;Hoang Tran Hai Dang;1;05/05/2006;0987876565;danghth@gmail.com;24H5A;Hoa
+107240173;7;Tran Minh Hieu;1;04/08/2006;0876765432;hieutm@gmail.com;24SHYD;Hoa
+101240036;8;Phan Dac Trung;1;19/05/2006;0878767896;trungpd@gmail.com;24C1B;Co Khi
+101240044;9;Bui Duc Duy;1;13/05/2006;0843435653;duybd@gmail.com;24C1B;Co Khi
+107230102;10;Nguyen Ngoc Vien;1;05/05/2005;0987654321;viennn@gmail.com;23H2B;Hoa
+107230199;11;Vo Minh Phong;1;15/03/2005;0912345678;phongvm@gmail.com;23H2B;Hoa
+123230043;12;Pham Hoang Phi Hung;1;20/08/2005;0934567890;hunghpp@gmail.com;23ES;Dien
+123230097;13;Truong Quang Vinh;1;25/11/2005;0976543210;vinhtq@gmail.com;23ECE;DTVT
+105230221;14;Le Trung Anh Vu;1;12/09/2005;0945678901;vulta@gmail.com;23D5;CNTT
+105230063;15;Tran Van Hieu;1;08/07/2005;0967890123;hieutv@gmail.com;23D5;CNTT
+109230216;16;Tran Van Thinh;1;30/01/2005;0923456789;thinhtv@gmail.com;23CSHT;Vat Lieu
+101230047;17;Phan Van Hau;1;18/12/2005;0956789012;haupv@gmail.com;23CDT3;Dien
+101230119;18;Nguyen Hoang Linh;1;22/06/2005;0989012345;linhnh@gmail.com;23CDT1;Dien
+101230135;19;Tran Duy Xuan Bach;1;14/04/2005;0911223344;bachtb@gmail.com;23CDT1;Dien
+101230144;20;Le Dinh Quoc Truong;1;03/10/2005;0933445566;truongldq@gmail.com;23C1B;Dien
+101230031;21;Phan Nguyen Xuan Tung;1;27/02/2005;0977889900;tungpnx@gmail.com;23C1A;Dien
+107250245;22;Nguyen Ngoc Vien;1;05/05/2007;0987654321;viennn@gmail.com;25H2B;Hoa
+107250203;23;Vo Minh Phong;1;15/03/2007;0912345678;phongvm@gmail.com;25H2B;Hoa
+123250088;24;Pham Hoang Phi Hung;1;20/08/2007;0934567890;hunghpp@gmail.com;25ES;Dien
+123250241;25;Truong Quang Vinh;1;25/11/2007;0976543210;vinhtq@gmail.com;25ECE;DTVT
+105250233;26;Le Trung Anh Vu;1;12/09/2007;0945678901;vulta@gmail.com;25D5;CNTT
+105250127;27;Tran Van Hieu;1;08/07/2007;0967890123;hieutv@gmail.com;25D5;CNTT
+109250003;28;Tran Van Thinh;1;30/01/2007;0923456789;thinhtv@gmail.com;25CSHT;Vat Lieu
+101250192;29;Phan Van Hau;1;18/12/2007;0956789012;haupv@gmail.com;25CDT3;Dien
+101250061;30;Nguyen Hoang Linh;1;22/06/2007;0989012345;linhnh@gmail.com;25CDT1;Dien
+107240085;31;Le Thi My Duyen;0;12/09/2006;0934561234;duyenltm@gmail.com;24SHYD;Hoa
+101240219;32;Nguyen Thi Thanh Thao;0;25/11/2006;0976549876;thaontt@gmail.com;24C1A;Co Khi
+123240023;33;Tran Thi Hong Nhung;0;18/07/2006;0945673214;nhungtth@gmail.com;24ECE;DTVT
+105240047;34;Pham Thi Quynh Trang;0;30/03/2006;0967896541;trangptq@gmail.com;24D4;CNTT
+109240142;35;Vu Thi Thu Ha;0;14/02/2006;0923458765;havtt@gmail.com;24CSHT;Vat Lieu
+101240217;36;Do Thi Phuong Thao;0;08/12/2006;0956781234;thaodtp@gmail.com;24CDT2;Dien
+110240211;37;Hoang Thi Lan Anh;0;22/06/2006;0989014789;anhhtl@gmail.com;24X1A;Co Khi Dong Luc
+103240058;38;Nguyen Thi Bich Ngoc;0;03/10/2006;0933446655;ngocntb@gmail.com;24KTOTO1;Ky Thuat O To
+118240189;39;Tran Thi Minh Thu;0;27/02/2006;0977881122;thuttm@gmail.com;24QLCN1;Quan Ly Cong Nghiep
+121240024;40;Le Thi Huong Giang;0;11/05/2006;0944558877;gianglth@gmail.com;24KT1;Ke Toan
+107240249;41;Pham Thi Thanh Tam;0;19/08/2006;0966779955;tampth@gmail.com;24H3A;Hoa
+101240112;42;Nguyen Thi Ngoc Anh;0;07/12/2006;0922337744;anhntn@gmail.com;24C2A;Co Khi
+123240031;43;Hoang Thi Mai Linh;0;25/10/2006;0955668833;linhhtm@gmail.com;24PFIEV1;Dien
+105240071;44;Tran Thi Kim Chi;0;16/04/2006;0988994477;chittk@gmail.com;24D3;CNTT
+110240223;45;Pham Thi Huyen Trang;0;09/01/2006;0911335566;trangpth@gmail.com;24X2B;Co Khi Dong Luc
+103240117;46;Le Thi Thanh Nga;0;28/09/2006;0944772299;ngaltt@gmail.com;24KTOTO2;Ky Thuat O To
+118240232;47;Vu Thi Bich Van;0;13/07/2006;0977113388;vanvtb@gmail.com;24KXCLC;Kinh Te Xay Dung
+107250018;48;Le Thi My Duyen;0;12/09/2007;0934561234;duyenltm@gmail.com;25SHYD;Hoa
+101250049;49;Nguyen Thi Thanh Thao;0;25/11/2007;0976549876;thaontt@gmail.com;25C1A;Co Khi
+123250212;50;Tran Thi Hong Nhung;0;18/07/2007;0945673214;nhungtth@gmail.com;25ECE;DTVT
+105250041;51;Pham Thi Quynh Trang;0;30/03/2007;0967896541;trangptq@gmail.com;25D4;CNTT
+109250143;52;Vu Thi Thu Ha;0;14/02/2007;0923458765;havtt@gmail.com;25CSHT;Vat Lieu
+101250067;53;Do Thi Phuong Thao;0;08/12/2007;0956781234;thaodtp@gmail.com;25CDT2;Dien
+110250197;54;Hoang Thi Lan Anh;0;22/06/2007;0989014789;anhhtl@gmail.com;25X1A;Co Khi Dong Luc
+103250019;55;Nguyen Thi Bich Ngoc;0;03/10/2007;0933446655;ngocntb@gmail.com;25KTOTO1;Ky Thuat O To
+118250061;56;Tran Thi Minh Thu;0;27/02/2007;0977881122;thuttm@gmail.com;25QLCN1;Quan Ly Cong Nghiep
+121250101;57;Le Thi Huong Giang;0;11/05/2007;0944558877;gianglth@gmail.com;25KT1;Ke Toan
+107250221;58;Pham Thi Thanh Tam;0;19/08/2007;0966779955;tampth@gmail.com;25H3A;Hoa
+101250182;59;Nguyen Thi Ngoc Anh;0;07/12/2007;0922337744;anhntn@gmail.com;25C2A;Co Khi
+123250045;60;Hoang Thi Mai Linh;0;25/10/2007;0955668833;linhhtm@gmail.com;25PFIEV1;Dien
+105250159;61;Tran Thi Kim Chi;0;16/04/2007;0988994477;chittk@gmail.com;25D3;CNTT
+110250088;62;Pham Thi Huyen Trang;0;09/01/2007;0911335566;trangpth@gmail.com;25X2B;Co Khi Dong Luc
+103250241;63;Le Thi Thanh Nga;0;28/09/2007;0944772299;ngaltt@gmail.com;25KTOTO2;Ky Thuat O To

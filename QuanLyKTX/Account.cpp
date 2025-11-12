@@ -1,11 +1,7 @@
 #include "Account.h"
-#include <iomanip>
-#include <iostream>
-
-
 
 // Constructor
-Account::Account(const int& userId, const string & username, const string & password, Person* user)
+Account::Account(const int& userId, const string & username, const string & password, IPerson* user)
 	:userId(userId), username(username), password(password), user(user)
 {
 }
@@ -17,11 +13,11 @@ Account::~Account()
 {
 }
 
-void Account::AddUser(Person* user)
+void Account::AddUser(IPerson* user)
 {
 	this->user = user;
 }
-Person* Account::getUser() const
+IPerson* Account::getUser() const
 {
 	return this->user;
 }
@@ -43,7 +39,7 @@ void Account::setUsername(const string& username)
 {
 	this->username = username;
 }
-string Account::getPassword()
+string Account::getPassword() const
 {
 	return this->password;
 }
@@ -51,8 +47,6 @@ void Account::setPassword(const string& password)
 {
 	this->password = password;
 }
-
-
 
 
 bool Account::operator==(const Account& acc)

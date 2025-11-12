@@ -1,12 +1,9 @@
 #pragma once
 #include "Date.h"
-#include "Account.h"
-#include <iostream>
-using namespace std;
+#include "IPerson.h"
 
 
-class Account;
-class Person
+class Person : public IPerson
 {
 protected:
 	string fullName;
@@ -15,36 +12,28 @@ protected:
 	string phoneNumber;
 	string email;
 	int userId;
-	Account* userAccount;
+	IAccount* userAccount;
 public:
-	Person(
-		const string & = "",
-		const Date & = Date(),
-		const bool& = true,
-		const string & = "",
-		const string & = "",
-		const int& = 0,
-		Account* = nullptr
-	);
+	Person(const string & = "", const Date & = Date(), const bool& = true, const string & = "", const string & = "", const int& = 0, IAccount* = nullptr);
 	Person(const Person&);
 	virtual ~Person();
 
-	void AddAccount(Account*);
-	Account* getAccount() const;
-	virtual string getRole() = 0;
+	void AddAccount(IAccount*);
+	IAccount* getAccount() override;
 
-	string getFullName();
-	void setFullName(const string&);
-	Date getDateOfBirth();
-	void setDateOfBirth(const Date&);
-	bool getGender();
-	void setGender(const bool&);
-	string getPhoneNumber();
-	void setPhoneNumber(const string&);
-	string getEmail();
-	void setEmail(const string&);
-	int getUserId();
-	void setUserId(const int&);
+	virtual string getRole() = 0;
+	string getFullName() const override;
+	void setFullName(const string&) override;
+	Date getDateOfBirth() const override;
+	void setDateOfBirth(const Date&) override;
+	bool getGender() const override;
+	void setGender(const bool&) override;
+	string getPhoneNumber() const override;
+	void setPhoneNumber(const string&) override;
+	string getEmail() const override;
+	void setEmail(const string&) override;
+	int getUserId() const override;
+	void setUserId(const int&) override;
 
 	Person& operator=(const Person&);
 	bool operator==(const Person&);

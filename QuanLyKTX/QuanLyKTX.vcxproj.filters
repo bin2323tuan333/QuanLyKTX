@@ -37,9 +37,6 @@
     <Filter Include="Source Files\FileHandle">
       <UniqueIdentifier>{f6e40664-ba3f-4d6d-b4dc-0629e4ff59df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\FileHandle">
-      <UniqueIdentifier>{c1c29190-9a6b-45b5-9a48-98175052fda1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Models">
       <UniqueIdentifier>{65f161aa-f770-4a2c-ba12-4b6442dc08cd}</UniqueIdentifier>
     </Filter>
@@ -51,6 +48,15 @@
     </Filter>
     <Filter Include="Header Files\Models">
       <UniqueIdentifier>{6b4094f6-b30f-4ce7-b8a2-a4c8b4cbe527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\InterfaceModels">
+      <UniqueIdentifier>{d3310862-b1a3-4b58-b8e6-059d1a1e861c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FileHandle">
+      <UniqueIdentifier>{c1c29190-9a6b-45b5-9a48-98175052fda1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\InterfaceService">
+      <UniqueIdentifier>{cc1cd572-f534-4c7b-a202-8b62b3ed2b3a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Source Files\Presentation</Filter>
-    </ClCompile>
-    <ClCompile Include="StringUtil.cpp">
-      <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Person.cpp">
       <Filter>Source Files\Models</Filter>
@@ -155,12 +158,6 @@
     <ClInclude Include="Application.h">
       <Filter>Header Files\Presentation</Filter>
     </ClInclude>
-    <ClInclude Include="StringUtil.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="HashTable.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="LinkedList.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
@@ -190,6 +187,42 @@
     </ClInclude>
     <ClInclude Include="StudentView.h">
       <Filter>Header Files\Presentation\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="IStudent.h">
+      <Filter>Header Files\InterfaceModels</Filter>
+    </ClInclude>
+    <ClInclude Include="IAccount.h">
+      <Filter>Header Files\InterfaceModels</Filter>
+    </ClInclude>
+    <ClInclude Include="IEmployee.h">
+      <Filter>Header Files\InterfaceModels</Filter>
+    </ClInclude>
+    <ClInclude Include="IContract.h">
+      <Filter>Header Files\InterfaceModels</Filter>
+    </ClInclude>
+    <ClInclude Include="IInvoice.h">
+      <Filter>Header Files\InterfaceModels</Filter>
+    </ClInclude>
+    <ClInclude Include="IRoom.h">
+      <Filter>Header Files\InterfaceModels</Filter>
+    </ClInclude>
+    <ClInclude Include="IAuthService.h">
+      <Filter>Header Files\InterfaceService</Filter>
+    </ClInclude>
+    <ClInclude Include="IBillindService.h">
+      <Filter>Header Files\InterfaceService</Filter>
+    </ClInclude>
+    <ClInclude Include="IRoomService.h">
+      <Filter>Header Files\InterfaceService</Filter>
+    </ClInclude>
+    <ClInclude Include="IUserService.h">
+      <Filter>Header Files\InterfaceService</Filter>
+    </ClInclude>
+    <ClInclude Include="IContractService.h">
+      <Filter>Header Files\InterfaceService</Filter>
+    </ClInclude>
+    <ClInclude Include="IPerson.h">
+      <Filter>Header Files\InterfaceModels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,16 @@ LinkedList<Room*>* RoomService::getAllRooms()
 {
 	return DB::Instance()->getAllRooms();
 }
+Room* RoomService::getRoomByStudentId(int studentId)
+{
+	Student* student = DB::Instance()->getStudentByStudentId(studentId);
+	Contract* contract = nullptr;
+	for (ListNode<Contract*>* p = student->getContracts()->getHead(); p != nullptr; p = p->next)
+	{
+		if (p->value->isActive()) return p->value->getRoom();
+	}
+	return nullptr;
+}
 LinkedList<Room*> RoomService::getAvailableRooms()
 {
 	LinkedList<Room*> tempList;
@@ -36,9 +46,16 @@ Room* RoomService::getRoomById(int roomId)
 	return DB::Instance()->getRoomByRoomId(roomId);
 }
 
-int RoomService::updateRoom(const Room& updatedRoom)
+int RoomService::updateRoom(const int& id, const Room& updatedRoom)
 {
-	// check logic
+	Room* room = DB::Instance()->getRoomByRoomId(id);
+	if (room->getCurrentOccupancy() != 0)
+	{
+		if (updatedRoom.getRoomType() != room->getRoomType() || updatedRoom.getIsActive() != room->getIsActive())
+			return 2;
+	}
+	if (room->getCapacity() != updatedRoom.getCapacity() && room->getCurrentOccupancy() > updatedRoom.getCapacity())
+		return 2;
 	DB::Instance()->updateRoom(updatedRoom);
 	return 1;
 }

@@ -45,7 +45,20 @@ bool AuthService::genAccount(Person* person)
 		newAccount->setUsername(to_string(employee->getEmployeeId()));
 	}
 	else return false;
-	string pass = to_string(person->getDateOfBirth().getDay()) + to_string(person->getDateOfBirth().getMonth()) + to_string(person->getDateOfBirth().getYear());
+	string pass = "";
+	if (person->getDateOfBirth().getDay() < 10)
+	{
+		pass += "0";
+		pass += to_string(person->getDateOfBirth().getDay());
+	}
+	else pass += to_string(person->getDateOfBirth().getDay());
+	if (person->getDateOfBirth().getDay() < 10)
+	{
+		pass += "0";
+		pass += to_string(person->getDateOfBirth().getMonth());
+	}
+	else pass += to_string(person->getDateOfBirth().getMonth());
+	pass += to_string(person->getDateOfBirth().getYear());
 	newAccount->setPassword(pass);
 	this->database->addAccount(newAccount);
 	person->AddAccount(newAccount);
@@ -54,7 +67,7 @@ bool AuthService::genAccount(Person* person)
 }
 int AuthService::getIdAuto()
 {
-	int maxId = 1;
+	int maxId = 0;
 	for (ListNode<Account*>* p = database->getAllAccounts()->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->getUserId() > maxId) maxId = p->value->getUserId();

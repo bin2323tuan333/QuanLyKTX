@@ -1,13 +1,14 @@
 #pragma once
+#include "IContract.h"
 #include "Date.h"
-#include "Room.h"
-#include "Student.h"
-#include "Invoice.h"
+#include "IStudent.h"
+#include "IRoom.h"
+#include "IInvoice.h"
+#include "LinkedList.h"
 
-class Invoice;
-class Student;
-class Room;
-class Contract
+
+
+class Contract : public IContract
 {
 private:
 	int contractId;
@@ -15,44 +16,32 @@ private:
 	int roomId;
 	Date startDate;
 	Date endDate;
-
-	Student* student;
-	Room* room;
-	LinkedList<Invoice*> invoices;
+	IStudent* student;
+	IRoom* room;
+	LinkedList<IInvoice*> invoices;
 public:
-	// Constructor, Copy constructor, Destructor
-	Contract(
-		const int& = 0,
-		const int& = 0,
-		const int& = 0,
-		const Date & = Date(),
-		const Date & = Date(),
-		Student* = nullptr,
-		Room* = nullptr
-	);
+	Contract(const int& = 0, const int& = 0, const int& = 0, const Date & = Date(), const Date & = Date(), IStudent* = nullptr, IRoom* = nullptr);
 	Contract(const Contract&);
 	~Contract();
 
-	void AddStudent(Student*);
-	void AddRoom(Room*);
-	void AddInvoice(Invoice*);
-	Student* getStudent();
-	Room* getRoom();
-	LinkedList<Invoice*>* getInvoices();
+	void AddStudent(IStudent*) override;
+	void AddRoom(IRoom*) override;
+	void AddInvoice(IInvoice*) override;
+	IStudent* getStudent() override;
+	IRoom* getRoom() override;
+	LinkedList<IInvoice*>* getInvoices() override;
 
-	// Getter & Setter
-	int getContractId() const;
-	void setContractId(const int&);
-	int getStudentId() const;
-	void setStudentId(const int&);
-	int getRoomId() const;
-	void setRoomId(const int&);
-	Date getStartDate();
-	void setStartDate(const Date&);
-	Date getEndDate();
-	void setEndDate(const Date&);
-
-	bool isActive();
+	int getContractId() const override;
+	void setContractId(const int&) override;
+	int getStudentId() const override;
+	void setStudentId(const int&) override;
+	int getRoomId() const override;
+	void setRoomId(const int&) override;
+	Date getStartDate() const override;
+	void setStartDate(const Date&) override;
+	Date getEndDate() const override;
+	void setEndDate(const Date&) override;
+	bool isActive() const override;
 
 	Contract& operator=(const Contract&);
 	bool operator==(const Contract&);

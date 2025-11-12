@@ -7,16 +7,12 @@ class HomeView : public BaseView
 private:
 	Account*& user;
 	AuthService* authService;
-	int menuChoice;
-	int loginSelected;
-	bool isError;
-	bool isEndApp;
+	int menuChoice, loginSelected;
+	bool isError, isEndApp;
+	string username, password;
 
-	string username;
-	string password;
-
-	void showHeader(const int&, const int&);
 	void handleInput() override;
+	void showHeader(const int&, const int&);
 	void showHome(const int&, const int&);
 	void showAbout(const int&, const int&);
 	void showLogin(const int&, const int&);

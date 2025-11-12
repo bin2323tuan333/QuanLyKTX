@@ -3,14 +3,14 @@
 
 // Constructor
 Room::Room(const int& roomId, const string & roomName, const string & roomType, const int& capacity,
-	const int& currentOccupancy, const int& floor, const string & building, const bool& isActive)
+	const int& floor, const string & building, const bool& isActive)
 	: roomId(roomId), roomName(roomName), roomType(roomType), capacity(capacity), 
-	currentOccupancy(currentOccupancy), floor(floor), building(building), isActive(isActive)
+	floor(floor), building(building), isActive(isActive)
 {
 }
 Room::Room(const Room& r)
 	: roomId(r.roomId), roomName(r.roomName), roomType(r.roomType), capacity(r.capacity),
-	currentOccupancy(r.currentOccupancy), floor(r.floor), building(r.building), isActive(r.isActive)
+	floor(r.floor), building(r.building), isActive(r.isActive)
 {
 }
 Room::~Room()
@@ -27,11 +27,11 @@ LinkedList<Contract*>* Room::getContracts()
 }
 bool Room::isAvailable()
 {
-	return this->currentOccupancy < this->capacity;
+	return this->getCurrentOccupancy() < this->capacity;
 }
 bool Room::isVacant()
 {
-	return this->currentOccupancy == 0;
+	return this->getCurrentOccupancy() == 0;
 }
 
 // Getter & Setter
@@ -51,7 +51,7 @@ void Room::setRoomName(const string& roomName)
 {
 	this->roomName = roomName;
 }
-string Room::getRoomType()
+string Room::getRoomType() const
 {
 	return this->roomType;
 }
@@ -59,7 +59,7 @@ void Room::setRoomType(const string& roomType)
 {
 	this->roomType = roomType;
 }
-int Room::getCapacity()
+int Room::getCapacity() const
 {
 	return this->capacity;
 }
@@ -69,12 +69,9 @@ void Room::setCapacity(const int& capacity)
 }
 int Room::getCurrentOccupancy()
 {
-	return this->currentOccupancy;
+	return this->contracts.getSize();
 }
-void Room::setCurrentOccupancy(const int& currentOccupancy)
-{
-	this->currentOccupancy = currentOccupancy;
-}
+
 int Room::getFloor()
 {
 	return this->floor;
@@ -91,7 +88,7 @@ void Room::setBuilding(const string& building)
 {
 	this->building = building;
 }
-bool Room::getIsActive()
+bool Room::getIsActive() const
 {
 	return this->isActive;
 }
@@ -110,7 +107,6 @@ Room& Room::operator=(const Room& other)
 	this->roomName = other.roomName;
 	this->roomType = other.roomType;
 	this->capacity = other.capacity;
-	this->currentOccupancy = other.currentOccupancy;
 	this->floor = other.floor;
 	this->building = other.building;
 	this->isActive = other.isActive;
@@ -122,7 +118,6 @@ bool Room::operator==(const Room& other)
 		this->roomName == other.roomName &&
 		this->roomType == other.roomType &&
 		this->capacity == other.capacity &&
-		this->currentOccupancy == other.currentOccupancy &&
 		this->floor == other.floor &&
 		this->building == other.building &&
 		this->isActive == other.isActive);
@@ -133,7 +128,6 @@ bool Room::operator!=(const Room& other)
 		this->roomName != other.roomName ||
 		this->roomType != other.roomType ||
 		this->capacity != other.capacity ||
-		this->currentOccupancy != other.currentOccupancy ||
 		this->floor != other.floor ||
 		this->building != other.building ||
 		this->isActive != other.isActive);

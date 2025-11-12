@@ -1,42 +1,25 @@
 #pragma once
-#include "Person.h"
-#include "Contract.h"
-#include "LinkedList.h"
+#include "IStudent.h"
 
 
 
 class Contract;
-class Student : public Person
+class Student : public Person, public IStudent
 {
 private:
     int studentId;
     string className;
     string faculty;
-
-    LinkedList<Contract*> contracts;
+    LinkedList<IContract*> contracts;
 public:
-    Student(
-        const string & = "",
-        const Date & = Date(),
-        const bool& = true,
-        const string & = "",
-        const string & = "",
-        const int& = 0,
-        Account* = nullptr,
-        const int& = 0,
-        const string& = "",
-        const string& = ""
-    );
+    Student( const string & = "", const Date & = Date(), const bool& = true, const string & = "", const string & = "", const int& = 0, IAccount* = nullptr, const int& = 0, const string& = "", const string& = "");
     Student(const Student&);
     ~Student();
 
     void AddContract(Contract*);
-    LinkedList<Contract*>* getContracts();
+    LinkedList<IContract*>* getContracts();
     string getRole() override;
     bool hasActiveContract();
-    
-
-    // Getter & Setter
     int getStudentId() const;
     void setStudentId(const int&);
     string getClassName();

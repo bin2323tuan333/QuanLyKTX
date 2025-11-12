@@ -103,7 +103,6 @@ void DB::loadData()
 		getline(ss, token, ';'); room->setRoomName(token);
 		getline(ss, token, ';'); room->setRoomType(token);
 		getline(ss, token, ';'); room->setCapacity(stoi(token));
-		getline(ss, token, ';'); room->setCurrentOccupancy(stoi(token));
 		getline(ss, token, ';'); room->setFloor(stoi(token));
 		getline(ss, token, ';'); room->setBuilding(token);
 		getline(ss, token, ';'); room->setIsActive(token == "1" ? true : false);
@@ -175,6 +174,7 @@ void DB::connect()
 		Student* student = this->getStudentByStudentId(key);
 		if (student != nullptr)
 			p->value->AddStudent(student);
+		if (!p->value->isActive()) continue;
 		key = p->value->getRoomId();
 		Room* room = this->getRoomByRoomId(key);
 		if (room != nullptr)
@@ -281,7 +281,6 @@ void DB::saveData()
 		roomFile << p->value->getRoomName() << ";";
 		roomFile << p->value->getRoomType() << ";";
 		roomFile << p->value->getCapacity() << ";";
-		roomFile << p->value->getCurrentOccupancy() << ";";
 		roomFile << p->value->getFloor() << ";";
 		roomFile << p->value->getBuilding() << ";";
 		roomFile << (p->value->getIsActive() == true ? "1" : "0") << "\n";
@@ -342,11 +341,12 @@ LinkedList<Account*>* DB::getAllAccounts()
 }
 
 // === Student === 
-void DB::updateStudent(const Student& stu)
+void DB::updateStudent(const int& id, const Student& stu)
 {
-	Student* current = this->getStudentByStudentId(stu.getStudentId());
+	Student* current = this->getStudentByStudentId(id);
 	if (current == nullptr) return;
 	*current = stu;
+	current->getAccount()->setUsername(to_string(current->getStudentId()));
 }
 void DB::deleteStudent(const Student& stu)
 {
@@ -445,6 +445,8 @@ void DB::addContract(const Contract& con)
 {
 	Contract* newContract = new Contract(con);
 	this->listContracts.add(newContract);
+	newContract->AddRoom(this->getRoomByRoomId(newContract->getRoomId()));
+	newContract->AddStudent(this->getStudentByStudentId(newContract->getStudentId()));
 }
 Contract* DB::getContractByContractId(const int& contractId)
 {
@@ -474,6 +476,8 @@ void DB::addInvoice(const Invoice& inv)
 {
 	Invoice* newInvoice = new Invoice(inv);
 	this->listInvoices.add(newInvoice);
+	Contract* contract = this->getContractByContractId(newInvoice->getContractId());
+	newInvoice->AddContract(contract);
 }
 LinkedList<Invoice*>* DB::getAllInvoices()
 {

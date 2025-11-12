@@ -3,7 +3,7 @@
 
 // Constructor
 Employee::Employee(const string& fullName, const Date& dateOfBirth, const bool& gender, const string& phoneNumber,
-	const string& email, const int& userId, Account* acc, const int& employeeId, const string & role, const int& salary)
+	const string& email, const int& userId, IAccount* acc, const int& employeeId, const string & role, const int& salary)
 	:Person(fullName, dateOfBirth, gender, phoneNumber, email, userId, acc), employeeId(employeeId), role(role), salary(salary)
 {
 }
@@ -15,11 +15,6 @@ Employee::~Employee()
 {
 }
 
-
-
-
-
-// Getter & Setter
 int Employee::getEmployeeId() const
 {
 	return this->employeeId;
@@ -36,7 +31,7 @@ void Employee::setRole(const string& role)
 {
 	this->role = role;
 }
-int Employee::getSalary()
+int Employee::getSalary() const
 {
 	return this->salary;
 }
@@ -44,7 +39,6 @@ void Employee::setSalary(const int& salary)
 {
 	this->salary = salary;
 }
-
 
 Employee& Employee::operator=(const Employee& other)
 {

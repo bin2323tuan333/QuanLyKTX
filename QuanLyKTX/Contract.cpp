@@ -3,12 +3,12 @@
 
 // Constructor
 Contract::Contract(const int& contractId, const int& studentId, const int& roomId, const Date& startDate,
-	const Date& endDate, Student* student, Room* room)
+	const Date& endDate, IStudent* student, IRoom* room)
 	: contractId(contractId), studentId(studentId), roomId(roomId), startDate(endDate), endDate(endDate), student(student), room(room)
 {
 }
 Contract::Contract(const Contract& c)
-	: contractId(c.contractId), studentId(c.studentId), roomId(c.roomId), startDate(c.endDate), endDate(c.endDate), student(c.student), room(c.room)
+	: contractId(c.contractId), studentId(c.studentId), roomId(c.roomId), startDate(c.startDate), endDate(c.endDate), student(c.student), room(c.room)
 {
 }
 Contract::~Contract()
@@ -16,29 +16,29 @@ Contract::~Contract()
 }
 
 
-void Contract::AddStudent(Student* student)
+void Contract::AddStudent(IStudent* student)
 {
 	this->student = student;
 	student->AddContract(this);
 }
-void Contract::AddRoom(Room* room)
+void Contract::AddRoom(IRoom* room)
 {
 	this->room = room;
 	room->AddContract(this);
 }
-void Contract::AddInvoice(Invoice* invoice)
+void Contract::AddInvoice(IInvoice* invoice)
 {
 	this->invoices.add(invoice);
 }
-Student* Contract::getStudent()
+IStudent* Contract::getStudent()
 {
 	return this->student;
 }
-Room* Contract::getRoom()
+IRoom* Contract::getRoom()
 {
 	return this->room;
 }
-LinkedList<Invoice*>* Contract::getInvoices()
+LinkedList<IInvoice*>* Contract::getInvoices()
 {
 	return &this->invoices;
 }
@@ -69,7 +69,7 @@ void Contract::setRoomId(const int& roomId)
 {
 	this->roomId = roomId;
 }
-Date Contract::getStartDate()
+Date Contract::getStartDate() const
 {
 	return this->startDate;
 }
@@ -77,7 +77,7 @@ void Contract::setStartDate(const Date& startDate)
 {
 	this->startDate = startDate;
 }
-Date Contract::getEndDate()
+Date Contract::getEndDate() const
 {
 	return this->endDate;
 }
@@ -86,7 +86,7 @@ void Contract::setEndDate(const Date& endDate)
 	this->endDate = endDate;
 }
 
-bool Contract::isActive()
+bool Contract::isActive() const
 {
 	return Date::getCurrentDay() <= this->endDate;
 }

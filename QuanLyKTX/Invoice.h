@@ -11,29 +11,15 @@ private:
     int roomFee, internetFee, electricFee, waterFee;
     Date createdDate;
     bool isPaid;
-
     int contractId;
     Contract* contract;
-
 public:
-    // Constructor, Copy constructor, Destructor
-    Invoice(
-        const int& = 0, 
-        const int& = 0, 
-        const int& = 0, 
-        const int& = 0, 
-        const int& = 0,
-        const Date & = Date(),
-        const bool& = false,
-        const int& = 0,
-        Contract* = nullptr
-    );
+    Invoice(const int& = 0, const int& = 0, const int& = 0, const int& = 0, const int& = 0, const Date & = Date(), const bool& = false, const int& = 0, Contract* = nullptr);
     Invoice(const Invoice&);
     ~Invoice();
+
     void AddContract(Contract*);
     Contract* getContract();
-
-    // Getter & Setter
     int getInvoiceId() const;
     void setInvoiceId(const int&);
     int getContractId() const;

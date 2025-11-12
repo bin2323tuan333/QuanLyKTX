@@ -3,7 +3,7 @@
 
 // Constructor
 Student::Student(const string& fullName, const Date& dateOfBirth, const bool& gender, const string & phoneNumber,
-	const string & email, const int& userId, Account* acc, const int& studentId, const string & className, const string & faculty)
+	const string & email, const int& userId, IAccount* acc, const int& studentId, const string & className, const string & faculty)
 	: Person(fullName, dateOfBirth, gender, phoneNumber, email, userId, acc), studentId(studentId), className(className), faculty(faculty)
 {
 }
@@ -26,14 +26,14 @@ LinkedList<Contract*>* Student::getContracts()
 }
 string Student::getRole()
 {
-	return "student";
+	return "Student";
 }
 bool Student::hasActiveContract()
 {
 	if (this->contracts.getSize() == 0) {
 		return false;
 	}
-	for (ListNode<Contract*>* p = this->contracts.getHead(); p != nullptr; p = p->next) {
+	for (ListNode<IContract*>* p = this->contracts.getHead(); p != nullptr; p = p->next) {
 		if (p->value->isActive())
 			return true;
 	}

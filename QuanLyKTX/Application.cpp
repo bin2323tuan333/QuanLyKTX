@@ -24,6 +24,7 @@ Application::~Application()
 
 void Application::run()
 {
+	ConsolaUI::ShowCursor(false);
 	DB::Instance();
 	this->isRunning = true;
 	this->currentView = new HomeView(currentUser, authService);
@@ -37,7 +38,14 @@ void Application::run()
 		{
 			if (currentUser->getUser()->getRole() == "Student")
 			{
-				this->currentView = new StudentView();
+				this->currentView = new StudentView(
+					this->currentUser,
+					this->authService,
+					this->userService,
+					this->roomService,
+					this->billingService,
+					this->contractService
+				);
 			}
 			else if (currentUser->getUser()->getRole() == "Manager")
 			{

@@ -1,6 +1,6 @@
 #include "Person.h"
 
-Person::Person(const string& fullName, const Date& dateOfBirth, const bool& gender, const string& phoneNumber, const string& email, const int& userId, Account* acc)
+Person::Person(const string& fullName, const Date& dateOfBirth, const bool& gender, const string& phoneNumber, const string& email, const int& userId, IAccount* acc)
 	:fullName(fullName), dateOfBirth(dateOfBirth), gender(gender), phoneNumber(phoneNumber), email(email), userId(userId), userAccount(acc)
 {
 }
@@ -12,17 +12,17 @@ Person::~Person()
 {
 }
 
-void Person::AddAccount(Account* acc)
+void Person::AddAccount(IAccount* acc)
 {
 	this->userAccount = acc;
 	acc->AddUser(this);
 }
-Account* Person::getAccount() const
+IAccount* Person::getAccount()
 {
 	return this->userAccount;
 }
 
-string Person::getFullName()
+string Person::getFullName() const
 {
 	return this->fullName;
 }
@@ -30,7 +30,7 @@ void Person::setFullName(const string& fullName)
 {
 	this->fullName = fullName;
 }
-Date Person::getDateOfBirth()
+Date Person::getDateOfBirth() const
 {
 	return this->dateOfBirth;
 }
@@ -38,7 +38,7 @@ void Person::setDateOfBirth(const Date& dateOfBirth)
 {
 	this->dateOfBirth = dateOfBirth;
 }
-bool Person::getGender()
+bool Person::getGender() const
 {
 	return this->gender;
 }
@@ -46,7 +46,7 @@ void Person::setGender(const bool& gender)
 {
 	this->gender = gender;
 }
-string Person::getPhoneNumber()
+string Person::getPhoneNumber() const
 {
 	return this->phoneNumber;
 }
@@ -54,7 +54,7 @@ void Person::setPhoneNumber(const string& phoneNumber)
 {
 	this->phoneNumber = phoneNumber;
 }
-string Person::getEmail()
+string Person::getEmail() const
 {
 	return this->email;
 }
@@ -62,7 +62,7 @@ void Person::setEmail(const string& email)
 {
 	this->email = email;
 }
-int Person::getUserId()
+int Person::getUserId() const
 {
 	return this->userId;
 }
