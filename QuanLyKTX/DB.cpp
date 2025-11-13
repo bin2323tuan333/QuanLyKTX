@@ -353,6 +353,9 @@ void DB::updateStudent(const int& id, const IStudent& stu)
 	if (current == nullptr) return;
 	*current = stu;
 	current->getAccount()->setUsername(to_string(current->getStudentId()));
+	LinkedList<IContract*>* list = current->getContracts();
+	for (ListNode<IContract*>* p = list->getHead(); p != nullptr; p = p->next)
+		p->value->setStudentId(id);
 }
 void DB::deleteStudent(const IStudent& stu)
 {

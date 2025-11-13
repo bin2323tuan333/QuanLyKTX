@@ -16,7 +16,6 @@ StudentView::StudentView(IAccount* user, IAuthService* auth, IUserService* userS
 {
 	this->menuChoice = 0;
 	this->choiceToAct = 0;
-	this->studentToAct = new Student();
 	this->isShow = false;
 	this->isLogout = false;
 	this->isUpdate = false;
@@ -28,7 +27,6 @@ StudentView::StudentView(IAccount* user, IAuthService* auth, IUserService* userS
 	this->isPaid = false;
 	this->isCreate = false;
 }
-
 StudentView::~StudentView()
 {
 }
@@ -83,7 +81,6 @@ int StudentView::show()
 	if (this->isLogout) return 2;
 	return 1;
 }
-
 void StudentView::handleInput()
 {
 	if (menuChoice != 0) this->isShow = true;
@@ -378,6 +375,10 @@ void StudentView::handleInput()
 			break;
 			}
 		}
+	}
+	if (this->isShow == false)
+	{
+		this->studentToAct = nullptr;
 	}
 }
 

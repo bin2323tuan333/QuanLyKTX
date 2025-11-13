@@ -52,30 +52,30 @@ int ContractService::createContract(int studentId, int roomId, int cycle)
 	if (student == nullptr || room == nullptr)
 		return 0;
 	LinkedList<IContract*>* list = student->getContracts();
-
 	if (room->getCurrentOccupancy() == room->getCapacity())
 		return 2;
 	string checkGender = student->getGender() ? "Nam" : "Nu";
 	if (checkGender != room->getRoomType())
 		return 2;
-	Contract contract;
-	contract.setContractId(this->getIdAuto());
-	contract.setStudentId(studentId);
-	contract.setRoomId(roomId);
+	IContract* contract = new Contract();
+	contract->setContractId(this->getIdAuto());
+	contract->setStudentId(studentId);
+	contract->setRoomId(roomId);
 	bool check = true;
 	for (ListNode<IContract*>* p = list->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->isActive())
 		{
-			contract.setStartDate(p->value->getEndDate());
+			contract->setStartDate(p->value->getEndDate());
 			check = false;
 			break;
 		}
 	}
 	if (check)
-		contract.setStartDate(Date::getCurrentDay());
-	contract.setEndDate(Date::increaseDate(contract.getStartDate(), cycle));
-	DB::Instance()->addContract(contract);
+		contract->setStartDate(Date::getCurrentDay());
+	contract->setEndDate(Date::increaseDate(contract->getStartDate(), cycle));
+	DB::Instance()->addContract(*contract);
+	delete contract;
 	return 1;
 }
 int ContractService::getIdAuto()

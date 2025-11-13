@@ -24,7 +24,6 @@ EmployeeView::EmployeeView(IAccount* user, IAuthService* auth, IUserService* use
 	this->changePassError = 0;
 	this->studentId = 0;
 	this->currentIndex = 1;
-	this->studentToAct = new Student();
 	this->isDateEdit = false;
 	this->dateIndex = 1;
 
@@ -699,13 +698,9 @@ void EmployeeView::handleInput()
 			}
 			else if (key == 'Y' || key == 'y')
 			{
-				this->contractService->createContract(this->studentId, this->roomId, this->cycle);
-				this->studentId = 0;
-				this->roomId = 0;
-				this->cycle = 0;
+				this->error = this->contractService->createContract(this->studentId, this->roomId, this->cycle);
 			}
 		}
-
 	}
 	if (this->isShow == false)
 	{
@@ -716,7 +711,7 @@ void EmployeeView::handleInput()
 		this->currentIndex = 1;
 		this->isUpdate = false;
 		this->isDelete = false;
-		*this->studentToAct = Student();
+		this->studentToAct = nullptr;
 		this->preStudentId = 0;
 		this->isPaid = false;
 	}
@@ -760,10 +755,10 @@ void EmployeeView::showInfo(const int& width, const int& height)
 
 	ConsolaUI::text(width / 2 - 28, 17, "---------------------------------------------", 8);
 	ConsolaUI::text(width / 2 - 28, 18, "Thong tin lien he & Chuc vu:", 11);
-	ConsolaUI::text(width / 2 - 27, 21, "Email: ", 7);
-	ConsolaUI::text(width / 2, 21, temp->getEmail(), 15);
-	ConsolaUI::text(width / 2 - 27, 22, "So Dien Thoai: ", 7);
-	ConsolaUI::text(width / 2, 22, temp->getPhoneNumber(), 15);
+	ConsolaUI::text(width / 2 - 27, 20, "Email: ", 7);
+	ConsolaUI::text(width / 2, 20, temp->getEmail(), 15);
+	ConsolaUI::text(width / 2 - 27, 21, "So Dien Thoai: ", 7);
+	ConsolaUI::text(width / 2, 21, temp->getPhoneNumber(), 15);
 }
 void EmployeeView::showChangePass(const int& width, const int& height)
 {
@@ -1511,11 +1506,19 @@ void EmployeeView::showCreateContract(const int& width, const int& height)
 	ConsolaUI::text(width / 2 - 25, height / 2 + 6, "[*] Ma Phong:", this->currentIndex == 2 ? 9 : 15);
 	ConsolaUI::text(width / 2 - 25 + 4, height / 2 + 7, "Ten Phong:", 15);
 	ConsolaUI::text(width / 2 - 25 + 4, height / 2 + 8, "So Nguoi Hien Tai:", 15);
-	ConsolaUI::text(width / 2 - 25, height / 2 + 9, "Loai Phong", 15);
+	ConsolaUI::text(width / 2 - 25 + 4, height / 2 + 9, "Loai Phong", 15);
 	ConsolaUI::text(width / 2 - 25, height / 2 + 10, "[*] Thoi Han (So Thang):", this->currentIndex == 3 ? 9 : 15);
 
 	IStudent* student = this->userService->getStudentById(this->studentId);
 	ConsolaUI::text(width / 2, height / 2 + 2, to_string(this->studentId), 15);
+	if (this->error == 2)
+	{
+		ConsolaUI::text(width / 2 - 26, height / 2 - 1, "Khong the them sinh vien do thong tin khong hop le!", 12);
+	}
+	else if (this->error == 1)
+	{
+		ConsolaUI::text(width / 2 - 14, height / 2 - 1, "Them sinh vien thanh cong!", 10);
+	}
 	if (student == nullptr)
 	{
 		isValid = false;
@@ -1531,7 +1534,6 @@ void EmployeeView::showCreateContract(const int& width, const int& height)
 		ConsolaUI::text(width / 2, height / 2 + 5, student->getGender() ? "Nam" : "Nu", 15);
 		canSave = true;
 	}
-
 	IRoom* room = this->roomService->getRoomById(this->roomId);
 	if (room == nullptr)
 	{
