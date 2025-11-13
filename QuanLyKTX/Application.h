@@ -8,16 +8,17 @@
 #include "StudentView.h"
 #include "EmployeeView.h"
 
+class IAccount;
 class Application
 {
 private:
-	AuthService* authService;
-	BillingService* billingService;
-	ContractService* contractService;
-	RoomService* roomService;
-	UserService* userService;
+	IAuthService* authService;
+	IBillingService* billingService;
+	IContractService* contractService;
+	IRoomService* roomService;
+	IUserService* userService;
 
-	Account* currentUser;
+	IAccount* currentUser;
 	BaseView* currentView;
 	bool isRunning;
 public:

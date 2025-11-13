@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Contract.h"
+#include "Room.h"
+#include "Student.h"
 
 // Constructor
 Contract::Contract(const int& contractId, const int& studentId, const int& roomId, const Date& startDate,

@@ -1,7 +1,8 @@
 #pragma once
+#include "IContractService.h"
 #include "DB.h"
 
-class ContractService
+class ContractService : public IContractService
 {
 private:
     DB* database;
@@ -9,13 +10,13 @@ public:
 	ContractService();
 	~ContractService();
 
-    int createContract(int studentId, int roomId, int cycle);
-    Contract* getContractById(int contractId);
-    LinkedList<Contract*>* getContractsByStudent(int studentId);
-    int getIdAuto();
+    int createContract(int, int, int) override;
+    IContract* getContractById(int) override;
+    LinkedList<IContract*>* getContractsByStudent(int) override;
+    int getIdAuto() override;
     
-    LinkedList<Contract*>* getAllContracts();
-    LinkedList<Contract*> getActiveContracts();
-    LinkedList<Contract*> getExpiredContracts();
+    LinkedList<IContract*>* getAllContracts() override;
+    LinkedList<IContract*> getActiveContracts() override;
+    LinkedList<IContract*> getExpiredContracts() override;
 };
 

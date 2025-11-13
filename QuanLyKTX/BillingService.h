@@ -1,7 +1,8 @@
 #pragma once
+#include "IBillingService.h"
 #include "DB.h"
 
-class BillingService
+class BillingService : public IBillingService
 {
 private:
     DB* database;
@@ -15,14 +16,14 @@ public:
 	~BillingService();
 
     //// Invoice CRUD
-    int createInvoice(const int&, const int&, const int&);
-    Invoice* getInvoiceById(int);
-    LinkedList<Invoice*> getInvoicesByStudent(int);
-    LinkedList<Invoice*>* getAllInvoices();
-    int autoGenId();
-    void paidInvoice(const Invoice&);
-    void printInvoice(const Invoice&);
-    LinkedList<Invoice*> getUnpaidInvoices();
-    LinkedList<Invoice*> getPaidInvoices();
+    int createInvoice(const int&, const int&, const int&) override;
+    IInvoice* getInvoiceById(int) override;
+    LinkedList<IInvoice*> getInvoicesByStudent(int) override;
+    LinkedList<IInvoice*>* getAllInvoices() override;
+    int autoGenId() override;
+    void paidInvoice(const IInvoice&) override;
+    void printInvoice(const IInvoice&) override;
+    LinkedList<IInvoice*> getUnpaidInvoices() override;
+    LinkedList<IInvoice*> getPaidInvoices() override;
 };
 

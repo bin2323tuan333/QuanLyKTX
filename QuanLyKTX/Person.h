@@ -3,7 +3,8 @@
 #include "IPerson.h"
 
 
-class Person : public IPerson
+class IAccount;
+class Person : public virtual IPerson
 {
 protected:
 	string fullName;
@@ -21,7 +22,7 @@ public:
 	void AddAccount(IAccount*);
 	IAccount* getAccount() override;
 
-	virtual string getRole() = 0;
+	virtual string getRole() override = 0;
 	string getFullName() const override;
 	void setFullName(const string&) override;
 	Date getDateOfBirth() const override;

@@ -1,6 +1,14 @@
 #include "DB.h"
+#include "Account.h"
+#include "Student.h"
+#include "Employee.h"
+#include "Room.h"
+#include "Contract.h"
+#include "Invoice.h"
 #include <fstream>
 #include <sstream>
+#include <iostream>
+using namespace std;
 
 DB* DB::_Instance = nullptr;
 DB::DB()
@@ -39,7 +47,7 @@ void DB::loadData()
 	{
 		if (line == "") continue;
 		stringstream ss(line);
-		Account* acc = new Account();
+		IAccount* acc = new Account();
 		string token;
 		getline(ss, token, ';'); acc->setUserId(stoi(token));
 		getline(ss, token, ';'); acc->setUsername(token);
@@ -55,7 +63,7 @@ void DB::loadData()
 		if (line == "") continue;
 		stringstream ss(line);
 		string token;
-		Student* student = new Student();
+		IStudent* student = new Student();
 		getline(ss, token, ';'); student->setStudentId(stoi(token));
 		getline(ss, token, ';'); student->setUserId(stoi(token));
 		getline(ss, token, ';'); student->setFullName(token);
@@ -77,7 +85,7 @@ void DB::loadData()
 		if (line == "") continue;
 		stringstream ss(line);
 		string token;
-		Employee* employee = new Employee();
+		IEmployee* employee = new Employee();
 		getline(ss, token, ';'); employee->setEmployeeId(stoi(token));
 		getline(ss, token, ';'); employee->setUserId(stoi(token));
 		getline(ss, token, ';'); employee->setFullName(token);
@@ -85,7 +93,6 @@ void DB::loadData()
 		getline(ss, token, ';'); employee->setDateOfBirth(Date::stringToDate(token));
 		getline(ss, token, ';'); employee->setPhoneNumber(token);
 		getline(ss, token, ';'); employee->setEmail(token);
-		getline(ss, token, ';'); employee->setRole(token);
 		getline(ss, token, ';'); employee->setSalary(stoi(token));
 		this->listEmployees.add(employee);
 	}
@@ -98,7 +105,7 @@ void DB::loadData()
 		if (line == "") continue;
 		stringstream ss(line);
 		string token;
-		Room* room = new Room();
+		IRoom* room = new Room();
 		getline(ss, token, ';'); room->setRoomId(stoi(token));
 		getline(ss, token, ';'); room->setRoomName(token);
 		getline(ss, token, ';'); room->setRoomType(token);
@@ -117,7 +124,7 @@ void DB::loadData()
 		if (line == "") continue;
 		stringstream ss(line);
 		string token;
-		Invoice* invoice = new Invoice();
+		IInvoice* invoice = new Invoice();
 		getline(ss, token, ';'); invoice->setInvoiceId(stoi(token));
 		getline(ss, token, ';'); invoice->setContractId(stoi(token));
 		getline(ss, token, ';'); invoice->setRoomFee(stoi(token));
@@ -125,7 +132,7 @@ void DB::loadData()
 		getline(ss, token, ';'); invoice->setElectricFee(stoi(token));
 		getline(ss, token, ';'); invoice->setWaterFee(stoi(token));
 		getline(ss, token, ';'); invoice->setCreatedDate(Date::stringToDate(token));
-		getline(ss, token, ';'); invoice->setisPaid(token == "1" ? true : false);
+		getline(ss, token, ';'); invoice->setIsPaid(token == "1" ? true : false);
 		this->listInvoices.add(invoice);
 	}
 	invFile.close();
@@ -139,7 +146,7 @@ void DB::loadData()
 		if (line == "") continue;
 		stringstream ss(line);
 		string token;
-		Contract* contract = new Contract();
+		IContract* contract = new Contract();
 		getline(ss, token, ';'); contract->setContractId(stoi(token));
 		getline(ss, token, ';'); contract->setStudentId(stoi(token));
 		getline(ss, token, ';'); contract->setRoomId(stoi(token));
@@ -151,40 +158,40 @@ void DB::loadData()
 }
 void DB::connect()
 {
-	for (ListNode<Student*>* p = this->listStudents.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IStudent*>* p = this->listStudents.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		int key = p->value->getUserId();
-		Account* temp = this->getAccountByUserId(key);
+		IAccount* temp = this->getAccountByUserId(key);
 		if (temp != nullptr)
 			p->value->AddAccount(temp);
 	}
-	for (ListNode<Employee*>* p = this->listEmployees.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IEmployee*>* p = this->listEmployees.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		int key = p->value->getUserId();
-		Account* temp = this->getAccountByUserId(key);
+		IAccount* temp = this->getAccountByUserId(key);
 		if (temp != nullptr)
 			p->value->AddAccount(temp);
 	}
-	for (ListNode<Contract*>* p = this->listContracts.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IContract*>* p = this->listContracts.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		int key = p->value->getStudentId();
-		Student* student = this->getStudentByStudentId(key);
+		IStudent* student = this->getStudentByStudentId(key);
 		if (student != nullptr)
 			p->value->AddStudent(student);
 		if (!p->value->isActive()) continue;
 		key = p->value->getRoomId();
-		Room* room = this->getRoomByRoomId(key);
+		IRoom* room = this->getRoomByRoomId(key);
 		if (room != nullptr)
 			p->value->AddRoom(room);
 	}
-	for (ListNode<Invoice*>* p = this->listInvoices.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IInvoice*>* p = this->listInvoices.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		int key = p->value->getContractId();
-		Contract* contract = this->getContractByContractId(key);
+		IContract* contract = this->getContractByContractId(key);
 		if (contract != nullptr)
 			p->value->AddContract(contract);
 	}
@@ -195,7 +202,7 @@ void DB::saveData()
 	ofstream accFile("Account.txt");
 	if (!accFile.is_open())
 		return;
-	for (ListNode<Account*>* p = this->listAccounts.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IAccount*>* p = this->listAccounts.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		accFile << (p->value)->getUserId() << ";";
@@ -207,7 +214,7 @@ void DB::saveData()
 	// Student
 	ofstream stuFile("Student.txt");
 	if (!stuFile.is_open()) return;
-	for (ListNode<Student*>* p = this->listStudents.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IStudent*>* p = this->listStudents.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		stuFile << p->value->getStudentId() << ";";
@@ -225,7 +232,7 @@ void DB::saveData()
 	// Employee
 	ofstream empFile("Employee.txt");
 	if (!empFile.is_open()) return;
-	for (ListNode<Employee*>* p = this->listEmployees.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IEmployee*>* p = this->listEmployees.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		empFile << p->value->getEmployeeId() << ";";
@@ -235,7 +242,6 @@ void DB::saveData()
 		empFile << p->value->getDateOfBirth() << ";";
 		empFile << p->value->getPhoneNumber() << ";";
 		empFile << p->value->getEmail() << ";";
-		empFile << p->value->getRole() << ";";
 		empFile << p->value->getSalary() << endl;
 	}
 	empFile.close();
@@ -243,7 +249,7 @@ void DB::saveData()
 	// Contract
 	ofstream conFile("Contract.txt");
 	if (!conFile.is_open()) return;
-	for (ListNode<Contract*>* p = this->listContracts.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IContract*>* p = this->listContracts.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		conFile << p->value->getContractId() << ";";
@@ -257,7 +263,7 @@ void DB::saveData()
 	// Invoice
 	ofstream invFile("Invoice.txt");
 	if (!invFile.is_open()) return;
-	for (ListNode<Invoice*>* p = this->listInvoices.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IInvoice*>* p = this->listInvoices.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		invFile << p->value->getInvoiceId() << ";";
@@ -267,14 +273,14 @@ void DB::saveData()
 		invFile << p->value->getElectricFee() << ";";
 		invFile << p->value->getWaterFee() << ";";
 		invFile << p->value->getCreatedDate() << ";";
-		invFile << (p->value->getisPaid() ? "1" : "0") << endl;
+		invFile << (p->value->getIsPaid() ? "1" : "0") << endl;
 	}
 	invFile.close();
 
 	// Room
 	ofstream roomFile("Room.txt");
 	if (!roomFile.is_open()) return;
-	for (ListNode<Room*>* p = this->listRooms.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IRoom*>* p = this->listRooms.getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value == nullptr) continue;
 		roomFile << p->value->getRoomId() << ";";
@@ -289,203 +295,208 @@ void DB::saveData()
 }
 void DB::freeMem()
 {
-	for (ListNode<Student*>* p = this->listStudents.getHead(); p != nullptr; p = p->next) delete p->value;
+	for (ListNode<IStudent*>* p = this->listStudents.getHead(); p != nullptr; p = p->next) delete p->value;
 	this->listStudents.clear();
-	for (ListNode<Employee*>* p = this->listEmployees.getHead(); p != nullptr; p = p->next) delete p->value;
+	for (ListNode<IEmployee*>* p = this->listEmployees.getHead(); p != nullptr; p = p->next) delete p->value;
 	this->listEmployees.clear();
-	for (ListNode<Account*>* p = this->listAccounts.getHead(); p != nullptr; p = p->next) delete p->value;
+	for (ListNode<IAccount*>* p = this->listAccounts.getHead(); p != nullptr; p = p->next) delete p->value;
 	this->listAccounts.clear();
-	for (ListNode<Contract*>* p = this->listContracts.getHead(); p != nullptr; p = p->next) delete p->value;
+	for (ListNode<IContract*>* p = this->listContracts.getHead(); p != nullptr; p = p->next) delete p->value;
 	this->listContracts.clear();
-	for (ListNode<Invoice*>* p = this->listInvoices.getHead(); p != nullptr; p = p->next) delete p->value;
+	for (ListNode<IInvoice*>* p = this->listInvoices.getHead(); p != nullptr; p = p->next) delete p->value;
 	this->listInvoices.clear();
-	for (ListNode<Room*>* p = this->listRooms.getHead(); p != nullptr; p = p->next) delete p->value;
+	for (ListNode<IRoom*>* p = this->listRooms.getHead(); p != nullptr; p = p->next) delete p->value;
 	this->listRooms.clear();
 }
 
 
 // ===== CRUD BASIC =====
 // === Account ===
-void DB::updateAccount(const Account& acc)
+void DB::updateAccount(const IAccount& acc)
 {
-	Account* current = this->getAccountByUserId(acc.getUserId());
+	IAccount* current = this->getAccountByUserId(acc.getUserId());
 	if (current == nullptr) return;
 	*current = acc;
 }
-void DB::deleteAccount(const Account& acc)
+void DB::deleteAccount(const IAccount& acc)
 {
-	Account* temp = this->getAccountByUserId(acc.getUserId());
+	IAccount* temp = this->getAccountByUserId(acc.getUserId());
 	this->listAccounts.remove(temp);
 	delete temp;
 }
-void DB::addAccount(Account* newAccount)
+void DB::addAccount(IAccount* newAccount)
 {
 	this->listAccounts.add(newAccount);
 
 }
-Account* DB::getAccountByUsername(const string& username)
+IAccount* DB::getAccountByUsername(const string& username)
 {
-	for (ListNode<Account*>* p = this->listAccounts.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IAccount*>* p = this->listAccounts.getHead(); p != nullptr; p = p->next)
 		if (username == p->value->getUsername()) return p->value;
 	return nullptr;
 }
-Account* DB::getAccountByUserId(const int& userId)
+IAccount* DB::getAccountByUserId(const int& userId)
 {
-	for (ListNode<Account*>* p = this->listAccounts.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IAccount*>* p = this->listAccounts.getHead(); p != nullptr; p = p->next)
 		if (userId == p->value->getUserId()) return p->value;
 	return nullptr;
 }
-LinkedList<Account*>* DB::getAllAccounts()
+LinkedList<IAccount*>* DB::getAllAccounts()
 {
 	return &this->listAccounts;
 }
 
 // === Student === 
-void DB::updateStudent(const int& id, const Student& stu)
+void DB::updateStudent(const int& id, const IStudent& stu)
 {
-	Student* current = this->getStudentByStudentId(id);
+	IStudent* current = this->getStudentByStudentId(id);
 	if (current == nullptr) return;
 	*current = stu;
 	current->getAccount()->setUsername(to_string(current->getStudentId()));
 }
-void DB::deleteStudent(const Student& stu)
+void DB::deleteStudent(const IStudent& stu)
 {
-	Student* temp = this->getStudentByStudentId(stu.getStudentId());
+	IStudent* temp = this->getStudentByStudentId(stu.getStudentId());
 	this->listStudents.remove(temp);
 	delete temp;
 }
-void DB::addStudent(const Student& stu)
+void DB::addStudent(const IStudent& stu)
 {
-	Student* newStudent = new Student(stu);
+	IStudent* newStudent = new Student();
+	*newStudent = stu;
 	this->listStudents.add(newStudent);
 }
-Student* DB::getStudentByStudentId(const int& studentId)
+IStudent* DB::getStudentByStudentId(const int& studentId)
 {
-	for (ListNode<Student*>* p = this->listStudents.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IStudent*>* p = this->listStudents.getHead(); p != nullptr; p = p->next)
 		if ( studentId == p->value->getStudentId()) return p->value;
 	return nullptr;
 }
-LinkedList<Student*>* DB::getAllStudents()
+LinkedList<IStudent*>* DB::getAllStudents()
 {
 	return &this->listStudents;
 }
 
 // === Employee === 
-void DB::updateEmployee(const Employee& emp)
+void DB::updateEmployee(const IEmployee& emp)
 {
-	Employee* current = this->getEmployeeByEmployeeId(emp.getEmployeeId());
+	IEmployee* current = this->getEmployeeByEmployeeId(emp.getEmployeeId());
 	if (current == nullptr) return;
 	*current = emp;
 }
-void DB::deleteEmployee(const Employee& emp)
+void DB::deleteEmployee(const IEmployee& emp)
 {
-	Employee* temp = this->getEmployeeByEmployeeId(emp.getEmployeeId());
+	IEmployee* temp = this->getEmployeeByEmployeeId(emp.getEmployeeId());
 	this->listEmployees.remove(temp);
 	delete temp;
 }
-void DB::addEmployee(const Employee& emp)
+void DB::addEmployee(const IEmployee& emp)
 {
-	Employee* newEmployee = new Employee(emp);
+	IEmployee* newEmployee = new Employee();
+	*newEmployee = emp;
 	this->listEmployees.add(newEmployee);
 }
-Employee* DB::getEmployeeByEmployeeId(const int& employeeId)
+IEmployee* DB::getEmployeeByEmployeeId(const int& employeeId)
 {
-	for (ListNode<Employee*>* p = this->listEmployees.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IEmployee*>* p = this->listEmployees.getHead(); p != nullptr; p = p->next)
 		if (employeeId == p->value->getEmployeeId()) return p->value;
 	return nullptr;
 }
-LinkedList<Employee*>* DB::getAllEmployees()
+LinkedList<IEmployee*>* DB::getAllEmployees()
 {
 	return &this->listEmployees;
 }
 
 // === Room === 
-void DB::updateRoom(const Room& room)
+void DB::updateRoom(const IRoom& room)
 {
-	Room* current = this->getRoomByRoomId(room.getRoomId());
+	IRoom* current = this->getRoomByRoomId(room.getRoomId());
 	if (current == nullptr) return;
 	*current = room;
 }
-void DB::deleteRoom(const Room& room)
+void DB::deleteRoom(const IRoom& room)
 {
-	Room* temp = this->getRoomByRoomId(room.getRoomId());
+	IRoom* temp = this->getRoomByRoomId(room.getRoomId());
 	this->listRooms.remove(temp);
 	delete temp;
 }
-void DB::addRoom(const Room& room)
+void DB::addRoom(const IRoom& room)
 {
-	Room* newRoom = new Room(room);
+	IRoom* newRoom = new Room();
+	*newRoom = room;
 	this->listRooms.add(newRoom);
 }
-Room* DB::getRoomByRoomId(const int& roomId)
+IRoom* DB::getRoomByRoomId(const int& roomId)
 {
-	for (ListNode<Room*>* p = this->listRooms.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IRoom*>* p = this->listRooms.getHead(); p != nullptr; p = p->next)
 		if (roomId == p->value->getRoomId()) return p->value;
 	return nullptr;
 }
-LinkedList<Room*>* DB::getAllRooms()
+LinkedList<IRoom*>* DB::getAllRooms()
 {
 	return &this->listRooms;
 }
 
 // === Contract === 
-void DB::updateContract(const Contract& con)
+void DB::updateContract(const IContract& con)
 {
-	Contract* current = this->getContractByContractId(con.getContractId());
+	IContract* current = this->getContractByContractId(con.getContractId());
 	if (current == nullptr) return;
 	*current = con;
 }
-void DB::deleteContract(const Contract& con)
+void DB::deleteContract(const IContract& con)
 {
-	Contract* temp = this->getContractByContractId(con.getContractId());
+	IContract* temp = this->getContractByContractId(con.getContractId());
 	this->listContracts.remove(temp);
 	delete temp;
 }
-void DB::addContract(const Contract& con)
+void DB::addContract(const IContract& con)
 {
-	Contract* newContract = new Contract(con);
+	IContract* newContract = new Contract();
+	*newContract = con;
 	this->listContracts.add(newContract);
 	newContract->AddRoom(this->getRoomByRoomId(newContract->getRoomId()));
 	newContract->AddStudent(this->getStudentByStudentId(newContract->getStudentId()));
 }
-Contract* DB::getContractByContractId(const int& contractId)
+IContract* DB::getContractByContractId(const int& contractId)
 {
-	for (ListNode<Contract*>* p = this->listContracts.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IContract*>* p = this->listContracts.getHead(); p != nullptr; p = p->next)
 		if (p->value->getContractId() == contractId) return p->value;
 	return nullptr;
 }
-LinkedList<Contract*>* DB::getAllContracts()
+LinkedList<IContract*>* DB::getAllContracts()
 {
 	return &this->listContracts;
 }
 
 // === Invoice ===
-void DB::updateInvoice(const Invoice& inv)
+void DB::updateInvoice(const IInvoice& inv)
 {
-	Invoice* current = this->getInvoiceByInvoiceId(inv.getInvoiceId());
+	IInvoice* current = this->getInvoiceByInvoiceId(inv.getInvoiceId());
 	if (current == nullptr) return;
 	*current = inv;
 }
-void DB::deleteInvoice(const Invoice& inv)
+void DB::deleteInvoice(const IInvoice& inv)
 {
-	Invoice* temp = this->getInvoiceByInvoiceId(inv.getInvoiceId());
+	IInvoice* temp = this->getInvoiceByInvoiceId(inv.getInvoiceId());
 	this->listInvoices.remove(temp);
 	delete temp;
 }
-void DB::addInvoice(const Invoice& inv)
+void DB::addInvoice(const IInvoice& inv)
 {
-	Invoice* newInvoice = new Invoice(inv);
+	IInvoice* newInvoice = new Invoice();
+	*newInvoice = inv;
 	this->listInvoices.add(newInvoice);
-	Contract* contract = this->getContractByContractId(newInvoice->getContractId());
+	IContract* contract = this->getContractByContractId(newInvoice->getContractId());
 	newInvoice->AddContract(contract);
 }
-LinkedList<Invoice*>* DB::getAllInvoices()
+LinkedList<IInvoice*>* DB::getAllInvoices()
 {
 	return &this->listInvoices;
 }
-Invoice* DB::getInvoiceByInvoiceId(const int& invoiceId)
+IInvoice* DB::getInvoiceByInvoiceId(const int& invoiceId)
 {
-	for (ListNode<Invoice*>* p = this->listInvoices.getHead(); p != nullptr; p = p->next)
+	for (ListNode<IInvoice*>* p = this->listInvoices.getHead(); p != nullptr; p = p->next)
 		if (p->value->getInvoiceId() == invoiceId) return p->value;
 	return nullptr;
 }

@@ -1,7 +1,8 @@
 #pragma once
 #include "DB.h"
+#include "IUserService.h"
 
-class UserService
+class UserService : public IUserService
 {
 private:
     DB* database;
@@ -10,13 +11,11 @@ public:
     UserService();
     ~UserService();
 
-
-    //// ===== STUDENT MANAGEMENT =====
-    int createStudent(Student&);
-    Student* getStudentById(const int&);
-    LinkedList<Student*>* getAllStudents();
-    int updateStudent(int studentId, const Student& updatedStudent);
-    int deleteStudent(int studentId);
-    LinkedList<Student*> getStudentsWithoutRoom();
+    int createStudent(IStudent&) override;
+    IStudent* getStudentById(const int&) override;
+    LinkedList<IStudent*>* getAllStudents() override;
+    int updateStudent(int, const IStudent&) override;
+    int deleteStudent(int) override;
+    LinkedList<IStudent*> getStudentsWithoutRoom() override;
 };
 

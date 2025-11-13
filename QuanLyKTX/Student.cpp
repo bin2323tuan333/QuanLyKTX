@@ -1,5 +1,6 @@
 #include "Student.h"
-#include <iostream>
+#include "IContact.h"
+#include "Contract.h"
 
 // Constructor
 Student::Student(const string& fullName, const Date& dateOfBirth, const bool& gender, const string & phoneNumber,
@@ -16,11 +17,11 @@ Student::~Student()
 }
 
 
-void Student::AddContract(Contract* contract)
+void Student::AddContract(IContract* contract)
 {
 	this->contracts.add(contract);
 }
-LinkedList<Contract*>* Student::getContracts()
+LinkedList<IContract*>* Student::getContracts()
 {
 	return &(this->contracts);
 }
@@ -30,13 +31,10 @@ string Student::getRole()
 }
 bool Student::hasActiveContract()
 {
-	if (this->contracts.getSize() == 0) {
+	if (this->contracts.getSize() == 0)
 		return false;
-	}
-	for (ListNode<IContract*>* p = this->contracts.getHead(); p != nullptr; p = p->next) {
-		if (p->value->isActive())
-			return true;
-	}
+	for (ListNode<IContract*>* p = this->contracts.getHead(); p != nullptr; p = p->next) 
+		if (p->value->isActive()) return true;
 	return false;
 }
 
@@ -51,7 +49,7 @@ void Student::setStudentId(const int& studentId)
 {
 	this->studentId = studentId;
 }
-string Student::getClassName()
+string Student::getClassName() const
 {
 	return this->className;
 }
@@ -59,7 +57,7 @@ void Student::setClassName(const string& className)
 {
 	this->className = className;
 }
-string Student::getFaculty()
+string Student::getFaculty() const
 {
 	return this->faculty;
 }

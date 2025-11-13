@@ -1,5 +1,4 @@
 #include "Room.h"
-#include <iostream>
 
 // Constructor
 Room::Room(const int& roomId, const string & roomName, const string & roomType, const int& capacity,
@@ -17,13 +16,13 @@ Room::~Room()
 {
 }
 
-void Room::AddContract(Contract* contract)
+void Room::AddContract(IContract* contract)
 {
 	this->contracts.add(contract);
 }
-LinkedList<Contract*>* Room::getContracts()
+LinkedList<IContract*>* Room::getContracts()
 {
-	return &this->contracts;
+	return &(this->contracts);
 }
 bool Room::isAvailable()
 {
@@ -43,7 +42,7 @@ void Room::setRoomId(const int& roomId)
 {
 	this->roomId = roomId;
 }
-string Room::getRoomName()
+string Room::getRoomName() const
 {
 	return this->roomName;
 }
@@ -72,7 +71,7 @@ int Room::getCurrentOccupancy()
 	return this->contracts.getSize();
 }
 
-int Room::getFloor()
+int Room::getFloor() const
 {
 	return this->floor;
 }
@@ -80,7 +79,7 @@ void Room::setFloor(const int& floor)
 {
 	this->floor = floor;
 }
-string Room::getBuilding()
+string Room::getBuilding() const
 {
 	return this->building;
 }

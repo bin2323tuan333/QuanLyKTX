@@ -1,18 +1,18 @@
 #pragma once
-#include <string>
+#include <iostream>
 #include "LinkedList.h"
-#include "Contract.h"
 using namespace std;
 
+class IContract;
 class IRoom {
 public:
-    virtual ~IRoom() = default;
+    virtual ~IRoom();
 
-    virtual void AddContract(Contract*) = 0;
-    virtual LinkedList<Contract*>* getContracts() = 0;
+    virtual void AddContract(IContract*) = 0;
+    virtual LinkedList<IContract*>* getContracts() = 0;
     virtual bool isAvailable() = 0;
     virtual bool isVacant() = 0;
-    virtual int getCurrentOccupancy() const = 0;
+    virtual int getCurrentOccupancy() = 0;
 
 
     virtual int getRoomId() const = 0;
@@ -30,8 +30,3 @@ public:
     virtual bool getIsActive() const = 0;
     virtual void setIsActive(const bool&) = 0;
 };
-
-
-IRoom::~IRoom()
-{
-}

@@ -1,10 +1,12 @@
 #pragma once
 #include "IStudent.h"
+#include "Person.h"
+#include <iostream>
+using namespace std;
 
 
-
-class Contract;
-class Student : public Person, public IStudent
+class IContract;
+class Student : public virtual IStudent, public Person
 {
 private:
     int studentId;
@@ -16,16 +18,17 @@ public:
     Student(const Student&);
     ~Student();
 
-    void AddContract(Contract*);
+    void AddContract(IContract*);
     LinkedList<IContract*>* getContracts();
     string getRole() override;
-    bool hasActiveContract();
+    bool hasActiveContract() override;
+    
     int getStudentId() const;
-    void setStudentId(const int&);
-    string getClassName();
-    void setClassName(const string&);
-    string getFaculty();
-    void setFaculty(const string&);
+    void setStudentId(const int&) override;
+    string getClassName() const override;
+    void setClassName(const string&) override;
+    string getFaculty() const override;
+    void setFaculty(const string&) override;
 
     Student& operator=(const Student&);
     bool operator==(const Student&);

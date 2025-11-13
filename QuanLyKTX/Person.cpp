@@ -1,4 +1,5 @@
 #include "Person.h"
+#include "Account.h"
 
 Person::Person(const string& fullName, const Date& dateOfBirth, const bool& gender, const string& phoneNumber, const string& email, const int& userId, IAccount* acc)
 	:fullName(fullName), dateOfBirth(dateOfBirth), gender(gender), phoneNumber(phoneNumber), email(email), userId(userId), userAccount(acc)

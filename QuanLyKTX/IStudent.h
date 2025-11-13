@@ -1,15 +1,17 @@
 #pragma once
 #include "IPerson.h"
-#include "IContract.h"
 #include "LinkedList.h"
 
-class IStudent : public IPerson {
+class IContract;
+class IStudent : public virtual IPerson 
+{
 public:
 	virtual ~IStudent();
 
-	virtual string getRole() override = 0;
-	virtual void AddContract(IContract* contract) = 0;
+	virtual string getRole() = 0;
+	virtual void AddContract(IContract*) = 0;
 	virtual LinkedList<IContract*>* getContracts() = 0;
+	virtual bool hasActiveContract() = 0;
 
 	virtual int getStudentId() const = 0;
 	virtual string getClassName() const = 0;
@@ -18,7 +20,3 @@ public:
 	virtual void setClassName(const string&) = 0;
 	virtual void setFaculty(const string&) = 0;
 };
-
-IStudent::~IStudent()
-{
-}

@@ -1,11 +1,14 @@
 #pragma once
-#include "IPerson.h"
+#include "Date.h"
 
-class IAccount {
+
+class IPerson;
+class IAccount 
+{
 public:
     virtual ~IAccount();
 
-    virtual void AddUser(IPerson* user) = 0;
+    virtual void AddUser(IPerson*) = 0;
     virtual IPerson* getUser() const = 0;
 
     virtual int getUserId() const = 0;
@@ -15,7 +18,3 @@ public:
     virtual void setUsername(const string&) = 0;
     virtual void setPassword(const string&) = 0;
 };
-
-IAccount::~IAccount()
-{
-}

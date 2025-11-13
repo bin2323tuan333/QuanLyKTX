@@ -1,22 +1,23 @@
 #pragma once
+#include "IRoomService.h"
 #include "DB.h"
 
-class RoomService
+class RoomService : public IRoomService
 {
-
 private:
 	DB* database;
+
 public:
 	RoomService();
 	~RoomService();
 
 
-	Room* getRoomById(int);
-	Room* getRoomByStudentId(int);
-	LinkedList<Room*>* getAllRooms();
-	int updateRoom(const int&, const Room&);
+	IRoom* getRoomById(int) override;
+	IRoom* getRoomByStudentId(int) override;
+	LinkedList<IRoom*>* getAllRooms() override;
+	int updateRoom(const int&, const IRoom&) override;
 
-	LinkedList<Room*> getAvailableRooms();
-	LinkedList<Room*> getVacantRooms();
+	LinkedList<IRoom*> getAvailableRooms() override;
+	LinkedList<IRoom*> getVacantRooms() override;
 };
 

@@ -1,14 +1,11 @@
 #pragma once
 #include "IContract.h"
-#include "Date.h"
-#include "IStudent.h"
-#include "IRoom.h"
-#include "IInvoice.h"
-#include "LinkedList.h"
 
 
-
-class Contract : public IContract
+class IInvoice;
+class IRoom;
+class IStudent;
+class Contract : public virtual IContract
 {
 private:
 	int contractId;

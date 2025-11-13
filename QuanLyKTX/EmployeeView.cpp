@@ -1,6 +1,17 @@
 #include "EmployeeView.h"
+#include "IAuthService.h"
+#include "IUserService.h"
+#include "IBillingService.h"
+#include "IRoomService.h"
+#include "IContractService.h"
+#include "Account.h" 
+#include "Student.h"
+#include "Employee.h"
+#include "Invoice.h"
+#include "Contract.h"
+#include "DB.h"
 
-EmployeeView::EmployeeView(Account*& user, AuthService* auth, UserService* userService, RoomService* roomService, BillingService* billing, ContractService* con)
+EmployeeView::EmployeeView(IAccount* user, IAuthService* auth, IUserService* userService, IRoomService* roomService, IBillingService* billing, IContractService* con)
 	:user(user), authService(auth), userService(userService), roomService(roomService), billingService(billing), contractService(con)
 {
 	this->menuChoice = 0;
@@ -13,7 +24,7 @@ EmployeeView::EmployeeView(Account*& user, AuthService* auth, UserService* userS
 	this->changePassError = 0;
 	this->studentId = 0;
 	this->currentIndex = 1;
-	this->studentToAct = Student();
+	this->studentToAct = new Student();
 	this->isDateEdit = false;
 	this->dateIndex = 1;
 
@@ -263,7 +274,7 @@ void EmployeeView::handleInput()
 		}
 		else if (this->isDateEdit == true)
 		{
-			Date tempDate = this->studentToAct.getDateOfBirth();
+			Date tempDate = this->studentToAct->getDateOfBirth();
 			if (tempKey == 75)
 			{
 				if (this->dateIndex == 1) this->dateIndex = 3;
@@ -328,7 +339,7 @@ void EmployeeView::handleInput()
 			{
 				tempDate.setDay(1);
 			}
-			this->studentToAct.setDateOfBirth(tempDate);
+			this->studentToAct->setDateOfBirth(tempDate);
 		}
 	}
 	else if (key == 'p' || key == 'P')
@@ -394,7 +405,7 @@ void EmployeeView::handleInput()
 				{
 					ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 2, "                        ", 15);
 					ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 2);
-					this->studentToAct.setFullName(ConsolaUI::GetLine());
+					this->studentToAct->setFullName(ConsolaUI::GetLine());
 					break;
 				}
 				case 2:
@@ -404,42 +415,42 @@ void EmployeeView::handleInput()
 				}
 				case 3:
 				{
-					this->studentToAct.setGender(this->studentToAct.getGender() ? false : true);
+					this->studentToAct->setGender(this->studentToAct->getGender());
 					break;
 				}
 				case 4:
 				{
 					ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 5, "                        ", 15);
 					ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 5);
-					this->studentToAct.setStudentId(ConsolaUI::GetInt());
+					this->studentToAct->setStudentId(ConsolaUI::GetInt());
 					break;
 				}
 				case 5:
 				{
 					ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 6, "                        ", 15);
 					ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 6);
-					this->studentToAct.setClassName(ConsolaUI::GetLine());
+					this->studentToAct->setClassName(ConsolaUI::GetLine());
 					break;
 				}
 				case 6:
 				{
 					ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 7, "                        ", 15);
 					ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 7);
-					this->studentToAct.setFaculty(ConsolaUI::GetLine());
+					this->studentToAct->setFaculty(ConsolaUI::GetLine());
 					break;
 				}
 				case 7:
 				{
 					ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 8, "                        ", 15);
 					ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 8);
-					this->studentToAct.setPhoneNumber(ConsolaUI::GetLine());
+					this->studentToAct->setPhoneNumber(ConsolaUI::GetLine());
 					break;
 				}
 				case 8:
 				{
 					ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 9, "                        ", 15);
 					ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 9);
-					this->studentToAct.setEmail(ConsolaUI::GetLine());
+					this->studentToAct->setEmail(ConsolaUI::GetLine());
 					break;
 				}
 				}
@@ -448,11 +459,11 @@ void EmployeeView::handleInput()
 			{
 				if (key == 'Y' || key == 'y')
 				{
-					this->error = this->userService->createStudent(this->studentToAct);
-					this->studentToAct = Student();
+					this->error = this->userService->createStudent(*this->studentToAct);
+					*this->studentToAct = Student();
 				}
 				else if (key == 'X' || key == 'x')
-					this->studentToAct = Student();
+					*this->studentToAct = Student();
 			}
 		}
 		if (this->choiceToAct == 1)
@@ -472,17 +483,17 @@ void EmployeeView::handleInput()
 			else if (key == 'U' || key == 'u')
 			{
 				this->isUpdate = true;
-				this->preStudentId = this->studentToAct.getStudentId();
+				this->preStudentId = this->studentToAct->getStudentId();
 			}
 			else if (key == 'y' || key == 'Y')
 			{
 				if (this->isDelete)
 				{
-					this->error = this->userService->deleteStudent(this->studentToAct.getStudentId());
+					this->error = this->userService->deleteStudent(this->studentToAct->getStudentId());
 				}
 				else if (this->isUpdate)
 				{
-					this->error = this->userService->updateStudent(this->preStudentId, this->studentToAct);
+					this->error = this->userService->updateStudent(this->preStudentId, *this->studentToAct);
 				}
 				if (this->error == 1)
 				{
@@ -520,24 +531,24 @@ void EmployeeView::handleInput()
 					case 1:
 					{
 						ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 2);
-						this->roomToAct.setRoomName(ConsolaUI::GetLine());
+						this->roomToAct->setRoomName(ConsolaUI::GetLine());
 					}
 					break;
 					case 2:
 					{
-						if (this->roomToAct.getRoomType() == "Nam") this->roomToAct.setRoomType("Nu");
-						else this->roomToAct.setRoomType("Nam");
+						if (this->roomToAct->getRoomType() == "Nam") this->roomToAct->setRoomType("Nu");
+						else this->roomToAct->setRoomType("Nam");
 					}
 					break;
 					case 3:
 					{
 						ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2, ConsolaUI::getConsoleHeight() / 2 + 4);
-						this->roomToAct.setCapacity(ConsolaUI::GetInt());
+						this->roomToAct->setCapacity(ConsolaUI::GetInt());
 					}
 					break;
 					case 4:
 					{
-						this->roomToAct.setIsActive(!this->roomToAct.getIsActive());
+						this->roomToAct->setIsActive(!this->roomToAct->getIsActive());
 					}
 					break;
 					}
@@ -548,7 +559,7 @@ void EmployeeView::handleInput()
 				}
 				else if (key == 'y' || key == 'Y')
 				{
-					this->error = this->roomService->updateRoom(this->roomId, this->roomToAct);
+					this->error = this->roomService->updateRoom(this->roomId, *this->roomToAct);
 				}
 				if (this->error == 1)
 				{
@@ -628,12 +639,12 @@ void EmployeeView::handleInput()
 			}
 			else if (key == 't' || key == 'T')
 			{
-				this->billingService->printInvoice(this->invToPay);
+				this->billingService->printInvoice(*this->invToPay);
 			}
 			else if (this->isPaid == true && (key == 'y' || key == 'Y'))
 			{
 				this->isPaid = false;
-				this->billingService->paidInvoice(this->invToPay);
+				this->billingService->paidInvoice(*this->invToPay);
 			}
 		}
 	}
@@ -705,7 +716,7 @@ void EmployeeView::handleInput()
 		this->currentIndex = 1;
 		this->isUpdate = false;
 		this->isDelete = false;
-		this->studentToAct = Student();
+		*this->studentToAct = Student();
 		this->preStudentId = 0;
 		this->isPaid = false;
 	}
@@ -734,7 +745,7 @@ void EmployeeView::showInfoMenu(const int& width, const int& height)
 }
 void EmployeeView::showInfo(const int& width, const int& height)
 {
-	Employee* temp = dynamic_cast<Employee*>(this->user->getUser());
+	IEmployee* temp = dynamic_cast<IEmployee*>(this->user->getUser());
 	ConsolaUI::text(width / 2 - 18, 7, ">>   THONG TIN CA NHAN (NHAN VIEN)   <<", 14);
 	ConsolaUI::drawBox(width / 2 - 30, 9, 60, 14, 8);
 	ConsolaUI::text(width / 2 - 28, 10, "Thong tin dinh danh:", 11);
@@ -749,8 +760,6 @@ void EmployeeView::showInfo(const int& width, const int& height)
 
 	ConsolaUI::text(width / 2 - 28, 17, "---------------------------------------------", 8);
 	ConsolaUI::text(width / 2 - 28, 18, "Thong tin lien he & Chuc vu:", 11);
-	ConsolaUI::text(width / 2 - 27, 20, "Chuc Vu: ", 7);
-	ConsolaUI::text(width / 2, 20, temp->getRole(), 15);
 	ConsolaUI::text(width / 2 - 27, 21, "Email: ", 7);
 	ConsolaUI::text(width / 2, 21, temp->getEmail(), 15);
 	ConsolaUI::text(width / 2 - 27, 22, "So Dien Thoai: ", 7);
@@ -806,7 +815,7 @@ void EmployeeView::showStudentMenu(const int& width, const int& height)
 void EmployeeView::showAllStudents(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 17, 7, ">>   XEM DANH SACH SINH VIEN   <<", 14);
-	LinkedList<Student*>* list = this->userService->getAllStudents();
+	LinkedList<IStudent*>* list = this->userService->getAllStudents();
 	if (list->getSize() == 0)
 		ConsolaUI::text(width / 2 - 19, 9, "Khong co sinh vien nao trong danh sach!", 12);
 	else
@@ -827,8 +836,7 @@ void EmployeeView::showAllStudents(const int& width, const int& height)
 			int yPos = 10 + i;
 			if (i + this->pageIndex * itemsPerPage < list->getSize())
 			{
-				Student* student = *list->getAt(i + this->pageIndex * itemsPerPage);
-
+				IStudent* student = *list->getAt(i + this->pageIndex * itemsPerPage);
 				ConsolaUI::text(width / 2 - 46, yPos, to_string(student->getStudentId()), 15);
 				ConsolaUI::text(width / 2 - 31, yPos, student->getFullName(), 15);
 				ConsolaUI::text(width / 2 + 4, yPos, student->getClassName(), 15);
@@ -847,76 +855,77 @@ void EmployeeView::showFindStudent(const int& width, const int& height)
 	ConsolaUI::text(width / 2 - 18, 7, ">>   TIM KIEM THEO ID SINH VIEN   <<", 14);
 	ConsolaUI::text(width / 2 - 25, 9, "[F] Nhap Ma Sinh Vien: ", 15);
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
-	Student* student = this->userService->getStudentById(this->studentId);
+	IStudent* student = this->userService->getStudentById(this->studentId);
 	if (this->studentId != 0)
 	{
 		if (student == nullptr)
-			ConsolaUI::text(width / 2 - 25, 11, ">> KHONG TIM THAY SINH VIEN: " + to_string(this->studentId) + " <<", 12);
-		else
 		{
-			if (!this->isDelete && !this->isUpdate) this->studentToAct = *student;
-			if (this->isDelete)
-			{
-				if (this->error == 2)
-					ConsolaUI::text(width / 2 - 30, height / 2 - 1, "Khong the xoa sinh vien nay vi hop dong chua het han!", 15);
-				if (this->error == 3)
-					ConsolaUI::text(width / 2 - 30, height / 2 - 1, "Khong the xoa sinh vien nay vi chua thanh toan day du hoa don!", 15);
-				ConsolaUI::drawBox(width / 2 - 25, height / 2, 50, 7, 12);
-				for (int i = 1; i < 7; i++)
-					ConsolaUI::text(width / 2 - 24, height / 2 + i, "                                               ", 15);
-				ConsolaUI::text(width / 2 - 9, height / 2 + 2, "** XAC NHAN XOA **", 12);
-				ConsolaUI::text(width / 2 - 16, height / 2 + 2 + 3, "Ban co chac chan muon xoa khong?", 7);
-				ConsolaUI::text(width / 2 - 15, height / 2 + 2 + 4, "[Y] Yes - Xoa    [N] No - Huy", 7);
-				return;
-			}
-			else if (this->isUpdate)
-			{
-				ConsolaUI::drawBox(width / 2 - 30, height / 2, 60, 12, 8);
-				for (int i = 1; i < 12; i++)
-					ConsolaUI::text(width / 2 - 29, height / 2 + i, "                                                         ", 15);
-				if (this->error == 4)
-					ConsolaUI::text(width / 2 - 12, height / 2 - 1, "Du lieu khong hop le!", 15);
-				else if (this->error == 5)
-					ConsolaUI::text(width / 2 - 12, height / 2 - 1, "Id moi da ton tai trong he thong!", 15);
-				ConsolaUI::text(width / 2 - 12, height / 2 + 1, "** CAP NHAT THONG TIN **", 15);
-				ConsolaUI::text(width / 2 - 25, height / 2 + 2, "Ho va ten       :", this->currentIndex == 1 ? 3 : 15);
-				ConsolaUI::text(width / 2 - 25, height / 2 + 3, "Ngay sinh       :", this->currentIndex == 2 ? 3 : 15);
-				ConsolaUI::text(width / 2 - 25, height / 2 + 4, "Gioi tinh       :", this->currentIndex == 3 ? 3 : 15);
-				ConsolaUI::text(width / 2 - 25, height / 2 + 5, "Ma so sinh vien :", this->currentIndex == 4 ? 3 : 15);
-				ConsolaUI::text(width / 2 - 25, height / 2 + 6, "Lop             :", this->currentIndex == 5 ? 3 : 15);
-				ConsolaUI::text(width / 2 - 25, height / 2 + 7, "Khoa            :", this->currentIndex == 6 ? 3 : 15);
-				ConsolaUI::text(width / 2 - 25, height / 2 + 8, "So dien thoai   :", this->currentIndex == 7 ? 3 : 15);
-				ConsolaUI::text(width / 2 - 25, height / 2 + 9, "Email           :", this->currentIndex == 8 ? 3 : 15);
-
-				ConsolaUI::text(width / 2, height / 2 + 2, this->studentToAct.getFullName() == "" ? "__________" : this->studentToAct.getFullName(), 15);
-				ConsolaUI::text(width / 2, height / 2 + 3, (this->studentToAct.getDateOfBirth().getDay() < 10 ? "0" : "") + to_string(this->studentToAct.getDateOfBirth().getDay()) + "/", this->isDateEdit == true ? (this->dateIndex == 1 ? 10 : 15) : 15);
-				ConsolaUI::text(width / 2 + 3, height / 2 + 3, (this->studentToAct.getDateOfBirth().getMonth() < 10 ? "0" : "") + to_string(this->studentToAct.getDateOfBirth().getMonth()) + "/", this->isDateEdit == true ? (this->dateIndex == 2 ? 10 : 15) : 15);
-				ConsolaUI::text(width / 2 + 6, height / 2 + 3, to_string(this->studentToAct.getDateOfBirth().getYear()), this->isDateEdit == true ? (this->dateIndex == 3 ? 10 : 15) : 15);
-				ConsolaUI::text(width / 2, height / 2 + 4, this->studentToAct.getGender() == true ? "Nam" : "Nu", 15);
-				ConsolaUI::text(width / 2, height / 2 + 5, this->studentToAct.getStudentId() == 0 ? "__________" : to_string(this->studentToAct.getStudentId()), 15);
-				ConsolaUI::text(width / 2, height / 2 + 6, this->studentToAct.getClassName() == "" ? "__________" : this->studentToAct.getClassName(), 15);
-				ConsolaUI::text(width / 2, height / 2 + 7, this->studentToAct.getFaculty() == "" ? "__________" : this->studentToAct.getFaculty(), 15);
-				ConsolaUI::text(width / 2, height / 2 + 8, this->studentToAct.getPhoneNumber() == "" ? "__________" : this->studentToAct.getPhoneNumber(), 15);
-				ConsolaUI::text(width / 2, height / 2 + 9, this->studentToAct.getEmail() == "" ? "__________" : this->studentToAct.getEmail(), 15);
-				ConsolaUI::text(width / 2 - 17, height / 2 + 11, "[Y] Yes - Cap Nhat    [N] No - Huy", 15);
-				return;
-			}
-			// Show Thong Tin Sinh Vien Da Duoc Tim Kiem
-			ConsolaUI::text(width / 2 - 25, 11, ">> SINH VIEN DA DUOC TIM THAY! (ID: " + to_string(this->studentId) + ") <<", 10);
-			ConsolaUI::text(width / 2 - 25, 13, "Ho Va Ten:          " + student->getFullName(), 15);
-			ConsolaUI::text(width / 2 - 25, 14, "Ma So Sinh Vien:    " + to_string(student->getStudentId()), 15);
-			ConsolaUI::text(width / 2 - 25, 15, "Ngay Sinh:          " + student->getDateOfBirth().getDate(), 15);
-			ConsolaUI::text(width / 2 - 25, 16, "Gioi Tinh:          ", 15);
-			ConsolaUI::text(width / 2 - 5, 16, student->getGender() ? "Nam" : "Nu", 15);
-			ConsolaUI::text(width / 2 - 25, 17, "Lop:                " + student->getClassName(), 15);
-			ConsolaUI::text(width / 2 - 25, 18, "Khoa:               " + student->getFaculty(), 15);
-			ConsolaUI::text(width / 2 - 25, 19, "SDT:                " + student->getPhoneNumber(), 15);
-			ConsolaUI::text(width / 2 - 25, 20, "Email:              " + student->getEmail(), 15);
-			// Nut Thao Tac Xoa Va Cap Nhat
-			ConsolaUI::text(width / 2 - 25, 24, "[ X ] Xoa", 2);
-			ConsolaUI::text(width / 2 - 25, 25, "[ U ] Cap Nhat", 2);
-
+			ConsolaUI::text(width / 2 - 25, 11, ">> KHONG TIM THAY SINH VIEN: " + to_string(this->studentId) + " <<", 12);
+			return;
 		}
+
+		if (!this->isDelete && !this->isUpdate) this->studentToAct = student;
+		if (this->isDelete)
+		{
+			if (this->error == 2)
+				ConsolaUI::text(width / 2 - 30, height / 2 - 1, "Khong the xoa sinh vien nay vi hop dong chua het han!", 15);
+			if (this->error == 3)
+				ConsolaUI::text(width / 2 - 30, height / 2 - 1, "Khong the xoa sinh vien nay vi chua thanh toan day du hoa don!", 15);
+			ConsolaUI::drawBox(width / 2 - 25, height / 2, 50, 7, 12);
+			for (int i = 1; i < 7; i++)
+				ConsolaUI::text(width / 2 - 24, height / 2 + i, "                                               ", 15);
+			ConsolaUI::text(width / 2 - 9, height / 2 + 2, "** XAC NHAN XOA **", 12);
+			ConsolaUI::text(width / 2 - 16, height / 2 + 2 + 3, "Ban co chac chan muon xoa khong?", 7);
+			ConsolaUI::text(width / 2 - 15, height / 2 + 2 + 4, "[Y] Yes - Xoa    [N] No - Huy", 7);
+			return;
+		}
+		else if (this->isUpdate)
+		{
+			ConsolaUI::drawBox(width / 2 - 30, height / 2, 60, 12, 8);
+			for (int i = 1; i < 12; i++)
+				ConsolaUI::text(width / 2 - 29, height / 2 + i, "                                                         ", 15);
+			if (this->error == 4)
+				ConsolaUI::text(width / 2 - 12, height / 2 - 1, "Du lieu khong hop le!", 15);
+			else if (this->error == 5)
+				ConsolaUI::text(width / 2 - 12, height / 2 - 1, "Id moi da ton tai trong he thong!", 15);
+			ConsolaUI::text(width / 2 - 12, height / 2 + 1, "** CAP NHAT THONG TIN **", 15);
+			ConsolaUI::text(width / 2 - 25, height / 2 + 2, "Ho va ten       :", this->currentIndex == 1 ? 3 : 15);
+			ConsolaUI::text(width / 2 - 25, height / 2 + 3, "Ngay sinh       :", this->currentIndex == 2 ? 3 : 15);
+			ConsolaUI::text(width / 2 - 25, height / 2 + 4, "Gioi tinh       :", this->currentIndex == 3 ? 3 : 15);
+			ConsolaUI::text(width / 2 - 25, height / 2 + 5, "Ma so sinh vien :", this->currentIndex == 4 ? 3 : 15);
+			ConsolaUI::text(width / 2 - 25, height / 2 + 6, "Lop             :", this->currentIndex == 5 ? 3 : 15);
+			ConsolaUI::text(width / 2 - 25, height / 2 + 7, "Khoa            :", this->currentIndex == 6 ? 3 : 15);
+			ConsolaUI::text(width / 2 - 25, height / 2 + 8, "So dien thoai   :", this->currentIndex == 7 ? 3 : 15);
+			ConsolaUI::text(width / 2 - 25, height / 2 + 9, "Email           :", this->currentIndex == 8 ? 3 : 15);
+
+			ConsolaUI::text(width / 2, height / 2 + 2, this->studentToAct->getFullName() == "" ? "__________" : this->studentToAct->getFullName(), 15);
+			ConsolaUI::text(width / 2, height / 2 + 3, (this->studentToAct->getDateOfBirth().getDay() < 10 ? "0" : "") + to_string(this->studentToAct->getDateOfBirth().getDay()) + "/", this->isDateEdit == true ? (this->dateIndex == 1 ? 10 : 15) : 15);
+			ConsolaUI::text(width / 2 + 3, height / 2 + 3, (this->studentToAct->getDateOfBirth().getMonth() < 10 ? "0" : "") + to_string(this->studentToAct->getDateOfBirth().getMonth()) + "/", this->isDateEdit == true ? (this->dateIndex == 2 ? 10 : 15) : 15);
+			ConsolaUI::text(width / 2 + 6, height / 2 + 3, to_string(this->studentToAct->getDateOfBirth().getYear()), this->isDateEdit == true ? (this->dateIndex == 3 ? 10 : 15) : 15);
+			ConsolaUI::text(width / 2, height / 2 + 4, this->studentToAct->getGender() == true ? "Nam" : "Nu", 15);
+			ConsolaUI::text(width / 2, height / 2 + 5, this->studentToAct->getStudentId() == 0 ? "__________" : to_string(this->studentToAct->getStudentId()), 15);
+			ConsolaUI::text(width / 2, height / 2 + 6, this->studentToAct->getClassName() == "" ? "__________" : this->studentToAct->getClassName(), 15);
+			ConsolaUI::text(width / 2, height / 2 + 7, this->studentToAct->getFaculty() == "" ? "__________" : this->studentToAct->getFaculty(), 15);
+			ConsolaUI::text(width / 2, height / 2 + 8, this->studentToAct->getPhoneNumber() == "" ? "__________" : this->studentToAct->getPhoneNumber(), 15);
+			ConsolaUI::text(width / 2, height / 2 + 9, this->studentToAct->getEmail() == "" ? "__________" : this->studentToAct->getEmail(), 15);
+			ConsolaUI::text(width / 2 - 17, height / 2 + 11, "[Y] Yes - Cap Nhat    [N] No - Huy", 15);
+			return;
+		}
+		// Show Thong Tin Sinh Vien Da Duoc Tim Kiem
+		ConsolaUI::text(width / 2 - 25, 11, ">> SINH VIEN DA DUOC TIM THAY! (ID: " + to_string(this->studentId) + ") <<", 10);
+		ConsolaUI::text(width / 2 - 25, 13, "Ho Va Ten:          " + student->getFullName(), 15);
+		ConsolaUI::text(width / 2 - 25, 14, "Ma So Sinh Vien:    " + to_string(student->getStudentId()), 15);
+		ConsolaUI::text(width / 2 - 25, 15, "Ngay Sinh:          " + student->getDateOfBirth().getDate(), 15);
+		ConsolaUI::text(width / 2 - 25, 16, "Gioi Tinh:          ", 15);
+		ConsolaUI::text(width / 2 - 5, 16, student->getGender() ? "Nam" : "Nu", 15);
+		ConsolaUI::text(width / 2 - 25, 17, "Lop:                " + student->getClassName(), 15);
+		ConsolaUI::text(width / 2 - 25, 18, "Khoa:               " + student->getFaculty(), 15);
+		ConsolaUI::text(width / 2 - 25, 19, "SDT:                " + student->getPhoneNumber(), 15);
+		ConsolaUI::text(width / 2 - 25, 20, "Email:              " + student->getEmail(), 15);
+		// Nut Thao Tac Xoa Va Cap Nhat
+		ConsolaUI::text(width / 2 - 25, 24, "[ X ] Xoa", 2);
+		ConsolaUI::text(width / 2 - 25, 25, "[ U ] Cap Nhat", 2);
+
 	}
 }
 void EmployeeView::showAddStudent(const int& width, const int& height)
@@ -934,16 +943,16 @@ void EmployeeView::showAddStudent(const int& width, const int& height)
 	ConsolaUI::text(width / 2 - 25, height / 2 + 8, "So dien thoai   :", this->currentIndex == 7 ? 3 : 15);
 	ConsolaUI::text(width / 2 - 25, height / 2 + 9, "Email           :", this->currentIndex == 8 ? 3 : 15);
 
-	ConsolaUI::text(width / 2, height / 2 + 2, this->studentToAct.getFullName() == "" ? "__________" : this->studentToAct.getFullName(), 15);
-	ConsolaUI::text(width / 2, height / 2 + 3, (this->studentToAct.getDateOfBirth().getDay() < 10 ? "0" : "") + to_string(this->studentToAct.getDateOfBirth().getDay()) + "/", this->isDateEdit == true ? (this->dateIndex == 1 ? 10 : 15) : 15);
-	ConsolaUI::text(width / 2 + 3, height / 2 + 3, (this->studentToAct.getDateOfBirth().getMonth() < 10 ? "0" : "") + to_string(this->studentToAct.getDateOfBirth().getMonth()) + "/", this->isDateEdit == true ? (this->dateIndex == 2 ? 10 : 15) : 15);
-	ConsolaUI::text(width / 2 + 6, height / 2 + 3, to_string(this->studentToAct.getDateOfBirth().getYear()), this->isDateEdit == true ? (this->dateIndex == 3 ? 10 : 15) : 15);
-	ConsolaUI::text(width / 2, height / 2 + 4, this->studentToAct.getGender() == true ? "Nam" : "Nu", 15);
-	ConsolaUI::text(width / 2, height / 2 + 5, this->studentToAct.getStudentId() == 0 ? "__________" : to_string(this->studentToAct.getStudentId()), 15);
-	ConsolaUI::text(width / 2, height / 2 + 6, this->studentToAct.getClassName() == "" ? "__________" : this->studentToAct.getClassName(), 15);
-	ConsolaUI::text(width / 2, height / 2 + 7, this->studentToAct.getFaculty() == "" ? "__________" : this->studentToAct.getFaculty(), 15);
-	ConsolaUI::text(width / 2, height / 2 + 8, this->studentToAct.getPhoneNumber() == "" ? "__________" : this->studentToAct.getPhoneNumber(), 15);
-	ConsolaUI::text(width / 2, height / 2 + 9, this->studentToAct.getEmail() == "" ? "__________" : this->studentToAct.getEmail(), 15);
+	ConsolaUI::text(width / 2, height / 2 + 2, this->studentToAct->getFullName() == "" ? "__________" : this->studentToAct->getFullName(), 15);
+	ConsolaUI::text(width / 2, height / 2 + 3, (this->studentToAct->getDateOfBirth().getDay() < 10 ? "0" : "") + to_string(this->studentToAct->getDateOfBirth().getDay()) + "/", this->isDateEdit == true ? (this->dateIndex == 1 ? 10 : 15) : 15);
+	ConsolaUI::text(width / 2 + 3, height / 2 + 3, (this->studentToAct->getDateOfBirth().getMonth() < 10 ? "0" : "") + to_string(this->studentToAct->getDateOfBirth().getMonth()) + "/", this->isDateEdit == true ? (this->dateIndex == 2 ? 10 : 15) : 15);
+	ConsolaUI::text(width / 2 + 6, height / 2 + 3, to_string(this->studentToAct->getDateOfBirth().getYear()), this->isDateEdit == true ? (this->dateIndex == 3 ? 10 : 15) : 15);
+	ConsolaUI::text(width / 2, height / 2 + 4, this->studentToAct->getGender() == true ? "Nam" : "Nu", 15);
+	ConsolaUI::text(width / 2, height / 2 + 5, this->studentToAct->getStudentId() == 0 ? "__________" : to_string(this->studentToAct->getStudentId()), 15);
+	ConsolaUI::text(width / 2, height / 2 + 6, this->studentToAct->getClassName() == "" ? "__________" : this->studentToAct->getClassName(), 15);
+	ConsolaUI::text(width / 2, height / 2 + 7, this->studentToAct->getFaculty() == "" ? "__________" : this->studentToAct->getFaculty(), 15);
+	ConsolaUI::text(width / 2, height / 2 + 8, this->studentToAct->getPhoneNumber() == "" ? "__________" : this->studentToAct->getPhoneNumber(), 15);
+	ConsolaUI::text(width / 2, height / 2 + 9, this->studentToAct->getEmail() == "" ? "__________" : this->studentToAct->getEmail(), 15);
 
 	ConsolaUI::text(width / 2 - 20, height / 2 + 13, "[Y] Them Sinh Vien", 2);
 	ConsolaUI::text(width / 2 - 20, height / 2 + 14, "[X] Xoa Thong Tin Sinh Vien Hien Tai", 12);
@@ -951,7 +960,7 @@ void EmployeeView::showAddStudent(const int& width, const int& height)
 }
 void EmployeeView::showStudentsNotRegister(const int& width, const int& height)
 {
-	LinkedList<Student*> students = this->userService->getStudentsWithoutRoom();
+	LinkedList<IStudent*> students = this->userService->getStudentsWithoutRoom();
 	if (students.getSize() == 0)
 	{
 		ConsolaUI::text(width / 2 - 20, 9, "Khong co sinh vien nao trong danh sach!", 12);
@@ -974,8 +983,7 @@ void EmployeeView::showStudentsNotRegister(const int& width, const int& height)
 		int yPos = 10 + i;
 		if (i + this->pageIndex * itemsPerPage < students.getSize())
 		{
-			Student* student = *students.getAt(i + this->pageIndex * itemsPerPage);
-
+			IStudent* student = *students.getAt(i + this->pageIndex * itemsPerPage);
 			ConsolaUI::text(width / 2 - 44, yPos, to_string(student->getStudentId()), 15);
 			ConsolaUI::text(width / 2 - 29, yPos, student->getFullName(), 15);
 			ConsolaUI::text(width / 2 + 6, yPos, student->getClassName(), 15);
@@ -1003,7 +1011,7 @@ void EmployeeView::showRoomMenu(const int& width, const int& height)
 void EmployeeView::showAllRooms(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 25, 7, ">>   XEM DANH SACH PHONG   <<", 14);
-	LinkedList<Room*>* list = this->roomService->getAllRooms();
+	LinkedList<IRoom*>* list = this->roomService->getAllRooms();
 
 	if (list->getSize() == 0)
 		ConsolaUI::text(width / 2 - 18, 9, "Khong co phong nao trong danh sach!", 12);
@@ -1027,7 +1035,7 @@ void EmployeeView::showAllRooms(const int& width, const int& height)
 			int yPos = 10 + i;
 			if (i + this->pageIndex * itemsPerPage < list->getSize())
 			{
-				Room* room = *list->getAt(i + this->pageIndex * itemsPerPage);
+				IRoom* room = *list->getAt(i + this->pageIndex * itemsPerPage);
 				ConsolaUI::text(width / 2 - 50, yPos, to_string(room->getRoomId()), 15);
 				ConsolaUI::text(width / 2 - 35, yPos, room->getRoomName(), 15);
 				ConsolaUI::text(width / 2 - 20, yPos, room->getRoomType(), 15);
@@ -1048,7 +1056,7 @@ void EmployeeView::showFindRoomById(const int& width, const int& height)
 	ConsolaUI::text(width / 2 - 16, 7, ">>   TIM KIEM THEO ID PHONG   <<", 14);
 	ConsolaUI::text(width / 2 - 25, 9, "[F] Nhap Ma Phong: ", 15);
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
-	Room* roomToShow = this->roomService->getRoomById(this->roomId);
+	IRoom* roomToShow = this->roomService->getRoomById(this->roomId);
 	if (this->roomId == 0)
 		return;
 	if (roomToShow == nullptr)
@@ -1059,7 +1067,7 @@ void EmployeeView::showFindRoomById(const int& width, const int& height)
 
 	if (!this->isUpdate)
 	{
-		this->roomToAct = *roomToShow;
+		this->roomToAct = roomToShow;
 	}
 	if (this->isUpdate)
 	{
@@ -1072,10 +1080,10 @@ void EmployeeView::showFindRoomById(const int& width, const int& height)
 		ConsolaUI::text(width / 2 - 25, height / 2 + 3, "Loai Phong: ", this->currentIndex == 2 ? 3 : 15);
 		ConsolaUI::text(width / 2 - 25, height / 2 + 4, "Suc Chua: ", this->currentIndex == 3 ? 3 : 15);
 		ConsolaUI::text(width / 2 - 25, height / 2 + 5, "Trang Thai: ", this->currentIndex == 4 ? 3 : 15);
-		ConsolaUI::text(width / 2, height / 2 + 2, this->roomToAct.getRoomName(), 15);
-		ConsolaUI::text(width / 2, height / 2 + 3, this->roomToAct.getRoomType(), 15);
-		ConsolaUI::text(width / 2, height / 2 + 4, to_string(this->roomToAct.getCapacity()), 15);
-		ConsolaUI::text(width / 2, height / 2 + 5, this->roomToAct.getIsActive() ? "Con Hoat Dong" : "Khong Hoat Dong", this->roomToAct.getIsActive() ? 10 : 12);
+		ConsolaUI::text(width / 2, height / 2 + 2, this->roomToAct->getRoomName(), 15);
+		ConsolaUI::text(width / 2, height / 2 + 3, this->roomToAct->getRoomType(), 15);
+		ConsolaUI::text(width / 2, height / 2 + 4, to_string(this->roomToAct->getCapacity()), 15);
+		ConsolaUI::text(width / 2, height / 2 + 5, this->roomToAct->getIsActive() ? "Con Hoat Dong" : "Khong Hoat Dong", this->roomToAct->getIsActive() ? 10 : 12);
 		ConsolaUI::text(width / 2 - 18, height / 2 + 9, "[Y] Yes - Cap Nhat     [N] No - Huy", 7);
 		return;
 	}
@@ -1104,7 +1112,7 @@ void EmployeeView::showFindRoomById(const int& width, const int& height)
 void EmployeeView::showFindVacantRooms(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 17, 7, ">>  XEM DANH SACH PHONG TRONG   <<", 14);
-	LinkedList<Room*> list = this->roomService->getVacantRooms();
+	LinkedList<IRoom*> list = this->roomService->getVacantRooms();
 
 	if (list.getSize() == 0)
 		ConsolaUI::text(width / 2 - 18, 9, "Khong co phong nao trong danh sach!", 12);
@@ -1128,7 +1136,7 @@ void EmployeeView::showFindVacantRooms(const int& width, const int& height)
 			int yPos = 10 + i;
 			if (i + this->pageIndex * itemsPerPage < list.getSize())
 			{
-				Room* room = *list.getAt(i + this->pageIndex * itemsPerPage);
+				IRoom* room = *list.getAt(i + this->pageIndex * itemsPerPage);
 				ConsolaUI::text(width / 2 - 50, yPos, to_string(room->getRoomId()), 15);
 				ConsolaUI::text(width / 2 - 35, yPos, room->getRoomName(), 15);
 				ConsolaUI::text(width / 2 - 20, yPos, room->getRoomType(), 15);
@@ -1147,7 +1155,7 @@ void EmployeeView::showFindVacantRooms(const int& width, const int& height)
 void EmployeeView::showFindAvailableRooms(const int& width, const int& height)
 {
 	ConsolaUI::text(30, 7, "XEM DANH SACH PHONG:", 14);
-	LinkedList<Room*> list = this->roomService->getAvailableRooms();
+	LinkedList<IRoom*> list = this->roomService->getAvailableRooms();
 
 	if (list.getSize() == 0)
 	{
@@ -1174,7 +1182,7 @@ void EmployeeView::showFindAvailableRooms(const int& width, const int& height)
 		int yPos = 10 + i;
 		if (i + this->pageIndex * itemsPerPage < list.getSize())
 		{
-			Room* room = *list.getAt(i + this->pageIndex * itemsPerPage);
+			IRoom* room = *list.getAt(i + this->pageIndex * itemsPerPage);
 			ConsolaUI::text(width / 2 - 50, yPos, to_string(room->getRoomId()), 15);
 			ConsolaUI::text(width / 2 - 35, yPos, room->getRoomName(), 15);
 			ConsolaUI::text(width / 2 - 20, yPos, room->getRoomType(), 15);
@@ -1206,7 +1214,7 @@ void EmployeeView::showInvoiceMenu(const int& width, const int& height)
 void EmployeeView::showAllInvoices(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 15, 7, ">>   XEM DANH SACH HOA DON   <<", 14);
-	LinkedList<Invoice*>* list = this->billingService->getAllInvoices();
+	LinkedList<IInvoice*>* list = this->billingService->getAllInvoices();
 	if (list->getSize() == 0)
 	{
 		ConsolaUI::text(width / 2 - 19, 9, "Khong co hoa don nao trong danh sach!", 12);
@@ -1227,11 +1235,11 @@ void EmployeeView::showAllInvoices(const int& width, const int& height)
 		int yPos = 10 + i;
 		if (i + this->pageIndex * itemsPerPage < list->getSize())
 		{
-			Invoice* invoice = *list->getAt(i + this->pageIndex * itemsPerPage);
+			IInvoice* invoice = *list->getAt(i + this->pageIndex * itemsPerPage);
 			ConsolaUI::text(width / 2 - 30, yPos, to_string(invoice->getInvoiceId()), 15);
 			ConsolaUI::text(width / 2 - 15, yPos, to_string(invoice->getTotalAmount()), 15);
 			ConsolaUI::text(width / 2, yPos, invoice->getCreatedDate().getDate(), 15);
-			ConsolaUI::text(width / 2 + 15, yPos, invoice->getisPaid() ? "Da thanh toan" : "Chua thanh toan", invoice->getisPaid() ? 10 : 12);
+			ConsolaUI::text(width / 2 + 15, yPos, invoice->getIsPaid() ? "Da thanh toan" : "Chua thanh toan", invoice->getIsPaid() ? 10 : 12);
 		}
 		else break;
 	}
@@ -1246,7 +1254,7 @@ void EmployeeView::showCreateNewInvoice(const int& width, const int& height)
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
 	if (this->roomId == 0)
 		return;
-	Room* room = this->roomService->getRoomById(this->roomId);
+	IRoom* room = this->roomService->getRoomById(this->roomId);
 	if (room == nullptr)
 	{
 		ConsolaUI::text(width / 2 - 10, 12, "Khong co phong nay!", 12);
@@ -1274,7 +1282,7 @@ void EmployeeView::showFindInvoicesByStudentId(const int& width, const int& heig
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
 	if (this->studentId == 0)
 		return;
-	LinkedList<Invoice*> invoices = this->billingService->getInvoicesByStudent(this->studentId);
+	LinkedList<IInvoice*> invoices = this->billingService->getInvoicesByStudent(this->studentId);
 	if (invoices.getSize() == 0)
 	{
 		ConsolaUI::text(width / 2 - 13, 11, "Sinh Vien Chua Co Hoa Don!", 12);
@@ -1295,11 +1303,11 @@ void EmployeeView::showFindInvoicesByStudentId(const int& width, const int& heig
 		int yPos = 13 + i;
 		if (i + this->pageIndex * itemsPerPage < invoices.getSize())
 		{
-			Invoice* invoice = *invoices.getAt(i + this->pageIndex * itemsPerPage);
+			IInvoice* invoice = *invoices.getAt(i + this->pageIndex * itemsPerPage);
 			ConsolaUI::text(width / 2 - 30, yPos, to_string(invoice->getInvoiceId()), 15);
 			ConsolaUI::text(width / 2 - 15, yPos, to_string(invoice->getTotalAmount()), 15);
 			ConsolaUI::text(width / 2, yPos, invoice->getCreatedDate().getDate(), 15);
-			ConsolaUI::text(width / 2 + 15, yPos, invoice->getisPaid() ? "Da thanh toan" : "Chua thanh toan", invoice->getisPaid() ? 10 : 12);
+			ConsolaUI::text(width / 2 + 15, yPos, invoice->getIsPaid() ? "Da thanh toan" : "Chua thanh toan", invoice->getIsPaid() ? 10 : 12);
 		}
 		else break;
 	}
@@ -1312,7 +1320,7 @@ void EmployeeView::showFindInvoiceById(const int& width, const int& height)
 	ConsolaUI::text(width / 2 - 17, 7, ">>   TIM KIEM THEO ID HOA DON   <<", 14);
 	ConsolaUI::text(width / 2 - 25, 9, "[F] Nhap Ma Hoa Don: ", 15);
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
-	Invoice* invToShow = this->billingService->getInvoiceById(this->invoiceId);
+	IInvoice* invToShow = this->billingService->getInvoiceById(this->invoiceId);
 	if (this->invoiceId == 0)
 		return;
 	if (invToShow == nullptr)
@@ -1320,11 +1328,11 @@ void EmployeeView::showFindInvoiceById(const int& width, const int& height)
 		ConsolaUI::text(width / 2 - 15, 11, ">> KHONG TIM THAY HOA DON: " + to_string(this->invoiceId) + " <<", 12);
 		return;
 	}
-	
-	this->invToPay = *invToShow;
+
+	this->invToPay = invToShow;
 	if (this->isPaid == true)
 	{
-		
+
 		ConsolaUI::drawBox(width / 2 - 16, height / 2, 32, 12, 15);
 		ConsolaUI::text(width / 2 - 6, height / 2 + 1, "QR to Scan", 15);
 		ConsolaUI::text(width / 2 - 13, height / 2 + 2, "*************************", 15);
@@ -1364,13 +1372,13 @@ void EmployeeView::showFindInvoiceById(const int& width, const int& height)
 	ConsolaUI::text(xLabel, yPos + 11, "Ngay Lap Hoa Don:", 15);
 	ConsolaUI::text(xValue, yPos + 11, invToShow->getCreatedDate().getDate(), 15);
 	ConsolaUI::text(xLabel, yPos + 12, "Trang Thai:", 15);
-	ConsolaUI::text(xValue, yPos + 12, invToShow->getisPaid() ? "Da Thanh Toan" : "Chua Thanh Toan", invToShow->getisPaid() ? 10 : 7);
-	ConsolaUI::text(width / 2 - 20, height / 2  + 14, "[T] - In Hoa Don       [Y] - Thanh Toan", 7);
+	ConsolaUI::text(xValue, yPos + 12, invToShow->getIsPaid() ? "Da Thanh Toan" : "Chua Thanh Toan", invToShow->getIsPaid() ? 10 : 7);
+	ConsolaUI::text(width / 2 - 20, height / 2 + 14, "[T] - In Hoa Don       [Y] - Thanh Toan", 7);
 }
 void EmployeeView::showUnpaidInvoices(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 15, 7, ">>   XEM DANH SACH HOA DON   <<", 14);
-	LinkedList<Invoice*> list = this->billingService->getUnpaidInvoices();
+	LinkedList<IInvoice*> list = this->billingService->getUnpaidInvoices();
 	if (list.getSize() == 0)
 		ConsolaUI::text(width / 2 - 20, 9, "Khong co hoa don nao trong danh sach!", 12);
 	else
@@ -1390,11 +1398,11 @@ void EmployeeView::showUnpaidInvoices(const int& width, const int& height)
 			int yPos = 10 + i;
 			if (i + this->pageIndex * itemsPerPage < list.getSize())
 			{
-				Invoice* invoice = *list.getAt(i + this->pageIndex * itemsPerPage);
+				IInvoice* invoice = *list.getAt(i + this->pageIndex * itemsPerPage);
 				ConsolaUI::text(width / 2 - 30, yPos, to_string(invoice->getInvoiceId()), 15);
 				ConsolaUI::text(width / 2 - 15, yPos, to_string(invoice->getTotalAmount()), 15);
 				ConsolaUI::text(width / 2, yPos, invoice->getCreatedDate().getDate(), 15);
-				ConsolaUI::text(width / 2 + 15, yPos, invoice->getisPaid() ? "Da thanh toan" : "Chua thanh toan", invoice->getisPaid() ? 10 : 7);
+				ConsolaUI::text(width / 2 + 15, yPos, invoice->getIsPaid() ? "Da thanh toan" : "Chua thanh toan", invoice->getIsPaid() ? 10 : 7);
 			}
 			else break;
 		}
@@ -1406,7 +1414,7 @@ void EmployeeView::showUnpaidInvoices(const int& width, const int& height)
 void EmployeeView::showPaidInvoices(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 15, 7, ">>   XEM DANH SACH HOA DON   <<", 14);
-	LinkedList<Invoice*> list = this->billingService->getPaidInvoices();
+	LinkedList<IInvoice*> list = this->billingService->getPaidInvoices();
 
 	if (list.getSize() == 0)
 		ConsolaUI::text(width / 2 - 20, 9, "Khong co hoa don nao trong danh sach!", 12);
@@ -1427,11 +1435,11 @@ void EmployeeView::showPaidInvoices(const int& width, const int& height)
 			int yPos = 10 + i;
 			if (i + this->pageIndex * itemsPerPage < list.getSize())
 			{
-				Invoice* invoice = *list.getAt(i + this->pageIndex * itemsPerPage);
+				IInvoice* invoice = *list.getAt(i + this->pageIndex * itemsPerPage);
 				ConsolaUI::text(width / 2 - 30, yPos, to_string(invoice->getInvoiceId()), 15);
 				ConsolaUI::text(width / 2 - 15, yPos, to_string(invoice->getTotalAmount()), 15);
 				ConsolaUI::text(width / 2, yPos, invoice->getCreatedDate().getDate(), 15);
-				ConsolaUI::text(width / 2 + 15, yPos, invoice->getisPaid() ? "Da thanh toan" : "Chua thanh toan", invoice->getisPaid() ? 10 : 7);
+				ConsolaUI::text(width / 2 + 15, yPos, invoice->getIsPaid() ? "Da thanh toan" : "Chua thanh toan", invoice->getIsPaid() ? 10 : 7);
 			}
 			else break;
 		}
@@ -1457,7 +1465,7 @@ void EmployeeView::showContractMenu(const int& width, const int& height)
 void EmployeeView::showAllContracts(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 16, 7, ">>   XEM DANH SACH HOP DONG   <<", 14);
-	LinkedList<Contract*>* list = this->contractService->getAllContracts();
+	LinkedList<IContract*>* list = this->contractService->getAllContracts();
 	if (list->getSize() > 0)
 	{
 		int itemsPerPage = height - 14;
@@ -1477,7 +1485,7 @@ void EmployeeView::showAllContracts(const int& width, const int& height)
 			int yPos = 11 + i;
 			if (i + this->pageIndex * itemsPerPage < list->getSize())
 			{
-				Contract* contract = *list->getAt(i + this->pageIndex * itemsPerPage);
+				IContract* contract = *list->getAt(i + this->pageIndex * itemsPerPage);
 				ConsolaUI::text(width / 2 - 38, yPos, to_string(contract->getContractId()), 15);
 				ConsolaUI::text(width / 2 - 23, yPos, contract->getStartDate().getDate(), 15);
 				ConsolaUI::text(width / 2 - 8, yPos, contract->getEndDate().getDate(), 15);
@@ -1506,7 +1514,7 @@ void EmployeeView::showCreateContract(const int& width, const int& height)
 	ConsolaUI::text(width / 2 - 25, height / 2 + 9, "Loai Phong", 15);
 	ConsolaUI::text(width / 2 - 25, height / 2 + 10, "[*] Thoi Han (So Thang):", this->currentIndex == 3 ? 9 : 15);
 
-	Student* student = this->userService->getStudentById(this->studentId);
+	IStudent* student = this->userService->getStudentById(this->studentId);
 	ConsolaUI::text(width / 2, height / 2 + 2, to_string(this->studentId), 15);
 	if (student == nullptr)
 	{
@@ -1524,7 +1532,7 @@ void EmployeeView::showCreateContract(const int& width, const int& height)
 		canSave = true;
 	}
 
-	Room* room = this->roomService->getRoomById(this->roomId);
+	IRoom* room = this->roomService->getRoomById(this->roomId);
 	if (room == nullptr)
 	{
 		isValid = false;
@@ -1554,7 +1562,7 @@ void EmployeeView::showFindContractsByStudentId(const int& width, const int& hei
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
 	if (this->studentId == 0)
 		return;
-	LinkedList<Contract*>* contracts = this->contractService->getContractsByStudent(this->studentId);
+	LinkedList<IContract*>* contracts = this->contractService->getContractsByStudent(this->studentId);
 	if (contracts->getSize() == 0)
 	{
 		ConsolaUI::text(35, 11, ">> Sinh Vien Chua Co Hop Dong <<", 12);
@@ -1578,7 +1586,7 @@ void EmployeeView::showFindContractsByStudentId(const int& width, const int& hei
 		int currentIndex = i + this->pageIndex * itemsPerPage;
 		if (currentIndex < contracts->getSize())
 		{
-			Contract* contract = *contracts->getAt(currentIndex);
+			IContract* contract = *contracts->getAt(currentIndex);
 			if (contract != nullptr)
 			{
 				ConsolaUI::text(width / 2 - 38, yPos, to_string(contract->getContractId()), 15);
@@ -1601,7 +1609,7 @@ void EmployeeView::showFindContractById(const int& width, const int& height)
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
 	if (this->contractId == 0)
 		return;
-	Contract* contract = this->contractService->getContractById(this->contractId);
+	IContract* contract = this->contractService->getContractById(this->contractId);
 	if (contract == nullptr)
 	{
 		ConsolaUI::text(width / 2 - 19, 11, ">> Khong Tim Thay Hop Dong Voi Ma ID Nay <<", 12);
@@ -1624,7 +1632,7 @@ void EmployeeView::showFindContractById(const int& width, const int& height)
 void EmployeeView::showInvalidContracts(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 16, 7, ">>   XEM DANH SACH HOP DONG   <<", 14);
-	LinkedList<Contract*> list = this->contractService->getExpiredContracts();
+	LinkedList<IContract*> list = this->contractService->getExpiredContracts();
 	if (list.getSize() > 0)
 	{
 		int itemsPerPage = height - 13;
@@ -1644,7 +1652,7 @@ void EmployeeView::showInvalidContracts(const int& width, const int& height)
 			int yPos = 11 + i;
 			if (i + this->pageIndex * itemsPerPage < list.getSize())
 			{
-				Contract* contract = *list.getAt(i + this->pageIndex * itemsPerPage);
+				IContract* contract = *list.getAt(i + this->pageIndex * itemsPerPage);
 				ConsolaUI::text(width / 2 - 38, yPos, to_string(contract->getContractId()), 15);
 				ConsolaUI::text(width / 2 - 23, yPos, contract->getStartDate().getDate(), 15);
 				ConsolaUI::text(width / 2 - 8, yPos, contract->getEndDate().getDate(), 15);
@@ -1661,7 +1669,7 @@ void EmployeeView::showInvalidContracts(const int& width, const int& height)
 void EmployeeView::showValidContracts(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 16, 7, ">>   XEM DANH SACH HOP DONG   <<", 14);
-	LinkedList<Contract*> list = this->contractService->getActiveContracts();
+	LinkedList<IContract*> list = this->contractService->getActiveContracts();
 	if (list.getSize() > 0)
 	{
 		int itemsPerPage = height - 13;
@@ -1681,7 +1689,7 @@ void EmployeeView::showValidContracts(const int& width, const int& height)
 			int yPos = 11 + i;
 			if (i + this->pageIndex * itemsPerPage < list.getSize())
 			{
-				Contract* contract = *list.getAt(i + this->pageIndex * itemsPerPage);
+				IContract* contract = *list.getAt(i + this->pageIndex * itemsPerPage);
 				ConsolaUI::text(width / 2 - 38, yPos, to_string(contract->getContractId()), 15);
 				ConsolaUI::text(width / 2 - 23, yPos, contract->getStartDate().getDate(), 15);
 				ConsolaUI::text(width / 2 - 8, yPos, contract->getEndDate().getDate(), 15);

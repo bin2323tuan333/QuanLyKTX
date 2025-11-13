@@ -1,13 +1,10 @@
 #pragma once
+#include "IRoom.h"
 #include "LinkedList.h"
-#include "Contract.h"
-#include <string>
-using namespace std;
+#include "IContact.h"
 
-
-
-class Contract;
-class Room 
+class IContract;
+class Room : public virtual IRoom
 {
 private:
     int roomId;
@@ -17,31 +14,32 @@ private:
     int floor;
     string building;
     bool isActive;
-    LinkedList<Contract*> contracts;
+    LinkedList<IContract*> contracts;
 public:
     Room(const int& = 0, const string & = "", const string & = "", const int& = 0, const int& = 0, const string& = "", const bool& = true);
     Room(const Room&);
     ~Room();
-    void AddContract(Contract*);
-    LinkedList<Contract*>* getContracts();
-    bool isAvailable();
-    bool isVacant();
 
-    int getRoomId() const;
-    void setRoomId(const int&);
-    string getRoomName();
-    void setRoomName(const string&);
-    string getRoomType() const;
-    void setRoomType(const string&);
-    int getCapacity() const;
-    void setCapacity(const int&);
-    int getCurrentOccupancy();
-    int getFloor();
-    void setFloor(const int&);
-    string getBuilding();
-    void setBuilding(const string&);
-    bool getIsActive() const;
-    void setIsActive(const bool&);
+    void AddContract(IContract*) override;
+    LinkedList<IContract*>* getContracts() override;
+    bool isAvailable() override;
+    bool isVacant() override;
+
+    int getRoomId() const override;
+    void setRoomId(const int&) override;
+    string getRoomName() const override;
+    void setRoomName(const string&) override;
+    string getRoomType() const override;
+    void setRoomType(const string&) override;
+    int getCapacity() const override;
+    void setCapacity(const int&) override;
+    int getCurrentOccupancy() override;
+    int getFloor() const override;
+    void setFloor(const int&) override;
+    string getBuilding() const override;
+    void setBuilding(const string&) override;
+    bool getIsActive() const override;
+    void setIsActive(const bool&) override;
 
     Room& operator=(const Room&);
     bool operator==(const Room&);

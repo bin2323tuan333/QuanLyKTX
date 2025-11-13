@@ -2,7 +2,7 @@
 #include "IAccount.h"
 #include "Person.h"
 
-class Account : public IAccount
+class Account : public virtual IAccount
 {
 private:
     int userId;

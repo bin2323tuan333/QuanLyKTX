@@ -3,12 +3,12 @@
 
 // Constructor
 Employee::Employee(const string& fullName, const Date& dateOfBirth, const bool& gender, const string& phoneNumber,
-	const string& email, const int& userId, IAccount* acc, const int& employeeId, const string & role, const int& salary)
-	:Person(fullName, dateOfBirth, gender, phoneNumber, email, userId, acc), employeeId(employeeId), role(role), salary(salary)
+	const string& email, const int& userId, IAccount* acc, const int& employeeId, const int& salary)
+	:Person(fullName, dateOfBirth, gender, phoneNumber, email, userId, acc), employeeId(employeeId), salary(salary)
 {
 }
 Employee::Employee(const Employee& e)
-	: Person(e.fullName, e.dateOfBirth, e.gender, e.phoneNumber, e.email, e.userId, e.userAccount), employeeId(e.employeeId), role(e.role), salary(e.salary)
+	: Person(e.fullName, e.dateOfBirth, e.gender, e.phoneNumber, e.email, e.userId, e.userAccount), employeeId(e.employeeId), salary(e.salary)
 {
 }
 Employee::~Employee()
@@ -23,13 +23,10 @@ void Employee::setEmployeeId(const int& employeeId)
 {
 	this->employeeId = employeeId;
 }
+
 string Employee::getRole()
 {
-	return this->role;
-}
-void Employee::setRole(const string& role)
-{
-	this->role = role;
+	return "Manager";
 }
 int Employee::getSalary() const
 {
@@ -47,7 +44,6 @@ Employee& Employee::operator=(const Employee& other)
 
 	this->Person::operator=(other);
 	this->employeeId = other.employeeId;
-	this->role = other.role;
 	this->salary = other.salary;
 	return *this;
 }
@@ -57,7 +53,6 @@ bool Employee::operator==(const Employee& other)
 	if (!(this->Person::operator==(other)))
 		return false;
 	return (this->employeeId == other.employeeId &&
-		this->role == other.role &&
 		this->salary == other.salary);
 }
 
@@ -67,6 +62,5 @@ bool Employee::operator!=(const Employee& other)
 	if (this->Person::operator!=(other))
 		return true;
 	return (this->employeeId != other.employeeId ||
-		this->role != other.role ||
 		this->salary != other.salary);
 }

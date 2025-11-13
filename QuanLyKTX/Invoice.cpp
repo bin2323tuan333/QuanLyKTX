@@ -1,4 +1,5 @@
 #include "Invoice.h"
+#include "Contract.h"
 
 
 Invoice::Invoice(const int& invoiceId, 
@@ -9,7 +10,7 @@ Invoice::Invoice(const int& invoiceId,
 	const Date & createDate, 
 	const bool& paid,
 	const int& contractId,
-	Contract* contract)
+	IContract* contract)
 	: invoiceId(invoiceId), roomFee(roomFee), internetFee(internetFee), electricFee(electricFee), waterFee(waterFee),
 	createdDate(createdDate),isPaid(paid), contractId(contractId), contract(contract)
 {
@@ -23,13 +24,13 @@ Invoice::~Invoice()
 {
 }
 
-void Invoice::AddContract(Contract* contract)
+void Invoice::AddContract(IContract* contract)
 {
 	this->contract = contract;
 	contract->AddInvoice(this);
 }
 
-Contract* Invoice::getContract()
+IContract* Invoice::getContract()
 {
 	return this->contract;
 }
@@ -51,7 +52,7 @@ void Invoice::setContractId(const int& id)
 {
 	this->contractId = id;
 }
-int Invoice::getRoomFee()
+int Invoice::getRoomFee() const
 {
 	return this->roomFee;
 }
@@ -59,7 +60,7 @@ void Invoice::setRoomFee(const int& fee)
 {
 	this->roomFee = fee;
 }
-int Invoice::getInternetFee()
+int Invoice::getInternetFee()  const
 {
 	return this->internetFee;
 }
@@ -67,7 +68,7 @@ void Invoice::setInternetFee(const int& fee)
 {
 	this->internetFee = fee;
 }
-int Invoice::getElectricFee()
+int Invoice::getElectricFee() const
 {
 	return this->electricFee;
 }
@@ -75,7 +76,7 @@ void Invoice::setElectricFee(const int& fee)
 {
 	this->electricFee = fee;
 }
-int Invoice::getWaterFee()
+int Invoice::getWaterFee() const
 {
 	return this->waterFee;
 }
@@ -83,11 +84,11 @@ void Invoice::setWaterFee(const int& fee)
 {
 	this->waterFee = fee;
 }
-int Invoice::getTotalAmount()
+int Invoice::getTotalAmount() const
 {
 	return this->electricFee + this->waterFee + this->internetFee + this->roomFee;
 }
-Date Invoice::getCreatedDate()
+Date Invoice::getCreatedDate() const
 {
 	return this->createdDate;
 }
@@ -95,11 +96,11 @@ void Invoice::setCreatedDate(const Date& date)
 {
 	this->createdDate = date;
 }
-bool Invoice::getisPaid()
+bool Invoice::getIsPaid() const
 {
 	return this->isPaid;
 }
-void Invoice::setisPaid(const bool& paid)
+void Invoice::setIsPaid(const bool& paid)
 {
 	this->isPaid = paid;
 }

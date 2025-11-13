@@ -1,5 +1,9 @@
 #include "AuthService.h"
-
+#include "Account.h"
+#include "Person.h"
+#include "Student.h"
+#include "Employee.h"
+#include <string>
 
 AuthService::AuthService()
 {
@@ -9,9 +13,9 @@ AuthService::~AuthService()
 {
 }
 
-Account* AuthService::login(const string& username, const string& password)
+IAccount* AuthService::login(const string& username, const string& password)
 {
-	Account* temp = DB::Instance()->getAccountByUsername(username);
+	IAccount* temp = DB::Instance()->getAccountByUsername(username);
 	if (temp == nullptr) return 0;
 	if (temp->getPassword() == password)
 	{
@@ -19,7 +23,7 @@ Account* AuthService::login(const string& username, const string& password)
 	}
 	return nullptr;
 }
-int AuthService::changePassword(Account* user, const string& oldPass, const string& newPass, const string& reNewPass)
+int AuthService::changePassword(IAccount* user, const string& oldPass, const string& newPass, const string& reNewPass)
 {
 	if (oldPass != user->getPassword()) return 2;						// Mat Khau Cu Khong Dung
 	if (oldPass == "" || newPass == "" || reNewPass == "") return 3;	// De trong mat khau
@@ -28,14 +32,14 @@ int AuthService::changePassword(Account* user, const string& oldPass, const stri
 	user->setPassword(newPass);
 	return 1;
 }
-bool AuthService::genAccount(Person* person)
+bool AuthService::genAccount(IPerson* person)
 {
 	if (person->getAccount() != nullptr) return false;
 
-	Account* newAccount = new Account();
+	IAccount* newAccount = new Account();
 	newAccount->setUserId(this->getIdAuto());
-	Student* student = dynamic_cast<Student*>(person);
-	Employee* employee = dynamic_cast<Employee*>(person);
+	IStudent* student = dynamic_cast<IStudent*>(person);
+	IEmployee* employee = dynamic_cast<IEmployee*>(person);
 	if (student != nullptr)
 	{
 		newAccount->setUsername(to_string(student->getStudentId()));
@@ -68,7 +72,7 @@ bool AuthService::genAccount(Person* person)
 int AuthService::getIdAuto()
 {
 	int maxId = 0;
-	for (ListNode<Account*>* p = database->getAllAccounts()->getHead(); p != nullptr; p = p->next)
+	for (ListNode<IAccount*>* p = database->getAllAccounts()->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->getUserId() > maxId) maxId = p->value->getUserId();
 	}

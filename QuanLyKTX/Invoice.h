@@ -1,44 +1,42 @@
 #pragma once
-#include "Date.h"
-#include "Student.h"
-#include "Employee.h"
-#include <string>
-using namespace std;
+#include "IInvoice.h"
 
-class Invoice {
+class IContract;
+class Invoice : public virtual IInvoice
+{
 private:
     int invoiceId;
     int roomFee, internetFee, electricFee, waterFee;
     Date createdDate;
     bool isPaid;
     int contractId;
-    Contract* contract;
+    IContract* contract;
 public:
-    Invoice(const int& = 0, const int& = 0, const int& = 0, const int& = 0, const int& = 0, const Date & = Date(), const bool& = false, const int& = 0, Contract* = nullptr);
+    Invoice(const int& = 0, const int& = 0, const int& = 0, const int& = 0, const int& = 0, const Date & = Date(), const bool& = false, const int& = 0, IContract* = nullptr);
     Invoice(const Invoice&);
     ~Invoice();
 
-    void AddContract(Contract*);
-    Contract* getContract();
-    int getInvoiceId() const;
-    void setInvoiceId(const int&);
-    int getContractId() const;
-    void setContractId(const int&);
-    int getEmployeeId() const;
-    void setEmployeeId(const int&);
-    int getRoomFee();
-    void setRoomFee(const int&);
-    int getInternetFee();
-    void setInternetFee(const int&);
-    int getElectricFee();
-    void setElectricFee(const int&);
-    int getWaterFee();
-    void setWaterFee(const int&);
-    int getTotalAmount();
-    Date getCreatedDate();
-    void setCreatedDate(const Date&);
-    bool getisPaid();
-    void setisPaid(const bool&);
+    void AddContract(IContract*) override;
+    IContract* getContract() override;
+    int getTotalAmount() const override;
+
+
+    int getInvoiceId() const override;
+    void setInvoiceId(const int&) override;
+    int getContractId() const override;
+    void setContractId(const int&) override;
+    int getRoomFee() const override;
+    void setRoomFee(const int&) override;
+    int getInternetFee() const override;
+    void setInternetFee(const int&) override;
+    int getElectricFee() const override;
+    void setElectricFee(const int&) override;
+    int getWaterFee() const override;
+    void setWaterFee(const int&) override;
+    Date getCreatedDate() const override;
+    void setCreatedDate(const Date&) override;
+    bool getIsPaid() const override;
+    void setIsPaid(const bool&) override;
 
     Invoice& operator=(const Invoice&);
     bool operator==(const Invoice&);

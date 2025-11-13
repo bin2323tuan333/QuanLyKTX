@@ -5,10 +5,10 @@ class IAccount;
 class IPerson {
 public:
     virtual ~IPerson();
-    virtual string getRole() = 0;
 
     virtual IAccount* getAccount() = 0;
     virtual void AddAccount(IAccount*) = 0;
+    virtual string getRole() = 0;
 
     virtual string getFullName() const = 0;
     virtual void setFullName(const string&) = 0;
@@ -23,7 +23,3 @@ public:
     virtual int getUserId() const = 0;
     virtual void setUserId(const int&) = 0;
 };
-
-IPerson::~IPerson()
-{
-}

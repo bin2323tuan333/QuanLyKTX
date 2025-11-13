@@ -1,31 +1,31 @@
 #pragma once
-#include "Account.h"
-#include "Employee.h"
-#include "Student.h"
-#include "Contract.h"
-#include "Room.h"
-#include "Invoice.h"
+#include <string>
 #include "LinkedList.h"
+using namespace std;
 
 
-
+class IAccount;
+class IStudent;
+class IEmployee;
+class IContract;
+class IInvoice;
+class IRoom;
 class DB
 {
 private:
 	static DB* _Instance;
-	LinkedList<Account*> listAccounts;
-	LinkedList<Student*> listStudents;
-	LinkedList<Employee*> listEmployees;
-	LinkedList<Contract*> listContracts;
-	LinkedList<Invoice*> listInvoices;
-	LinkedList<Room*> listRooms;
+	LinkedList<IAccount*> listAccounts;
+	LinkedList<IStudent*> listStudents;
+	LinkedList<IEmployee*> listEmployees;
+	LinkedList<IContract*> listContracts;
+	LinkedList<IInvoice*> listInvoices;
+	LinkedList<IRoom*> listRooms;
 	DB();
 	DB(const DB&) = delete;
 	const DB& operator=(const DB&) = delete;
 
 	void loadData();
 	void connect();
-	
 	void freeMem();
 public:
 	~DB();
@@ -33,54 +33,54 @@ public:
 	static void Destroy();
     void saveData();
 	// ====  ====
-	LinkedList<Student*>* getStudentInRoom(const int&);
-	LinkedList<Contract*>* getContractInStudent(const int&);
-	LinkedList<Invoice*>* getInvoiceInContract(const int&);
+	LinkedList<IStudent*>* getStudentInRoom(const int&);
+	LinkedList<IContract*>* getContractInStudent(const int&);
+	LinkedList<IInvoice*>* getInvoiceInContract(const int&);
 
 
 
 	// ==== CRUD BASIC ====
 	// ===Account===
-	void updateAccount(const Account&);
-	void deleteAccount(const Account&);
-	void addAccount(Account*);
-	Account* getAccountByUsername(const string&);
-	Account* getAccountByUserId(const int&);
-	LinkedList<Account*>* getAllAccounts();
+	void updateAccount(const IAccount&);
+	void deleteAccount(const IAccount&);
+	void addAccount(IAccount*);
+	IAccount* getAccountByUsername(const string&);
+	IAccount* getAccountByUserId(const int&);
+	LinkedList<IAccount*>* getAllAccounts();
 
 	// ===Student===
-	void updateStudent(const int& id, const Student&);
-	void deleteStudent(const Student&);
-	void addStudent(const Student&);
-	Student* getStudentByStudentId(const int&);
-	LinkedList<Student*>* getAllStudents();
+	void updateStudent(const int& id, const IStudent&);
+	void deleteStudent(const IStudent&);
+	void addStudent(const IStudent&);
+	IStudent* getStudentByStudentId(const int&);
+	LinkedList<IStudent*>* getAllStudents();
 
 	// ===Employee===
-	void updateEmployee(const Employee&);
-	void deleteEmployee(const Employee&);
-	void addEmployee(const Employee&);
-	Employee* getEmployeeByEmployeeId(const int&);
-	LinkedList<Employee*>* getAllEmployees();
+	void updateEmployee(const IEmployee&);
+	void deleteEmployee(const IEmployee&);
+	void addEmployee(const IEmployee&);
+	IEmployee* getEmployeeByEmployeeId(const int&);
+	LinkedList<IEmployee*>* getAllEmployees();
 
 	// ===Contract===
-	void updateContract(const Contract&);
-	void deleteContract(const Contract&);
-	void addContract(const Contract&);
-	Contract* getContractByContractId(const int&);
-	LinkedList<Contract*>* getAllContracts();
+	void updateContract(const IContract&);
+	void deleteContract(const IContract&);
+	void addContract(const IContract&);
+	IContract* getContractByContractId(const int&);
+	LinkedList<IContract*>* getAllContracts();
 
 	// ===Invoice===
-	void updateInvoice(const Invoice&);
-	void deleteInvoice(const Invoice&);
-	void addInvoice(const Invoice&);
-	Invoice* getInvoiceByInvoiceId(const int&);
-	LinkedList<Invoice*>* getAllInvoices();
+	void updateInvoice(const IInvoice&);
+	void deleteInvoice(const IInvoice&);
+	void addInvoice(const IInvoice&);
+	IInvoice* getInvoiceByInvoiceId(const int&);
+	LinkedList<IInvoice*>* getAllInvoices();
 
 	// ===Room===
-	void updateRoom(const Room&);
-	void deleteRoom(const Room&);
-	void addRoom(const Room&);
-	Room* getRoomByRoomId(const int&);
-	LinkedList<Room*>* getAllRooms();
+	void updateRoom(const IRoom&);
+	void deleteRoom(const IRoom&);
+	void addRoom(const IRoom&);
+	IRoom* getRoomByRoomId(const int&);
+	LinkedList<IRoom*>* getAllRooms();
 };
 

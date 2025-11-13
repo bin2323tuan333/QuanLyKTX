@@ -55,7 +55,13 @@
     <Filter Include="Header Files\FileHandle">
       <UniqueIdentifier>{c1c29190-9a6b-45b5-9a48-98175052fda1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\InterfaceService">
+    <Filter Include="Source Files\InterfaceModels">
+      <UniqueIdentifier>{6edef6e7-cb64-494b-9819-5ec1887c0424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InterfaceServices">
+      <UniqueIdentifier>{21166d30-79b5-47e5-8166-b44b59f6ff8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\InterfaceServices">
       <UniqueIdentifier>{cc1cd572-f534-4c7b-a202-8b62b3ed2b3a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -122,6 +128,42 @@
     </ClCompile>
     <ClCompile Include="HomeView.cpp">
       <Filter>Source Files\Presentation\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="IAccount.cpp">
+      <Filter>Source Files\InterfaceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="IPerson.cpp">
+      <Filter>Source Files\InterfaceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="IContract.cpp">
+      <Filter>Source Files\InterfaceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="IStudent.cpp">
+      <Filter>Source Files\InterfaceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="IEmployee.cpp">
+      <Filter>Source Files\InterfaceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="IInvoice.cpp">
+      <Filter>Source Files\InterfaceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="IRoom.cpp">
+      <Filter>Source Files\InterfaceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="IAuthService.cpp">
+      <Filter>Source Files\InterfaceServices</Filter>
+    </ClCompile>
+    <ClCompile Include="IBillingService.cpp">
+      <Filter>Source Files\InterfaceServices</Filter>
+    </ClCompile>
+    <ClCompile Include="IContractService.cpp">
+      <Filter>Source Files\InterfaceServices</Filter>
+    </ClCompile>
+    <ClCompile Include="IRoomService.cpp">
+      <Filter>Source Files\InterfaceServices</Filter>
+    </ClCompile>
+    <ClCompile Include="IUserService.cpp">
+      <Filter>Source Files\InterfaceServices</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,19 +249,19 @@
       <Filter>Header Files\InterfaceModels</Filter>
     </ClInclude>
     <ClInclude Include="IAuthService.h">
-      <Filter>Header Files\InterfaceService</Filter>
+      <Filter>Header Files\InterfaceServices</Filter>
     </ClInclude>
-    <ClInclude Include="IBillindService.h">
-      <Filter>Header Files\InterfaceService</Filter>
+    <ClInclude Include="IBillingService.h">
+      <Filter>Header Files\InterfaceServices</Filter>
     </ClInclude>
     <ClInclude Include="IRoomService.h">
-      <Filter>Header Files\InterfaceService</Filter>
+      <Filter>Header Files\InterfaceServices</Filter>
     </ClInclude>
     <ClInclude Include="IUserService.h">
-      <Filter>Header Files\InterfaceService</Filter>
+      <Filter>Header Files\InterfaceServices</Filter>
     </ClInclude>
     <ClInclude Include="IContractService.h">
-      <Filter>Header Files\InterfaceService</Filter>
+      <Filter>Header Files\InterfaceServices</Filter>
     </ClInclude>
     <ClInclude Include="IPerson.h">
       <Filter>Header Files\InterfaceModels</Filter>

@@ -1,12 +1,13 @@
 #pragma once
-#include "AuthService.h"
 #include "BaseView.h"
 
+class IAccount;
+class IAuthService;
 class HomeView : public BaseView
 {
 private:
-	Account*& user;
-	AuthService* authService;
+	IAccount*& user;
+	IAuthService* authService;
 	int menuChoice, loginSelected;
 	bool isError, isEndApp;
 	string username, password;
@@ -18,7 +19,7 @@ private:
 	void showLogin(const int&, const int&);
 	void showExit(const int&, const int&);
 public:
-	HomeView(Account*&, AuthService*);
+	HomeView(IAccount*&, IAuthService*);
 	virtual ~HomeView();
 
 	int show() override;

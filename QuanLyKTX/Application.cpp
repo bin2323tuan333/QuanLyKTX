@@ -1,5 +1,6 @@
 ﻿#include "Application.h"
 #include "ConsolaUI.h"
+#include "Account.h"
 
 Application::Application()
 	:isRunning(false)
@@ -30,6 +31,7 @@ void Application::run()
 	this->currentView = new HomeView(currentUser, authService);
 	while (isRunning)
 	{
+		
 		if (this->currentUser == nullptr && this->currentView == nullptr)
 		{
 			this->currentView = new HomeView(currentUser, authService);
@@ -65,12 +67,17 @@ void Application::run()
 			ConsolaUI::clearScreen();
 			int result = this->currentView->show();
 			if (result == 0) this->isRunning = false;
-			if (result == 2) 
+			else if (result == 2)
+			{
+				this->currentUser = nullptr;
+				delete this->currentView;
+				this->currentView = nullptr;
+			}
+			else if (result == 3)
 			{
 				delete this->currentView;
 				this->currentView = nullptr;
 			}
-		
 		}
 	}
 	ConsolaUI::clearScreen();
