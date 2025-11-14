@@ -28,4 +28,6 @@ public:
 	virtual void setCreatedDate(const Date&) = 0;
 	virtual bool getIsPaid() const = 0;
 	virtual void setIsPaid(const bool&) = 0;
+
+	virtual IInvoice* clone() const = 0;
 };

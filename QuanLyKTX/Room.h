@@ -41,6 +41,8 @@ public:
     bool getIsActive() const override;
     void setIsActive(const bool&) override;
 
+    IRoom* clone() const override;
+
     Room& operator=(const Room&);
     bool operator==(const Room&);
     bool operator!=(const Room&);

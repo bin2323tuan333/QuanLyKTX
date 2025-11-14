@@ -105,6 +105,11 @@ void Invoice::setIsPaid(const bool& paid)
 	this->isPaid = paid;
 }
 
+IInvoice* Invoice::clone() const
+{
+	return new Invoice(*this);
+}
+
 Invoice& Invoice::operator=(const Invoice& other)
 {
 	if (this == &other)

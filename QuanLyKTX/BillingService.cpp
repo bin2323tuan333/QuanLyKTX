@@ -2,6 +2,7 @@
 #include "Room.h"
 #include "Invoice.h"
 #include "Contract.h"
+#include "Student.h"
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -45,13 +46,11 @@ IInvoice* BillingService::getInvoiceById(int invoiceId)
 LinkedList<IInvoice*> BillingService::getInvoicesByStudent(int studentId)
 {
 	LinkedList<IInvoice*> tempList;
-	for (ListNode<IContract*>* p = DB::Instance()->getAllContracts()->getHead(); p != nullptr; p = p->next)
+	IStudent* student = DB::Instance()->getStudentByStudentId(studentId);
+	for (ListNode<IContract*>* p = student->getContracts()->getHead(); p != nullptr; p = p->next)
 	{
-		if (p->value->getStudentId() == studentId)
-		{
-			LinkedList<IInvoice*>* invoices = p->value->getInvoices();
-			for (ListNode<IInvoice*>* i = invoices->getHead(); i != nullptr; i = i->next) tempList.add(i->value);
-		}
+		LinkedList<IInvoice*>* invoices = p->value->getInvoices();
+		for (ListNode<IInvoice*>* i = invoices->getHead(); i != nullptr; i = i->next) tempList.add(i->value);
 	}
 	return tempList;
 }
@@ -63,15 +62,16 @@ int BillingService::createInvoice(const int& roomId, const int& elec, const int&
 	LinkedList<IContract*>* contract = room->getContracts();
 	for (ListNode<IContract*>* p = contract->getHead(); p != nullptr; p = p->next)
 	{
-		Invoice invoice;
-		invoice.setInvoiceId(this->autoGenId());
-		invoice.setContractId(p->value->getContractId());
-		invoice.setCreatedDate(Date::getCurrentDay());
-		invoice.setElectricFee(elec * this->ELECTRIC_PRICE / room->getCurrentOccupancy());
-		invoice.setWaterFee(water * this->WATER_PRICE / room->getCurrentOccupancy());
-		invoice.setInternetFee(this->INTERNET_FEE);
-		invoice.setRoomFee(this->ROOM_FEE);
-		DB::Instance()->addInvoice(invoice);
+		IInvoice* invoice = new Invoice();
+		invoice->setInvoiceId(this->autoGenId());
+		invoice->setContractId(p->value->getContractId());
+		invoice->setCreatedDate(Date::getCurrentDay());
+		invoice->setElectricFee(elec * this->ELECTRIC_PRICE / room->getCurrentOccupancy());
+		invoice->setWaterFee(water * this->WATER_PRICE / room->getCurrentOccupancy());
+		invoice->setInternetFee(this->INTERNET_FEE);
+		invoice->setRoomFee(this->ROOM_FEE);
+		DB::Instance()->addInvoice(*invoice);
+		delete invoice;
 	}
 	return 1;
 }

@@ -66,6 +66,10 @@ void Student::setFaculty(const string& faculty)
 	this->faculty = faculty;
 }
 
+IStudent* Student::clone() const
+{
+	return new Student(*this);
+}
 
 Student& Student::operator=(const Student& other)
 {

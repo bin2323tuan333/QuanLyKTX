@@ -43,7 +43,10 @@ IContract* ContractService::getContractById(int contractId)
 }
 LinkedList<IContract*>* ContractService::getContractsByStudent(int studentId)
 {
-	return DB::Instance()->getStudentByStudentId(studentId)->getContracts();
+	IStudent* student = DB::Instance()->getStudentByStudentId(studentId);
+	if (student == nullptr)
+		return nullptr;
+	return student->getContracts();
 }
 int ContractService::createContract(int studentId, int roomId, int cycle)
 {

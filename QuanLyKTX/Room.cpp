@@ -95,7 +95,10 @@ void Room::setIsActive(const bool& isActive)
 {
 	this->isActive = isActive;
 }
-
+IRoom* Room::clone() const
+{
+	return new Room(*this);
+}
 
 Room& Room::operator=(const Room& other)
 {

@@ -39,6 +39,7 @@ public:
 	Date getEndDate() const override;
 	void setEndDate(const Date&) override;
 	bool isActive() const override;
+	IContract* clone() const override;
 
 	Contract& operator=(const Contract&);
 	bool operator==(const Contract&);

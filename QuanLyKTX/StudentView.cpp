@@ -589,7 +589,7 @@ void StudentView::showInvoiceList(const int& width, const int& height)
 			return;
 		}
 	}
-	Student* temp = dynamic_cast<Student*>(this->user->getUser());
+	IStudent* temp = dynamic_cast<IStudent*>(this->user->getUser());
 	LinkedList<IInvoice*> invoices = this->billingService->getInvoicesByStudent(temp->getStudentId());
 	if (invoices.getSize() == 0)
 	{

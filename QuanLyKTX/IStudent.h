@@ -19,4 +19,6 @@ public:
 	virtual void setStudentId(const int&) = 0;
 	virtual void setClassName(const string&) = 0;
 	virtual void setFaculty(const string&) = 0;
+
+	virtual IStudent* clone() const = 0;
 };

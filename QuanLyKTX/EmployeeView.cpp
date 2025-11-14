@@ -26,17 +26,20 @@ EmployeeView::EmployeeView(IAccount* user, IAuthService* auth, IUserService* use
 	this->currentIndex = 1;
 	this->isDateEdit = false;
 	this->dateIndex = 1;
-
 	this->roomId = 0;
 	this->invoiceId = 0;
 	this->contractId = 0;
 	this->preStudentId = 0;
 	this->error = -1;
 	this->isPaid = false;
+	this->studentToAct = nullptr;
+	this->roomToAct = nullptr;
 }
 
 EmployeeView::~EmployeeView()
 {
+	if (this->studentToAct != nullptr) delete this->studentToAct;
+	if (this->roomToAct != nullptr) delete this->roomToAct;
 }
 
 int EmployeeView::show()
@@ -358,6 +361,10 @@ void EmployeeView::handleInput()
 			this->user = nullptr;
 			this->isLogout = true;
 		}
+		if (this->menuChoice == 1 && this->choiceToAct == 2)
+		{
+			this->studentToAct = new Student();
+		}
 	}
 	else if (key == 27)
 	{
@@ -414,7 +421,7 @@ void EmployeeView::handleInput()
 				}
 				case 3:
 				{
-					this->studentToAct->setGender(this->studentToAct->getGender());
+					this->studentToAct->setGender(!this->studentToAct->getGender());
 					break;
 				}
 				case 4:
@@ -459,10 +466,9 @@ void EmployeeView::handleInput()
 				if (key == 'Y' || key == 'y')
 				{
 					this->error = this->userService->createStudent(*this->studentToAct);
-					*this->studentToAct = Student();
 				}
 				else if (key == 'X' || key == 'x')
-					*this->studentToAct = Student();
+					this->studentToAct = nullptr;
 			}
 		}
 		if (this->choiceToAct == 1)
@@ -711,11 +717,19 @@ void EmployeeView::handleInput()
 		this->currentIndex = 1;
 		this->isUpdate = false;
 		this->isDelete = false;
-		this->studentToAct = nullptr;
+		if (this->studentToAct != nullptr)
+		{
+			delete this->studentToAct;
+			this->studentToAct = nullptr;
+		}
+		if (this->roomToAct != nullptr)
+		{
+			delete this->roomToAct;
+			this->roomToAct = nullptr;
+		}
 		this->preStudentId = 0;
 		this->isPaid = false;
 	}
-
 }
 
 void EmployeeView::showHeader(const int& width, const int& height)
@@ -850,78 +864,75 @@ void EmployeeView::showFindStudent(const int& width, const int& height)
 	ConsolaUI::text(width / 2 - 18, 7, ">>   TIM KIEM THEO ID SINH VIEN   <<", 14);
 	ConsolaUI::text(width / 2 - 25, 9, "[F] Nhap Ma Sinh Vien: ", 15);
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
+	if (this->studentId == 0)
+		return;
 	IStudent* student = this->userService->getStudentById(this->studentId);
-	if (this->studentId != 0)
+	if (student == nullptr)
 	{
-		if (student == nullptr)
-		{
-			ConsolaUI::text(width / 2 - 25, 11, ">> KHONG TIM THAY SINH VIEN: " + to_string(this->studentId) + " <<", 12);
-			return;
-		}
-
-		if (!this->isDelete && !this->isUpdate) this->studentToAct = student;
-		if (this->isDelete)
-		{
-			if (this->error == 2)
-				ConsolaUI::text(width / 2 - 30, height / 2 - 1, "Khong the xoa sinh vien nay vi hop dong chua het han!", 15);
-			if (this->error == 3)
-				ConsolaUI::text(width / 2 - 30, height / 2 - 1, "Khong the xoa sinh vien nay vi chua thanh toan day du hoa don!", 15);
-			ConsolaUI::drawBox(width / 2 - 25, height / 2, 50, 7, 12);
-			for (int i = 1; i < 7; i++)
-				ConsolaUI::text(width / 2 - 24, height / 2 + i, "                                               ", 15);
-			ConsolaUI::text(width / 2 - 9, height / 2 + 2, "** XAC NHAN XOA **", 12);
-			ConsolaUI::text(width / 2 - 16, height / 2 + 2 + 3, "Ban co chac chan muon xoa khong?", 7);
-			ConsolaUI::text(width / 2 - 15, height / 2 + 2 + 4, "[Y] Yes - Xoa    [N] No - Huy", 7);
-			return;
-		}
-		else if (this->isUpdate)
-		{
-			ConsolaUI::drawBox(width / 2 - 30, height / 2, 60, 12, 8);
-			for (int i = 1; i < 12; i++)
-				ConsolaUI::text(width / 2 - 29, height / 2 + i, "                                                         ", 15);
-			if (this->error == 4)
-				ConsolaUI::text(width / 2 - 12, height / 2 - 1, "Du lieu khong hop le!", 15);
-			else if (this->error == 5)
-				ConsolaUI::text(width / 2 - 12, height / 2 - 1, "Id moi da ton tai trong he thong!", 15);
-			ConsolaUI::text(width / 2 - 12, height / 2 + 1, "** CAP NHAT THONG TIN **", 15);
-			ConsolaUI::text(width / 2 - 25, height / 2 + 2, "Ho va ten       :", this->currentIndex == 1 ? 3 : 15);
-			ConsolaUI::text(width / 2 - 25, height / 2 + 3, "Ngay sinh       :", this->currentIndex == 2 ? 3 : 15);
-			ConsolaUI::text(width / 2 - 25, height / 2 + 4, "Gioi tinh       :", this->currentIndex == 3 ? 3 : 15);
-			ConsolaUI::text(width / 2 - 25, height / 2 + 5, "Ma so sinh vien :", this->currentIndex == 4 ? 3 : 15);
-			ConsolaUI::text(width / 2 - 25, height / 2 + 6, "Lop             :", this->currentIndex == 5 ? 3 : 15);
-			ConsolaUI::text(width / 2 - 25, height / 2 + 7, "Khoa            :", this->currentIndex == 6 ? 3 : 15);
-			ConsolaUI::text(width / 2 - 25, height / 2 + 8, "So dien thoai   :", this->currentIndex == 7 ? 3 : 15);
-			ConsolaUI::text(width / 2 - 25, height / 2 + 9, "Email           :", this->currentIndex == 8 ? 3 : 15);
-
-			ConsolaUI::text(width / 2, height / 2 + 2, this->studentToAct->getFullName() == "" ? "__________" : this->studentToAct->getFullName(), 15);
-			ConsolaUI::text(width / 2, height / 2 + 3, (this->studentToAct->getDateOfBirth().getDay() < 10 ? "0" : "") + to_string(this->studentToAct->getDateOfBirth().getDay()) + "/", this->isDateEdit == true ? (this->dateIndex == 1 ? 10 : 15) : 15);
-			ConsolaUI::text(width / 2 + 3, height / 2 + 3, (this->studentToAct->getDateOfBirth().getMonth() < 10 ? "0" : "") + to_string(this->studentToAct->getDateOfBirth().getMonth()) + "/", this->isDateEdit == true ? (this->dateIndex == 2 ? 10 : 15) : 15);
-			ConsolaUI::text(width / 2 + 6, height / 2 + 3, to_string(this->studentToAct->getDateOfBirth().getYear()), this->isDateEdit == true ? (this->dateIndex == 3 ? 10 : 15) : 15);
-			ConsolaUI::text(width / 2, height / 2 + 4, this->studentToAct->getGender() == true ? "Nam" : "Nu", 15);
-			ConsolaUI::text(width / 2, height / 2 + 5, this->studentToAct->getStudentId() == 0 ? "__________" : to_string(this->studentToAct->getStudentId()), 15);
-			ConsolaUI::text(width / 2, height / 2 + 6, this->studentToAct->getClassName() == "" ? "__________" : this->studentToAct->getClassName(), 15);
-			ConsolaUI::text(width / 2, height / 2 + 7, this->studentToAct->getFaculty() == "" ? "__________" : this->studentToAct->getFaculty(), 15);
-			ConsolaUI::text(width / 2, height / 2 + 8, this->studentToAct->getPhoneNumber() == "" ? "__________" : this->studentToAct->getPhoneNumber(), 15);
-			ConsolaUI::text(width / 2, height / 2 + 9, this->studentToAct->getEmail() == "" ? "__________" : this->studentToAct->getEmail(), 15);
-			ConsolaUI::text(width / 2 - 17, height / 2 + 11, "[Y] Yes - Cap Nhat    [N] No - Huy", 15);
-			return;
-		}
-		// Show Thong Tin Sinh Vien Da Duoc Tim Kiem
-		ConsolaUI::text(width / 2 - 25, 11, ">> SINH VIEN DA DUOC TIM THAY! (ID: " + to_string(this->studentId) + ") <<", 10);
-		ConsolaUI::text(width / 2 - 25, 13, "Ho Va Ten:          " + student->getFullName(), 15);
-		ConsolaUI::text(width / 2 - 25, 14, "Ma So Sinh Vien:    " + to_string(student->getStudentId()), 15);
-		ConsolaUI::text(width / 2 - 25, 15, "Ngay Sinh:          " + student->getDateOfBirth().getDate(), 15);
-		ConsolaUI::text(width / 2 - 25, 16, "Gioi Tinh:          ", 15);
-		ConsolaUI::text(width / 2 - 5, 16, student->getGender() ? "Nam" : "Nu", 15);
-		ConsolaUI::text(width / 2 - 25, 17, "Lop:                " + student->getClassName(), 15);
-		ConsolaUI::text(width / 2 - 25, 18, "Khoa:               " + student->getFaculty(), 15);
-		ConsolaUI::text(width / 2 - 25, 19, "SDT:                " + student->getPhoneNumber(), 15);
-		ConsolaUI::text(width / 2 - 25, 20, "Email:              " + student->getEmail(), 15);
-		// Nut Thao Tac Xoa Va Cap Nhat
-		ConsolaUI::text(width / 2 - 25, 24, "[ X ] Xoa", 2);
-		ConsolaUI::text(width / 2 - 25, 25, "[ U ] Cap Nhat", 2);
-
+		ConsolaUI::text(width / 2 - 25, 11, ">> KHONG TIM THAY SINH VIEN: " + to_string(this->studentId) + " <<", 12);
+		return;
 	}
+	if (!this->isDelete && !this->isUpdate) this->studentToAct = student->clone();
+	if (this->isDelete)
+	{
+		if (this->error == 2)
+			ConsolaUI::text(width / 2 - 30, height / 2 - 1, "Khong the xoa sinh vien nay vi hop dong chua het han!", 15);
+		if (this->error == 3)
+			ConsolaUI::text(width / 2 - 30, height / 2 - 1, "Khong the xoa sinh vien nay vi chua thanh toan day du hoa don!", 15);
+		ConsolaUI::drawBox(width / 2 - 25, height / 2, 50, 7, 12);
+		for (int i = 1; i < 7; i++)
+			ConsolaUI::text(width / 2 - 24, height / 2 + i, "                                               ", 15);
+		ConsolaUI::text(width / 2 - 9, height / 2 + 2, "** XAC NHAN XOA **", 12);
+		ConsolaUI::text(width / 2 - 16, height / 2 + 2 + 3, "Ban co chac chan muon xoa khong?", 7);
+		ConsolaUI::text(width / 2 - 15, height / 2 + 2 + 4, "[Y] Yes - Xoa    [N] No - Huy", 7);
+		return;
+	}
+	else if (this->isUpdate)
+	{
+		ConsolaUI::drawBox(width / 2 - 30, height / 2, 60, 12, 8);
+		for (int i = 1; i < 12; i++)
+			ConsolaUI::text(width / 2 - 29, height / 2 + i, "                                                         ", 15);
+		if (this->error == 4)
+			ConsolaUI::text(width / 2 - 12, height / 2 - 1, "Du lieu khong hop le!", 15);
+		else if (this->error == 5)
+			ConsolaUI::text(width / 2 - 12, height / 2 - 1, "Id moi da ton tai trong he thong!", 15);
+		ConsolaUI::text(width / 2 - 12, height / 2 + 1, "** CAP NHAT THONG TIN **", 15);
+		ConsolaUI::text(width / 2 - 25, height / 2 + 2, "Ho va ten       :", this->currentIndex == 1 ? 3 : 15);
+		ConsolaUI::text(width / 2 - 25, height / 2 + 3, "Ngay sinh       :", this->currentIndex == 2 ? 3 : 15);
+		ConsolaUI::text(width / 2 - 25, height / 2 + 4, "Gioi tinh       :", this->currentIndex == 3 ? 3 : 15);
+		ConsolaUI::text(width / 2 - 25, height / 2 + 5, "Ma so sinh vien :", this->currentIndex == 4 ? 3 : 15);
+		ConsolaUI::text(width / 2 - 25, height / 2 + 6, "Lop             :", this->currentIndex == 5 ? 3 : 15);
+		ConsolaUI::text(width / 2 - 25, height / 2 + 7, "Khoa            :", this->currentIndex == 6 ? 3 : 15);
+		ConsolaUI::text(width / 2 - 25, height / 2 + 8, "So dien thoai   :", this->currentIndex == 7 ? 3 : 15);
+		ConsolaUI::text(width / 2 - 25, height / 2 + 9, "Email           :", this->currentIndex == 8 ? 3 : 15);
+
+		ConsolaUI::text(width / 2, height / 2 + 2, this->studentToAct->getFullName() == "" ? "__________" : this->studentToAct->getFullName(), 15);
+		ConsolaUI::text(width / 2, height / 2 + 3, (this->studentToAct->getDateOfBirth().getDay() < 10 ? "0" : "") + to_string(this->studentToAct->getDateOfBirth().getDay()) + "/", this->isDateEdit == true ? (this->dateIndex == 1 ? 10 : 15) : 15);
+		ConsolaUI::text(width / 2 + 3, height / 2 + 3, (this->studentToAct->getDateOfBirth().getMonth() < 10 ? "0" : "") + to_string(this->studentToAct->getDateOfBirth().getMonth()) + "/", this->isDateEdit == true ? (this->dateIndex == 2 ? 10 : 15) : 15);
+		ConsolaUI::text(width / 2 + 6, height / 2 + 3, to_string(this->studentToAct->getDateOfBirth().getYear()), this->isDateEdit == true ? (this->dateIndex == 3 ? 10 : 15) : 15);
+		ConsolaUI::text(width / 2, height / 2 + 4, this->studentToAct->getGender() == true ? "Nam" : "Nu", 15);
+		ConsolaUI::text(width / 2, height / 2 + 5, this->studentToAct->getStudentId() == 0 ? "__________" : to_string(this->studentToAct->getStudentId()), 15);
+		ConsolaUI::text(width / 2, height / 2 + 6, this->studentToAct->getClassName() == "" ? "__________" : this->studentToAct->getClassName(), 15);
+		ConsolaUI::text(width / 2, height / 2 + 7, this->studentToAct->getFaculty() == "" ? "__________" : this->studentToAct->getFaculty(), 15);
+		ConsolaUI::text(width / 2, height / 2 + 8, this->studentToAct->getPhoneNumber() == "" ? "__________" : this->studentToAct->getPhoneNumber(), 15);
+		ConsolaUI::text(width / 2, height / 2 + 9, this->studentToAct->getEmail() == "" ? "__________" : this->studentToAct->getEmail(), 15);
+		ConsolaUI::text(width / 2 - 17, height / 2 + 11, "[Y] Yes - Cap Nhat    [N] No - Huy", 15);
+		return;
+	}
+	// Show Thong Tin Sinh Vien Da Duoc Tim Kiem
+	ConsolaUI::text(width / 2 - 25, 11, ">> SINH VIEN DA DUOC TIM THAY! (ID: " + to_string(this->studentId) + ") <<", 10);
+	ConsolaUI::text(width / 2 - 25, 13, "Ho Va Ten:          " + student->getFullName(), 15);
+	ConsolaUI::text(width / 2 - 25, 14, "Ma So Sinh Vien:    " + to_string(student->getStudentId()), 15);
+	ConsolaUI::text(width / 2 - 25, 15, "Ngay Sinh:          " + student->getDateOfBirth().getDate(), 15);
+	ConsolaUI::text(width / 2 - 25, 16, "Gioi Tinh:          ", 15);
+	ConsolaUI::text(width / 2 - 5, 16, student->getGender() ? "Nam" : "Nu", 15);
+	ConsolaUI::text(width / 2 - 25, 17, "Lop:                " + student->getClassName(), 15);
+	ConsolaUI::text(width / 2 - 25, 18, "Khoa:               " + student->getFaculty(), 15);
+	ConsolaUI::text(width / 2 - 25, 19, "SDT:                " + student->getPhoneNumber(), 15);
+	ConsolaUI::text(width / 2 - 25, 20, "Email:              " + student->getEmail(), 15);
+	// Nut Thao Tac Xoa Va Cap Nhat
+	ConsolaUI::text(width / 2 - 25, 24, "[ X ] Xoa", 2);
+	ConsolaUI::text(width / 2 - 25, 25, "[ U ] Cap Nhat", 2);
 }
 void EmployeeView::showAddStudent(const int& width, const int& height)
 {
@@ -1051,19 +1062,14 @@ void EmployeeView::showFindRoomById(const int& width, const int& height)
 	ConsolaUI::text(width / 2 - 16, 7, ">>   TIM KIEM THEO ID PHONG   <<", 14);
 	ConsolaUI::text(width / 2 - 25, 9, "[F] Nhap Ma Phong: ", 15);
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
+	if (this->roomId == 0) return;
 	IRoom* roomToShow = this->roomService->getRoomById(this->roomId);
-	if (this->roomId == 0)
-		return;
 	if (roomToShow == nullptr)
 	{
 		ConsolaUI::text(width / 2 - 15, 11, ">> KHONG TIM THAY PHONG: " + to_string(this->roomId) + " <<", 12);
 		return;
 	}
-
-	if (!this->isUpdate)
-	{
-		this->roomToAct = roomToShow;
-	}
+	if (!this->isUpdate) this->roomToAct = roomToShow->clone();
 	if (this->isUpdate)
 	{
 		if (this->currentIndex < 1) this->currentIndex = 4;
@@ -1565,6 +1571,11 @@ void EmployeeView::showFindContractsByStudentId(const int& width, const int& hei
 	if (this->studentId == 0)
 		return;
 	LinkedList<IContract*>* contracts = this->contractService->getContractsByStudent(this->studentId);
+	if (contracts == nullptr)
+	{
+		ConsolaUI::text(width / 2 - 14, 11, "Khong co ma sinh vien nay!", 15);
+		return;
+	}
 	if (contracts->getSize() == 0)
 	{
 		ConsolaUI::text(35, 11, ">> Sinh Vien Chua Co Hop Dong <<", 12);

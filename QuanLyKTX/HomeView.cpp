@@ -79,21 +79,20 @@ void HomeView::handleInput()
 	{
 		if (1 == key - '0')
 		{
+			ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2 - 23, ConsolaUI::getConsoleHeight() / 2 + 1, "                 ", 15);
 			ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2 - 23, ConsolaUI::getConsoleHeight() / 2 + 1);
 			this->username = ConsolaUI::GetLine("normal");
 		}
 		else if (2 == key - '0')
 		{
+			ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2 - 23, ConsolaUI::getConsoleHeight() / 2 + 5, "                 ", 15);
 			ConsolaUI::gotoXY(ConsolaUI::getConsoleWidth() / 2 - 23, ConsolaUI::getConsoleHeight() / 2 + 5);
 			this->password = ConsolaUI::GetLine("pass");
 		}
 		else if (key == 13)
 		{
 			this->user = this->authService->login(this->username, this->password);
-			if (this->user == nullptr)
-			{
-				ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2 - 23, ConsolaUI::getConsoleHeight() / 2 - 3, "Sai MK", 15);
-			}
+			this->isError = true;
 		}
 	}
 	else if (this->menuChoice == 3)
@@ -158,7 +157,8 @@ void HomeView::showLogin(const int& width, const int& height)
 	ConsolaUI::drawBox(width / 2 - 25, height / 2 + 4, 50, 2, (2 == this->loginSelected) ? 1 : 11);
 	ConsolaUI::text(width / 2 - 20, height / 2 + 4, " 2. Mat Khau ", (2 == this->loginSelected) ? 1 : 11);
 	ConsolaUI::text(width / 2 - 3, height / 2 + 7, "Nhan [ Enter ] De Dang Nhap", 2);
-
+	if (this->user == nullptr && this->isError)
+		ConsolaUI::text(ConsolaUI::getConsoleWidth() / 2 - 12, ConsolaUI::getConsoleHeight() / 2 - 3, "Sai thong tin tai khoan", 15);
 	if (this->username != "")
 		ConsolaUI::text(width / 2 - 23, height / 2 + 1, this->username, (1 == this->loginSelected) ? 1 : 11);
 	if (this->password != "")

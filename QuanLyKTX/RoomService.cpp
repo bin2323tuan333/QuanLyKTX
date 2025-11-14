@@ -58,6 +58,11 @@ int RoomService::updateRoom(const int& id, const IRoom& updatedRoom)
 	}
 	if (room->getCapacity() != updatedRoom.getCapacity() && room->getCurrentOccupancy() > updatedRoom.getCapacity())
 		return 2;
-	DB::Instance()->updateRoom(updatedRoom);
+	room->setBuilding(room->getBuilding());
+	room->setCapacity(room->getCapacity());
+	room->setFloor(room->getFloor());
+	room->setIsActive(room->getIsActive());
+	room->setRoomName(room->getRoomName());
+	room->setRoomType(room->getRoomType());
 	return 1;
 }

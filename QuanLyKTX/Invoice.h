@@ -38,6 +38,8 @@ public:
     bool getIsPaid() const override;
     void setIsPaid(const bool&) override;
 
+    IInvoice* clone() const override;
+
     Invoice& operator=(const Invoice&);
     bool operator==(const Invoice&);
     bool operator!=(const Invoice&);

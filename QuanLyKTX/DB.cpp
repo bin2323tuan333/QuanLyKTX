@@ -312,12 +312,6 @@ void DB::freeMem()
 
 // ===== CRUD BASIC =====
 // === Account ===
-void DB::updateAccount(const IAccount& acc)
-{
-	IAccount* current = this->getAccountByUserId(acc.getUserId());
-	if (current == nullptr) return;
-	*current = acc;
-}
 void DB::deleteAccount(const IAccount& acc)
 {
 	IAccount* temp = this->getAccountByUserId(acc.getUserId());
@@ -327,7 +321,6 @@ void DB::deleteAccount(const IAccount& acc)
 void DB::addAccount(IAccount* newAccount)
 {
 	this->listAccounts.add(newAccount);
-
 }
 IAccount* DB::getAccountByUsername(const string& username)
 {
@@ -346,17 +339,7 @@ LinkedList<IAccount*>* DB::getAllAccounts()
 	return &this->listAccounts;
 }
 
-// === Student === 
-void DB::updateStudent(const int& id, const IStudent& stu)
-{
-	IStudent* current = this->getStudentByStudentId(id);
-	if (current == nullptr) return;
-	*current = stu;
-	current->getAccount()->setUsername(to_string(current->getStudentId()));
-	LinkedList<IContract*>* list = current->getContracts();
-	for (ListNode<IContract*>* p = list->getHead(); p != nullptr; p = p->next)
-		p->value->setStudentId(id);
-}
+// === Student ===
 void DB::deleteStudent(const IStudent& stu)
 {
 	IStudent* temp = this->getStudentByStudentId(stu.getStudentId());
@@ -365,8 +348,8 @@ void DB::deleteStudent(const IStudent& stu)
 }
 void DB::addStudent(const IStudent& stu)
 {
-	IStudent* newStudent = new Student();
-	*newStudent = stu;
+	IStudent* newStudent;
+	newStudent = stu.clone();
 	this->listStudents.add(newStudent);
 }
 IStudent* DB::getStudentByStudentId(const int& studentId)
@@ -380,13 +363,7 @@ LinkedList<IStudent*>* DB::getAllStudents()
 	return &this->listStudents;
 }
 
-// === Employee === 
-void DB::updateEmployee(const IEmployee& emp)
-{
-	IEmployee* current = this->getEmployeeByEmployeeId(emp.getEmployeeId());
-	if (current == nullptr) return;
-	*current = emp;
-}
+// === Employee ===
 void DB::deleteEmployee(const IEmployee& emp)
 {
 	IEmployee* temp = this->getEmployeeByEmployeeId(emp.getEmployeeId());
@@ -410,13 +387,7 @@ LinkedList<IEmployee*>* DB::getAllEmployees()
 	return &this->listEmployees;
 }
 
-// === Room === 
-void DB::updateRoom(const IRoom& room)
-{
-	IRoom* current = this->getRoomByRoomId(room.getRoomId());
-	if (current == nullptr) return;
-	*current = room;
-}
+// === Room ===
 void DB::deleteRoom(const IRoom& room)
 {
 	IRoom* temp = this->getRoomByRoomId(room.getRoomId());
@@ -441,12 +412,6 @@ LinkedList<IRoom*>* DB::getAllRooms()
 }
 
 // === Contract === 
-void DB::updateContract(const IContract& con)
-{
-	IContract* current = this->getContractByContractId(con.getContractId());
-	if (current == nullptr) return;
-	*current = con;
-}
 void DB::deleteContract(const IContract& con)
 {
 	IContract* temp = this->getContractByContractId(con.getContractId());
@@ -455,8 +420,7 @@ void DB::deleteContract(const IContract& con)
 }
 void DB::addContract(const IContract& con)
 {
-	IContract* newContract = new Contract();
-	*newContract = con;
+	IContract* newContract = con.clone();
 	this->listContracts.add(newContract);
 	newContract->AddRoom(this->getRoomByRoomId(newContract->getRoomId()));
 	newContract->AddStudent(this->getStudentByStudentId(newContract->getStudentId()));
@@ -473,12 +437,6 @@ LinkedList<IContract*>* DB::getAllContracts()
 }
 
 // === Invoice ===
-void DB::updateInvoice(const IInvoice& inv)
-{
-	IInvoice* current = this->getInvoiceByInvoiceId(inv.getInvoiceId());
-	if (current == nullptr) return;
-	*current = inv;
-}
 void DB::deleteInvoice(const IInvoice& inv)
 {
 	IInvoice* temp = this->getInvoiceByInvoiceId(inv.getInvoiceId());
@@ -487,8 +445,7 @@ void DB::deleteInvoice(const IInvoice& inv)
 }
 void DB::addInvoice(const IInvoice& inv)
 {
-	IInvoice* newInvoice = new Invoice();
-	*newInvoice = inv;
+	IInvoice* newInvoice = inv.clone();
 	this->listInvoices.add(newInvoice);
 	IContract* contract = this->getContractByContractId(newInvoice->getContractId());
 	newInvoice->AddContract(contract);

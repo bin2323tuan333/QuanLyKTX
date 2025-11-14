@@ -28,6 +28,7 @@ public:
 	virtual Date getEndDate() const = 0;
 	virtual void setEndDate(const Date&) = 0;
 	
+	virtual IContract* clone() const = 0;
 	virtual bool isActive() const = 0;
 };
 

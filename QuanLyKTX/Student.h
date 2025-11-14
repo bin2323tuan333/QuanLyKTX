@@ -30,6 +30,8 @@ public:
     string getFaculty() const override;
     void setFaculty(const string&) override;
 
+    IStudent* clone() const override;
+
     Student& operator=(const Student&);
     bool operator==(const Student&);
     bool operator!=(const Student&);

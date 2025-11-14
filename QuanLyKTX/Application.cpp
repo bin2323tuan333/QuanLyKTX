@@ -31,7 +31,6 @@ void Application::run()
 	this->currentView = new HomeView(currentUser, authService);
 	while (isRunning)
 	{
-		
 		if (this->currentUser == nullptr && this->currentView == nullptr)
 		{
 			this->currentView = new HomeView(currentUser, authService);

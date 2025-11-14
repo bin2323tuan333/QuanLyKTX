@@ -87,17 +87,19 @@ void Contract::setEndDate(const Date& endDate)
 {
 	this->endDate = endDate;
 }
-
 bool Contract::isActive() const
 {
 	return Date::getCurrentDay() <= this->endDate;
+}
+IContract* Contract::clone() const
+{
+	return new Contract(*this);
 }
 
 Contract& Contract::operator=(const Contract& other)
 {
 	if (this == &other)
 		return *this;
-
 	this->contractId = other.contractId;
 	this->studentId = other.studentId;
 	this->roomId = other.roomId;

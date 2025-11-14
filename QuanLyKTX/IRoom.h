@@ -29,4 +29,6 @@ public:
     virtual void setBuilding(const string&) = 0;
     virtual bool getIsActive() const = 0;
     virtual void setIsActive(const bool&) = 0;
+
+    virtual IRoom* clone() const = 0;
 };

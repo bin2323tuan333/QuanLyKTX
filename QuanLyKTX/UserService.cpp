@@ -4,6 +4,7 @@
 #include "Student.h"
 #include "Contract.h"
 #include "Invoice.h"
+#include "Account.h"
 
 UserService::UserService()
 {
@@ -28,8 +29,9 @@ int UserService::createStudent(IStudent& student)
 	if (DB::Instance()->getStudentByStudentId(student.getStudentId()) != nullptr)
 		return 0;
 	DB::Instance()->addStudent(student);
+	IStudent* stu = DB::Instance()->getStudentByStudentId(student.getStudentId());
 	AuthService auth;
-	auth.genAccount(DB::Instance()->getStudentByStudentId(student.getStudentId()));
+	auth.genAccount(stu);
 	return 1;
 }
 
@@ -43,11 +45,12 @@ LinkedList<IStudent*> UserService::getStudentsWithoutRoom()
 }
 
 int UserService::updateStudent(int studentId, const IStudent& updatedStudent)
-{	
+{
 	IStudent* student = DB::Instance()->getStudentByStudentId(studentId);
 	if (student == nullptr) return 3;
+
 	if (updatedStudent.getStudentId() <= 0 || updatedStudent.getFullName() == "") return 4;			// Du Lieu Khong Hop Le
-	if (studentId != updatedStudent.getStudentId()) 
+	if (studentId != updatedStudent.getStudentId())
 	{
 		IStudent* existing = DB::Instance()->getStudentByStudentId(updatedStudent.getStudentId());
 		if (existing != nullptr)  return 5;															// Id moi da ton tai
@@ -56,9 +59,21 @@ int UserService::updateStudent(int studentId, const IStudent& updatedStudent)
 	{
 		LinkedList<IContract*>* list = student->getContracts();
 		for (ListNode<IContract*>* p = list->getHead(); p != nullptr; p = p->next)
+		{
 			p->value->setStudentId(updatedStudent.getStudentId());
+		}
+		IAccount* account = student->getAccount();
+		account->setUsername(to_string(updatedStudent.getStudentId()));
 	}
-	DB::Instance()->updateStudent(studentId, updatedStudent);
+	student->setUserId(updatedStudent.getUserId());
+	student->setClassName(updatedStudent.getClassName());
+	student->setDateOfBirth(updatedStudent.getDateOfBirth());
+	student->setEmail(updatedStudent.getEmail());
+	student->setFaculty(updatedStudent.getFaculty());
+	student->setFullName(updatedStudent.getFullName());
+	student->setGender(updatedStudent.getGender());
+	student->setPhoneNumber(updatedStudent.getPhoneNumber());
+	student->setStudentId(updatedStudent.getStudentId());
 	return 1;
 }
 
@@ -67,17 +82,17 @@ int UserService::deleteStudent(int studentId)
 	IStudent* student = DB::Instance()->getStudentByStudentId(studentId);
 	if (student == nullptr) return 0;
 	LinkedList<IContract*>* contracts = student->getContracts();
-	if (contracts != nullptr) 
+	if (contracts != nullptr)
 	{
-		for (ListNode<IContract*>* p = contracts->getHead(); p != nullptr; p = p->next) 
+		for (ListNode<IContract*>* p = contracts->getHead(); p != nullptr; p = p->next)
 		{
-			if (p->value != nullptr) 
+			if (p->value != nullptr)
 			{
 				IContract* contract = p->value;
 				if (contract->isActive())  return 2;
 				LinkedList<IInvoice*>* invoices = contract->getInvoices();
 				if (invoices != nullptr) {
-					for (ListNode<IInvoice*>* inv = invoices->getHead(); inv != nullptr; inv = inv->next) 
+					for (ListNode<IInvoice*>* inv = invoices->getHead(); inv != nullptr; inv = inv->next)
 					{
 						if (inv->value != nullptr && !inv->value->getIsPaid()) return 3;
 					}
