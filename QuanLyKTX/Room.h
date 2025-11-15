@@ -1,10 +1,10 @@
 #pragma once
-#include "IRoom.h"
 #include "LinkedList.h"
-#include "IContact.h"
+#include <string>
+using namespace std;
 
-class IContract;
-class Room : public virtual IRoom
+class Contract;
+class Room
 {
 private:
     int roomId;
@@ -14,35 +14,32 @@ private:
     int floor;
     string building;
     bool isActive;
-    LinkedList<IContract*> contracts;
+    LinkedList<Contract*> contracts;
 public:
     Room(const int& = 0, const string & = "", const string & = "", const int& = 0, const int& = 0, const string& = "", const bool& = true);
     Room(const Room&);
     ~Room();
 
-    void AddContract(IContract*) override;
-    LinkedList<IContract*>* getContracts() override;
-    bool isAvailable() override;
-    bool isVacant() override;
+    void AddContract(Contract*);
+    LinkedList<Contract*>* getContracts();
+    bool isAvailable();
+    bool isVacant();
 
-    int getRoomId() const override;
-    void setRoomId(const int&) override;
-    string getRoomName() const override;
-    void setRoomName(const string&) override;
-    string getRoomType() const override;
-    void setRoomType(const string&) override;
-    int getCapacity() const override;
-    void setCapacity(const int&) override;
-    int getCurrentOccupancy() override;
-    int getFloor() const override;
-    void setFloor(const int&) override;
-    string getBuilding() const override;
-    void setBuilding(const string&) override;
-    bool getIsActive() const override;
-    void setIsActive(const bool&) override;
-
-    IRoom* clone() const override;
-
+    int getRoomId() const;
+    void setRoomId(const int&);
+    string getRoomName() const;
+    void setRoomName(const string&);
+    string getRoomType() const;
+    void setRoomType(const string&);
+    int getCapacity() const;
+    void setCapacity(const int&);
+    int getFloor() const;
+    void setFloor(const int&);
+    string getBuilding() const;
+    void setBuilding(const string&);
+    bool getIsActive() const;
+    void setIsActive(const bool&);
+    int getCurrentOccupancy() const;
     Room& operator=(const Room&);
     bool operator==(const Room&);
     bool operator!=(const Room&);

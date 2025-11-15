@@ -14,55 +14,58 @@ UserService::~UserService()
 {
 }
 
-LinkedList<IStudent*>* UserService::getAllStudents()
+LinkedList<Student*>* UserService::getAllStudents()
 {
 	return DB::Instance()->getAllStudents();
 }
-IStudent* UserService::getStudentById(const int& studentId)
+Student* UserService::getStudentById(const int& studentId)
 {
-	return DB::Instance()->getStudentByStudentId(studentId);
+	Student* student = DB::Instance()->getStudentByStudentId(studentId);
+	if (student == nullptr) return nullptr;
+	return student;
 }
 
-int UserService::createStudent(IStudent& student)
+int UserService::createStudent(Student& student)
 {
-	// .. Logic
+	if (student.getStudentId() == 0)
+		return 2;
 	if (DB::Instance()->getStudentByStudentId(student.getStudentId()) != nullptr)
 		return 0;
 	DB::Instance()->addStudent(student);
-	IStudent* stu = DB::Instance()->getStudentByStudentId(student.getStudentId());
+	Student* stu = DB::Instance()->getStudentByStudentId(student.getStudentId());
 	AuthService auth;
 	auth.genAccount(stu);
 	return 1;
 }
 
-LinkedList<IStudent*> UserService::getStudentsWithoutRoom()
+LinkedList<Student*> UserService::getStudentsWithoutRoom()
 {
-	LinkedList<IStudent*> tempList;
-	for (ListNode<IStudent*>* p = DB::Instance()->getAllStudents()->getHead(); p != nullptr; p = p->next)
+	LinkedList<Student*> tempList;
+	for (ListNode<Student*>* p = DB::Instance()->getAllStudents()->getHead(); p != nullptr; p = p->next)
 		if (!p->value->hasActiveContract())
 			tempList.add(p->value);
 	return tempList;
 }
 
-int UserService::updateStudent(int studentId, const IStudent& updatedStudent)
+int UserService::updateStudent(int studentId, const Student& updatedStudent)
 {
-	IStudent* student = DB::Instance()->getStudentByStudentId(studentId);
+	Student* student = DB::Instance()->getStudentByStudentId(studentId);
 	if (student == nullptr) return 3;
 
 	if (updatedStudent.getStudentId() <= 0 || updatedStudent.getFullName() == "") return 4;			// Du Lieu Khong Hop Le
 	if (studentId != updatedStudent.getStudentId())
 	{
-		IStudent* existing = DB::Instance()->getStudentByStudentId(updatedStudent.getStudentId());
+		Student* existing = DB::Instance()->getStudentByStudentId(updatedStudent.getStudentId());
 		if (existing != nullptr)  return 5;															// Id moi da ton tai
 	}
 	if (studentId != updatedStudent.getStudentId())
 	{
-		LinkedList<IContract*>* list = student->getContracts();
-		for (ListNode<IContract*>* p = list->getHead(); p != nullptr; p = p->next)
+		LinkedList<Contract*>* list = student->getContracts();
+		for (ListNode<Contract*>* p = list->getHead(); p != nullptr; p = p->next)
 		{
 			p->value->setStudentId(updatedStudent.getStudentId());
 		}
-		IAccount* account = student->getAccount();
+		Account* account = student->getAccount();
 		account->setUsername(to_string(updatedStudent.getStudentId()));
 	}
 	student->setUserId(updatedStudent.getUserId());
@@ -79,20 +82,20 @@ int UserService::updateStudent(int studentId, const IStudent& updatedStudent)
 
 int UserService::deleteStudent(int studentId)
 {
-	IStudent* student = DB::Instance()->getStudentByStudentId(studentId);
+	Student* student = DB::Instance()->getStudentByStudentId(studentId);
 	if (student == nullptr) return 0;
-	LinkedList<IContract*>* contracts = student->getContracts();
+	LinkedList<Contract*>* contracts = student->getContracts();
 	if (contracts != nullptr)
 	{
-		for (ListNode<IContract*>* p = contracts->getHead(); p != nullptr; p = p->next)
+		for (ListNode<Contract*>* p = contracts->getHead(); p != nullptr; p = p->next)
 		{
 			if (p->value != nullptr)
 			{
-				IContract* contract = p->value;
+				Contract* contract = p->value;
 				if (contract->isActive())  return 2;
-				LinkedList<IInvoice*>* invoices = contract->getInvoices();
+				LinkedList<Invoice*>* invoices = contract->getInvoices();
 				if (invoices != nullptr) {
-					for (ListNode<IInvoice*>* inv = invoices->getHead(); inv != nullptr; inv = inv->next)
+					for (ListNode<Invoice*>* inv = invoices->getHead(); inv != nullptr; inv = inv->next)
 					{
 						if (inv->value != nullptr && !inv->value->getIsPaid()) return 3;
 					}

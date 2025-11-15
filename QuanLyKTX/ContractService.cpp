@@ -14,58 +14,58 @@ ContractService::~ContractService()
 }
 
 
-LinkedList<IContract*>* ContractService::getAllContracts()
+LinkedList<Contract*>* ContractService::getAllContracts()
 {
 	return DB::Instance()->getAllContracts();
 }
 
-LinkedList<IContract*> ContractService::getActiveContracts()
+LinkedList<Contract*> ContractService::getActiveContracts()
 {
-	LinkedList<IContract*> tempList;
-	for (ListNode<IContract*>* p = DB::Instance()->getAllContracts()->getHead(); p != nullptr; p = p->next)
+	LinkedList<Contract*> tempList;
+	for (ListNode<Contract*>* p = DB::Instance()->getAllContracts()->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->isActive()) tempList.add(p->value);
 	}
 	return tempList;
 }
-LinkedList<IContract*> ContractService::getExpiredContracts()
+LinkedList<Contract*> ContractService::getExpiredContracts()
 {
-	LinkedList<IContract*> tempList;
-	for (ListNode<IContract*>* p = DB::Instance()->getAllContracts()->getHead(); p != nullptr; p = p->next)
+	LinkedList<Contract*> tempList;
+	for (ListNode<Contract*>* p = DB::Instance()->getAllContracts()->getHead(); p != nullptr; p = p->next)
 	{
 		if (!p->value->isActive()) tempList.add(p->value);
 	}
 	return tempList;
 }
-IContract* ContractService::getContractById(int contractId)
+Contract* ContractService::getContractById(int contractId)
 {
 	return DB::Instance()->getContractByContractId(contractId);
 }
-LinkedList<IContract*>* ContractService::getContractsByStudent(int studentId)
+LinkedList<Contract*>* ContractService::getContractsByStudent(int studentId)
 {
-	IStudent* student = DB::Instance()->getStudentByStudentId(studentId);
+	Student* student = DB::Instance()->getStudentByStudentId(studentId);
 	if (student == nullptr)
 		return nullptr;
 	return student->getContracts();
 }
 int ContractService::createContract(int studentId, int roomId, int cycle)
 {
-	IStudent* student = DB::Instance()->getStudentByStudentId(studentId);
-	IRoom* room = DB::Instance()->getRoomByRoomId(roomId);
+	Student* student = DB::Instance()->getStudentByStudentId(studentId);
+	Room* room = DB::Instance()->getRoomByRoomId(roomId);
 	if (student == nullptr || room == nullptr)
 		return 0;
-	LinkedList<IContract*>* list = student->getContracts();
+	LinkedList<Contract*>* list = student->getContracts();
 	if (room->getCurrentOccupancy() == room->getCapacity())
 		return 2;
 	string checkGender = student->getGender() ? "Nam" : "Nu";
 	if (checkGender != room->getRoomType())
 		return 2;
-	IContract* contract = new Contract();
+	Contract* contract = new Contract();
 	contract->setContractId(this->getIdAuto());
 	contract->setStudentId(studentId);
 	contract->setRoomId(roomId);
 	bool check = true;
-	for (ListNode<IContract*>* p = list->getHead(); p != nullptr; p = p->next)
+	for (ListNode<Contract*>* p = list->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->isActive())
 		{
@@ -84,7 +84,7 @@ int ContractService::createContract(int studentId, int roomId, int cycle)
 int ContractService::getIdAuto()
 {
 	int maxId = 0;
-	for (ListNode<IContract*>* p = DB::Instance()->getAllContracts()->getHead(); p != nullptr; p = p->next)
+	for (ListNode<Contract*>* p = DB::Instance()->getAllContracts()->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->getContractId() > maxId) maxId = p->value->getContractId();
 	}

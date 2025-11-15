@@ -1,9 +1,9 @@
 #pragma once
 #include "BaseView.h"
 
-class IAccount;
-class IStudent;
-class IInvoice;
+class Account;
+class Student;
+class Invoice;
 class IAuthService;
 class IUserService;
 class IRoomService;
@@ -12,7 +12,7 @@ class IContractService;
 class StudentView : public BaseView
 {
 private:
-	IAccount* user;
+	Account* user;
 	IAuthService* authService;
 	IUserService* userService;
 	IRoomService* roomService;
@@ -23,8 +23,8 @@ private:
 	int menuChoice, choiceToAct, changePassError, pageIndex, currentIndex, dateIndex, preId, error, maxPage, roomId, cycle;
 	bool isDateEdit, isShow, isLogout, isPaid, isUpdate, isCreate;
 	string oldPass, newPass, reNewPass;
-	IStudent* studentToAct;
-	IInvoice* invToPay;
+	Student* studentToAct;
+	Invoice* invToPay;
 
 
 	void showHeader(const int&, const int&);
@@ -35,7 +35,7 @@ private:
 	void showInvoiceList(const int&, const int&);
 	void showContractList(const int&, const int&);
 public:
-	StudentView(IAccount*, IAuthService*, IUserService*, IRoomService*, IBillingService*, IContractService*);
+	StudentView(Account*, IAuthService*, IUserService*, IRoomService*, IBillingService*, IContractService*);
 	~StudentView();
 
 	int show() override;

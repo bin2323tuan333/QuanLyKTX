@@ -2,6 +2,8 @@
 #include "DB.h"
 #include "IAuthService.h"
 
+class Account;
+class Person;
 class AuthService : public IAuthService
 {
 private:
@@ -10,9 +12,9 @@ public:
 	AuthService();
 	~AuthService();
 
-	IAccount* login(const string&, const string&) override;
-	int changePassword(IAccount*, const string&, const string&, const string&) override;
-	bool genAccount(IPerson*) override;
+	Account* login(const string&, const string&) override;
+	int changePassword(Account*, const string&, const string&, const string&) override;
+	bool genAccount(Person*) override;
 	int getIdAuto() override;
 };
 

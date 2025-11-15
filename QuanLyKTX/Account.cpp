@@ -1,7 +1,7 @@
 #include "Account.h"
 
 // Constructor
-Account::Account(const int& userId, const string & username, const string & password, IPerson* user)
+Account::Account(const int& userId, const string & username, const string & password, Person* user)
 	:userId(userId), username(username), password(password), user(user)
 {
 }
@@ -13,11 +13,11 @@ Account::~Account()
 {
 }
 
-void Account::AddUser(IPerson* user)
+void Account::AddUser(Person* user)
 {
 	this->user = user;
 }
-IPerson* Account::getUser() const
+Person* Account::getUser() const
 {
 	return this->user;
 }

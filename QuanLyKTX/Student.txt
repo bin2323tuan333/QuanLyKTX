@@ -58,3 +58,4 @@
 105250159;61;Tran Thi Kim Chi;0;16/04/2007;0988994477;chittk@gmail.com;25D3;CNTT
 110250088;62;Pham Thi Huyen Trang;0;09/01/2007;0911335566;trangpth@gmail.com;25X2B;Co Khi Dong Luc
 103250241;63;Le Thi Thanh Nga;0;28/09/2007;0944772299;ngaltt@gmail.com;25KTOTO2;Ky Thuat O To
+2323;64;2323;1;01/01/2000;;;;

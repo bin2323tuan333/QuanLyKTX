@@ -2,15 +2,15 @@
 #include <string>
 using namespace std;
 
-class IPerson;
-class IAccount;
+class Person;
+class Account;
 class IAuthService
 {
 public:
     virtual ~IAuthService();
 
-    virtual IAccount* login(const string&, const string&) = 0;
-    virtual int changePassword(IAccount*, const string&, const string&, const string&) = 0;
-    virtual bool genAccount(IPerson*) = 0;
+    virtual Account* login(const string&, const string&) = 0;
+    virtual int changePassword(Account*, const string&, const string&, const string&) = 0;
+    virtual bool genAccount(Person*) = 0;
     virtual int getIdAuto() = 0;
 };

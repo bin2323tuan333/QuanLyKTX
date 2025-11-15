@@ -5,13 +5,14 @@
 #include "IRoomService.h"
 #include "IContractService.h"
 #include "Account.h" 
+#include "Room.h" 
 #include "Student.h"
 #include "Employee.h"
 #include "Invoice.h"
 #include "Contract.h"
 #include "DB.h"
 
-StudentView::StudentView(IAccount* user, IAuthService* auth, IUserService* userService, IRoomService* roomService, IBillingService* billing, IContractService* con)
+StudentView::StudentView(Account* user, IAuthService* auth, IUserService* userService, IRoomService* roomService, IBillingService* billing, IContractService* con)
 	:user(user), authService(auth), userService(userService), roomService(roomService), billingService(billing), contractService(con)
 {
 	this->menuChoice = 0;
@@ -347,7 +348,7 @@ void StudentView::handleInput()
 		}
 		else if (key == 'y' || key == 'Y')
 		{
-			IStudent* temp = dynamic_cast<IStudent*>(this->user->getUser());
+			Student* temp = static_cast<Student*>(this->user->getUser());
 			this->error = this->contractService->createContract(temp->getStudentId(), this->roomId, this->cycle);
 			if (this->error == 1) this->isCreate = false;
 		}
@@ -404,7 +405,7 @@ void StudentView::showInfoMenu(const int& width, const int& height)
 void StudentView::showInfo(const int& width, const int& height)
 {
 
-	IStudent* temp = dynamic_cast<IStudent*>(this->user->getUser());
+	Student* temp = static_cast<Student*>(this->user->getUser());
 	if (!this->isUpdate)
 		this->studentToAct = temp;
 	if (this->isUpdate)
@@ -503,8 +504,8 @@ void StudentView::showChangePass(const int& width, const int& height)
 void StudentView::showRoomInfo(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 13, 7, ">>   THONG TIN PHONG   <<", 14);
-	IStudent* temp = dynamic_cast<IStudent*>(this->user->getUser());
-	IRoom* roomToShow = this->roomService->getRoomByStudentId(temp->getStudentId());
+	Student* temp = dynamic_cast<Student*>(this->user->getUser());
+	Room* roomToShow = this->roomService->getRoomByStudentId(temp->getStudentId());
 	if (roomToShow == nullptr)
 	{
 		ConsolaUI::text(width / 2 - 20, 8, "Sinh vien can dang ky hop dong de vao o!", 15);
@@ -534,7 +535,7 @@ void StudentView::showInvoiceList(const int& width, const int& height)
 	ConsolaUI::drawBox(width / 2, 8, 25, 2, 15);
 	if (this->preId != 0)
 	{
-		IInvoice* invToShow = this->billingService->getInvoiceById(this->preId);
+		Invoice* invToShow = this->billingService->getInvoiceById(this->preId);
 		if (invToShow == nullptr && this->preId != 0)
 		{
 			ConsolaUI::text(width / 2 - 15, 11, "Ban Khong Co Quyen Truy Cap!", 12);
@@ -589,8 +590,8 @@ void StudentView::showInvoiceList(const int& width, const int& height)
 			return;
 		}
 	}
-	IStudent* temp = dynamic_cast<IStudent*>(this->user->getUser());
-	LinkedList<IInvoice*> invoices = this->billingService->getInvoicesByStudent(temp->getStudentId());
+	Student* temp = static_cast<Student*>(this->user->getUser());
+	LinkedList<Invoice*> invoices = this->billingService->getInvoicesByStudent(temp->getStudentId());
 	if (invoices.getSize() == 0)
 	{
 		ConsolaUI::text(width / 2 - 13, 11, "Sinh Vien Chua Co Hoa Don!", 12);
@@ -611,7 +612,7 @@ void StudentView::showInvoiceList(const int& width, const int& height)
 		int yPos = 14 + i;
 		if (i + this->pageIndex * itemsPerPage < invoices.getSize())
 		{
-			IInvoice* invoice = *invoices.getAt(i + this->pageIndex * itemsPerPage);
+			Invoice* invoice = *invoices.getAt(i + this->pageIndex * itemsPerPage);
 			ConsolaUI::text(width / 2 - 30, yPos, to_string(invoice->getInvoiceId()), 15);
 			ConsolaUI::text(width / 2 - 15, yPos, to_string(invoice->getTotalAmount()), 15);
 			ConsolaUI::text(width / 2, yPos, invoice->getCreatedDate().getDate(), 15);
@@ -628,7 +629,7 @@ void StudentView::showContractList(const int& width, const int& height)
 {
 	ConsolaUI::text(width / 2 - 15, 7, ">>   DANH SACH HOP DONG   <<", 14);
 	Student* temp = dynamic_cast<Student*>(this->user->getUser());
-	LinkedList<IContract*>* contracts = this->contractService->getContractsByStudent(temp->getStudentId());
+	LinkedList<Contract*>* contracts = this->contractService->getContractsByStudent(temp->getStudentId());
 	if (contracts->getSize() == 0)
 	{
 		ConsolaUI::text(35, 9, ">> Sinh Vien Chua Co Hop Dong <<", 12);
@@ -655,7 +656,7 @@ void StudentView::showContractList(const int& width, const int& height)
 		ConsolaUI::text(width / 2, height / 2 + 3, temp->getFullName(), 15);
 		ConsolaUI::text(width / 2, height / 2 + 4, temp->getDateOfBirth().getDate(), 15);
 		ConsolaUI::text(width / 2, height / 2 + 5, temp->getGender() ? "Nam" : "Nu", 15);
-		IRoom* room = this->roomService->getRoomById(this->roomId);
+		Room* room = this->roomService->getRoomById(this->roomId);
 		if (room == nullptr)
 		{
 			isValid = false;
@@ -696,7 +697,7 @@ void StudentView::showContractList(const int& width, const int& height)
 		int currentIndex = i + this->pageIndex * itemsPerPage;
 		if (currentIndex < contracts->getSize())
 		{
-			IContract* contract = *contracts->getAt(currentIndex);
+			Contract* contract = *contracts->getAt(currentIndex);
 			if (contract != nullptr)
 			{
 				ConsolaUI::text(width / 2 - 38, yPos, to_string(contract->getContractId()), 15);

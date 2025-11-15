@@ -2,6 +2,8 @@
 #include "IContractService.h"
 #include "DB.h"
 
+
+class Contract;
 class ContractService : public IContractService
 {
 private:
@@ -11,12 +13,12 @@ public:
 	~ContractService();
 
     int createContract(int, int, int) override;
-    IContract* getContractById(int) override;
-    LinkedList<IContract*>* getContractsByStudent(int) override;
+    Contract* getContractById(int) override;
+    LinkedList<Contract*>* getContractsByStudent(int) override;
     int getIdAuto() override;
     
-    LinkedList<IContract*>* getAllContracts() override;
-    LinkedList<IContract*> getActiveContracts() override;
-    LinkedList<IContract*> getExpiredContracts() override;
+    LinkedList<Contract*>* getAllContracts() override;
+    LinkedList<Contract*> getActiveContracts() override;
+    LinkedList<Contract*> getExpiredContracts() override;
 };
 

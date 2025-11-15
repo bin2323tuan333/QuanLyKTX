@@ -3,7 +3,7 @@
 
 // Constructor
 Employee::Employee(const string& fullName, const Date& dateOfBirth, const bool& gender, const string& phoneNumber,
-	const string& email, const int& userId, IAccount* acc, const int& employeeId, const int& salary)
+	const string& email, const int& userId, Account* acc, const int& employeeId, const int& salary)
 	:Person(fullName, dateOfBirth, gender, phoneNumber, email, userId, acc), employeeId(employeeId), salary(salary)
 {
 }

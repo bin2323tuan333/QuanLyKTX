@@ -2,6 +2,7 @@
 #include "IRoomService.h"
 #include "DB.h"
 
+class Room;
 class RoomService : public IRoomService
 {
 private:
@@ -12,12 +13,11 @@ public:
 	~RoomService();
 
 
-	IRoom* getRoomById(int) override;
-	IRoom* getRoomByStudentId(int) override;
-	LinkedList<IRoom*>* getAllRooms() override;
-	int updateRoom(const int&, const IRoom&) override;
-
-	LinkedList<IRoom*> getAvailableRooms() override;
-	LinkedList<IRoom*> getVacantRooms() override;
+	Room* getRoomById(int) override;
+	Room* getRoomByStudentId(int) override;
+	LinkedList<Room*>* getAllRooms() override;
+	int updateRoom(const int&, const Room&) override;
+	LinkedList<Room*> getAvailableRooms() override;
+	LinkedList<Room*> getVacantRooms() override;
 };
 

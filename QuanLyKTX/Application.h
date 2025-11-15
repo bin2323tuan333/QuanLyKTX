@@ -8,7 +8,7 @@
 #include "StudentView.h"
 #include "EmployeeView.h"
 
-class IAccount;
+class Account;
 class Application
 {
 private:
@@ -18,7 +18,7 @@ private:
 	IRoomService* roomService;
 	IUserService* userService;
 
-	IAccount* currentUser;
+	Account* currentUser;
 	BaseView* currentView;
 	bool isRunning;
 public:

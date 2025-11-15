@@ -5,7 +5,7 @@
 
 // Constructor
 Contract::Contract(const int& contractId, const int& studentId, const int& roomId, const Date& startDate,
-	const Date& endDate, IStudent* student, IRoom* room)
+	const Date& endDate, Student* student, Room* room)
 	: contractId(contractId), studentId(studentId), roomId(roomId), startDate(endDate), endDate(endDate), student(student), room(room)
 {
 }
@@ -18,29 +18,29 @@ Contract::~Contract()
 }
 
 
-void Contract::AddStudent(IStudent* student)
+void Contract::AddStudent(Student* student)
 {
 	this->student = student;
 	student->AddContract(this);
 }
-void Contract::AddRoom(IRoom* room)
+void Contract::AddRoom(Room* room)
 {
 	this->room = room;
 	room->AddContract(this);
 }
-void Contract::AddInvoice(IInvoice* invoice)
+void Contract::AddInvoice(Invoice* invoice)
 {
 	this->invoices.add(invoice);
 }
-IStudent* Contract::getStudent()
+Student* Contract::getStudent()
 {
 	return this->student;
 }
-IRoom* Contract::getRoom()
+Room* Contract::getRoom()
 {
 	return this->room;
 }
-LinkedList<IInvoice*>* Contract::getInvoices()
+LinkedList<Invoice*>* Contract::getInvoices()
 {
 	return &this->invoices;
 }
@@ -90,10 +90,6 @@ void Contract::setEndDate(const Date& endDate)
 bool Contract::isActive() const
 {
 	return Date::getCurrentDay() <= this->endDate;
-}
-IContract* Contract::clone() const
-{
-	return new Contract(*this);
 }
 
 Contract& Contract::operator=(const Contract& other)

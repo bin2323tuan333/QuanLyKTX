@@ -1,16 +1,16 @@
 #pragma once
-#include "IRoom.h"
 #include "LinkedList.h"
 
+class Room;
 class IRoomService
 {
 public:
     virtual ~IRoomService();
 
-    virtual IRoom* getRoomById(int) = 0;
-    virtual IRoom* getRoomByStudentId(int) = 0;
-    virtual LinkedList<IRoom*>* getAllRooms() = 0;
-    virtual int updateRoom(const int&, const IRoom&) = 0;
-    virtual LinkedList<IRoom*> getAvailableRooms() = 0;
-    virtual LinkedList<IRoom*> getVacantRooms() = 0;
+    virtual Room* getRoomById(int) = 0;
+    virtual Room* getRoomByStudentId(int) = 0;
+    virtual LinkedList<Room*>* getAllRooms() = 0;
+    virtual int updateRoom(const int&, const Room&) = 0;
+    virtual LinkedList<Room*> getAvailableRooms() = 0;
+    virtual LinkedList<Room*> getVacantRooms() = 0;
 };

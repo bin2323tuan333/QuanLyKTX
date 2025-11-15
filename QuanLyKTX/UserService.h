@@ -2,6 +2,8 @@
 #include "DB.h"
 #include "IUserService.h"
 
+
+class Student;
 class UserService : public IUserService
 {
 private:
@@ -11,11 +13,11 @@ public:
     UserService();
     ~UserService();
 
-    int createStudent(IStudent&) override;
-    IStudent* getStudentById(const int&) override;
-    LinkedList<IStudent*>* getAllStudents() override;
-    int updateStudent(int, const IStudent&) override;
+    int createStudent(Student&) override;
+    Student* getStudentById(const int&) override;
+    LinkedList<Student*>* getAllStudents() override;
+    int updateStudent(int, const Student&) override;
     int deleteStudent(int) override;
-    LinkedList<IStudent*> getStudentsWithoutRoom() override;
+    LinkedList<Student*> getStudentsWithoutRoom() override;
 };
 

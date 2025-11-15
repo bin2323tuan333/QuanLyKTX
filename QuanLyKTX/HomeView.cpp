@@ -1,7 +1,7 @@
 #include "HomeView.h"
 #include "IAuthService.h"
 
-HomeView::HomeView(IAccount*& acc, IAuthService* authService)
+HomeView::HomeView(Account*& acc, IAuthService* authService)
 	:user(acc), authService(authService)
 {
 	this->menuChoice = 0;

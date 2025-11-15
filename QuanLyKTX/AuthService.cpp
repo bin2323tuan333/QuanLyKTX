@@ -13,9 +13,9 @@ AuthService::~AuthService()
 {
 }
 
-IAccount* AuthService::login(const string& username, const string& password)
+Account* AuthService::login(const string& username, const string& password)
 {
-	IAccount* temp = DB::Instance()->getAccountByUsername(username);
+	Account* temp = DB::Instance()->getAccountByUsername(username);
 	if (temp == nullptr) return 0;
 	if (temp->getPassword() == password)
 	{
@@ -23,7 +23,7 @@ IAccount* AuthService::login(const string& username, const string& password)
 	}
 	return nullptr;
 }
-int AuthService::changePassword(IAccount* user, const string& oldPass, const string& newPass, const string& reNewPass)
+int AuthService::changePassword(Account* user, const string& oldPass, const string& newPass, const string& reNewPass)
 {
 	if (oldPass != user->getPassword()) return 2;						// Mat Khau Cu Khong Dung
 	if (oldPass == "" || newPass == "" || reNewPass == "") return 3;	// De trong mat khau
@@ -32,14 +32,14 @@ int AuthService::changePassword(IAccount* user, const string& oldPass, const str
 	user->setPassword(newPass);
 	return 1;
 }
-bool AuthService::genAccount(IPerson* person)
+bool AuthService::genAccount(Person* person)
 {
 	if (person->getAccount() != nullptr) return false;
 
-	IAccount* newAccount = new Account();
+	Account* newAccount = new Account();
 	newAccount->setUserId(this->getIdAuto());
-	IStudent* student = dynamic_cast<IStudent*>(person);
-	IEmployee* employee = dynamic_cast<IEmployee*>(person);
+	Student* student = static_cast<Student*>(person);
+	Employee* employee = static_cast<Employee*>(person);
 	if (student != nullptr)
 	{
 		newAccount->setUsername(to_string(student->getStudentId()));
@@ -72,7 +72,7 @@ bool AuthService::genAccount(IPerson* person)
 int AuthService::getIdAuto()
 {
 	int maxId = 0;
-	for (ListNode<IAccount*>* p = database->getAllAccounts()->getHead(); p != nullptr; p = p->next)
+	for (ListNode<Account*>* p = database->getAllAccounts()->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->getUserId() > maxId) maxId = p->value->getUserId();
 	}

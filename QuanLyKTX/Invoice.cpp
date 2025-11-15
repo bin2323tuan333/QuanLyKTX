@@ -10,7 +10,7 @@ Invoice::Invoice(const int& invoiceId,
 	const Date & createDate, 
 	const bool& paid,
 	const int& contractId,
-	IContract* contract)
+	Contract* contract)
 	: invoiceId(invoiceId), roomFee(roomFee), internetFee(internetFee), electricFee(electricFee), waterFee(waterFee),
 	createdDate(createdDate),isPaid(paid), contractId(contractId), contract(contract)
 {
@@ -24,13 +24,13 @@ Invoice::~Invoice()
 {
 }
 
-void Invoice::AddContract(IContract* contract)
+void Invoice::AddContract(Contract* contract)
 {
 	this->contract = contract;
 	contract->AddInvoice(this);
 }
 
-IContract* Invoice::getContract()
+Contract* Invoice::getContract()
 {
 	return this->contract;
 }
@@ -104,12 +104,6 @@ void Invoice::setIsPaid(const bool& paid)
 {
 	this->isPaid = paid;
 }
-
-IInvoice* Invoice::clone() const
-{
-	return new Invoice(*this);
-}
-
 Invoice& Invoice::operator=(const Invoice& other)
 {
 	if (this == &other)

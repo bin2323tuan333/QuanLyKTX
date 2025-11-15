@@ -1,11 +1,10 @@
 #pragma once
 #include "BaseView.h"
+#include "Student.h"
+#include "Invoice.h"
+#include "Room.h"
 
 
-class IAccount;
-class IStudent;
-class IRoom;
-class IInvoice;
 class IAuthService;
 class IUserService;
 class IRoomService;
@@ -14,7 +13,7 @@ class IContractService;
 class EmployeeView : public BaseView
 {
 private:
-	IAccount* user;
+	Account* user;
 	IAuthService* authService;
 	IUserService* userService;
 	IRoomService* roomService;
@@ -28,9 +27,9 @@ private:
 	int contractId;
 	bool isShow, isLogout, isDelete, isUpdate, isDateEdit, isPaid;
 	string oldPass, newPass, reNewPass;
-	IStudent* studentToAct;
-	IInvoice* invToPay;
-	IRoom* roomToAct;
+	Student studentToAct;
+	Invoice invToPay;
+	Room roomToAct;
 
 
 	void handleInput() override;
@@ -64,7 +63,7 @@ private:
 	void showValidContracts(const int&, const int&);
 
 public:
-	EmployeeView(IAccount*, IAuthService*, IUserService*, IRoomService*, IBillingService*, IContractService*);
+	EmployeeView(Account*, IAuthService*, IUserService*, IRoomService*, IBillingService*, IContractService*);
 	virtual ~EmployeeView();
 
 	int show() override;

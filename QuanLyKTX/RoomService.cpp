@@ -1,6 +1,7 @@
 #include "RoomService.h"
 #include "Student.h"
 #include "Contract.h"
+#include "Room.h"
 
 RoomService::RoomService()
 {
@@ -11,46 +12,46 @@ RoomService::~RoomService()
 {
 }
 
-LinkedList<IRoom*>* RoomService::getAllRooms()
+LinkedList<Room*>* RoomService::getAllRooms()
 {
 	return DB::Instance()->getAllRooms();
 }
-IRoom* RoomService::getRoomByStudentId(int studentId)
+Room* RoomService::getRoomByStudentId(int studentId)
 {
-	IStudent* student = DB::Instance()->getStudentByStudentId(studentId);
-	IContract* contract = nullptr;
-	for (ListNode<IContract*>* p = student->getContracts()->getHead(); p != nullptr; p = p->next)
+	Student* student = DB::Instance()->getStudentByStudentId(studentId);
+	Contract* contract = nullptr;
+	for (ListNode<Contract*>* p = student->getContracts()->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->isActive()) return p->value->getRoom();
 	}
 	return nullptr;
 }
-LinkedList<IRoom*> RoomService::getAvailableRooms()
+LinkedList<Room*> RoomService::getAvailableRooms()
 {
-	LinkedList<IRoom*> tempList;
-	for (ListNode<IRoom*>* p = DB::Instance()->getAllRooms()->getHead(); p != nullptr; p = p->next)
+	LinkedList<Room*> tempList;
+	for (ListNode<Room*>* p = DB::Instance()->getAllRooms()->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->isAvailable()) tempList.add(p->value);
 	}
 	return tempList;
 }
-LinkedList<IRoom*> RoomService::getVacantRooms()
+LinkedList<Room*> RoomService::getVacantRooms()
 {
-	LinkedList<IRoom*> tempList;
-	for (ListNode<IRoom*>* p = DB::Instance()->getAllRooms()->getHead(); p != nullptr; p = p->next)
+	LinkedList<Room*> tempList;
+	for (ListNode<Room*>* p = DB::Instance()->getAllRooms()->getHead(); p != nullptr; p = p->next)
 	{
 		if (p->value->isVacant()) tempList.add(p->value);
 	}
 	return tempList;
 }
-IRoom* RoomService::getRoomById(int roomId)
+Room* RoomService::getRoomById(int roomId)
 {
 	return DB::Instance()->getRoomByRoomId(roomId);
 }
 
-int RoomService::updateRoom(const int& id, const IRoom& updatedRoom)
+int RoomService::updateRoom(const int& id, const Room& updatedRoom)
 {
-	IRoom* room = DB::Instance()->getRoomByRoomId(id);
+	Room* room = DB::Instance()->getRoomByRoomId(id);
 	if (room->getCurrentOccupancy() != 0)
 	{
 		if (updatedRoom.getRoomType() != room->getRoomType() || updatedRoom.getIsActive() != room->getIsActive())

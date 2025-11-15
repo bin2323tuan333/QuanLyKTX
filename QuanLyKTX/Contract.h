@@ -1,11 +1,11 @@
 #pragma once
-#include "IContract.h"
+#include "Date.h"
+#include "LinkedList.h"
 
-
-class IInvoice;
-class IRoom;
-class IStudent;
-class Contract : public virtual IContract
+class Invoice;
+class Room;
+class Student;
+class Contract
 {
 private:
 	int contractId;
@@ -13,33 +13,32 @@ private:
 	int roomId;
 	Date startDate;
 	Date endDate;
-	IStudent* student;
-	IRoom* room;
-	LinkedList<IInvoice*> invoices;
+	Student* student;
+	Room* room;
+	LinkedList<Invoice*> invoices;
 public:
-	Contract(const int& = 0, const int& = 0, const int& = 0, const Date & = Date(), const Date & = Date(), IStudent* = nullptr, IRoom* = nullptr);
+	Contract(const int& = 0, const int& = 0, const int& = 0, const Date & = Date(), const Date & = Date(), Student* = nullptr, Room* = nullptr);
 	Contract(const Contract&);
 	~Contract();
 
-	void AddStudent(IStudent*) override;
-	void AddRoom(IRoom*) override;
-	void AddInvoice(IInvoice*) override;
-	IStudent* getStudent() override;
-	IRoom* getRoom() override;
-	LinkedList<IInvoice*>* getInvoices() override;
+	void AddStudent(Student*);
+	void AddRoom(Room*);
+	void AddInvoice(Invoice*);
+	Student* getStudent();
+	Room* getRoom();
+	LinkedList<Invoice*>* getInvoices();
 
-	int getContractId() const override;
-	void setContractId(const int&) override;
-	int getStudentId() const override;
-	void setStudentId(const int&) override;
-	int getRoomId() const override;
-	void setRoomId(const int&) override;
-	Date getStartDate() const override;
-	void setStartDate(const Date&) override;
-	Date getEndDate() const override;
-	void setEndDate(const Date&) override;
-	bool isActive() const override;
-	IContract* clone() const override;
+	int getContractId() const;
+	void setContractId(const int&);
+	int getStudentId() const;
+	void setStudentId(const int&);
+	int getRoomId() const;
+	void setRoomId(const int&);
+	Date getStartDate() const;
+	void setStartDate(const Date&);
+	Date getEndDate() const;
+	void setEndDate(const Date&);
+	bool isActive() const;
 
 	Contract& operator=(const Contract&);
 	bool operator==(const Contract&);

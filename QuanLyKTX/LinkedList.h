@@ -28,7 +28,7 @@ public:
 	~LinkedList();
 
 	bool isEmpty();
-	int getSize();
+	int getSize() const;
 	void clear();
 	Value* getAt(int);
 	ListNode<Value>* getHead();
@@ -109,7 +109,7 @@ bool LinkedList<Value>::isEmpty()
 	return this->head == nullptr;
 }
 template<typename Value>
-int LinkedList<Value>::getSize()
+int LinkedList<Value>::getSize() const
 {
 	return this->size;
 }

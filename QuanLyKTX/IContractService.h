@@ -2,7 +2,7 @@
 #include "LinkedList.h"
 
 
-class IContract;
+class Contract;
 class IContractService
 {
 public:
@@ -10,10 +10,10 @@ public:
 
     virtual int createContract(int, int, int) = 0;
     virtual int getIdAuto() = 0;
-    virtual IContract* getContractById(int) = 0;
+    virtual Contract* getContractById(int) = 0;
 
-    virtual LinkedList<IContract*>* getContractsByStudent(int) = 0;
-    virtual LinkedList<IContract*>* getAllContracts() = 0;
-    virtual LinkedList<IContract*> getActiveContracts() = 0;
-    virtual LinkedList<IContract*> getExpiredContracts() = 0;
+    virtual LinkedList<Contract*>* getContractsByStudent(int) = 0;
+    virtual LinkedList<Contract*>* getAllContracts() = 0;
+    virtual LinkedList<Contract*> getActiveContracts() = 0;
+    virtual LinkedList<Contract*> getExpiredContracts() = 0;
 };

@@ -16,11 +16,11 @@ Room::~Room()
 {
 }
 
-void Room::AddContract(IContract* contract)
+void Room::AddContract(Contract* contract)
 {
 	this->contracts.add(contract);
 }
-LinkedList<IContract*>* Room::getContracts()
+LinkedList<Contract*>* Room::getContracts()
 {
 	return &(this->contracts);
 }
@@ -66,8 +66,8 @@ void Room::setCapacity(const int& capacity)
 {
 	this->capacity = capacity;
 }
-int Room::getCurrentOccupancy()
-{
+int Room::getCurrentOccupancy() const
+{ 
 	return this->contracts.getSize();
 }
 
@@ -94,10 +94,6 @@ bool Room::getIsActive() const
 void Room::setIsActive(const bool& isActive)
 {
 	this->isActive = isActive;
-}
-IRoom* Room::clone() const
-{
-	return new Room(*this);
 }
 
 Room& Room::operator=(const Room& other)

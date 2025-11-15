@@ -1,28 +1,27 @@
 #pragma once
-#include "IAccount.h"
 #include "Person.h"
 
-class Account : public virtual IAccount
+class Account 
 {
 private:
     int userId;
     string username;
     string password;
-    IPerson* user;
+    Person* user;
 public:
-    Account(const int& = 0, const string & = "", const string & = "", IPerson* = nullptr);
+    Account(const int& = 0, const string & = "", const string & = "", Person* = nullptr);
     Account(const Account&);
     ~Account();
 
-    void AddUser(IPerson*) override;
-    IPerson* getUser() const override;
+    void AddUser(Person*);
+    Person* getUser() const;
 
-    int getUserId() const override;
-    void setUserId(const int&) override;
-    string getUsername() const override;
-    void setUsername(const string&) override;
-    string getPassword() const override;
-    void setPassword(const string&) override;
+    int getUserId() const;
+    void setUserId(const int&);
+    string getUsername() const;
+    void setUsername(const string&);
+    string getPassword() const;
+    void setPassword(const string&);
 
     Account& operator=(const Account&);
     bool operator==(const Account&);

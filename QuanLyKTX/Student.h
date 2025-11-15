@@ -1,37 +1,32 @@
 #pragma once
-#include "IStudent.h"
+#include "LinkedList.h"
 #include "Person.h"
-#include <iostream>
-using namespace std;
 
 
-class IContract;
-class Student : public virtual IStudent, public Person
+class Contract;
+class Student : public Person
 {
 private:
     int studentId;
     string className;
     string faculty;
-    LinkedList<IContract*> contracts;
+    LinkedList<Contract*> contracts;
 public:
-    Student( const string & = "", const Date & = Date(), const bool& = true, const string & = "", const string & = "", const int& = 0, IAccount* = nullptr, const int& = 0, const string& = "", const string& = "");
+    Student( const string & = "", const Date & = Date(), const bool& = true, const string & = "", const string & = "", const int& = 0, Account* = nullptr, const int& = 0, const string& = "", const string& = "");
     Student(const Student&);
     ~Student();
 
-    void AddContract(IContract*);
-    LinkedList<IContract*>* getContracts();
+    void AddContract(Contract*);
+    LinkedList<Contract*>* getContracts();
     string getRole() override;
-    bool hasActiveContract() override;
+    bool hasActiveContract();
     
     int getStudentId() const;
-    void setStudentId(const int&) override;
-    string getClassName() const override;
-    void setClassName(const string&) override;
-    string getFaculty() const override;
-    void setFaculty(const string&) override;
-
-    IStudent* clone() const override;
-
+    void setStudentId(const int&);
+    string getClassName() const;
+    void setClassName(const string&);
+    string getFaculty() const;
+    void setFaculty(const string&);
     Student& operator=(const Student&);
     bool operator==(const Student&);
     bool operator!=(const Student&);

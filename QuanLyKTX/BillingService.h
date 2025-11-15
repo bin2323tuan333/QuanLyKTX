@@ -2,6 +2,8 @@
 #include "IBillingService.h"
 #include "DB.h"
 
+
+class Invoice;
 class BillingService : public IBillingService
 {
 private:
@@ -17,13 +19,13 @@ public:
 
     //// Invoice CRUD
     int createInvoice(const int&, const int&, const int&) override;
-    IInvoice* getInvoiceById(int) override;
-    LinkedList<IInvoice*> getInvoicesByStudent(int) override;
-    LinkedList<IInvoice*>* getAllInvoices() override;
+    Invoice* getInvoiceById(int) override;
+    LinkedList<Invoice*> getInvoicesByStudent(int) override;
+    LinkedList<Invoice*>* getAllInvoices() override;
     int autoGenId() override;
-    void paidInvoice(const IInvoice&) override;
-    void printInvoice(const IInvoice&) override;
-    LinkedList<IInvoice*> getUnpaidInvoices() override;
-    LinkedList<IInvoice*> getPaidInvoices() override;
+    void paidInvoice(const Invoice&) override;
+    void printInvoice(const Invoice&) override;
+    LinkedList<Invoice*> getUnpaidInvoices() override;
+    LinkedList<Invoice*> getPaidInvoices() override;
 };
 
