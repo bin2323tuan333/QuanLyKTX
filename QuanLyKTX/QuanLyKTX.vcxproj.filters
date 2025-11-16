@@ -49,14 +49,8 @@
     <Filter Include="Header Files\Models">
       <UniqueIdentifier>{6b4094f6-b30f-4ce7-b8a2-a4c8b4cbe527}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\InterfaceModels">
-      <UniqueIdentifier>{d3310862-b1a3-4b58-b8e6-059d1a1e861c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\FileHandle">
       <UniqueIdentifier>{c1c29190-9a6b-45b5-9a48-98175052fda1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\InterfaceModels">
-      <UniqueIdentifier>{6edef6e7-cb64-494b-9819-5ec1887c0424}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\InterfaceServices">
       <UniqueIdentifier>{21166d30-79b5-47e5-8166-b44b59f6ff8c}</UniqueIdentifier>
@@ -128,27 +122,6 @@
     </ClCompile>
     <ClCompile Include="HomeView.cpp">
       <Filter>Source Files\Presentation\Views</Filter>
-    </ClCompile>
-    <ClCompile Include="IAccount.cpp">
-      <Filter>Source Files\InterfaceModels</Filter>
-    </ClCompile>
-    <ClCompile Include="IPerson.cpp">
-      <Filter>Source Files\InterfaceModels</Filter>
-    </ClCompile>
-    <ClCompile Include="IContract.cpp">
-      <Filter>Source Files\InterfaceModels</Filter>
-    </ClCompile>
-    <ClCompile Include="IStudent.cpp">
-      <Filter>Source Files\InterfaceModels</Filter>
-    </ClCompile>
-    <ClCompile Include="IEmployee.cpp">
-      <Filter>Source Files\InterfaceModels</Filter>
-    </ClCompile>
-    <ClCompile Include="IInvoice.cpp">
-      <Filter>Source Files\InterfaceModels</Filter>
-    </ClCompile>
-    <ClCompile Include="IRoom.cpp">
-      <Filter>Source Files\InterfaceModels</Filter>
     </ClCompile>
     <ClCompile Include="IAuthService.cpp">
       <Filter>Source Files\InterfaceServices</Filter>
@@ -230,24 +203,6 @@
     <ClInclude Include="StudentView.h">
       <Filter>Header Files\Presentation\Views</Filter>
     </ClInclude>
-    <ClInclude Include="IStudent.h">
-      <Filter>Header Files\InterfaceModels</Filter>
-    </ClInclude>
-    <ClInclude Include="IAccount.h">
-      <Filter>Header Files\InterfaceModels</Filter>
-    </ClInclude>
-    <ClInclude Include="IEmployee.h">
-      <Filter>Header Files\InterfaceModels</Filter>
-    </ClInclude>
-    <ClInclude Include="IContract.h">
-      <Filter>Header Files\InterfaceModels</Filter>
-    </ClInclude>
-    <ClInclude Include="IInvoice.h">
-      <Filter>Header Files\InterfaceModels</Filter>
-    </ClInclude>
-    <ClInclude Include="IRoom.h">
-      <Filter>Header Files\InterfaceModels</Filter>
-    </ClInclude>
     <ClInclude Include="IAuthService.h">
       <Filter>Header Files\InterfaceServices</Filter>
     </ClInclude>
@@ -262,9 +217,6 @@
     </ClInclude>
     <ClInclude Include="IContractService.h">
       <Filter>Header Files\InterfaceServices</Filter>
-    </ClInclude>
-    <ClInclude Include="IPerson.h">
-      <Filter>Header Files\InterfaceModels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

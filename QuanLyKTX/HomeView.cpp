@@ -144,7 +144,7 @@ void HomeView::showAbout(const int& width, const int& height)
 
 	ConsolaUI::text(width / 5, 19, "SINH VIEN THUC HIEN:", 6);
 	ConsolaUI::text(width / 3 + 10, 19, "Pham Quoc Tuan             Lop: 24T_DT4    MSSV: 102240229", 15);
-	ConsolaUI::text(width / 3 + 10, 20, "Nguyen Viet Nhat Long      Lop: 24T_DT4    MSSV: 102240229", 15);
+	ConsolaUI::text(width / 3 + 10, 20, "Nguyen Viet Nhat Long      Lop: 24T_DT4    MSSV: 102240201", 15);
 
 
 	ConsolaUI::text(width / 2 - 8, height - 1, "Da Nang, 10/2025", 15);

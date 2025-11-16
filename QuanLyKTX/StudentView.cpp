@@ -442,7 +442,7 @@ void StudentView::showInfo(const int& width, const int& height)
 		ConsolaUI::text(width / 2 - 17, height / 2 + 11, "[Y] Yes - Cap Nhat    [N] No - Huy", 15);
 		return;
 	}
-	ConsolaUI::text(width / 2 - 18, 7, ">>   THONG TIN CA NHAN (NHAN VIEN)   <<", 14);
+	ConsolaUI::text(width / 2 - 18, 7, ">>   THONG TIN CA NHAN (SINH VIEN)   <<", 14);
 	ConsolaUI::drawBox(width / 2 - 30, 9, 60, 14, 8);
 	ConsolaUI::text(width / 2 - 28, 10, "Thong tin dinh danh:", 11);
 	ConsolaUI::text(width / 2 - 27, 12, "Ho Va Ten: ", 7);
@@ -463,7 +463,7 @@ void StudentView::showInfo(const int& width, const int& height)
 	ConsolaUI::text(width / 2, 21, temp->getEmail(), 15);
 	ConsolaUI::text(width / 2 - 27, 22, "So Dien Thoai: ", 7);
 	ConsolaUI::text(width / 2, 22, temp->getPhoneNumber(), 15);
-	ConsolaUI::text(width / 2, 25, "[X] Chinh sua thong tin", 15);
+	ConsolaUI::text(width / 2 - 25, 25, "[X] Chinh sua thong tin", 15);
 }
 void StudentView::showChangePass(const int& width, const int& height)
 {
@@ -709,7 +709,7 @@ void StudentView::showContractList(const int& width, const int& height)
 		}
 		else break;
 	}
-	ConsolaUI::text(width / 2 - 25, height - 2, "[D] Dang ky / Gia han hop dong", 15);
+	ConsolaUI::text(width / 2 - 31, height - 2, "[D] Dang ky / Gia han hop dong", 15);
 	ConsolaUI::text(width / 2 - 6, height - 1, "Trang " + to_string(this->pageIndex + 1) + "/" + to_string(totalPages), 7); // 15
 	ConsolaUI::text(width / 2 - 31, height - 1, "[ Q ] Trang Truoc", 3);	// 20
 	ConsolaUI::text(width / 2 + 11, height - 1, "[ P ] Trang Sau", 3);		// 20

@@ -2,21 +2,24 @@
 #include <sstream>
 
 // Ham lay chieu rong cua console
-int ConsolaUI::getConsoleWidth() {
+int ConsolaUI::getConsoleWidth() 
+{
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     return csbi.srWindow.Right - csbi.srWindow.Left -2;
 }
 
 // Ham lay chieu cao cua console
-int ConsolaUI::getConsoleHeight() {
+int ConsolaUI::getConsoleHeight() 
+{
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     return csbi.srWindow.Bottom - csbi.srWindow.Top -2;
 }
 
 // Di chuyen (x, y) den toa do tren consola
-void ConsolaUI::gotoXY(int x, int y) {
+void ConsolaUI::gotoXY(int x, int y) 
+{
     COORD coord;
     coord.X = x;
     coord.Y = y;
@@ -24,7 +27,8 @@ void ConsolaUI::gotoXY(int x, int y) {
 }
 
 // Hien thi con tro chuot
-void ConsolaUI::ShowCursor(bool show) {
+void ConsolaUI::ShowCursor(bool show) 
+{
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOut, &cursorInfo);
@@ -33,13 +37,15 @@ void ConsolaUI::ShowCursor(bool show) {
 }
 
 // Thay doi mau chu
-void ConsolaUI::setTextColor(int color) {
+void ConsolaUI::setTextColor(int color) 
+{
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
 
 // Hinh Chu Nhat
-void ConsolaUI::drawBox(int x, int y, int w, int h, int borderColor) {
+void ConsolaUI::drawBox(int x, int y, int w, int h, int borderColor) 
+{
     // Mau Sac
     setTextColor(borderColor);
 

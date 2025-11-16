@@ -10,7 +10,6 @@ public:
 	ListNode();
 	ListNode(const Value&);
 	~ListNode();
-
 	ListNode<Value>* getNext();
 };
 
@@ -26,14 +25,11 @@ public:
 	LinkedList(const LinkedList<Value>&);
 	LinkedList<Value>& operator=(const LinkedList<Value>&);
 	~LinkedList();
-
 	bool isEmpty();
 	int getSize() const;
 	void clear();
 	Value* getAt(int);
 	ListNode<Value>* getHead();
-	
-
 	void add(const Value&);
 	bool remove(const Value&);
 	Value* search(const Value&);
