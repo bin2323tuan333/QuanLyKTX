@@ -31,14 +31,13 @@ public:
 	static DB* Instance();
 	static void Destroy();
     void saveData();
-	// ====  ====
+
+
 	LinkedList<Student*>* getStudentInRoom(const int&);
 	LinkedList<Contract*>* getContractInStudent(const int&);
 	LinkedList<Invoice*>* getInvoiceInContract(const int&);
 
 
-
-	// ==== CRUD BASIC ====
 	// ===Account===
 	void deleteAccount(const Account&);
 	void addAccount(Account*);
